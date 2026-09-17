@@ -1,0 +1,259 @@
+{
+ "entry": {
+  "behaviour": "eat",
+  "attack": {
+   "move": "lesion",
+   "neurons": [
+    59455,
+    80293,
+    107572
+   ],
+   "size": 3,
+   "simulations": 6
+  },
+  "repair": {
+   "move": "bias + potentiate",
+   "neurons": [
+    84763,
+    56016,
+    7420,
+    9257,
+    4477
+   ],
+   "size": 5,
+   "on_hz": 50.0,
+   "off_hz": 0.0,
+   "simulations": 19
+  },
+  "healthy_on_hz": 106.66666666666667,
+  "healthy_off_hz": 0.0,
+  "total_seconds": 173
+ },
+ "log": [
+  {
+   "agent": "attacker-greedy",
+   "step": 1,
+   "hypothesis": "cut the 1 strongest surviving drivers of the readout",
+   "intervention": "lesion 1 neurons",
+   "result": "readout 53.3 Hz",
+   "goal_met": false,
+   "t": 6.9
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 2,
+   "hypothesis": "cut the 2 strongest surviving drivers of the readout",
+   "intervention": "lesion 2 neurons",
+   "result": "readout 43.3 Hz",
+   "goal_met": false,
+   "t": 13.3
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 3,
+   "hypothesis": "cut the 3 strongest surviving drivers of the readout",
+   "intervention": "lesion 3 neurons",
+   "result": "readout 0.0 Hz",
+   "goal_met": true,
+   "t": 19.6
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 4,
+   "hypothesis": "is neuron 59455 necessary? try without it",
+   "intervention": "lesion 2 neurons",
+   "result": "readout 66.7 Hz",
+   "goal_met": false,
+   "t": 26.0
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 5,
+   "hypothesis": "is neuron 80293 necessary? try without it",
+   "intervention": "lesion 2 neurons",
+   "result": "readout 20.0 Hz",
+   "goal_met": false,
+   "t": 32.4
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 6,
+   "hypothesis": "is neuron 107572 necessary? try without it",
+   "intervention": "lesion 2 neurons",
+   "result": "readout 43.3 Hz",
+   "goal_met": false,
+   "t": 32.4
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 1,
+   "hypothesis": "bias only on the 2 strongest surviving drivers",
+   "intervention": "bias only, 2 neurons",
+   "result": "on 3.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 39.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 2,
+   "hypothesis": "bias only on the 4 strongest surviving drivers",
+   "intervention": "bias only, 4 neurons",
+   "result": "on 6.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 46.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 3,
+   "hypothesis": "bias only on the 6 strongest surviving drivers",
+   "intervention": "bias only, 6 neurons",
+   "result": "on 3.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 52.7
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 4,
+   "hypothesis": "bias only on the 8 strongest surviving drivers",
+   "intervention": "bias only, 8 neurons",
+   "result": "on 3.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 59.5
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 5,
+   "hypothesis": "bias only on the 12 strongest surviving drivers",
+   "intervention": "bias only, 12 neurons",
+   "result": "on 6.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 66.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 6,
+   "hypothesis": "potentiate only on the 2 strongest surviving drivers",
+   "intervention": "potentiate only, 2 neurons",
+   "result": "on 13.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 72.8
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 7,
+   "hypothesis": "potentiate only on the 4 strongest surviving drivers",
+   "intervention": "potentiate only, 4 neurons",
+   "result": "on 13.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 79.9
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 8,
+   "hypothesis": "potentiate only on the 6 strongest surviving drivers",
+   "intervention": "potentiate only, 6 neurons",
+   "result": "on 20.0 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 86.9
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 9,
+   "hypothesis": "potentiate only on the 8 strongest surviving drivers",
+   "intervention": "potentiate only, 8 neurons",
+   "result": "on 20.0 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 94.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 10,
+   "hypothesis": "potentiate only on the 12 strongest surviving drivers",
+   "intervention": "potentiate only, 12 neurons",
+   "result": "on 23.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 101.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 11,
+   "hypothesis": "bias + potentiate on the 2 strongest surviving drivers",
+   "intervention": "bias + potentiate, 2 neurons",
+   "result": "on 10.0 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 108.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 12,
+   "hypothesis": "bias + potentiate on the 4 strongest surviving drivers",
+   "intervention": "bias + potentiate, 4 neurons",
+   "result": "on 36.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 115.0
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 13,
+   "hypothesis": "bias + potentiate on the 6 strongest surviving drivers",
+   "intervention": "bias + potentiate, 6 neurons",
+   "result": "on 50.0 Hz / off 0.0 Hz",
+   "goal_met": true,
+   "t": 122.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 14,
+   "hypothesis": "is neuron 84763 needed for the repair?",
+   "intervention": "bias + potentiate, 5 neurons",
+   "result": "on 26.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 128.8
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 15,
+   "hypothesis": "is neuron 40815 needed for the repair?",
+   "intervention": "bias + potentiate, 5 neurons",
+   "result": "on 43.3 Hz / off 0.0 Hz",
+   "goal_met": true,
+   "t": 135.5
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 16,
+   "hypothesis": "is neuron 56016 needed for the repair?",
+   "intervention": "bias + potentiate, 4 neurons",
+   "result": "on 26.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 142.3
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 17,
+   "hypothesis": "is neuron 7420 needed for the repair?",
+   "intervention": "bias + potentiate, 4 neurons",
+   "result": "on 16.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 149.0
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 18,
+   "hypothesis": "is neuron 9257 needed for the repair?",
+   "intervention": "bias + potentiate, 4 neurons",
+   "result": "on 33.3 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 155.5
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 19,
+   "hypothesis": "is neuron 4477 needed for the repair?",
+   "intervention": "bias + potentiate, 4 neurons",
+   "result": "on 36.7 Hz / off 0.0 Hz",
+   "goal_met": false,
+   "t": 162.2
+  }
+ ]
+}
