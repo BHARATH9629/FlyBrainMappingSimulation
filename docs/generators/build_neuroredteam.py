@@ -210,7 +210,7 @@ s.shapes.add_picture(os.path.join(ROOT, "results", "lesion_test.png"), Inches(7.
 caption(s, 0.45, 4.05, 6.6, 0.6, "Sugar on the tongue: about 380 neurons active, feeding neuron MN9 at 95 to 98 Hz.\nRandom input: MN9 silent (0 Hz). Same result in 3 of 3 runs.", size=12)
 caption(s, 7.35, 4.05, 5.6, 0.6, "First attack, done by hand: cut the 3 command neurons and feeding stops (1 Hz).\nCut 10 random neurons and nothing changes (91 Hz).", size=11)
 set_body(s, [
-    (0, [("What this shows: ", True), ("the real 139,255-neuron brain runs on a normal laptop and matches the Nature 2024 numbers; and the first entry of the fragility atlas already exists: feeding can be blocked with 3 neurons, but not with 10 random ones. The attacker agent's job is to find results like this automatically, for every behaviour, under rules.", False)]),
+    (0, [("What this shows: ", True), ("the real brain runs on a laptop and matches Nature 2024. First atlas entry, done by hand: attack = cut 3 neurons, feeding drops from 85 to 1.7 Hz; repair = boost 6 surviving inputs (small bias plus x2 synapse strength), feeding returns to 42 Hz with sugar and stays at 0 Hz without sugar, so it is a real repair, not forcing. Simple repair moves failed; the combination worked, which is why the defender needs a search agent.", False)]),
 ], size=15)
 body_ph(s).top = Inches(4.85); body_ph(s).height = Inches(1.9)
 
