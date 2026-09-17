@@ -183,25 +183,7 @@ def box(slide, x, y, w, h, title, sub, fill=NAVY):
 def arrow(slide, x1, y1, x2, y2, head=True):
     c = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, Inches(x1), Inches(y1), Inches(x2), Inches(y2)); c.line.color.rgb = RED; c.line.width = Pt(2.25)
     if head: etree.SubElement(c.line._get_or_add_ln(), "{%s}tailEnd" % NS["a"], type="triangle", w="med", len="med")
-row1 = [("1. Load the brain", "FlyWire data: 139,255 neurons,\n15 M connections   (done)"),
-        ("2. Simulator", "spiking neurons; stimulate,\nrecord, cut, weaken, inject   (done)"),
-        ("3. Behaviours", "eat (done), refuse bitter,\ngroom, escape + name table"),
-        ("4. Attack rules", "what the attacker may touch,\nbudget, realistic rates")]
-row2 = [("5. Attacker agent", "smallest change that forces,\nblocks or corrupts a behaviour"),
-        ("6. Defender agent", "smallest stimulation that\nrestores it, without forcing"),
-        ("7. Fragility atlas", "behaviour x attack size x\nrepair size x key neurons"),
-        ("8. Dashboard + paper", "Attack / Defend buttons,\nvirtual fly, report")]
-Wb, Hb, GAP, X0, Y1, Y2 = 2.75, 1.25, 0.42, 0.55, 1.55, 4.15
-for i, (t, sub) in enumerate(row1):
-    x = X0 + i * (Wb + GAP); box(s, x, Y1, Wb, Hb, t, sub)
-    if i < 3: arrow(s, x + Wb, Y1 + Hb / 2, x + Wb + GAP, Y1 + Hb / 2)
-for i, (t, sub) in enumerate(row2):
-    x = X0 + i * (Wb + GAP); box(s, x, Y2, Wb, Hb, t, sub, fill=RED if i < 3 else NAVY)
-    if i < 3: arrow(s, x + Wb, Y2 + Hb / 2, x + Wb + GAP, Y2 + Hb / 2)
-x4, x5, ymid = X0 + 3 * (Wb + GAP) + Wb / 2, X0 + Wb / 2, (Y1 + Hb + Y2) / 2
-arrow(s, x4, Y1 + Hb, x4, ymid); arrow(s, x4, ymid, x5, ymid, head=False); arrow(s, x5, ymid, x5, Y2)
-caption(s, 0.55, 5.65, 12.2, 0.9, "Red boxes are the new contributions. Steps 1 and 2 and the first behaviour are done (September 2026). "
-        "Every attack and repair is repeated over several seeds and checked against published circuits.", size=14)
+exec(open(os.path.join(HERE, 'flowchart_block.py'), encoding='utf8').read())
 
 # ============ 10. Preliminary results ============
 s = S[9]; set_simple_text(title_box(s), "Preliminary Results"); clear_body(s); set_slide_number(s, 10)
@@ -227,8 +209,8 @@ b = body_ph(s); b.left = Inches(10.3); b.top = Inches(1.15); b.width = Inches(2.
 
 # ============ 12. Flappy Bird: what we did ============
 s = S[11]; set_simple_text(title_box(s), "Side Result: Flappy Bird"); clear_body(s); set_slide_number(s, 12)
-s.shapes.add_picture(os.path.join(ROOT, "flappy", "flappy_frame.png"), Inches(0.45), Inches(1.25), width=Inches(6.3))
-caption(s, 0.45, 4.9, 6.3, 0.5, "Left: the game. Right: 3,000 real fly neurons, brightness = activity. Runs live in a window.", size=11)
+s.shapes.add_picture(os.path.join(ROOT, "animations", "flappy_fly_brain.gif"), Inches(0.45), Inches(1.25), width=Inches(6.3))
+caption(s, 0.45, 4.9, 6.3, 0.5, "Animation (plays in slideshow). Left: the game. Right: 3,000 real fly neurons, brightness = activity.", size=11)
 set_body(s, [
     (0, [("Why we did it: ", True), ("to check that the fly's wiring works as a neural network before building agents on it.", False)]),
     (0, [("The brain part: ", True), ("we took 3,000 real neurons and their 241,219 real connections (with the excitatory or inhibitory sign kept) and used them unchanged. Nothing about pipes or jumping is programmed.", False)]),
