@@ -165,7 +165,8 @@ set_body(S[4], [
     (1, [("Bates et al. (2026, Nature) & MaleCNS (2026, Cell) – ", True), ("complete brain + nerve-cord connectomes, female and male; motor control turns out to be distributed in local loops.", False)]),
     (0, [("Trend: ", True), ("mapping (2020–24) → simulating (2024) → whole-body and male/female maps (2025–26) → using the wiring as an AI architecture (2025–26).", False)]),
     (0, [("Framework: ", True), ("spiking neural networks, graph theory, reservoir computing, connectome-constrained deep learning, LLM tool-using agents.", False)]),
-    (0, [("Gap: ", True), ("no systematic test of evolved vs random/engineered wiring across many tasks; no autonomous AI experimentation on a connectome.", False)]),
+    (0, [("Already exists: ", True), ("browser simulators (FlyBrain), natural-language command interfaces (lixiang1076/fly-brain, CHIMERA), single-task fly-vs-random comparisons (ESA 2025; train-your-fly).", False)]),
+    (0, [("Gap: ", True), ("no closed-loop AI agent that plans and interprets its own experiments on a connectome; no multi-task benchmark with a ladder of controls showing WHICH structural feature of evolved wiring matters.", False)]),
 ], size=15, sub_size=14)
 
 # ===================== 6. Problem Definition =====================
@@ -200,9 +201,9 @@ set_body(S[6], [
     (1, [("Brain atlas: ", True), ("cell-type labels (sugar, bitter, touch, vision, motor) and graph queries such as \"shortest path from eye to legs\".", False)]),
     (1, [("Virtual fly (2-D): ", True), ("a fly in an on-screen arena driven by the brain's motor neurons — walks toward food, jumps from threats, grooms when touched; cut neurons live and watch behaviour break.", False)]),
     (1, [("AI scientist: ", True), ("an LLM with these tools plans, runs and interprets its own experiments and writes a report; validated by rediscovering known circuits.", False)]),
-    (1, [("Neural-network benchmark: ", True), ("the wiring as a PyTorch model (frozen and trainable) vs random, small-world and MLP networks on 3–5 tasks, with a \"how much fly is left\" shuffle curve.", False)]),
+    (1, [("Neural-network benchmark: ", True), ("the wiring as a PyTorch model (frozen and trainable) vs a ladder of controls — fully scrambled, degree-preserving, sign-preserving, module-preserving — and standard networks, on 3–5 tasks (Flappy Bird is task #1, already running).", False)]),
     (1, [("Dashboard: ", True), ("a browser page where anyone can press \"sugar\", watch neurons light up, cut neurons, and chat with the AI scientist.", False)]),
-    (0, [("Contribution: ", True), ("first autonomous-agent experimentation on a connectome; first systematic evolved-vs-random benchmark; an open tool usable without expert knowledge.", False)]),
+    (0, [("Novel contribution: ", True), ("(1) a closed-loop AI scientist that plans and interprets its own experiments — existing tools only translate single commands; (2) a multi-task benchmark with a ladder of controls (scrambled / degree- / sign- / module-preserving) to find which feature of evolved wiring matters. Simulator, virtual fly and dashboard are deliverables, not claimed as new.", False)]),
 ], size=16, sub_size=15)
 
 # ===================== 8. Methodology =====================
@@ -253,8 +254,8 @@ caption(s, 0.55, 5.65, 12.2, 0.9, "Steps 1–2 and the first validation are done
 
 # ===================== 10. Preliminary results (new slide) =====================
 s = S[9]; set_simple_text(title_box(s), "Preliminary Results"); clear_body(s); set_slide_number(s, 10)
-s.shapes.add_picture("../fly/sugar_test.png", Inches(0.45), Inches(1.35), width=Inches(6.6))
-s.shapes.add_picture("../fly/lesion_test.png", Inches(7.35), Inches(1.35), width=Inches(5.6))
+s.shapes.add_picture("../../results/sugar_test.png", Inches(0.45), Inches(1.35), width=Inches(6.6))
+s.shapes.add_picture("../../results/lesion_test.png", Inches(7.35), Inches(1.35), width=Inches(5.6))
 caption(s, 0.45, 4.05, 6.6, 0.6, "Sugar on the tongue → 380 neurons active, feeding neuron MN9 at 95–98 Hz.\nRandom input → MN9 silent (0 Hz). Same result in 3 of 3 runs.", size=12)
 caption(s, 7.35, 4.05, 5.6, 0.6, "Brain surgery: cut the 3 command neurons → feeding stops (1 Hz).\nCut 10 random neurons → nothing changes (91 Hz).", size=11)
 set_body(s, [
@@ -264,7 +265,7 @@ body_ph(s).top = Inches(4.85); body_ph(s).height = Inches(1.9)
 
 # ===================== 11. Live demo (new slide) =====================
 s = S[10]; set_simple_text(title_box(s), "Live Demo"); clear_body(s); set_slide_number(s, 11)
-pic = s.shapes.add_picture("../fly/fly_feeding_demo.gif", Inches(0.9), Inches(1.15), width=Inches(9.3))
+pic = s.shapes.add_picture("../../animations/fly_feeding_demo.gif", Inches(0.9), Inches(1.15), width=Inches(9.3))
 set_body(s, [
     (0, [("Animation (plays in slideshow): ", True), ("left — the real wiring, neurons placed by distance from the tongue, flashing as they fire. Right — a fly whose mouth is driven live by the MN9 'eat' neuron.", False)]),
     (0, [("0–350 ms: ", True), ("sugar arrives → signal ripples hop by hop → MN9 fires → mouth extends.", False)]),
@@ -279,7 +280,7 @@ set_body(S[11], [
     (1, "A whole-brain simulator on a laptop that matches the Nature 2024 results for feeding, bitter suppression and grooming."),
     (1, "A 2-D virtual fly driven by the brain: walks toward food, escapes threats, grooms — and visibly breaks when specific neurons are cut."),
     (1, "An AI scientist that, given only \"what makes the fly eat?\", finds the responsible neurons by itself (we already found the 3 key neurons by hand)."),
-    (1, "A benchmark table and shuffle curve showing where fly wiring beats, ties or loses to random and engineered networks."),
+    (1, "A benchmark table showing, task by task, where fly wiring beats, ties or loses each control — and therefore which structural property matters. Early result: on Flappy Bird a brain beats no-brain 5–10× when memory is needed, but real wiring does not beat scrambled wiring."),
     (1, "An open-source web dashboard anyone can use without neuroscience knowledge."),
     (0, [("Impact: ", True), ("labs simulate before experimenting (saves months); AI researchers get evidence on copying biological wiring; the pipeline transfers to the mouse connectome now being mapped; supports low-power (neuromorphic) computing.", False)]),
     (0, [("Future directions: ", True), ("3-D physics fly (NeuroMechFly / Flybody); learning via dopamine-gated plasticity in the mushroom body; male-vs-female connectome comparison; running the circuit on a neuromorphic chip or Raspberry Pi.", False)]),
@@ -302,7 +303,7 @@ set_body(S[12], [
 
 # ===================== 14. Conclusion =====================
 set_body(S[13], [
-    (0, [("Summary: ", True), ("For the first time we have a complete brain wiring diagram, and it runs on a laptop — we have already reproduced a Nature 2024 result and animated it. Our project turns this into a platform: a simulator, a labelled atlas, a virtual fly, an AI agent that experiments on the brain by itself, and a fair test of whether evolution's wiring beats human-designed networks.", False)]),
+    (0, [("Summary: ", True), ("The complete fly brain wiring runs on a laptop — we reproduced a Nature 2024 result and built a piece of the brain into a Flappy Bird player. Our two new contributions: an AI agent that plans and runs its own experiments to discover circuits, and a controlled benchmark that tells us which features of evolved wiring matter for computation. The simulator, virtual fly and dashboard are the platform that makes both possible.", False)]),
     (0, [("Final thought: ", True), ("This is where neuroscience and AI meet. A fly solves vision, flight and learning with 139 thousand neurons and almost no power. If its wiring holds design lessons, the fastest way to find them is to run it, poke it, and let an AI help us understand it.", False)]),
     (0, [("Next steps: ", True), ("mentor approval → validation runs (Oct) → virtual fly and agent prototype (Nov) → benchmark and dashboard (Dec) → conference paper.", False)]),
 ], size=18)
