@@ -19,7 +19,8 @@ Team: Govind · Bharath · Dhanush A · Shreenidhi Chalmi
 ## Run it
 
 ```bash
-pip install numpy scipy pandas pyarrow matplotlib
+pip install numpy scipy pandas pyarrow matplotlib pygame-ce
+python data/get_data.py     # downloads the 100 MB connectome once (not stored in the repo)
 cd simulator
 python sugar_test.py      # ~80 s: sugar -> MN9 fires (95-98 Hz); random -> 0 Hz; saves sugar_test.png
 python lesion_test.py     # traces tongue->MN9 path (3 synapses) and cuts neurons
