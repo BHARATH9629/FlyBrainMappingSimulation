@@ -14,7 +14,7 @@ How it works
    shuffled (same size, same weights, wrong places) and with no brain at all (linear on pixels),
    so we can compare: fly brain vs random brain vs no brain.
 """
-import os, time, argparse
+import os, time, argparse, json
 import numpy as np
 import pandas as pd
 import scipy.sparse as sp
@@ -26,6 +26,8 @@ DATA = os.path.join(HERE, "..", "data")
 # ============================================================ game
 class Flappy:
     W, H = 20, 12                 # retina resolution (columns x rows)
+    BLIND = 0.0      # fraction of the approach during which the pipe is INVISIBLE (needs memory)
+    NOISE = 0.0      # probability each input bit is flipped (needs temporal averaging)
     def __init__(self, seed=0):
         self.rng = np.random.default_rng(seed); self.reset()
     def reset(self):
@@ -52,8 +54,12 @@ class Flappy:
         x, g = self.next_pipe()
         v = np.zeros(self.N_IN, np.float32)
         v[min(11, max(0, int(self.y * 12)))] = 1
-        v[12 + min(11, max(0, int(g * 12)))] = 1
-        v[24 + min(9, max(0, int((x - self.BIRD_X) / 0.7 * 10)))] = 1
+        d = (x - self.BIRD_X) / 0.7                      # 1 = far, 0 = at the pipe
+        if d > self.BLIND:                               # gap visible only while far enough away
+            v[12 + min(11, max(0, int(g * 12)))] = 1
+        v[24 + min(9, max(0, int(d * 10)))] = 1
+        if self.NOISE > 0:
+            flip = self.rng.random(self.N_IN) < self.NOISE; v[flip] = 1 - v[flip]
         return v
     def coach(self):
         """Rule-based teacher: flap when below the gap centre and not already rising fast."""
@@ -111,6 +117,24 @@ class Reservoir:
         self.x = (1 - self.leak) * self.x + self.leak * np.tanh(pre)
         return self.x
 
+class WithInput:
+    """Read-out also sees the 34 raw inputs (standard echo-state-network trick)."""
+    def __init__(self, res): self.res = res; self.x = None; self.W = res.W
+    def reset(self): self.res.reset(); self.x = None
+    def step(self, u): self.x = np.concatenate([self.res.step(u), u]); return self.x
+
+DEFAULT_CFG = dict(rho=1.1, leak=0.6, in_scale=1.0, lam=0.1, input_to_readout=True, noise=0.15)
+def load_cfg():
+    p = os.path.join(HERE, "best_cfg.json")
+    return {**DEFAULT_CFG, **json.load(open(p))} if os.path.exists(p) else DEFAULT_CFG
+
+def build(kind, cfg, Wfly_raw):
+    """kind: 'fly' | 'random' | 'none' -> a player object (or None for the linear baseline)."""
+    if kind == "none": return None
+    Wraw = Wfly_raw if kind == "fly" else shuffle_wiring(Wfly_raw)
+    res = Reservoir(scale_spectral(Wraw, cfg["rho"]), Flappy.N_IN, leak=cfg["leak"], in_scale=cfg["in_scale"])
+    return WithInput(res) if cfg["input_to_readout"] else res
+
 # ============================================================ train + play
 def collect(res, n_frames, seed, noise=0.15):
     """Watch the coach play (with a little randomness so we see recoveries). Record brain state + coach action."""
@@ -130,6 +154,22 @@ def fit_readout(X, Y, lam=1.0):
     sw = np.where(Y > 0.5, 0.5 / max(Y.mean(), 1e-6), 0.5 / max(1 - Y.mean(), 1e-6))
     Xw = X * sw[:, None]
     return np.linalg.solve(X.T @ Xw + lam * np.eye(X.shape[1]), Xw.T @ (2 * Y - 1))
+
+def dagger(res, cfg, frames=40000, rounds=3, seed=1):
+    """Imitation learning that also learns from the student's own mistakes (DAgger)."""
+    X, Y = collect(res, frames, seed=seed, noise=cfg["noise"])
+    w = fit_readout(X, Y, cfg["lam"]); thr = calibrate(res, w, X)
+    for r in range(rounds):
+        Xs, Ys = [], []
+        for g in range(8):                                   # student plays, coach labels every frame it visits
+            game = Flappy(1000 * (r + 1) + g); obs = game.reset(); res.reset() if res else None
+            while game.alive and game.t < 1500:
+                state = res.step(obs) if res is not None else obs
+                Xs.append(np.append(state, 1.0)); Ys.append(game.coach())
+                obs, _ = game.step((Xs[-1] @ w) > thr)
+        X = np.vstack([X, np.array(Xs)]); Y = np.concatenate([Y, np.array(Ys)])
+        w = fit_readout(X, Y, cfg["lam"]); thr = calibrate(res, w, X)
+    return w, thr
 
 def calibrate(res, w, X, seeds=(1, 2, 3)):
     """Pick the decision threshold that plays best on TRAINING games (one scalar; test games stay unseen)."""
@@ -156,23 +196,26 @@ def evaluate(res, w, n=10, label="", thr=0.0):
     return scores
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("--neurons", type=int, default=3000); ap.add_argument("--frames", type=int, default=40000)
-    args = ap.parse_args()
-    t0 = time.time()
-    Wfly, fly_ids = load_subnetwork(args.neurons)
-    print(f"fly sub-network: {Wfly.shape[0]} neurons, {Wfly.nnz:,} synapses "
-          f"({(Wfly.data > 0).mean() * 100:.0f}% excitatory)  [{time.time() - t0:.0f}s]")
-    Wfly_s = scale_spectral(Wfly); Wrand_s = scale_spectral(shuffle_wiring(Wfly))
-    n_in = Flappy.N_IN
+    ap = argparse.ArgumentParser(); ap.add_argument("--neurons", type=int, default=3000)
+    ap.add_argument("--frames", type=int, default=40000); ap.add_argument("--games", type=int, default=30)
+    ap.add_argument("--blind", type=float, default=0.0, help="fraction of approach with pipe invisible, e.g. 0.5")
+    ap.add_argument("--noise", type=float, default=0.0, help="probability of flipping each input bit")
+    args = ap.parse_args(); cfg = load_cfg(); t0 = time.time()
+    Flappy.BLIND, Flappy.NOISE = args.blind, args.noise
+    print(f"task: blind={args.blind}  noise={args.noise}")
+    Wfly_raw, fly_ids = load_subnetwork(args.neurons)
+    print(f"fly sub-network: {Wfly_raw.shape[0]} neurons, {Wfly_raw.nnz:,} synapses "
+          f"({(Wfly_raw.data > 0).mean() * 100:.0f}% excitatory)   config: {cfg}")
+    np.save(os.path.join(HERE, "fly_ids.npy"), fly_ids); sp.save_npz(os.path.join(HERE, "W_fly_raw.npz"), Wfly_raw.tocsr())
     results = {}
-    for label, Wm in (("fly brain", Wfly_s), ("random brain", Wrand_s), ("no brain", None)):
-        res = Reservoir(Wm, n_in) if Wm is not None else None
-        X, Y = collect(res, args.frames, seed=1)
-        w = fit_readout(X, Y); thr = calibrate(res, w, X)
-        print(f"{label}: trained read-out on {len(X):,} frames (coach flapped {Y.mean() * 100:.0f}% of the time)")
-        results[label] = evaluate(res, w, label=label, thr=thr)
-        if label == "fly brain":
-            np.save(os.path.join(HERE, "readout_fly.npy"), np.append(w, thr)); np.save(os.path.join(HERE, "fly_ids.npy"), fly_ids)
-            sp.save_npz(os.path.join(HERE, "W_fly.npz"), Wfly_s)
-    print("\nSummary (mean pipes passed over 10 games, cap = 4000 frames):")
-    for k, v in results.items(): print(f"  {k:14s} {np.mean(v):6.1f}")
+    for kind in ("fly", "random", "none"):
+        res = build(kind, cfg, Wfly_raw)
+        w, thr = dagger(res, cfg, frames=args.frames)
+        np.save(os.path.join(HERE, f"readout_{kind}.npy"), np.append(w, thr))
+        scores = [play(res, w, seed=100 + i, thr=thr)[0] for i in range(args.games)]
+        results[kind] = scores
+        print(f"  {kind:7s} brain: mean {np.mean(scores):5.1f}  median {np.median(scores):4.0f}  "
+              f"max {max(scores):3d}  zero-games {sum(s == 0 for s in scores)}/{args.games}   [{time.time()-t0:.0f}s]")
+    json.dump(results, open(os.path.join(HERE, f"final_scores_blind{args.blind}_noise{args.noise}.json"), "w"))
+    print("Summary (mean pipes over %d unseen games): " % args.games +
+          "  ".join(f"{k}={np.mean(v):.1f}" for k, v in results.items()))
