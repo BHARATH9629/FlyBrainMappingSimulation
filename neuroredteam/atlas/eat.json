@@ -1,0 +1,60 @@
+{
+ "entry": {
+  "behaviour": "eat",
+  "healthy_on_hz": 106.66666666666667,
+  "healthy_off_hz": 0.0,
+  "goals": {
+   "block": {
+    "attacks": {
+     "greedy": {
+      "strategy": "attacker-greedy",
+      "goal": "block",
+      "intervention": {
+       "lesion": [
+        59455,
+        80293,
+        107572
+       ]
+      },
+      "size": 3,
+      "simulations": 6
+     },
+     "inject_inhibitors": {
+      "strategy": "attacker-inject",
+      "goal": "block",
+      "intervention": {
+       "inject": {
+        "121117": 150.0,
+        "42155": 150.0
+       }
+      },
+      "size": 2,
+      "simulations": 4
+     },
+     "weaken_only": null
+    },
+    "best": {
+     "strategy": "attacker-inject",
+     "goal": "block",
+     "intervention": {
+      "inject": {
+       "121117": 150.0,
+       "42155": 150.0
+      }
+     },
+     "size": 2,
+     "simulations": 4
+    },
+    "disjoint_attacks": [
+     3
+    ],
+    "repair": {
+     "strategy": "defender-greedy",
+     "move": "bias + potentiate",
+     "intervention": {
+      "bias": {
+       "59455": 6.0,
+       "107572": 6.0,
+       "80293": 6.0
+      },
+      "potentiate": {

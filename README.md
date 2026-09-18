@@ -20,11 +20,11 @@ measure. The output is a **fragility atlas** of fly behaviours and a benchmark f
 | Whole-brain simulation, matches Nature 2024 | done | sugar -> feeding neuron MN9 fires (95 to 107 Hz); random input -> 0 Hz |
 | Behaviour "eat" as a pass/fail test | done | on >= 40 Hz with sugar AND off <= 10 Hz without |
 | Attack rules (attack surface) | done | `neuroredteam/behaviours.py` |
-| Attacker, greedy version | **done, verified** | finds the 3-neuron block in 6 simulations; set is minimal; same neurons as found by hand; holds across seeds |
-| Defender, greedy version | **done, verified** | 5-neuron repair (bias + potentiate); 40 to 50 Hz with sugar, 0 Hz without, across seeds |
-| First fragility-atlas entry (eat) | done | attack size 3, repair size 5, recovery about 47 % |
-| Attacker, random baseline | code written, not yet run | `Attacker.random()` |
-| Goals "force" (eat without sugar) and "corrupt" (eat bitter) | not yet | needs bitter neuron IDs |
+| Attacker: greedy (cut), inject-inhibitors (no cuts), weaken-only, random baseline | **done, verified on 3 seeds x 3 seed-sets** | smallest block = 2 neurons via inhibition (beats the hand-found 3); force = 1 neuron |
+| Defender: greedy, escalating moves, set minimisation | **done, verified on 3 seeds x 3 seed-sets** | 3-neuron repair after the inhibitory attack; 52 % recovery; 0 Hz without sugar |
+| Fragility-atlas entry (eat) with redundancy and force goals | done | block 2, force 1, 1 independent cut-attack, repair 3; zero variance across seed-sets |
+| Batch runner + atlas CSV with mean +/- sd | done | `neuroredteam/batch.py` |
+| Goal "corrupt" (eat bitter) | not yet | needs bitter neuron IDs |
 | Behaviours groom, escape, refuse-bitter | not yet | needs neuron IDs from papers / FlyWire annotations |
 | LLM attacker and defender | not yet | same tools; needs an API key |
 | Fragility atlas over all behaviours | 1 of 4 | batch runner is trivial once behaviours exist |
@@ -38,7 +38,8 @@ pip install numpy scipy pandas pyarrow matplotlib pygame-ce
 python data/get_data.py            # downloads the 100 MB connectome once (not stored in the repo)
 
 cd neuroredteam
-python run_redteam.py              # attack + repair of 'eat', about 3 minutes, writes atlas/eat_greedy.json
+python run_redteam.py              # block + force attacks, redundancy, repair; ~8 min; writes atlas/eat.json
+python batch.py --reps 3           # the atlas table with mean +/- sd over independent seed-sets; ~10 min
 ```
 
 Other things to run:
@@ -65,9 +66,15 @@ Everything runs on a normal laptop, no GPU.
 
 ## The fragility atlas so far
 
-| Behaviour | Healthy | Attack (smallest block found) | Repair (smallest restore found) | Recovery |
-|---|---|---|---|---|
-| eat | MN9 107 Hz with sugar, 0 without | lesion 3 neurons: 720575940623211725, 720575940627099338, 720575940632252743 | bias +6 mV and x2 synapses on 5 surviving inputs | 50 Hz with sugar, 0 Hz without (47 %) |
+Every number verified on 3 seeds per run, repeated over 3 independent seed-sets (`neuroredteam/atlas/atlas.csv`).
+
+| Behaviour | Healthy | Smallest BLOCK | Smallest FORCE | Independent cut-attacks | Smallest REPAIR | Recovery |
+|---|---|---|---|---|---|---|
+| eat | 98.9 +/- 6.0 Hz | **2 neurons, no cuts** (drive two of MN9's own inhibitory inputs: 720575940636809646, 720575940620156209); or cut 3 command cells (720575940623211725, 720575940627099338, 720575940632252743) | **1 neuron** (drive command cell 720575940627099338 -> 94 Hz with no sugar) | 1 (after the 3 command cells, cutting 10 more drivers only reaches 40 Hz) | **3 neurons**, bias +6 mV and x2 synapses onto MN9 | 52 +/- 9 % |
+
+What this says about feeding: robust to graded damage (weakening 10 drivers to 50 % does not block it), fragile to targeted
+silencing (3 cells) and to its own inhibition (2 cells), and far easier to hijack (1 cell) than to stop. The attacker found the
+2-neuron inhibitory exploit that we had not found by hand.
 
 ## What is new and what is not (we do not overclaim)
 

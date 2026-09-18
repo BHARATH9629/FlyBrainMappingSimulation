@@ -49,7 +49,7 @@ class Brain:
         row = self.W[source].toarray().ravel(); order = np.argsort(-np.abs(row))
         return [(int(j), int(row[j])) for j in order if row[j] != 0][:top]
 
-    def subnetwork(self, seeds, depth=5, min_syn=2, must_include=()):
+    def subnetwork(self, seeds, depth=3, min_syn=5, must_include=()):
         """Neurons reachable from `seeds` within `depth` hops over connections with >= min_syn synapses."""
         key = (tuple(sorted(map(int, seeds))), depth, min_syn, tuple(sorted(map(int, must_include))))
         if key in self._sub_cache: return self._sub_cache[key]
@@ -68,7 +68,7 @@ class Brain:
 
     # ---------------------------------------------------------------- simulation
     def run(self, stimulate, t_ms=300, lesion=(), weaken=None, inject=None, bias=None, potentiate=None,
-            record=(), seed=1, depth=5, min_syn=2):
+            record=(), seed=1, depth=3, min_syn=5):
         """
         stimulate : indices driven at 150 Hz (the sensory input)
         lesion    : indices whose outgoing synapses are removed (silenced)
@@ -92,14 +92,27 @@ class Brain:
         must = list(record) + list(lesion) + list(weaken) + list(bias) + [p for pr in potentiate for p in pr]
         sub = self.subnetwork(seeds, depth, min_syn, must_include=must)
         n = sub.size; loc = {int(g): i for i, g in enumerate(sub)}
-        Wl = self.W[sub][:, sub].astype(np.float32).tolil()
+        # base sub-matrix is cached per sub-network; interventions are applied as cheap sparse ops
+        skey = ("W", tuple(sub.tolist()))
+        if skey not in self._sub_cache:
+            self._sub_cache[skey] = (self.W[sub][:, sub].astype(np.float32) * W_SYN).tocsr()
+        Wl = self._sub_cache[skey]
+        scale = np.ones(n, np.float32)
         for g in lesion:
-            if g in loc: Wl[loc[g], :] = 0
+            if g in loc: scale[loc[g]] = 0.0
         for g, f in weaken.items():
-            if g in loc: Wl[loc[g], :] = Wl[loc[g], :] * f
-        for (a, b), f in potentiate.items():
-            if a in loc and b in loc: Wl[loc[a], loc[b]] = Wl[loc[a], loc[b]] * f
-        Wl = (Wl.tocsr() * W_SYN).tocsr()
+            if g in loc: scale[loc[g]] *= f
+        if (scale != 1).any():
+            Wl = sp.diags(scale) @ Wl                     # scale outgoing synapses row-wise
+        if potentiate:
+            rows, cols, vals = [], [], []
+            for (a, b), f in potentiate.items():
+                if a in loc and b in loc:
+                    w = Wl[loc[a], loc[b]]
+                    if w != 0: rows.append(loc[a]); cols.append(loc[b]); vals.append((f - 1.0) * w)
+            if rows:
+                Wl = (Wl + sp.csr_matrix((vals, (rows, cols)), shape=(n, n), dtype=np.float32)).tocsr()
+        Wl = Wl.tocsr()
 
         rng = np.random.default_rng(seed)
         v0 = np.full(n, V0, np.float32)

@@ -1,6 +1,6 @@
 # HANDOFF: how NeuroRedTeam works and what to do next
 
-Read this before touching the code. Last updated 17 September 2026, after milestone 1.
+Read this before touching the code. Last updated 18 September 2026, after milestone 2 (robust agents + batch atlas).
 
 ## 0. The one-minute version
 
@@ -10,8 +10,9 @@ Read this before touching the code. Last updated 17 September 2026, after milest
 - `neuroredteam/agents.py` has the attacker and defender. Both are the same loop: choose an experiment, run the brain,
   check the behaviour, stop when the goal is met, then try to shrink the intervention set.
 - `neuroredteam/run_redteam.py` runs attack then repair for one behaviour and writes an atlas entry + a full log.
-- Milestone 1 result: eat can be blocked by 3 neurons and repaired by 5. Verified across seeds. Same 3 neurons as the
-  manual experiment. Everything else in the plan builds on these files.
+- Milestone 2 result (18 Sep): every goal verified on 3 seeds, repeated over 3 seed-sets, zero variance. eat: block = 2
+  neurons via the readout's own inhibitors (no cuts; beats the hand-found 3-cut), force = 1 neuron, 1 independent cut-attack,
+  repair = 3 neurons, 52 % recovery. Runs are 1.2 s on a 13,131-neuron sub-network that reproduces the full brain exactly.
 
 ## 1. How the simulation works (brain.py)
 
@@ -32,9 +33,11 @@ synapse 5 ms, refractory 2.2 ms, delay 1.8 ms, 0.275 mV per synapse`). Stimulate
 
 Returns `{"rates": {idx: Hz}, "active": {idx: Hz for every neuron that fired}, "n_sub": size of sub-network}`.
 
-Speed: it simulates only the sub-network reachable from the stimulus within `depth=5` hops over connections of
-`>= 2` synapses, plus any neurons named in the interventions. For sugar that is still about 131k neurons, about 4 s per run.
-**TODO (Govind):** tighten to `depth=4, min_syn=3` and check MN9 rates stay within a few Hz; target about 1 s per run.
+Speed: it simulates only the sub-network reachable from the stimulus within `depth=3` hops over connections of
+`>= 5` synapses, plus any neurons named in the interventions: 13,131 neurons for sugar, about 1.2 s per run. We checked
+fidelity: depth 3 / 5 synapses gives the same MN9 rates as the full brain (107 Hz healthy, 0 Hz attacked); depth 2 does not
+(73 Hz). The sub-matrix is cached; lesion/weaken are a diagonal scaling, potentiate a sparse add. When you add a behaviour,
+re-check fidelity against `simulator/sugar_test.py`-style full runs before trusting the numbers.
 Results are cached in memory by a hash of all arguments, so repeated experiments are free within a process.
 
 Indices vs IDs: internally neurons are 0..138638 (row order of `Completeness_783.csv`). `brain.ids[i]` gives the
@@ -62,9 +65,13 @@ motor neuron IDs are in the atlas.
 
 ## 3. Agents (agents.py)
 
-`Attacker.greedy()`: rank interneurons by (their firing rate) x (excitatory synapses onto the readout), lesion the top
-1, 2, 3 ... until the readout is <= OFF threshold with the stimulus present, then try dropping each neuron to
-minimise. `Attacker.random()`: same budget, random subsets of active neurons (the baseline to beat).
+Goals: `block` (readout <= OFF with stimulus) and `force` (readout >= ON without stimulus). Every check runs on
+`CHECK_SEEDS = (1, 2, 3)` and must pass on all of them.
+`Attacker.greedy()`: block = lesion the strongest active drivers one at a time; force = inject into the strongest
+excitatory inputs. `Attacker.inject_inhibitors()`: block with no cuts by driving the readout's own inhibitory inputs
+(this found the 2-neuron exploit). `Attacker.weaken_only()`: partial damage only. `Attacker.random()`: baseline.
+`Attacker.best_of_all()`: smallest of the three. `redundancy()`: find an attack, exclude its neurons, search again
+(how many independent attacks exist). All successful sets are minimised neuron by neuron. Cost = distinct neurons touched.
 
 `Defender.greedy()`: with the attack fixed, rank neurons that still fire and still excite the readout; try bias only,
 then potentiate only, then both, on the top 2/4/6/8/12; first valid repair wins; then drop neurons one at a time.
