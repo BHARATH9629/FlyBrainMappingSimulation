@@ -3,6 +3,8 @@ brain decided, the red/blue team log, and the keys.
 
 Keys
   S  drop sugar ahead        V  water ahead      B  bitter (sugar+bitter) ahead      C  choice arena: bitter, water, sugar; visits all three
+  E  explore: the fly wanders on its own; mouse click on the fly panel places a drop in that direction
+     (left button = sugar, right = bitter, middle = water); whatever it walks into, it tastes
   L  looming shadow (escape)
   DOWN  object approaching head-on (LC16 both eyes -> MDN: backs up)   1 / 2  threat on the left / right eye (-> DNa02: turns away)
   W  walk / stop             <- ->  steer                             SPACE  stop everything, clear drops
@@ -27,6 +29,7 @@ ap.add_argument("--script", default="", help='auto key presses, e.g. "S@2,A@2,S@
 ap.add_argument("--record", default="", help="save the session to this mp4")
 ap.add_argument("--robust", action="store_true", help="blue team uses the slow robust defender (default: greedy, fast)")
 ap.add_argument("--no_cache", action="store_true", help="always recompute attacks / repairs")
+ap.add_argument("--max_seconds", type=float, default=0, help="quit after this many seconds (safety for scripted runs)")
 ap.add_argument("--mode", default="full", choices=["full", "phase2"], help="phase2 = behaviours only (no red / blue team keys or panels)")
 args = ap.parse_args()
 
@@ -118,7 +121,7 @@ LABELS = {"eat": ("sugar taste neurons", "MN9 (feeding muscle)"), "drink": ("wat
           "refuse_bitter": ("sugar + bitter taste neurons", "MN9 (feeding muscle)"), "escape": ("looming detectors LC4/LPLC2", "giant fiber DNp01 (escape)"),
           "retreat": ("approach detectors LC16, both eyes", "MDN moonwalker (walk backward)"), "turn": ("looming detectors, one eye", "DNa02 (steering)")}
 
-state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}, phase="idle", t_phase=0.0, eat=0.0, turn_dir=0.0, verdict=None, verdict_col=(255, 255, 255),
+state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}, explore=False, wander=0.0, drops={}, phase="idle", t_phase=0.0, eat=0.0, turn_dir=0.0, verdict=None, verdict_col=(255, 255, 255),
              msg="loading the brain ...", loglines=[], last_frame=None, brain_img=None, anim=None)
 
 
@@ -126,6 +129,7 @@ def place_drop(kind):
     pos = body.position[:2]; h = float(body.heading)
     tgt = pos + 9.0 * np.array([np.cos(h), np.sin(h)])
     for k_, g in geoms.items(): body.sim.mj_model.geom_pos[g.id][:2] = tgt if k_ == kind else (1e6, 1e6)
+    state["drops"] = {kind: tgt}
     state.update(target=tgt, kind=kind, walking=True, phase="approach", verdict=None)
     state["msg"] = f"{kind} placed 9 mm ahead; walking to it"
 
@@ -138,6 +142,7 @@ def place_arena():
     for kind, dist, ang in order:
         spots[kind] = pos + dist * np.array([np.cos(h + ang), np.sin(h + ang)])
         body.sim.mj_model.geom_pos[geoms[kind].id][:2] = spots[kind]
+    state["drops"] = dict(spots)
     state.update(tour=[k for k, _, _ in order][1:], spots=spots, target=spots["bitter"], kind="bitter", walking=True, phase="approach", verdict=None)
     state["msg"] = "CHOICE: bitter, water and sugar drops ahead; the fly will taste each one"
 
@@ -151,6 +156,18 @@ def next_stop():
     return False
 
 
+def drop_at(kind, angle, dist=8.0):
+    """Place a drop `dist` mm from the fly at `angle` rad relative to its heading (mouse: direction of the click)."""
+    pos = body.position[:2]; h = float(body.heading)
+    spot = pos + dist * np.array([np.cos(h + angle), np.sin(h + angle)])
+    body.sim.mj_model.geom_pos[geoms[kind].id][:2] = spot; state["drops"][kind] = spot
+    state["msg"] = f"{kind} drop placed {'ahead' if abs(angle) < 0.3 else ('to the left' if angle > 0 else 'to the right')}; exploring fly will find it"
+
+
+def remove_drop(kind):
+    body.sim.mj_model.geom_pos[geoms[kind].id][:2] = (1e6, 1e6); state["drops"].pop(kind, None)
+
+
 def start_verdict(name):
     state.update(phase="think", t_phase=0.0); worker.q.put(("measure", name, True)); worker.q.put(("measure", name, False))
 
@@ -159,16 +176,21 @@ def draw_text(lines, x, y, col=(230, 230, 230)):
     for i, l in enumerate(lines): screen.blit(font.render(l, True, col), (x, y + 18 * i))
 
 
-running = True; escape_kick = 0.0; t_loaded = None; frames_out = []
+running = True; escape_kick = 0.0; t_loaded = None; frames_out = []; t_start = time.time()
 script = [(float(x.split("@")[1]), x.split("@")[0].strip().upper()) for x in args.script.split(",") if "@" in x]
 while running:
     # scripted keys: each fires N seconds after the system went idle (brain done, fly not busy) following the previous key
-    idle = worker.brain is not None and worker.q.empty() and worker.busy == "" and state["phase"] in ("idle", "free") and state["anim"] is None
+    idle = worker.brain is not None and worker.q.empty() and worker.busy == "" and state["phase"] in ("idle", "free", "explore") and state["anim"] is None
+    if args.max_seconds and time.time() - t_start > args.max_seconds: running = False       # safety: a script can never hang
     if idle and t_loaded is None: t_loaded = time.time()
     if not idle: t_loaded = None
     if t_loaded is not None and script and time.time() - t_loaded >= script[0][0]:
         _, key = script.pop(0); t_loaded = None
-        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=getattr(pygame, f"K_{key.lower()}") if len(key) == 1 else getattr(pygame, f"K_{key}")))
+        if key in ("LCLICK", "RCLICK", "MCLICK"):                    # scripted mouse clicks on the fly panel (for tests / clips)
+            btn = {"LCLICK": 1, "RCLICK": 3, "MCLICK": 2}[key]; x = {"LCLICK": int(PW * 0.25), "RCLICK": int(PW * 0.75), "MCLICK": PW // 2}[key]
+            pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, button=btn, pos=(x, PH // 2)))
+        else:
+            pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=getattr(pygame, f"K_{key.lower()}") if len(key) == 1 else getattr(pygame, f"K_{key}")))
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT: running = False
         elif ev.type == pygame.KEYDOWN:
@@ -179,10 +201,20 @@ while running:
             elif k == pygame.K_b: place_drop("bitter")
             elif k == pygame.K_v: place_drop("water")
             elif k == pygame.K_c: place_arena()
+            elif k == pygame.K_e:
+                state["explore"] = not state["explore"]
+                if state["explore"]: state.update(phase="explore", walking=True, target=None, tour=[], verdict=None); state["msg"] = "EXPLORE: the fly wanders; click to place drops (left = sugar, right = bitter, middle = water)"
+                else: state.update(phase="idle", walking=False); state["msg"] = "explore off"
+        elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and ev.pos[0] < PW:
+            kind = {1: "sugar", 3: "bitter", 2: "water"}.get(ev.button)
+            if kind:
+                angle = (PW / 2 - ev.pos[0]) / (PW / 2) * 1.0            # click left of centre -> to the fly's left (up to ~57 deg)
+                drop_at(kind, angle)
+                if not state["explore"]: state.update(target=state["drops"][kind], kind=kind, walking=True, phase="approach", verdict=None)
             elif k == pygame.K_w: state["walking"] = not state["walking"]; state["phase"] = "free"; state["msg"] = "walking" if state["walking"] else "stopped"
             elif k == pygame.K_LEFT: state["steer"] = min(state["steer"] + 0.4, 0.8)
             elif k == pygame.K_RIGHT: state["steer"] = max(state["steer"] - 0.4, -0.8)
-            elif k == pygame.K_SPACE: state.update(walking=False, steer=0.0, target=None, phase="idle", verdict=None, tour=[]); state["msg"] = "stopped"
+            elif k == pygame.K_SPACE: state.update(walking=False, steer=0.0, target=None, phase="idle", verdict=None, tour=[], explore=False); state["msg"] = "stopped"
             elif k == pygame.K_l: state.update(phase="think", kind="looming", walking=False); state["msg"] = "looming shadow! brain: escape?"; worker.q.put(("measure", "escape", True))
             elif k == pygame.K_DOWN: state.update(phase="think", kind="approach", walking=False); state["msg"] = "object approaching head-on (LC16, both eyes): brain: back up?"; worker.q.put(("measure", "retreat", True))
             elif k in (pygame.K_1, pygame.K_2):
@@ -269,15 +301,37 @@ while running:
         else:
             err = (np.arctan2(d[1], d[0]) - body.heading + np.pi) % (2 * np.pi) - np.pi
             left, right = np.clip(1.0 - 0.8 * err, 0.2, 1.2), np.clip(1.0 + 0.8 * err, 0.2, 1.2)
+    elif st["phase"] == "explore":
+        # slow random walk: the steering bias drifts, and the fly turns back toward the arena centre when far out
+        st["wander"] = 0.97 * st["wander"] + 0.06 * np.random.randn()
+        pos = body.position[:2]; far = np.linalg.norm(pos)
+        if far > 18.0:
+            back = (np.arctan2(-pos[1], -pos[0]) - body.heading + np.pi) % (2 * np.pi) - np.pi
+            st["wander"] = 0.6 * np.sign(back)
+        # "smell": within 12 mm of a drop the wander steers toward the nearest one (a body-side rule, not the connectome)
+        near = [(np.linalg.norm(spot - pos), kind, spot) for kind, spot in st["drops"].items() if np.linalg.norm(spot - pos) < 12.0]
+        if near:
+            dist, kind, spot = min(near)
+            err = (np.arctan2(*(spot - pos)[::-1]) - body.heading + np.pi) % (2 * np.pi) - np.pi
+            st["wander"] = 0.7 * st["wander"] + 0.3 * np.clip(0.9 * err, -0.6, 0.6)
+            if st["msg"].startswith("EXPLORE") or "placed" in st["msg"]: st["msg"] = f"smells the {kind} drop ({dist:.0f} mm; steering rule, not the connectome)"
+        w = float(np.clip(st["wander"], -0.6, 0.6)); left, right = np.clip(0.9 - w, 0.2, 1.2), np.clip(0.9 + w, 0.2, 1.2)
+        for kind, spot in list(st["drops"].items()):                  # anything within reach gets tasted
+            if np.linalg.norm(spot - pos) < ARRIVE:
+                st.update(kind=kind, walking=False); start_verdict({"sugar": "eat", "bitter": "refuse_bitter", "water": "drink"}[kind])
+                st["msg"] = f"found the {kind} drop; asking the brain ..."; break
     elif st["phase"] == "free" and st["walking"]:
         left, right = np.clip(1.0 - st["steer"], 0.2, 1.2), np.clip(1.0 + st["steer"], 0.2, 1.2)
     elif st["phase"] == "eating":
         eat = 1.0; st["t_phase"] += SIM_PER_FRAME
         if st["t_phase"] > 2.5:
-            st["phase"] = "idle"; next_stop()
+            st["phase"] = "idle"
+            if st["explore"]: remove_drop(st["kind"]); st["phase"] = "explore"; st["walking"] = True; st["verdict"] = None
+            else: next_stop()
     elif st["phase"] == "refuse":
         st["t_phase"] += SIM_PER_FRAME
-        if st["t_phase"] > 1.0 and st.get("tour"): next_stop()                                     # in the arena: go to the next drop
+        if st["t_phase"] > 1.0 and st["explore"]: remove_drop(st["kind"]); st["phase"] = "explore"; st["walking"] = True; st["verdict"] = None
+        elif st["t_phase"] > 1.0 and st.get("tour"): next_stop()                                   # in the arena: go to the next drop
         elif st["t_phase"] > 1.0: st["phase"] = "free"; st["walking"] = True; st["steer"] = 0.6    # alone: walks away, turning
         if st["t_phase"] > 3.0: st["steer"] = 0.0
     elif st["phase"] == "escape":
@@ -325,7 +379,7 @@ while running:
         t = big.render(st["verdict"], True, (0, 0, 0)); pygame.draw.rect(screen, st["verdict_col"], (PW - t.get_width() - 30, 8, t.get_width() + 20, t.get_height() + 6)); screen.blit(t, (PW - t.get_width() - 20, 10))
     draw_text([st["msg"]], 10, PH + 8, (255, 230, 120))
     draw_text(st["loglines"], 10, PH + 30, (200, 200, 210))
-    keys_p2 = "S sugar  V water  B bitter  C choice arena  L looming  DOWN approach  1/2 threat L/R  W walk  <- -> steer  SPACE stop  M sex  Q quit"
+    keys_p2 = "E explore + click (L sugar, R bitter, M water)   S V B drops   C arena   L looming   DOWN approach   1/2 threat   W walk   SPACE stop   Q"
     draw_text([keys_p2 + ("" if args.mode == "phase2" else "  |  A attack  F hijack  H no-sugar test  D repair  R reset")], 10, PH + BAR - 22, (140, 140, 160))
     pygame.display.flip(); clock.tick(30)
     if args.record: frames_out.append(np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2)).copy())
