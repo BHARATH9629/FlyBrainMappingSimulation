@@ -139,6 +139,13 @@ from the healthy brain, and the body acts. Walking gait is FlyGym's controller; 
 **C, the choice arena:** bitter, water and sugar drops laid out ahead; the fly visits all three and the brain decides at
 each one (refuses bitter, drinks, eats) -- the scene to open the Phase 2 demo with (`virtual_fly/out/phase2_arena.mp4`).
 
+**E, explore:** the fly wanders; mouse clicks place drops (left = sugar, right = bitter, middle = water); whatever it
+walks into it tastes. Finding a drop is a body-side "smell" rule, not the connectome. We tested real olfactory
+navigation: food-odour receptor neurons (DM1/DM2/DM4/DM5/VM2/DL2) drive descending neurons strongly (DNbe001 ~100 Hz,
+DNb05 ~300 Hz; 0 Hz without odour), but no bilateral descending pair we found encodes WHICH antenna smells more in a graded
+way (DNa02 right copy is silent for every input; DNbe001 left copy is suppressed by any right-antenna odour), so smell
+DETECTION could be brain-driven, smell DIRECTION cannot, in this model. Numbers: `neuroredteam/atlas/female/calibrate_smell.log`.
+
 Notes, said plainly: the male's retreat signal is weak (13 Hz); the female's left-eye steering signal is weak (11 Hz,
 under the 20 Hz bar, so "NO TURN"); the two datasets disagree on which DNa02 fires for a given eye (a soma-side labelling
 convention to verify before claiming anything about laterality); water GRNs are not separately typed in the female

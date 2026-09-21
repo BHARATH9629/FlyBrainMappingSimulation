@@ -1,0 +1,47 @@
+olfactory neurons: 2279 by side {'R': 1133, 'L': 1116}
+example types: {'ORN_DA1': 126, 'ORN_VA1d': 97, 'ORN_VA1v': 94, 'ORN_DL3': 79, 'ORN_VL1': 78, 'ORN_VM4': 75, 'ORN_VL2a': 71, 'ORN_DL1': 69, 'ORN_DM1': 68, 'ORN_VM5d': 67, 'ORN_V': 67, 'ORN_VA2': 67}
+food-odour ORN types found: ['ORN_DM2', 'ORN_DM5', 'ORN_DM1', 'ORN_DM4', 'ORN_DL2v', 'ORN_DL2d', 'ORN_VM2']
+ALL olfactory ORNs L                     n=1116  DNa02 L 101.7  R 0.0   DNa01 20.8  DNp09 0.0  MDN 0.0
+ALL olfactory ORNs R                     n=1133  DNa02 L 68.3  R 0.0   DNa01 8.3  DNp09 0.0  MDN 0.0
+ALL olfactory ORNs both                  n=2279  DNa02 L 86.7  R 0.0   DNa01 10.8  DNp09 0.0  MDN 0.0
+food ORNs ['ORN_DM2', 'ORN_DM5', 'ORN_DM1'] L n= 139  DNa02 L 133.3  R 0.0   DNa01 54.2  DNp09 0.0  MDN 0.0
+food ORNs ['ORN_DM2', 'ORN_DM5', 'ORN_DM1'] R n= 134  DNa02 L 88.3  R 0.0   DNa01 34.2  DNp09 0.0  MDN 0.0
+food ORNs ['ORN_DM2', 'ORN_DM5', 'ORN_DM1'] both n= 273  DNa02 L 121.7  R 0.0   DNa01 32.5  DNp09 0.0  MDN 0.0
+Descending-neuron types with a MIRRORED left/right odour response (ipsi > contra), food odour, female:
+   type  n  ipsi  contra  diff  Lc_L  Lc_R  Rc_L  Rc_R
+DNbe001  2  93.3    68.3  25.0  75.0  45.0  91.7 111.7
+  DNa02  2  65.8    46.7  19.2 131.7  93.3   0.0   0.0
+DNbe007  2 123.3   107.5  15.8 138.3 108.3 106.7 108.3
+  DNp31  2  97.5    82.5  15.0  96.7  63.3 101.7  98.3
+  DNp26  2  32.5    18.3  14.2  53.3  36.7   0.0  11.7
+  DNg37  2  15.8     3.3  12.5  21.7   0.0   6.7  10.0
+DNpe037  2  54.2    44.2  10.0  61.7  53.3  35.0  46.7
+DNpe040  2  14.2     5.8   8.3   1.7   0.0  11.7  26.7
+  DNg31  2  35.8    28.3   7.5  45.0  43.3  13.3  26.7
+  DNb08  4  12.9     5.8   7.1  25.8  11.7   0.0   0.0
+DNae005  2  12.5     5.8   6.7  21.7   8.3   3.3   3.3
+DNge041  2  89.2    82.5   6.7 115.0  96.7  68.3  63.3
+
+most odour-driven DN types overall:
+   idx    type side    L_odour    R_odour          m
+ 87747   DNb05    L 320.000000 315.000000 317.500000
+ 93663   DNb05    R 290.000000 285.000000 287.500000
+ 84651 DNge037    R 178.333333 168.333333 173.333333
+  5648 DNge037    L 173.333333 166.666667 170.000000
+ 95370   DNg35    R 158.333333 155.000000 156.666667
+136976   DNp32    L 150.000000 146.666667 148.333333
+ 27398   DNg13    L 145.000000 133.333333 139.166667
+ 74399   DNp05    R 130.000000 136.666667 133.333333
+ 24377   DNc01    R 130.000000 130.000000 130.000000
+136624   DNg56    R 130.000000 125.000000 127.500000
+graded odour (inject Hz = 150 x concentration) -> DNbe001 L/R and DNp31 L/R, mean +/- sd over 3 seeds
+  cL   cR |   be001_L   be001_R    L-R |   p31_L   p31_R
+1.00 0.00 |    70+/-3      81+/-7      -11 |      98     109
+0.00 1.00 |    43+/-7     100+/-8      -57 |      68      99
+1.00 1.00 |    44+/-3      98+/-2      -53 |      93     110
+1.00 0.50 |    49+/-4     108+/-3      -59 |      87     109
+0.50 1.00 |    44+/-4     108+/-2      -63 |      84     111
+0.50 0.50 |    50+/-0     109+/-2      -59 |      89     111
+0.25 0.00 |    72+/-2      89+/-2      -17 |      93     100
+0.00 0.25 |    48+/-6     108+/-6      -60 |      71      92
+0.00 0.00 |     0+/-0       0+/-0        0 |       0       0
