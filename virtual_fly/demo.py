@@ -133,7 +133,8 @@ for mode in args.modes:
             t = T_BRAIN * (k + 1) / max(k_arrive, 1)
             view.advance(t, *R["spikes_off"])
         blink = 0.5 + 0.5 * np.sin(k / 3.0) if att else 1.0
-        bimg = view.frame(stimulus=beh.stim, readout=beh.readout, attacked=att, repaired=rep,
+        bimg = view.frame(stimulus=beh.stim, readout=beh.readout, attacked=att, repaired=rep, stim_label="sugar taste neurons",
+                          readout_label="MN9 (feeding muscle)", readout_bar=beh.on_thr,
                           readout_hz=(R["on_hz"] if tasting else R["off_hz"]),
                           title=f"{args.sex} fly connectome: {brain.N:,} neurons, {brain.W.nnz/1e6:.0f} M connections",
                           subtitle=(f"sugar ON   brain time {t:5.0f} ms  (slow motion)" if tasting else f"walking, no sugar   {label[mode]}"),

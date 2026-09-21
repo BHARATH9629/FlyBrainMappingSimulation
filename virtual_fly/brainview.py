@@ -8,7 +8,7 @@ import numpy as np
 from scipy.ndimage import gaussian_filter
 from PIL import Image, ImageDraw, ImageFont
 
-TAU_MS = 25.0            # glow decay in brain time
+TAU_MS = 40.0            # glow decay in brain time
 
 
 class BrainView:
@@ -34,17 +34,18 @@ class BrainView:
         base[..., 1] = 0.12 + 0.26 * np.clip(dens, 0, 1); base[..., 2] = 0.20 + 0.40 * np.clip(dens, 0, 1)
         self.base = base
         self.glow = np.zeros(brain.N, np.float32)
+        self.fired = np.zeros(brain.N, bool)       # every neuron that fired in the last run: stays dimly lit afterwards
         self.last_t = 0.0
         self.font = ImageFont.truetype("arial.ttf", 16) if _has_arial() else ImageFont.load_default()
 
-    def reset(self): self.glow[:] = 0; self.last_t = 0.0
+    def reset(self): self.glow[:] = 0; self.fired[:] = False; self.last_t = 0.0
 
     def advance(self, t_ms, spike_t, spike_i):
         """Bring the glow state to brain time t_ms using spikes in (last_t, t_ms]."""
         dt = max(t_ms - self.last_t, 0.0)
         self.glow *= np.float32(np.exp(-dt / TAU_MS))
         m = (spike_t > self.last_t) & (spike_t <= t_ms)
-        if m.any(): np.add.at(self.glow, spike_i[m], 1.0)
+        if m.any(): np.add.at(self.glow, spike_i[m], 1.0); self.fired[spike_i[m]] = True
         self.last_t = t_ms
 
     def _splat(self, img, idx, color, size=1.0, strength=None):
@@ -57,8 +58,11 @@ class BrainView:
         for c in range(3): img[..., c] += layer * color[c]
 
     def frame(self, stimulus=(), readout=None, attacked=(), repaired=(), readout_hz=None, title="", subtitle="",
-              stim_on=False, blink=1.0):
+              stim_on=False, blink=1.0, stim_label="stimulus neurons", readout_label="readout neuron", show_redblue=True,
+              readout_bar=40.0):
         img = self.base.copy()
+        was = np.flatnonzero(self.fired & self.ok & (self.glow <= 0.05))          # fired earlier in this run: dim yellow
+        if was.size: self._splat(img, was, (0.95, 0.75, 0.25), size=1.7)
         act = np.flatnonzero((self.glow > 0.05) & self.ok)
         if act.size:
             self._splat(img, act, (1.0, 0.85, 0.35), size=1.6, strength=np.minimum(self.glow[act], 3.0))
@@ -77,12 +81,14 @@ class BrainView:
         d.text((10, 28), subtitle, fill=(180, 180, 190), font=self.font)
         # full legend, left to right
         x = 10; y = self.H - 22
-        for col, lab in ((( 76, 230, 255), "sugar neurons"), ((255, 217, 89), "firing"), ((51, 255, 77), "MN9 feeding neuron"),
-                         ((255, 38, 26), "attacked"), ((77, 128, 255), "repaired")):
+        legend = [((76, 230, 255), stim_label), ((255, 217, 89), "fired in this run"), ((51, 255, 77), readout_label)]
+        if show_redblue: legend += [((255, 38, 26), "attacked"), ((77, 128, 255), "repaired")]
+        for col, lab in legend:
             d.rectangle((x, y + 3, x + 10, y + 13), fill=col); d.text((x + 15, y - 2), lab, fill=(200, 200, 200), font=self.font)
             x += 15 + d.textlength(lab, font=self.font) + 14
         if readout_hz is not None:
-            d.text((self.W - 150, 8), f"MN9  {readout_hz:5.0f} Hz", fill=(51, 255, 77) if readout_hz >= 40 else (255, 120, 110), font=self.font)
+            txt = f"{readout_label.split(' (')[0]}  {readout_hz:5.0f} Hz"
+            d.text((self.W - 12 - d.textlength(txt, font=self.font), 8), txt, fill=(51, 255, 77) if readout_hz >= readout_bar else (255, 120, 110), font=self.font)
         return np.asarray(im)
 
 

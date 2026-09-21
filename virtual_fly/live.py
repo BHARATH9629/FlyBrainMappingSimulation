@@ -42,9 +42,10 @@ class BrainWorker(threading.Thread):
 
     def run(self):
         self.busy = f"loading the {self.sex} brain"
-        self.brain = Brain(self.sex); self.bhv = {n: Behaviour(self.brain, n) for n in ("eat", "refuse_bitter", "escape", "retreat", "turn", "drink")}
-        self.dna02 = {str(self.brain.types["side"].iloc[i]): int(i) for i in self.brain.by_type(["DNa02"])}   # {"L": idx, "R": idx}
-        self.view = BrainView(self.brain, PW, PH); self.busy = ""
+        brain = Brain(self.sex); self.bhv = {n: Behaviour(brain, n) for n in ("eat", "refuse_bitter", "escape", "retreat", "turn", "drink")}
+        self.dna02 = {str(brain.types["side"].iloc[i]): int(i) for i in brain.by_type(["DNa02"])}   # {"L": idx, "R": idx}
+        self.view = BrainView(brain, PW, PH); self.busy = ""
+        self.brain = brain                                     # published last: the UI checks `worker.brain is not None`
         self.out.put(("loaded", None))
         while True:
             job = self.q.get()
@@ -111,6 +112,10 @@ clock = pygame.time.Clock()
 worker = BrainWorker(args.sex)
 body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False)   # drops parked off-screen
 geoms = {"sugar": body.sim.mj_model.geom("sugar"), "bitter": body.sim.mj_model.geom("bitter"), "water": body.sim.mj_model.geom("water")}
+
+LABELS = {"eat": ("sugar taste neurons", "MN9 (feeding muscle)"), "drink": ("water taste neurons", "MN9 (feeding muscle)"),
+          "refuse_bitter": ("sugar + bitter taste neurons", "MN9 (feeding muscle)"), "escape": ("looming detectors LC4/LPLC2", "giant fiber DNp01 (escape)"),
+          "retreat": ("approach detectors LC16, both eyes", "MDN moonwalker (walk backward)"), "turn": ("looming detectors, one eye", "DNa02 (steering)")}
 
 state = dict(walking=False, steer=0.0, target=None, kind=None, phase="idle", t_phase=0.0, eat=0.0, turn_dir=0.0, verdict=None, verdict_col=(255, 255, 255),
              msg="loading the brain ...", loglines=[], last_frame=None, brain_img=None, anim=None)
@@ -182,7 +187,8 @@ while running:
             if kind == "loaded": state["msg"] = f"{worker.sex} brain ready: {worker.brain.N:,} neurons. S = sugar, B = bitter, L = looming, A/D = attack/repair"
             elif kind == "measured":
                 d = data; st = state
-                st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=1.5)
+                if d["with_stim"] or st["kind"] == "hijack":        # draw the stimulus run; the no-stimulus control is only logged
+                    st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=3.0, fresh=True)
                 st["loglines"].append(f"brain run: {d['name']} {'WITH' if d['with_stim'] else 'without'} stimulus -> readout {d['hz']:.0f} Hz")
                 if d["name"] == "escape" and d["with_stim"]:
                     ok = d["hz"] >= d["on_thr"]; st["verdict"] = "ESCAPES" if ok else "NO ESCAPE"; st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
@@ -206,7 +212,7 @@ while running:
                 elif not d["with_stim"]:
                     st["loglines"].append(f"   (control without stimulus: {d['hz']:.0f} Hz, must be <= {d['off_thr']:.0f})")
             elif kind == "threat":
-                d = data; st = state; st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=1.5)
+                d = data; st = state; st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=3.0, fresh=True)
                 diff = d["dna_L"] - d["dna_R"]                          # steering neurons fire asymmetrically -> a turn
                 if abs(diff) >= d["on_thr"]:                             # direction: away from the threatened eye
                     away = -1.0 if d["side"] == "L" else 1.0             # +1 = turn left
@@ -214,7 +220,7 @@ while running:
                     st["phase"] = "turn"; st["t_phase"] = 0.0; st["turn_dir"] = away
                 else: st["verdict"] = "NO TURN"; st["verdict_col"] = (240, 110, 110); st["phase"] = "idle"
                 st["loglines"].append(f"brain run: threat on {d['side']} eye -> DNa02 left {d['dna_L']:.0f} Hz, right {d['dna_R']:.0f} Hz")
-                st["msg"] = f"steering neurons: DNa02 L {d['dna_L']:.0f} Hz, R {d['dna_R']:.0f} Hz -> {st['verdict']} (away from the threat)"
+                st["msg"] = f"steering neurons: DNa02 L {d['dna_L']:.0f} Hz, R {d['dna_R']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}" + (" (away from the threat)" if st["phase"] == "turn" else "")
             elif kind == "attacked":
                 b_ = data["best"]
                 for row in data["log"][-6:]: state["loglines"].append(f"  [red {row['step']:2d}] {'GOAL ' if row['goal_met'] else '     '}{row['hypothesis'][:48]:48s} -> {row['result']}")
@@ -269,13 +275,17 @@ while running:
     if worker.brain is not None:
         v = worker.view; anim = st["anim"]
         if anim is not None:
+            if anim.get("fresh"): v.reset(); anim["fresh"] = False
             frac = min((time.time() - anim["t0"]) / anim["dur"], 1.0); v.advance(300.0 * frac, anim["spike_t"], anim["spike_i"])
             if frac >= 1.0: st["anim"] = None
-        else: v.glow *= 0.9
-        cur = worker.bhv[{"looming": "escape", "bitter": "refuse_bitter", "approach": "retreat", "threat": "turn", "water": "drink"}.get(st["kind"], "eat")]
+        else: v.glow *= 0.95
+        cur_name = {"looming": "escape", "bitter": "refuse_bitter", "approach": "retreat", "threat": "turn", "water": "drink"}.get(st["kind"], "eat")
+        cur = worker.bhv[cur_name]
+        stim_label, readout_label = LABELS[cur_name]
         att = neurons_of(worker.attack["intervention"]) if worker.attack else []
         rep = neurons_of(worker.repair["intervention"]) if worker.repair else []
-        bimg = v.frame(stimulus=cur.stim, readout=cur.readout, attacked=att, repaired=rep,
+        bimg = v.frame(stimulus=cur.stim, readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
+                       show_redblue=(args.mode != "phase2"), readout_bar=cur.on_thr,
                        title=f"{worker.sex} fly connectome: {worker.brain.N:,} neurons", subtitle=(worker.busy or "idle"),
                        stim_on=st["phase"] in ("think", "eating", "refuse", "escape", "retreat", "turn"), blink=0.5 + 0.5 * np.sin(time.time() * 4))
 

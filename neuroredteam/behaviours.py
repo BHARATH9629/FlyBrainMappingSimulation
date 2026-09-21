@@ -47,14 +47,14 @@ FEMALE = {   # FlyWire IDs (18-digit root ids)
     "retreat": {
         "stimulus": {"types": ["LC16"], "side": None},                   # LC16 in BOTH eyes: an object approaching head-on
         "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking), mean of 4
-        "on_threshold": 10.0, "off_threshold": 5.0,     # male calibrate: both eyes 13 +/- 1 Hz (weaker than the female's 42), 0 Hz without
+        "on_threshold": 20.0, "off_threshold": 10.0,    # calibrate.py: both eyes 42 Hz, one eye 0-19 Hz, 0 Hz without
         "description": "an approaching object (LC16) drives the moonwalker descending neurons: the fly backs up",
         "source": "LC16 -> backward walking: Wu et al. 2016 eLife; MDN: Bidaye et al. 2014 Science",
     },
     "turn": {
-        "stimulus": {"types": ["LC4", "LPLC2"], "side": "L"},            # looming on the LEFT eye
-        "readout": {"types": ["DNa02"], "side": "L"},                    # male: the LEFT-labelled DNa02 fires (110 Hz); right-eye looming -> nothing
-        "on_threshold": 40.0, "off_threshold": 10.0,    # LATERALITY DIFFERS from the female (R eye -> DNa02_L): likely a soma-side labelling convention; verify in neuroglancer before claiming
+        "stimulus": {"types": ["LC4", "LPLC2"], "side": "R"},            # looming on the RIGHT eye
+        "readout": {"types": ["DNa02"], "side": "L"},                    # the LEFT steering neuron fires -> turn left, away from it
+        "on_threshold": 20.0, "off_threshold": 10.0,    # calibrate.py: right-eye looming -> DNa02_L 62 Hz, DNa02_R 0; left-eye -> DNa02_R 11, DNa02_L 0; both eyes -> 0 / 0
         "description": "a threat on one side drives the opposite steering neuron DNa02: the fly turns away from it",
         "source": "DNa02 steering: Rayshubskiy et al. 2020 bioRxiv; Braun et al. 2024",
         "batch": False,
