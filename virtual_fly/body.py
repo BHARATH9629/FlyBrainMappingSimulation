@@ -37,7 +37,7 @@ def make_fly(name="fly", colorize=True):
 
 class FlyBody:
     """sim + walking controller + proboscis. step(left, right, eat) advances one physics step."""
-    def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None):
+    def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None, bitter_at=None, buffer=True):
         self.fly, neutral = make_fly()
         cams = {"side": dict(pos_offset=(-0.5, -7.5, 0.0), rotation=Rotation3D("euler", (1.57, 0, 0)), fovy=35.0),
                 "top":  dict(pos_offset=(0, 0, 12.0), rotation=Rotation3D("euler", (0, 0, 0)), fovy=35.0),
@@ -50,8 +50,14 @@ class FlyBody:
             self.world.mjcf_root.worldbody.add_geom(name="sugar", type=mujoco.mjtGeom.mjGEOM_ELLIPSOID, size=[0.75, 0.6, 0.14],
                                                     pos=[float(sugar_at[0]), float(sugar_at[1]), 0.12],
                                                     rgba=[1.0, 0.8, 0.15, 1.0], contype=0, conaffinity=0)
+        if bitter_at is not None:                       # a second, dark drop (bitter)
+            self.world.mjcf_root.worldbody.add_geom(name="bitter", type=mujoco.mjtGeom.mjGEOM_ELLIPSOID, size=[0.75, 0.6, 0.14],
+                                                    pos=[float(bitter_at[0]), float(bitter_at[1]), 0.12],
+                                                    rgba=[0.35, 0.2, 0.5, 1.0], contype=0, conaffinity=0)
         self.sim = Simulation(self.world)
         self.sim.set_renderer([cam], camera_res=res, playback_speed=playback_speed, output_fps=fps)
+        self.sim.renderer.buffer_frames = buffer          # live mode: do not accumulate frames in memory
+        self.cam_name = cam
         self.steps = PreprogrammedSteps()
         self.all_dofs = self.fly.get_actuated_jointdofs_order("position")
         self.leg_dofs = [d for d in self.all_dofs if d not in PROBOSCIS_DOFS]
@@ -61,6 +67,13 @@ class FlyBody:
         self.ctrl = HybridTurningController(timestep=self.sim.timestep, preprogrammed_steps=self.steps,
                                             output_dof_order=self.leg_dofs)
         self.thorax = self.fly.get_bodysegs_order().index(BodySegment("c_thorax"))
+        # take-off pose: the default stance with femur-tibia joints straightened (tibia flexion -> 0) and coxae pushed back
+        base = self.steps.default_pose_by_dof_order(self.leg_dofs); jp = np.array(base, float)
+        for k, d in enumerate(self.leg_dofs):
+            name = str(d)
+            if "tibia" in name and "PITCH" in name: jp[k] = 0.0            # straighten the knee
+            if "trochanterfemur" in name and "PITCH" in name: jp[k] = jp[k] * 0.5
+        self._jump_pose = jp
         self.reset()
 
     def reset(self, seed=0):
@@ -72,12 +85,27 @@ class FlyBody:
         self.sim.warmup()
         self.eat_level = 0.0
 
-    def step(self, left=1.0, right=1.0, eat=0.0, render=True):
-        """left/right: descending drive in [0, 1.2] (0 = stand still). eat in [0, 1]: proboscis extension target."""
+    def kick(self, strength=1.0):
+        """Escape take-off: give the body an upward-backward velocity (mm/s) as if the legs pushed off."""
+        v = self.sim.mj_data.qvel
+        v[2] += 120.0 * strength; v[0] -= 40.0 * strength * np.cos(self.heading)
+
+    def frame(self):
+        """Render the current state from the fly's camera, on demand (live mode)."""
+        r = self.sim.renderer
+        cam_id = list(r._cameras_names2id.values())[0]
+        r.mj_renderer.update_scene(self.sim.mj_data, cam_id, r.scene_option)
+        return r.mj_renderer.render().copy()
+
+    def step(self, left=1.0, right=1.0, eat=0.0, render=True, jump=0.0):
+        """left/right: descending drive in [0, 1.2] (0 = stand still). eat in [0, 1]: proboscis extension target.
+        jump in [0, 1]: escape pose (all legs pushed to extension, the take-off crouch-and-push)."""
         obs = HybridControllerObservation.from_sim(self.sim, self.fly.name)
         act = self.ctrl.step(np.array([left, right], float), obs)
         self.eat_level += 0.02 * (eat - self.eat_level)                 # smooth extension / retraction
         q = np.zeros(len(self.all_dofs)); q[self.leg_idx] = act.joint_angles
+        if jump > 0:                                                    # escape take-off: a push-off impulse on the body
+            self.kick(jump)
         q[self.prob_idx] = self.prob_neutral + self.eat_level * PROBOSCIS_EXTENDED
         self.sim.set_actuator_inputs(self.fly.name, ActuatorType.POSITION, q)
         if act.adhesion_onoff is not None: self.sim.set_leg_adhesion_states(self.fly.name, act.adhesion_onoff)

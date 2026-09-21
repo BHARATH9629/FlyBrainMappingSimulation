@@ -37,6 +37,21 @@ FEMALE = {   # FlyWire IDs (18-digit root ids)
         "description": "a looming object drives the giant fiber (DNp01), the escape command neuron",
         "source": "LC4 / LPLC2 -> giant fiber: Ache et al. 2019 Curr Biol; von Reyn et al. 2017 Neuron",
     },
+    "retreat": {
+        "stimulus": {"types": ["LC16"], "side": "L"},                    # LC16 visual neurons: approaching object -> backing up
+        "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking)
+        "on_threshold": 40.0, "off_threshold": 10.0,    # to calibrate
+        "description": "an approaching object (LC16) drives the moonwalker descending neurons: the fly backs up",
+        "source": "LC16 -> backward walking: Wu et al. 2016 eLife; MDN: Bidaye et al. 2014 Science",
+    },
+    "turn": {
+        "stimulus": {"types": ["LC4", "LPLC2"], "side": "L"},            # looming on the LEFT eye
+        "readout": {"types": ["DNa02"]},                                 # steering descending neurons, both sides (asymmetry = turn)
+        "on_threshold": 20.0, "off_threshold": 10.0,    # to calibrate
+        "description": "one-sided visual threat drives the steering descending neurons DNa02 asymmetrically",
+        "source": "DNa02 steering: Rayshubskiy et al. 2020 bioRxiv; Braun et al. 2024",
+        "batch": False,
+    },
     "groom": {
         "stimulus": {"regex": "JO-(F|E).*", "side": "L"},                # antennal mechanosensory JO-E/F (touch, gravity/wind)
         "readout": {"superclass": "descending", "regex": "DNg.*"},        # PLACEHOLDER: replaced by calibrate.py picks
@@ -78,6 +93,21 @@ MALE = {
         "on_threshold": 80.0, "off_threshold": 10.0,    # calibrate.py: healthy 216 Hz (both DNp01), 0 Hz without
         "description": "a looming object drives the giant fiber (DNp01), the escape command neuron",
         "source": "LC4 / LPLC2 -> giant fiber: Ache et al. 2019 Curr Biol; von Reyn et al. 2017 Neuron",
+    },
+    "retreat": {
+        "stimulus": {"types": ["LC16"], "side": "L"},                    # LC16 visual neurons: approaching object -> backing up
+        "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking)
+        "on_threshold": 40.0, "off_threshold": 10.0,    # to calibrate
+        "description": "an approaching object (LC16) drives the moonwalker descending neurons: the fly backs up",
+        "source": "LC16 -> backward walking: Wu et al. 2016 eLife; MDN: Bidaye et al. 2014 Science",
+    },
+    "turn": {
+        "stimulus": {"types": ["LC4", "LPLC2"], "side": "L"},            # looming on the LEFT eye
+        "readout": {"types": ["DNa02"]},                                 # steering descending neurons, both sides (asymmetry = turn)
+        "on_threshold": 20.0, "off_threshold": 10.0,    # to calibrate
+        "description": "one-sided visual threat drives the steering descending neurons DNa02 asymmetrically",
+        "source": "DNa02 steering: Rayshubskiy et al. 2020 bioRxiv; Braun et al. 2024",
+        "batch": False,
     },
     "groom": {
         "stimulus": {"regex": "JO-(F|E).*", "side": "L"},

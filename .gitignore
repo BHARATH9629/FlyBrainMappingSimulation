@@ -8,3 +8,5 @@ virtual_fly/out/*.mp4
 neuroredteam/atlas/*/log_*.json
 neuroredteam/atlas/*/*.log
 neuroredteam/atlas/*.log
+virtual_fly/cache/
+virtual_fly/out/*.png
