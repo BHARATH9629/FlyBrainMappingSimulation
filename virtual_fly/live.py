@@ -33,7 +33,8 @@ ap.add_argument("--max_seconds", type=float, default=0, help="quit after this ma
 ap.add_argument("--mode", default="full", choices=["full", "phase2"], help="phase2 = behaviours only (no red / blue team keys or panels)")
 args = ap.parse_args()
 
-PW, PH, BAR = 640, 480, 200                     # panel size, bottom bar
+PW, PH, BAR, TOP = 640, 480, 240, 44            # panel size, bottom panel, title bar
+BG, PANEL, INK, DIM, ACCENT = (16, 17, 22), (26, 28, 36), (235, 235, 240), (150, 152, 165), (255, 214, 102)
 SIM_PER_FRAME = 0.012                           # simulated seconds per screen frame (~1/8 real time)
 ARRIVE = 0.95                                   # mm from drop centre = "at the drop"
 
@@ -110,8 +111,30 @@ def neurons_of(iv):
                   | {a for (a, b) in iv.get("potentiate", {})})
 
 
-pygame.init(); screen = pygame.display.set_mode((2 * PW, PH + BAR)); pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else "NeuroRedTeam LIVE")
-font = pygame.font.SysFont("consolas", 16); big = pygame.font.SysFont("arial", 34, bold=True)
+pygame.init(); screen = pygame.display.set_mode((2 * PW, TOP + PH + BAR)); pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else "NeuroRedTeam LIVE")
+font = pygame.font.SysFont("segoeui", 17); mono = pygame.font.SysFont("consolas", 15); big = pygame.font.SysFont("segoeui", 36, bold=True)
+title_font = pygame.font.SysFont("segoeui", 22, bold=True); small = pygame.font.SysFont("segoeui", 14)
+
+
+def rrect(surface, color, rect, r=8, width=0):
+    pygame.draw.rect(surface, color, rect, width=width, border_radius=r)
+
+
+def chip(x, y, key, label, col=(60, 64, 80)):
+    """A keycap + label; returns the x after it."""
+    k = mono.render(key, True, INK); rrect(screen, col, (x, y, k.get_width() + 14, 24), r=5); screen.blit(k, (x + 7, y + 3))
+    l = small.render(label, True, DIM); screen.blit(l, (x + k.get_width() + 20, y + 4))
+    return x + k.get_width() + 20 + l.get_width() + 18
+
+
+def meter(x, y, w, label, hz, bar, ok_col):
+    """Firing-rate meter with the pass bar marked."""
+    top = max(bar * 2.5, hz * 1.15, 60.0)
+    rrect(screen, (40, 42, 54), (x, y + 22, w, 14), r=7)
+    fill = int(w * min(hz / top, 1.0)); rrect(screen, ok_col, (x, y + 22, max(fill, 4), 14), r=7)
+    bx = x + int(w * bar / top); pygame.draw.line(screen, INK, (bx, y + 18), (bx, y + 40), 2)
+    screen.blit(small.render(f"pass bar {bar:.0f} Hz", True, DIM), (bx + 6, y + 40))
+    screen.blit(font.render(f"{label}: {hz:.0f} Hz", True, INK), (x, y - 2))
 clock = pygame.time.Clock()
 worker = BrainWorker(args.sex)
 body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False)   # drops parked off-screen
@@ -121,7 +144,7 @@ LABELS = {"eat": ("sugar taste neurons", "MN9 (feeding muscle)"), "drink": ("wat
           "refuse_bitter": ("sugar + bitter taste neurons", "MN9 (feeding muscle)"), "escape": ("looming detectors LC4/LPLC2", "giant fiber DNp01 (escape)"),
           "retreat": ("approach detectors LC16, both eyes", "MDN moonwalker (walk backward)"), "turn": ("looming detectors, one eye", "DNa02 (steering)")}
 
-state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}, explore=False, wander=0.0, drops={}, phase="idle", t_phase=0.0, eat=0.0, turn_dir=0.0, verdict=None, verdict_col=(255, 255, 255),
+state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}, explore=False, wander=0.0, drops={}, meter=None, phase="idle", t_phase=0.0, eat=0.0, turn_dir=0.0, verdict=None, verdict_col=(255, 255, 255),
              msg="loading the brain ...", loglines=[], last_frame=None, brain_img=None, anim=None)
 
 
@@ -186,9 +209,10 @@ while running:
     if not idle: t_loaded = None
     if t_loaded is not None and script and time.time() - t_loaded >= script[0][0]:
         _, key = script.pop(0); t_loaded = None
+        if os.environ.get("LIVE_PROFILE"): print(f"script: pressing {key} at t={time.time()-t_start:.0f}s phase={state['phase']} msg={state['msg']!r}", flush=True)
         if key in ("LCLICK", "RCLICK", "MCLICK"):                    # scripted mouse clicks on the fly panel (for tests / clips)
             btn = {"LCLICK": 1, "RCLICK": 3, "MCLICK": 2}[key]; x = {"LCLICK": int(PW * 0.25), "RCLICK": int(PW * 0.75), "MCLICK": PW // 2}[key]
-            pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, button=btn, pos=(x, PH // 2)))
+            pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, button=btn, pos=(x, TOP + PH // 2)))
         else:
             pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=getattr(pygame, f"K_{key.lower()}") if len(key) == 1 else getattr(pygame, f"K_{key}")))
     for ev in pygame.event.get():
@@ -205,12 +229,6 @@ while running:
                 state["explore"] = not state["explore"]
                 if state["explore"]: state.update(phase="explore", walking=True, target=None, tour=[], verdict=None); state["msg"] = "EXPLORE: the fly wanders; click to place drops (left = sugar, right = bitter, middle = water)"
                 else: state.update(phase="idle", walking=False); state["msg"] = "explore off"
-        elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and ev.pos[0] < PW:
-            kind = {1: "sugar", 3: "bitter", 2: "water"}.get(ev.button)
-            if kind:
-                angle = (PW / 2 - ev.pos[0]) / (PW / 2) * 1.0            # click left of centre -> to the fly's left (up to ~57 deg)
-                drop_at(kind, angle)
-                if not state["explore"]: state.update(target=state["drops"][kind], kind=kind, walking=True, phase="approach", verdict=None)
             elif k == pygame.K_w: state["walking"] = not state["walking"]; state["phase"] = "free"; state["msg"] = "walking" if state["walking"] else "stopped"
             elif k == pygame.K_LEFT: state["steer"] = min(state["steer"] + 0.4, 0.8)
             elif k == pygame.K_RIGHT: state["steer"] = max(state["steer"] - 0.4, -0.8)
@@ -235,6 +253,13 @@ while running:
             elif k == pygame.K_m:
                 worker = BrainWorker("male" if worker.sex == "female" else "female"); state["msg"] = f"loading the {worker.sex} brain ..."
 
+        elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and ev.pos[0] < PW and TOP <= ev.pos[1] < TOP + PH:
+            kind = {1: "sugar", 3: "bitter", 2: "water"}.get(ev.button)
+            if kind:
+                angle = (PW / 2 - ev.pos[0]) / (PW / 2) * 1.0            # click left of centre -> to the fly's left (up to ~57 deg)
+                drop_at(kind, angle)
+                if not state["explore"]: state.update(target=state["drops"][kind], kind=kind, walking=True, phase="approach", verdict=None)
+
     # ---- brain results
     try:
         while True:
@@ -248,15 +273,15 @@ while running:
                 if d["name"] == "escape" and d["with_stim"]:
                     ok = d["hz"] >= d["on_thr"]; st["verdict"] = "ESCAPES" if ok else "NO ESCAPE"; st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
                     st["phase"] = "escape" if ok else "idle"; escape_kick = 1.0 if ok else 0.0; st["t_phase"] = 0.0
-                    st["msg"] = f"giant fiber DNp01 at {d['hz']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}"
+                    st["msg"] = f"giant fiber DNp01 at {d['hz']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}"; st["meter"] = ("giant fiber DNp01", d["hz"], d["on_thr"], ok)
                 elif d["name"] == "retreat" and d["with_stim"]:
                     ok = d["hz"] >= d["on_thr"]; st["verdict"] = "BACKS UP" if ok else "NO RETREAT"; st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
                     st["phase"] = "retreat" if ok else "idle"; st["t_phase"] = 0.0
-                    st["msg"] = f"moonwalker neurons MDN at {d['hz']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}"
+                    st["msg"] = f"moonwalker neurons MDN at {d['hz']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}"; st["meter"] = ("moonwalker MDN", d["hz"], d["on_thr"], ok)
                 elif d["name"] == "eat" and not d["with_stim"] and st["kind"] == "hijack":
                     ok = d["hz"] >= d["on_thr"]; st["verdict"] = "EATS NOTHING" if ok else "no feeding"; st["verdict_col"] = (240, 200, 90) if ok else (200, 200, 200)
                     st["phase"] = "eating" if ok else "idle"; st["t_phase"] = 0.0
-                    st["msg"] = f"MN9 with NO sugar: {d['hz']:.0f} Hz -> {st['verdict']}"
+                    st["msg"] = f"MN9 with NO sugar: {d['hz']:.0f} Hz -> {st['verdict']}"; st["meter"] = ("MN9 with no sugar", d["hz"], d["on_thr"], ok)
                 elif d["with_stim"] and st["kind"] in ("sugar", "bitter", "water"):
                     ok = d["hz"] >= d["on_thr"]
                     if st["kind"] == "sugar": st["verdict"] = "EATS" if ok else "NO FEEDING"; st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
@@ -264,6 +289,7 @@ while running:
                     else: st["verdict"] = "EATS BITTER!" if ok else "REFUSES BITTER"; st["verdict_col"] = (240, 110, 110) if ok else (120, 230, 120)
                     st["phase"] = "eating" if ok else "refuse"; st["t_phase"] = 0.0
                     st["msg"] = f"MN9 {d['hz']:.0f} Hz with {st['kind']} (bar {d['on_thr']:.0f}) -> {st['verdict']}"
+                    st["meter"] = (f"MN9 with {st['kind']}", d["hz"], d["on_thr"], ok if st["kind"] != "bitter" else not ok)
                 elif not d["with_stim"]:
                     st["loglines"].append(f"   (control without stimulus: {d['hz']:.0f} Hz, must be <= {d['off_thr']:.0f})")
             elif kind == "threat":
@@ -276,6 +302,7 @@ while running:
                 else: st["verdict"] = "NO TURN"; st["verdict_col"] = (240, 110, 110); st["phase"] = "idle"
                 st["loglines"].append(f"brain run: threat on {d['side']} eye -> DNa02 left {d['dna_L']:.0f} Hz, right {d['dna_R']:.0f} Hz")
                 st["msg"] = f"steering neurons: DNa02 L {d['dna_L']:.0f} Hz, R {d['dna_R']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}" + (" (away from the threat)" if st["phase"] == "turn" else "")
+                st["meter"] = ("DNa02 left minus right", abs(diff), d["on_thr"], abs(diff) >= d["on_thr"])
             elif kind == "attacked":
                 b_ = data["best"]
                 for row in data["log"][-6:]: state["loglines"].append(f"  [red {row['step']:2d}] {'GOAL ' if row['goal_met'] else '     '}{row['hypothesis'][:48]:48s} -> {row['result']}")
@@ -291,6 +318,7 @@ while running:
             state["loglines"] = state["loglines"][-7:]
     except queue.Empty: pass
 
+    _t0 = time.time()
     # ---- body
     st = state; left = right = 0.0; eat = 0.0
     if st["phase"] == "approach" and st["target"] is not None:
@@ -352,6 +380,7 @@ while running:
         if escape_kick > 0: body.kick(escape_kick); escape_kick = 0.0
         body.step(left, right, eat=eat, render=False)
     fly_img = body.frame()
+    _t1 = time.time()
 
     # ---- brain panel
     bimg = None
@@ -372,24 +401,56 @@ while running:
                        title=f"{worker.sex} fly connectome: {worker.brain.N:,} neurons", subtitle=(worker.busy or "idle"),
                        stim_on=st["phase"] in ("think", "eating", "refuse", "escape", "retreat", "turn"), blink=0.5 + 0.5 * np.sin(time.time() * 4))
 
+    _t2 = time.time()
     # ---- draw
-    screen.fill((18, 18, 24))
-    surf = pygame.surfarray.make_surface(np.transpose(fly_img, (1, 0, 2))); surf = pygame.transform.smoothscale(surf, (PW, PH)); screen.blit(surf, (0, 0))
-    if bimg is not None: screen.blit(pygame.surfarray.make_surface(np.transpose(bimg, (1, 0, 2))), (PW, 0))
-    else: draw_text(["loading the brain (female ~10 s, male ~40 s) ..."], PW + 20, PH // 2)
-    iv_txt = f"brain state: {'healthy' if not worker.iv else f'{size_of(worker.iv)} neurons modified'}" + (f"  attack {worker.attack['size']}" if worker.attack else "") + (f"  repair {worker.repair['size']}" if worker.repair else "")
-    if args.mode != "phase2": draw_text([iv_txt], 10, 10, (20, 20, 20))
+    screen.fill(BG)
+    # title bar
+    title = "The fly and its brain" if args.mode == "phase2" else "NeuroRedTeam LIVE"
+    screen.blit(title_font.render(title, True, INK), (16, 9))
+    sub = f"{worker.sex} fly  -  {worker.brain.N:,} neurons" if worker.brain is not None else "loading the brain ..."
+    screen.blit(font.render(sub, True, DIM), (16 + title_font.size(title)[0] + 18, 13))
+    status = worker.busy or ("brain: thinking ..." if st["phase"] == "think" else "brain: idle")
+    pill_col = (120, 90, 30) if worker.busy or st["phase"] == "think" else (34, 70, 48)
+    tw = font.size(status)[0]; rrect(screen, pill_col, (2 * PW - tw - 40, 9, tw + 24, 26), r=13); screen.blit(font.render(status, True, INK), (2 * PW - tw - 28, 12))
+    if args.mode != "phase2":
+        iv_txt = "brain: healthy" if not worker.iv else f"brain modified: {size_of(worker.iv)} neurons" + (f"  (attack {worker.attack['size']}" if worker.attack else "") + (f", repair {worker.repair['size']})" if worker.repair else (")" if worker.attack else ""))
+        screen.blit(font.render(iv_txt, True, ACCENT), (2 * PW - tw - 60 - font.size(iv_txt)[0], 13))
+    # panels
+    surf = pygame.surfarray.make_surface(np.transpose(fly_img, (1, 0, 2))); surf = pygame.transform.smoothscale(surf, (PW, PH)); screen.blit(surf, (0, TOP))
+    if bimg is not None: screen.blit(pygame.surfarray.make_surface(np.transpose(bimg, (1, 0, 2))), (PW, TOP))
+    else:
+        rrect(screen, PANEL, (PW, TOP, PW, PH)); screen.blit(font.render("loading the brain (female ~10 s, male ~40 s) ...", True, DIM), (PW + 24, TOP + PH // 2))
+    pygame.draw.line(screen, (60, 62, 76), (PW, TOP), (PW, TOP + PH), 2)
     if st["verdict"]:
-        t = big.render(st["verdict"], True, (0, 0, 0)); pygame.draw.rect(screen, st["verdict_col"], (PW - t.get_width() - 30, 8, t.get_width() + 20, t.get_height() + 6)); screen.blit(t, (PW - t.get_width() - 20, 10))
-    draw_text([st["msg"]], 10, PH + 8, (255, 230, 120))
-    draw_text(st["loglines"], 10, PH + 30, (200, 200, 210))
-    keys_p2 = "E explore + click (L sugar, R bitter, M water)   S V B drops   C arena   L looming   DOWN approach   1/2 threat   W walk   SPACE stop   Q"
-    draw_text([keys_p2 + ("" if args.mode == "phase2" else "  |  A attack  F hijack  H no-sugar test  D repair  R reset")], 10, PH + BAR - 22, (140, 140, 160))
+        t = big.render(st["verdict"], True, (12, 12, 16)); w_ = t.get_width() + 28
+        rrect(screen, st["verdict_col"], (PW - w_ - 14, TOP + 12, w_, t.get_height() + 8), r=10); screen.blit(t, (PW - w_, TOP + 16))
+    # bottom panel: message, meter, log, keys
+    y0 = TOP + PH
+    rrect(screen, PANEL, (0, y0, 2 * PW, BAR), r=0)
+    screen.blit(font.render(st["msg"], True, ACCENT), (16, y0 + 10))
+    if st["meter"]:
+        label, hz, bar_, ok = st["meter"]
+        meter(2 * PW - 380, y0 + 12, 340, label, hz, bar_, (86, 200, 110) if ok else (230, 100, 90))
+    for i, line in enumerate(st["loglines"][-6:]): screen.blit(mono.render(line, True, (185, 187, 200)), (16, y0 + 40 + 19 * i))
+    x = 16; y = y0 + BAR - 62
+    groups = [("S", "sugar"), ("V", "water"), ("B", "bitter"), ("C", "choice arena"), ("E", "explore + click"), ("L", "looming"),
+              ("DOWN", "approaching object"), ("1 / 2", "threat left / right"), ("W", "walk"), ("<- ->", "steer"), ("SPACE", "stop"), ("M", "swap sex"), ("Q", "quit")]
+    for k_, lab in groups:
+        if x > 2 * PW - 150: x = 16; y += 30
+        x = chip(x, y, k_, lab)
+    if args.mode != "phase2":
+        x = 16; y += 30
+        for k_, lab in [("A", "attack"), ("F", "hijack attack"), ("H", "test with no sugar"), ("D", "repair"), ("R", "reset brain")]:
+            x = chip(x, y, k_, lab, col=(110, 48, 48) if k_ in ("A", "F") else (48, 66, 120) if k_ == "D" else (60, 64, 80))
     pygame.display.flip(); clock.tick(30)
+    _t3 = time.time()
+    if os.environ.get("LIVE_PROFILE"):
+        _prof = state.setdefault("_prof", [0.0, 0.0, 0.0, 0]); _prof[0] += _t1 - _t0; _prof[1] += _t2 - _t1; _prof[2] += _t3 - _t2; _prof[3] += 1
+        if _prof[3] % 20 == 0: print(f"per frame: body {_prof[0]/_prof[3]*1000:.0f} ms, brain panel {_prof[1]/_prof[3]*1000:.0f} ms, draw+flip {_prof[2]/_prof[3]*1000:.0f} ms, phase {st['phase']}", flush=True)
     if args.record:
         f_ = np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2))
-        if f_.shape[:2] != (PH + BAR, 2 * PW):                          # window resized / minimised: keep a fixed frame size
-            from PIL import Image as _I; f_ = np.asarray(_I.fromarray(f_).resize((2 * PW, PH + BAR)))
+        if f_.shape[:2] != (TOP + PH + BAR, 2 * PW):                    # window resized / minimised: keep a fixed frame size
+            from PIL import Image as _I; f_ = np.asarray(_I.fromarray(f_).resize((2 * PW, TOP + PH + BAR)))
         frames_out.append(f_.copy())
 pygame.quit()
 if args.record and frames_out:
