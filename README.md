@@ -136,6 +136,9 @@ from the healthy brain, and the body acts. Walking gait is FlyGym's controller; 
 | DOWN approach | LC16, both eyes | moonwalker MDN (mean of 4) | 42 / 20 | 13 / 10 | BACKS UP |
 | 1 / 2 threat on the left / right eye | LC4 + LPLC2, that eye | steering DNa02, left vs right | R eye -> DNa02_L 62 Hz; L eye -> DNa02_R 11 (below bar) | L eye -> DNa02_L 110; R eye -> 0 | TURNS AWAY from the threat |
 
+**C, the choice arena:** bitter, water and sugar drops laid out ahead; the fly visits all three and the brain decides at
+each one (refuses bitter, drinks, eats) -- the scene to open the Phase 2 demo with (`virtual_fly/out/phase2_arena.mp4`).
+
 Notes, said plainly: the male's retreat signal is weak (13 Hz); the female's left-eye steering signal is weak (11 Hz,
 under the 20 Hz bar, so "NO TURN"); the two datasets disagree on which DNa02 fires for a given eye (a soma-side labelling
 convention to verify before claiming anything about laterality); water GRNs are not separately typed in the female
