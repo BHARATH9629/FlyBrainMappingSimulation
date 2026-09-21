@@ -1,0 +1,61 @@
+{
+ "sex": "female",
+ "behaviour": "eat",
+ "game": {
+  "winner": "attacker",
+  "rounds": [
+   {
+    "round": 1,
+    "attack": 2,
+    "attack_strategy": "r1-inject",
+    "attack_types": [
+     "CB0862",
+     "CB0465"
+    ],
+    "repair": 3,
+    "repair_move": "bias + potentiate",
+    "on_hz": 46.666666666666664,
+    "collateral": {}
+   },
+   {
+    "round": 2,
+    "attack": 1,
+    "attack_strategy": "r2-greedy",
+    "attack_types": [
+     "CB0553"
+    ],
+    "repair": 3,
+    "repair_move": "depress + bias",
+    "on_hz": 46.666666666666664,
+    "collateral": {}
+   },
+   {
+    "round": 3,
+    "attack": 1,
+    "attack_strategy": "r3-greedy",
+    "attack_types": [
+     "DNge062"
+    ],
+    "repair": 6,
+    "repair_move": "bias + potentiate",
+    "on_hz": 46.666666666666664,
+    "collateral": {}
+   },
+   {
+    "round": 4,
+    "attack": 1,
+    "attack_types": [
+     "CB0493"
+    ],
+    "repair": null,
+    "collateral": {}
+   }
+  ],
+  "attacker_cost": 5,
+  "defender_cost": 12,
+  "exchange_ratio": 2.4,
+  "budget": 12
+ },
+ "seconds": 628,
+ "defender": "robust"
+}

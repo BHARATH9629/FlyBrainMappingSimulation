@@ -1,0 +1,14 @@
+matched_type,status,female_ids,female_roles,female_chokepoint_freq,male_ids,male_local_type,male_roles,male_chokepoint_freq
+CB0010,female only,720575940627096957,block:inject_inhibitors;chokepoint,1.0,,,,
+CB0104,female only,720575940624571116,chokepoint,0.33,,,,
+CB0563,female only,720575940612710883;720575940606218528,block:inject_inhibitors;chokepoint,1.0,,,,
+CB3707,female only,720575940610063918;720575940617948445;720575940618243009,block:inject_inhibitors;chokepoint,1.0,,,,
+CL038,female only,720575940632736825;720575940617575803,block:inject_inhibitors;chokepoint,1.0,,,,
+DNp103,female only,720575940623781127,repair,0.0,,,,
+DNp70,conserved,720575940624349993,force:greedy;repair,0.0,10580,DNp70,force:greedy,0.0
+LHAD1g1,female only,720575940635119723,chokepoint,0.67,,,,
+PVLP010,female only,720575940623957173,block:inject_inhibitors;chokepoint,0.67,,,,
+PVLP122b,female only,720575940629602871;720575940608120587,repair,0.0,,,,
+SAD014,female only,720575940637471039,block:inject_inhibitors;chokepoint,1.0,,,,
+SAD017,female only,720575940617564246,block:inject_inhibitors;chokepoint,1.0,,,,
+SAD064,male only,,,,15791,SAD064,force:greedy,0.0

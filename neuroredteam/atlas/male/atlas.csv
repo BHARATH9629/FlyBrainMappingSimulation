@@ -1,0 +1,7 @@
+sex,behaviour,rep,seeds,healthy_hz,block_size,block_strategy,block_sims,force_size,force_sims,n_disjoint_attacks,disjoint_sizes,repair_size,repair_move,recovery_pct,repair_sims,seconds
+male,eat,0,"(1, 2, 3)",143.3,4,attacker-greedy,10,1,1,1,[4],1,potentiate only,44,8,460
+male,eat,1,"(11, 12, 13)",144.4,5,attacker-greedy,10,1,1,1,[4],3,potentiate only,32,11,935
+male,eat,2,"(21, 22, 23)",144.4,5,attacker-greedy,10,1,1,1,[4],10,potentiate only,33,22,1428
+male,escape,0,"(1, 2, 3)",410.0,,,,2,6,0,[],,,,,1714
+male,escape,1,"(11, 12, 13)",410.0,,,,3,8,0,[],,,,,1988
+male,escape,2,"(21, 22, 23)",410.0,,,,2,4,0,[],,,,,2277

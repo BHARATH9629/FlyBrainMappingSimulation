@@ -1,0 +1,34 @@
+{
+ "sex": "female",
+ "behaviour": "eat",
+ "game": {
+  "winner": "attacker",
+  "rounds": [
+   {
+    "round": 1,
+    "attack": 2,
+    "attack_strategy": "r1-inject",
+    "attack_types": [
+     "CB0862",
+     "CB0465"
+    ],
+    "repair": 3,
+    "repair_move": "bias + potentiate",
+    "on_hz": 46.666666666666664,
+    "collateral": {}
+   },
+   {
+    "round": 2,
+    "attack": 1,
+    "attack_types": [
+     "CB0553"
+    ],
+    "repair": null,
+    "collateral": {}
+   }
+  ],
+  "attacker_cost": 3,
+  "defender_cost": 3
+ },
+ "seconds": 116
+}

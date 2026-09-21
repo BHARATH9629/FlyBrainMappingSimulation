@@ -1,0 +1,12 @@
+matched_type,status,female_ids,female_roles,female_chokepoint_freq,male_ids,male_local_type,male_roles,male_chokepoint_freq
+AN_GNG_109,male only,,,,12976,AN05B007,chokepoint,0.25
+CB0016,conserved,720575940631092943,chokepoint;corrupt:greedy,0.6,522428;15612;513146,GNG592,chokepoint,0.25
+CB0022,male only,,,,11710;12319,GNG088,chokepoint,0.25
+CB0118,female only,720575940619973712,chokepoint,0.2,,,,
+CB0219,conserved,720575940624600840;720575940626826288,chokepoint;corrupt:greedy,0.6,11896;12811;12900,GNG087,chokepoint;corrupt:greedy,0.25
+CB0480,female only,720575940612906518;720575940639285949,chokepoint,0.8,,,,
+CB0571,female only,720575940621218694,chokepoint;corrupt:greedy,0.6,,,,
+CB0812,female only,720575940633941293,chokepoint,0.2,,,,
+DNg98,male only,,,,10959,DNg98,chokepoint,0.25
+DNge031,female only,720575940640589171,chokepoint,0.4,,,,
+DNge062,female only,720575940627099338,corrupt:search,0.0,,,,

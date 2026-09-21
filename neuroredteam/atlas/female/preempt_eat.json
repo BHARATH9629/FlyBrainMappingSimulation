@@ -1,0 +1,54 @@
+{
+ "sex": "female",
+ "behaviour": "eat",
+ "baseline": 2,
+ "sweep": [
+  {
+   "k": 2,
+   "depress": 2,
+   "potentiate": 2,
+   "bias": 3,
+   "mixed": 2
+  },
+  {
+   "k": 4,
+   "depress": 2,
+   "potentiate": 2,
+   "bias": 2,
+   "mixed": 2
+  },
+  {
+   "k": 6,
+   "depress": 2,
+   "potentiate": 2,
+   "bias": 2,
+   "mixed": 3
+  },
+  {
+   "k": 8,
+   "depress": 2,
+   "potentiate": 2,
+   "bias": 3,
+   "mixed": 3
+  },
+  {
+   "k": 12,
+   "depress": 3,
+   "potentiate": 2,
+   "bias": 3,
+   "mixed": 4
+  }
+ ],
+ "best": {
+  "k": 12,
+  "plan": "mixed",
+  "attack_size": 4
+ },
+ "game": {
+  "winner": "attacker",
+  "attacker_cost": 4,
+  "defender_cost": 12,
+  "exchange_ratio": 3.0
+ },
+ "note": "reconstructed from preempt_eat.log after a JSON-key bug in the first run"
+}

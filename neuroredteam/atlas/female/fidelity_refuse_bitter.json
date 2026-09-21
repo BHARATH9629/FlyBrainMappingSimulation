@@ -1,0 +1,50 @@
+[
+ {
+  "level": "depth 3, >=5 syn (atlas default)",
+  "n_sub": 61665,
+  "healthy": [
+   0.0,
+   0.0
+  ],
+  "corrupt (attacker-search, 1)": [
+   98.8888888888889,
+   6.849348892187753
+  ]
+ },
+ {
+  "level": "depth 4, >=5 syn",
+  "n_sub": 118099,
+  "healthy": [
+   0.0,
+   0.0
+  ],
+  "corrupt (attacker-search, 1)": [
+   98.8888888888889,
+   6.849348892187753
+  ]
+ },
+ {
+  "level": "depth 3, >=1 syn",
+  "n_sub": 129421,
+  "healthy": [
+   0.0,
+   0.0
+  ],
+  "corrupt (attacker-search, 1)": [
+   98.8888888888889,
+   6.849348892187753
+  ]
+ },
+ {
+  "level": "FULL BRAIN",
+  "n_sub": 136710,
+  "healthy": [
+   0.0,
+   0.0
+  ],
+  "corrupt (attacker-search, 1)": [
+   98.8888888888889,
+   6.849348892187753
+  ]
+ }
+]

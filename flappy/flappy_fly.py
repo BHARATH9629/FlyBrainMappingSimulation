@@ -68,8 +68,8 @@ class Flappy:
 
 # ============================================================ brain
 def load_subnetwork(n_neurons=3000, seed=0):
-    comp = pd.read_csv(os.path.join(DATA, "Completeness_783.csv"), index_col=0)
-    con = pd.read_parquet(os.path.join(DATA, "Connectivity_783.parquet"),
+    comp = pd.read_csv(os.path.join(DATA, "female_flywire", "Completeness_783.csv"), index_col=0)
+    con = pd.read_parquet(os.path.join(DATA, "female_flywire", "Connectivity_783.parquet"),
                           columns=["Presynaptic_Index", "Postsynaptic_Index", "Excitatory x Connectivity"])
     N = len(comp)
     W = sp.csr_matrix((con["Excitatory x Connectivity"].values.astype(np.float32),

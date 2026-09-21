@@ -1,0 +1,5 @@
+sex,behaviour,on_thr,off_thr,healthy_hz,block_size,block_strategy,force_size,n_disjoint,disjoint_sizes,repair_size,repair_move,recovery_pct,seconds
+female,escape,30.0,15.0,233.3,11,attacker-inject,1,0,[],1,potentiate only,21,420
+female,escape,40.0,10.0,233.3,11,attacker-inject,1,0,[],2,potentiate only,30,0
+female,escape,50.0,10.0,233.3,11,attacker-inject,1,0,[],2,potentiate only,30,0
+female,escape,60.0,5.0,233.3,,,1,0,[],,,,0

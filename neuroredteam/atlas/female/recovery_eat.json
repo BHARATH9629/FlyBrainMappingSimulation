@@ -1,0 +1,61 @@
+{
+ "sex": "female",
+ "behaviour": "eat",
+ "healthy_hz": 106.66666666666667,
+ "attacked_hz": 0.0,
+ "attack": {
+  "strategy": "attacker-inject",
+  "goal": "block",
+  "intervention": {
+   "inject": {
+    "121117": 150.0,
+    "42155": 150.0
+   }
+  },
+  "size": 2,
+  "simulations": 4
+ },
+ "curve": [
+  {
+   "level_pct": 40,
+   "on_bar_hz": 42.7,
+   "greedy_size": 4,
+   "greedy_hz": 54,
+   "robust_size": 4,
+   "robust_hz": 54,
+   "robust_fragile": true,
+   "robust_move": "bias + potentiate"
+  },
+  {
+   "level_pct": 60,
+   "on_bar_hz": 64.0,
+   "greedy_size": 6,
+   "greedy_hz": 73,
+   "robust_size": 6,
+   "robust_hz": 73,
+   "robust_fragile": true,
+   "robust_move": "bias + potentiate"
+  },
+  {
+   "level_pct": 80,
+   "on_bar_hz": 85.3,
+   "greedy_size": null,
+   "greedy_hz": null,
+   "robust_size": null,
+   "robust_hz": null,
+   "robust_fragile": null,
+   "robust_move": null
+  },
+  {
+   "level_pct": 100,
+   "on_bar_hz": 106.7,
+   "greedy_size": null,
+   "greedy_hz": null,
+   "robust_size": null,
+   "robust_hz": null,
+   "robust_fragile": null,
+   "robust_move": null
+  }
+ ],
+ "seconds": 229
+}

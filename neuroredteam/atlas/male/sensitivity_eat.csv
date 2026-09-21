@@ -1,0 +1,5 @@
+sex,behaviour,on_thr,off_thr,healthy_hz,block_size,block_strategy,force_size,n_disjoint,disjoint_sizes,repair_size,repair_move,recovery_pct,seconds
+male,eat,30.0,15.0,143.3,4,attacker-greedy,1,1,[4],1,potentiate only,31,294
+male,eat,40.0,10.0,143.3,4,attacker-greedy,1,1,[4],1,potentiate only,44,66
+male,eat,50.0,10.0,143.3,4,attacker-greedy,1,1,[4],2,potentiate only,74,0
+male,eat,60.0,5.0,143.3,5,attacker-greedy,1,1,[5],,,,194

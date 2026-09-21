@@ -1,0 +1,15 @@
+matched_type,status,female_ids,female_roles,female_chokepoint_freq,male_ids,male_local_type,male_roles,male_chokepoint_freq
+CB0047,male only,,,,524426,GNG586,block:inject_inhibitors;chokepoint,0.53
+CB0465,conserved,720575940636809646,block:inject_inhibitors;chokepoint,0.4,13754,GNG130,chokepoint,0.2
+CB0493,conserved,720575940632252743,block:greedy;chokepoint;repair,0.4,10881,GNG120,block:greedy;chokepoint,0.2
+CB0553,conserved,720575940623211725,block:greedy;chokepoint;repair,0.4,26764,GNG108,block:greedy;chokepoint,0.2
+CB0806,conserved,720575940626961241,chokepoint,0.4,16595;17782;513655;14593,GNG180;GNG184,block:inject_inhibitors;chokepoint,0.73
+CB0857,male only,,,,522702,GNG182,block:inject_inhibitors;chokepoint,0.73
+CB0862,conserved,720575940620156209,block:inject_inhibitors;chokepoint,0.4,28181;523590,GNG015,chokepoint,0.27
+CB0903,male only,,,,12851,GNG095,chokepoint,0.13
+CB0912,male only,,,,13402,GNG281,block:inject_inhibitors;chokepoint,0.47
+CB3958,male only,,,,10673,GNG002,chokepoint;repair,0.07
+DNge051,male only,,,,11179;523679,DNge051,block:inject_inhibitors;chokepoint,0.53
+DNge059,female only,720575940619877396,chokepoint,0.2,,,,
+DNge062,conserved,720575940627099338,block:greedy;chokepoint;force:greedy;repair,0.2,10833,DNge062,block:greedy;chokepoint;force:greedy,0.13
+DNge080,conserved,720575940627847752,chokepoint,0.2,12752;12364,DNge080,block:greedy;chokepoint,0.13

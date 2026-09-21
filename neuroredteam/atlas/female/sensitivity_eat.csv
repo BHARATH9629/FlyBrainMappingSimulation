@@ -1,0 +1,5 @@
+sex,behaviour,on_thr,off_thr,healthy_hz,block_size,block_strategy,force_size,n_disjoint,disjoint_sizes,repair_size,repair_move,recovery_pct,seconds
+female,eat,30.0,15.0,106.7,2,attacker-inject,1,1,[3],3,bias + potentiate,34,89
+female,eat,40.0,10.0,106.7,2,attacker-inject,1,1,[3],3,bias + potentiate,44,6
+female,eat,50.0,10.0,106.7,2,attacker-inject,1,1,[3],4,bias + potentiate,51,0
+female,eat,60.0,5.0,106.7,2,attacker-inject,1,1,[3],5,bias + potentiate,65,13

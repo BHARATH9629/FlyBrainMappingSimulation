@@ -1,0 +1,5 @@
+sex,behaviour,on_thr,off_thr,healthy_hz,block_size,block_strategy,force_size,n_disjoint,disjoint_sizes,repair_size,repair_move,recovery_pct,seconds
+male,escape,30.0,15.0,410.0,,,1,0,[],,,,199
+male,escape,40.0,10.0,410.0,,,1,0,[],,,,0
+male,escape,50.0,10.0,410.0,,,2,0,[],,,,17
+male,escape,60.0,5.0,410.0,,,2,0,[],,,,0

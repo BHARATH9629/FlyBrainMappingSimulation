@@ -35,11 +35,11 @@ MN9 = 720575940660219265   # proboscis motor neuron (feeding)
 
 # ---------------- load the connectome ----------------
 t0 = time.time()
-comp = pd.read_csv(DATA + "Completeness_783.csv", index_col=0)
+comp = pd.read_csv(DATA + "female_flywire/Completeness_783.csv", index_col=0)
 ids = comp.index.values
 id2idx = {fid: i for i, fid in enumerate(ids)}
 N = len(ids)
-con = pd.read_parquet(DATA + "Connectivity_783.parquet",
+con = pd.read_parquet(DATA + "female_flywire/Connectivity_783.parquet",
                       columns=["Presynaptic_Index", "Postsynaptic_Index", "Excitatory x Connectivity"])
 W = sp.csr_matrix((con["Excitatory x Connectivity"].values.astype(np.float32) * W_SYN,
                    (con["Presynaptic_Index"].values, con["Postsynaptic_Index"].values)),

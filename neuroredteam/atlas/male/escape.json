@@ -1,0 +1,1838 @@
+{
+ "entry": {
+  "behaviour": "escape",
+  "healthy_on_hz": 410.0,
+  "healthy_off_hz": 0.0,
+  "goals": {
+   "block": {
+    "attacks": {
+     "greedy": null,
+     "inject_inhibitors": null,
+     "weaken_only": null,
+     "search": null
+    },
+    "best": null,
+    "greedy_best_size": null
+   },
+   "force": {
+    "attacks": {
+     "greedy": {
+      "strategy": "attacker-greedy",
+      "goal": "force",
+      "intervention": {
+       "inject": {
+        "546": 150.0,
+        "5414": 150.0
+       }
+      },
+      "size": 2,
+      "simulations": 6
+     },
+     "inject_inhibitors": null,
+     "weaken_only": null,
+     "search": null
+    },
+    "best": {
+     "strategy": "attacker-greedy",
+     "goal": "force",
+     "intervention": {
+      "inject": {
+       "546": 150.0,
+       "5414": 150.0
+      }
+     },
+     "size": 2,
+     "simulations": 6
+    },
+    "greedy_best_size": 2
+   }
+  },
+  "total_seconds": 663,
+  "sex": "male",
+  "side": "default"
+ },
+ "log": [
+  {
+   "agent": "attacker-greedy",
+   "step": 1,
+   "hypothesis": "cut the 1 strongest drivers",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz",
+   "goal_met": false,
+   "t": 14.7
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 2,
+   "hypothesis": "cut the 2 strongest drivers",
+   "intervention": "lesion 2",
+   "result": "readout 403.3 Hz",
+   "goal_met": false,
+   "t": 22.0
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 3,
+   "hypothesis": "cut the 3 strongest drivers",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz",
+   "goal_met": false,
+   "t": 29.2
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 4,
+   "hypothesis": "cut the 4 strongest drivers",
+   "intervention": "lesion 4",
+   "result": "readout 400.0 Hz",
+   "goal_met": false,
+   "t": 36.4
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 5,
+   "hypothesis": "cut the 5 strongest drivers",
+   "intervention": "lesion 5",
+   "result": "readout 397.8 Hz",
+   "goal_met": false,
+   "t": 43.8
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 6,
+   "hypothesis": "cut the 6 strongest drivers",
+   "intervention": "lesion 6",
+   "result": "readout 396.7 Hz",
+   "goal_met": false,
+   "t": 51.2
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 7,
+   "hypothesis": "cut the 7 strongest drivers",
+   "intervention": "lesion 7",
+   "result": "readout 396.7 Hz",
+   "goal_met": false,
+   "t": 58.5
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 8,
+   "hypothesis": "cut the 8 strongest drivers",
+   "intervention": "lesion 8",
+   "result": "readout 396.7 Hz",
+   "goal_met": false,
+   "t": 65.8
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 9,
+   "hypothesis": "cut the 9 strongest drivers",
+   "intervention": "lesion 9",
+   "result": "readout 396.7 Hz",
+   "goal_met": false,
+   "t": 73.2
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 10,
+   "hypothesis": "cut the 10 strongest drivers",
+   "intervention": "lesion 10",
+   "result": "readout 393.3 Hz",
+   "goal_met": false,
+   "t": 80.6
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 1,
+   "hypothesis": "drive the 1 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 1",
+   "result": "readout 407.8 Hz",
+   "goal_met": false,
+   "t": 89.6
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 2,
+   "hypothesis": "drive the 2 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 2",
+   "result": "readout 406.7 Hz",
+   "goal_met": false,
+   "t": 100.9
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 3,
+   "hypothesis": "drive the 3 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 3",
+   "result": "readout 405.6 Hz",
+   "goal_met": false,
+   "t": 112.1
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 4,
+   "hypothesis": "drive the 5 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 5",
+   "result": "readout 403.3 Hz",
+   "goal_met": false,
+   "t": 123.7
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 5,
+   "hypothesis": "drive the 8 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 8",
+   "result": "readout 400.0 Hz",
+   "goal_met": false,
+   "t": 135.4
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 6,
+   "hypothesis": "drive the 12 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 12",
+   "result": "readout 394.4 Hz",
+   "goal_met": false,
+   "t": 147.5
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 1,
+   "hypothesis": "weaken the 1 strongest drivers to 50 %",
+   "intervention": "weaken 1",
+   "result": "readout 410.0 Hz",
+   "goal_met": false,
+   "t": 154.6
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 2,
+   "hypothesis": "weaken the 2 strongest drivers to 50 %",
+   "intervention": "weaken 2",
+   "result": "readout 406.7 Hz",
+   "goal_met": false,
+   "t": 161.6
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 3,
+   "hypothesis": "weaken the 3 strongest drivers to 50 %",
+   "intervention": "weaken 3",
+   "result": "readout 406.7 Hz",
+   "goal_met": false,
+   "t": 168.7
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 4,
+   "hypothesis": "weaken the 4 strongest drivers to 50 %",
+   "intervention": "weaken 4",
+   "result": "readout 405.6 Hz",
+   "goal_met": false,
+   "t": 175.8
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 5,
+   "hypothesis": "weaken the 6 strongest drivers to 50 %",
+   "intervention": "weaken 6",
+   "result": "readout 403.3 Hz",
+   "goal_met": false,
+   "t": 183.0
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 6,
+   "hypothesis": "weaken the 8 strongest drivers to 50 %",
+   "intervention": "weaken 8",
+   "result": "readout 403.3 Hz",
+   "goal_met": false,
+   "t": 190.2
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 7,
+   "hypothesis": "weaken the 10 strongest drivers to 50 %",
+   "intervention": "weaken 10",
+   "result": "readout 403.3 Hz",
+   "goal_met": false,
+   "t": 197.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 1,
+   "hypothesis": "beam level 1: lesion 929",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 197.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 2,
+   "hypothesis": "beam level 1: lesion 6867",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 200.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 3,
+   "hypothesis": "beam level 1: lesion 14231",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 202.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 4,
+   "hypothesis": "beam level 1: lesion 1816",
+   "intervention": "lesion 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 205.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 5,
+   "hypothesis": "beam level 1: lesion 389",
+   "intervention": "lesion 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 208.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 6,
+   "hypothesis": "beam level 1: lesion 733",
+   "intervention": "lesion 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 211.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 7,
+   "hypothesis": "beam level 1: lesion 546",
+   "intervention": "lesion 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 213.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 8,
+   "hypothesis": "beam level 1: lesion 159008",
+   "intervention": "lesion 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 216.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 9,
+   "hypothesis": "beam level 1: lesion 80",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 219.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 10,
+   "hypothesis": "beam level 1: lesion 19728",
+   "intervention": "lesion 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 221.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 11,
+   "hypothesis": "beam level 1: lesion 6961",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 224.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 12,
+   "hypothesis": "beam level 1: lesion 10055",
+   "intervention": "lesion 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 227.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 13,
+   "hypothesis": "beam level 1: inject 63",
+   "intervention": "inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 227.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 14,
+   "hypothesis": "beam level 1: inject 245",
+   "intervention": "inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 230.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 15,
+   "hypothesis": "beam level 1: inject 1127",
+   "intervention": "inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 233.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 16,
+   "hypothesis": "beam level 1: inject 3097",
+   "intervention": "inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 236.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 17,
+   "hypothesis": "beam level 1: inject 135",
+   "intervention": "inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 240.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 18,
+   "hypothesis": "beam level 1: inject 750",
+   "intervention": "inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 243.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 19,
+   "hypothesis": "beam level 1: weaken 929",
+   "intervention": "weaken 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 243.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 20,
+   "hypothesis": "beam level 1: weaken 6867",
+   "intervention": "weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 245.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 21,
+   "hypothesis": "beam level 1: weaken 14231",
+   "intervention": "weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 248.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 22,
+   "hypothesis": "beam level 1: weaken 1816",
+   "intervention": "weaken 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 250.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 23,
+   "hypothesis": "beam level 1: weaken 389",
+   "intervention": "weaken 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 252.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 24,
+   "hypothesis": "beam level 1: weaken 733",
+   "intervention": "weaken 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 255.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 25,
+   "hypothesis": "beam level 2: lesion 929, lesion 6867",
+   "intervention": "lesion 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 255.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 26,
+   "hypothesis": "beam level 2: lesion 929, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 258.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 27,
+   "hypothesis": "beam level 2: lesion 929, lesion 1816",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 260.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 28,
+   "hypothesis": "beam level 2: lesion 389, lesion 929",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 263.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 29,
+   "hypothesis": "beam level 2: lesion 733, lesion 929",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 266.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 30,
+   "hypothesis": "beam level 2: lesion 546, lesion 929",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 268.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 31,
+   "hypothesis": "beam level 2: lesion 929, lesion 159008",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 271.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 32,
+   "hypothesis": "beam level 2: lesion 80, lesion 929",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 274.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 33,
+   "hypothesis": "beam level 2: lesion 929, lesion 19728",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 276.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 34,
+   "hypothesis": "beam level 2: lesion 929, lesion 6961",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 279.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 35,
+   "hypothesis": "beam level 2: lesion 929, lesion 10055",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 282.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 36,
+   "hypothesis": "beam level 2: inject 63, lesion 929",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 285.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 37,
+   "hypothesis": "beam level 2: inject 245, lesion 929",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 289.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 38,
+   "hypothesis": "beam level 2: inject 1127, lesion 929",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 292.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 39,
+   "hypothesis": "beam level 2: inject 3097, lesion 929",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 294.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 40,
+   "hypothesis": "beam level 2: inject 135, lesion 929",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 298.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 41,
+   "hypothesis": "beam level 2: inject 750, lesion 929",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 301.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 42,
+   "hypothesis": "beam level 2: lesion 929, weaken 6867",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 303.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 43,
+   "hypothesis": "beam level 2: lesion 929, weaken 14231",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 306.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 44,
+   "hypothesis": "beam level 2: lesion 929, weaken 1816",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 308.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 45,
+   "hypothesis": "beam level 2: lesion 929, weaken 389",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 310.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 46,
+   "hypothesis": "beam level 2: lesion 929, weaken 733",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 313.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 47,
+   "hypothesis": "beam level 2: lesion 6867, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 315.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 48,
+   "hypothesis": "beam level 2: lesion 1816, lesion 6867",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 318.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 49,
+   "hypothesis": "beam level 2: lesion 389, lesion 6867",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 321.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 50,
+   "hypothesis": "beam level 2: lesion 733, lesion 6867",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 323.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 51,
+   "hypothesis": "beam level 2: lesion 546, lesion 6867",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 326.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 52,
+   "hypothesis": "beam level 2: lesion 6867, lesion 159008",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 329.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 53,
+   "hypothesis": "beam level 2: lesion 80, lesion 6867",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 331.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 54,
+   "hypothesis": "beam level 2: lesion 6867, lesion 19728",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 334.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 55,
+   "hypothesis": "beam level 2: lesion 6867, lesion 6961",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 337.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 56,
+   "hypothesis": "beam level 2: lesion 6867, lesion 10055",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 339.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 57,
+   "hypothesis": "beam level 2: inject 63, lesion 6867",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 342.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 58,
+   "hypothesis": "beam level 2: inject 245, lesion 6867",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 346.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 59,
+   "hypothesis": "beam level 2: inject 1127, lesion 6867",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 349.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 60,
+   "hypothesis": "beam level 2: inject 3097, lesion 6867",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 352.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 61,
+   "hypothesis": "beam level 2: inject 135, lesion 6867",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 355.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 62,
+   "hypothesis": "beam level 2: inject 750, lesion 6867",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 358.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 63,
+   "hypothesis": "beam level 2: lesion 6867, weaken 929",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 360.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 64,
+   "hypothesis": "beam level 2: lesion 6867, weaken 14231",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 363.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 65,
+   "hypothesis": "beam level 2: lesion 6867, weaken 1816",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 365.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 66,
+   "hypothesis": "beam level 2: lesion 6867, weaken 389",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 367.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 67,
+   "hypothesis": "beam level 2: lesion 6867, weaken 733",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 370.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 68,
+   "hypothesis": "beam level 2: lesion 1816, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 372.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 69,
+   "hypothesis": "beam level 2: lesion 389, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 375.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 70,
+   "hypothesis": "beam level 2: lesion 733, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 378.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 71,
+   "hypothesis": "beam level 2: lesion 546, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 380.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 72,
+   "hypothesis": "beam level 2: lesion 14231, lesion 159008",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 383.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 73,
+   "hypothesis": "beam level 2: lesion 80, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 386.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 74,
+   "hypothesis": "beam level 2: lesion 14231, lesion 19728",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 388.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 75,
+   "hypothesis": "beam level 2: lesion 6961, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 391.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 76,
+   "hypothesis": "beam level 2: lesion 10055, lesion 14231",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 394.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 77,
+   "hypothesis": "beam level 2: inject 63, lesion 14231",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 397.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 78,
+   "hypothesis": "beam level 2: inject 245, lesion 14231",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 400.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 79,
+   "hypothesis": "beam level 2: inject 1127, lesion 14231",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 403.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 80,
+   "hypothesis": "beam level 2: inject 3097, lesion 14231",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 406.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 81,
+   "hypothesis": "beam level 2: inject 135, lesion 14231",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 409.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 82,
+   "hypothesis": "beam level 2: inject 750, lesion 14231",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 412.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 83,
+   "hypothesis": "beam level 2: lesion 14231, weaken 929",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 414.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 84,
+   "hypothesis": "beam level 2: lesion 14231, weaken 6867",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 417.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 85,
+   "hypothesis": "beam level 2: lesion 14231, weaken 1816",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 419.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 86,
+   "hypothesis": "beam level 2: lesion 14231, weaken 389",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 422.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 87,
+   "hypothesis": "beam level 2: lesion 14231, weaken 733",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 424.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 88,
+   "hypothesis": "beam level 2: lesion 80, lesion 1816",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 427.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 89,
+   "hypothesis": "beam level 2: lesion 80, lesion 389",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 429.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 90,
+   "hypothesis": "beam level 2: lesion 80, lesion 733",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 432.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 91,
+   "hypothesis": "beam level 2: lesion 80, lesion 546",
+   "intervention": "lesion 2",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 434.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 92,
+   "hypothesis": "beam level 2: lesion 80, lesion 159008",
+   "intervention": "lesion 2",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 437.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 93,
+   "hypothesis": "beam level 2: lesion 80, lesion 19728",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 440.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 94,
+   "hypothesis": "beam level 2: lesion 80, lesion 6961",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 442.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 95,
+   "hypothesis": "beam level 2: lesion 80, lesion 10055",
+   "intervention": "lesion 2",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 445.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 96,
+   "hypothesis": "beam level 2: inject 63, lesion 80",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 448.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 97,
+   "hypothesis": "beam level 2: inject 245, lesion 80",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 451.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 98,
+   "hypothesis": "beam level 2: inject 1127, lesion 80",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 454.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 99,
+   "hypothesis": "beam level 2: inject 3097, lesion 80",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 457.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 100,
+   "hypothesis": "beam level 2: inject 135, lesion 80",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 460.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 101,
+   "hypothesis": "beam level 2: inject 750, lesion 80",
+   "intervention": "lesion 1, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 463.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 102,
+   "hypothesis": "beam level 2: lesion 80, weaken 929",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 466.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 103,
+   "hypothesis": "beam level 2: lesion 80, weaken 6867",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 468.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 104,
+   "hypothesis": "beam level 2: lesion 80, weaken 14231",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 470.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 105,
+   "hypothesis": "beam level 2: lesion 80, weaken 1816",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 473.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 106,
+   "hypothesis": "beam level 2: lesion 80, weaken 389",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 410.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 475.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 107,
+   "hypothesis": "beam level 2: lesion 80, weaken 733",
+   "intervention": "lesion 1, weaken 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 477.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 108,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, lesion 14231",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 477.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 109,
+   "hypothesis": "beam level 3: lesion 929, lesion 1816, lesion 6867",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 480.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 110,
+   "hypothesis": "beam level 3: lesion 389, lesion 929, lesion 6867",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 483.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 111,
+   "hypothesis": "beam level 3: lesion 733, lesion 929, lesion 6867",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 485.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 112,
+   "hypothesis": "beam level 3: lesion 546, lesion 929, lesion 6867",
+   "intervention": "lesion 3",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 488.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 113,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, lesion 159008",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 490.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 114,
+   "hypothesis": "beam level 3: lesion 80, lesion 929, lesion 6867",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 493.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 115,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, lesion 19728",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 496.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 116,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, lesion 6961",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 498.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 117,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, lesion 10055",
+   "intervention": "lesion 3",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 501.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 118,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 6867",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 504.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 119,
+   "hypothesis": "beam level 3: inject 245, lesion 929, lesion 6867",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 508.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 120,
+   "hypothesis": "beam level 3: inject 1127, lesion 929, lesion 6867",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 510.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 121,
+   "hypothesis": "beam level 3: inject 3097, lesion 929, lesion 6867",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 513.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 122,
+   "hypothesis": "beam level 3: inject 135, lesion 929, lesion 6867",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 516.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 123,
+   "hypothesis": "beam level 3: inject 750, lesion 929, lesion 6867",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 519.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 124,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, weaken 14231",
+   "intervention": "lesion 2, weaken 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 521.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 125,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, weaken 1816",
+   "intervention": "lesion 2, weaken 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 524.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 126,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, weaken 389",
+   "intervention": "lesion 2, weaken 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 526.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 127,
+   "hypothesis": "beam level 3: lesion 929, lesion 6867, weaken 733",
+   "intervention": "lesion 2, weaken 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 528.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 128,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 14231",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 532.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 129,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 1816",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 535.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 130,
+   "hypothesis": "beam level 3: inject 63, lesion 389, lesion 929",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 538.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 131,
+   "hypothesis": "beam level 3: inject 63, lesion 733, lesion 929",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 541.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 132,
+   "hypothesis": "beam level 3: inject 63, lesion 546, lesion 929",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 544.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 133,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 159008",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 547.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 134,
+   "hypothesis": "beam level 3: inject 63, lesion 80, lesion 929",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 550.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 135,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 19728",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 553.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 136,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 6961",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 557.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 137,
+   "hypothesis": "beam level 3: inject 63, lesion 929, lesion 10055",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 406.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 560.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 138,
+   "hypothesis": "beam level 3: inject 63, inject 245, lesion 929",
+   "intervention": "lesion 1, inject 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 564.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 139,
+   "hypothesis": "beam level 3: inject 63, inject 1127, lesion 929",
+   "intervention": "lesion 1, inject 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 567.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 140,
+   "hypothesis": "beam level 3: inject 63, inject 3097, lesion 929",
+   "intervention": "lesion 1, inject 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 571.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 141,
+   "hypothesis": "beam level 3: inject 63, inject 135, lesion 929",
+   "intervention": "lesion 1, inject 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 575.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 142,
+   "hypothesis": "beam level 3: inject 63, inject 750, lesion 929",
+   "intervention": "lesion 1, inject 2",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 578.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 143,
+   "hypothesis": "beam level 3: inject 63, lesion 929, weaken 6867",
+   "intervention": "lesion 1, weaken 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 581.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 144,
+   "hypothesis": "beam level 3: inject 63, lesion 929, weaken 14231",
+   "intervention": "lesion 1, weaken 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 584.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 145,
+   "hypothesis": "beam level 3: inject 63, lesion 929, weaken 1816",
+   "intervention": "lesion 1, weaken 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 587.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 146,
+   "hypothesis": "beam level 3: inject 63, lesion 929, weaken 389",
+   "intervention": "lesion 1, weaken 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 590.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 147,
+   "hypothesis": "beam level 3: inject 63, lesion 929, weaken 733",
+   "intervention": "lesion 1, weaken 1, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 593.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 148,
+   "hypothesis": "beam level 3: inject 135, lesion 929, lesion 14231",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 596.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 149,
+   "hypothesis": "beam level 3: inject 135, lesion 929, lesion 1816",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 599.7
+  },
+  {
+   "agent": "attacker-search",
+   "step": 150,
+   "hypothesis": "beam level 3: inject 135, lesion 389, lesion 929",
+   "intervention": "lesion 2, inject 1",
+   "result": "readout 403.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 603.0
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 1,
+   "hypothesis": "drive the 1 strongest excitatory inputs",
+   "intervention": "inject 1",
+   "result": "readout 56.7 Hz",
+   "goal_met": false,
+   "t": 608.9
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 2,
+   "hypothesis": "drive the 2 strongest excitatory inputs",
+   "intervention": "inject 2",
+   "result": "readout 108.9 Hz",
+   "goal_met": false,
+   "t": 615.4
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 3,
+   "hypothesis": "drive the 3 strongest excitatory inputs",
+   "intervention": "inject 3",
+   "result": "readout 123.3 Hz",
+   "goal_met": true,
+   "t": 622.3
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 4,
+   "hypothesis": "is neuron 546 necessary? try without it",
+   "intervention": "inject 2",
+   "result": "readout 60.0 Hz",
+   "goal_met": false,
+   "t": 627.7
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 5,
+   "hypothesis": "is neuron 1816 necessary? try without it",
+   "intervention": "inject 2",
+   "result": "readout 93.3 Hz",
+   "goal_met": true,
+   "t": 633.2
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 6,
+   "hypothesis": "is neuron 5414 necessary? try without it",
+   "intervention": "inject 1",
+   "result": "readout 56.7 Hz",
+   "goal_met": false,
+   "t": 633.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 1,
+   "hypothesis": "beam level 1: inject 546",
+   "intervention": "inject 1",
+   "result": "readout 66.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 633.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 2,
+   "hypothesis": "beam level 1: inject 1816",
+   "intervention": "inject 1",
+   "result": "readout 76.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 635.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 3,
+   "hypothesis": "beam level 1: inject 5414",
+   "intervention": "inject 1",
+   "result": "readout 43.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 636.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 4,
+   "hypothesis": "beam level 1: inject 1193",
+   "intervention": "inject 1",
+   "result": "readout 63.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 638.2
+  },
+  {
+   "agent": "attacker-search",
+   "step": 5,
+   "hypothesis": "beam level 1: inject 929",
+   "intervention": "inject 1",
+   "result": "readout 43.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 640.0
+  },
+  {
+   "agent": "attacker-search",
+   "step": 6,
+   "hypothesis": "beam level 1: inject 14231",
+   "intervention": "inject 1",
+   "result": "readout 50.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 641.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 7,
+   "hypothesis": "beam level 1: inject 80",
+   "intervention": "inject 1",
+   "result": "readout 16.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 643.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 8,
+   "hypothesis": "beam level 1: inject 6867",
+   "intervention": "inject 1",
+   "result": "readout 86.7 Hz (seed 1)",
+   "goal_met": true,
+   "t": 644.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 9,
+   "hypothesis": "verify on all seeds",
+   "intervention": "inject 1",
+   "result": "readout 52.2 Hz",
+   "goal_met": false,
+   "t": 646.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 10,
+   "hypothesis": "beam level 1: inject 6045",
+   "intervention": "inject 1",
+   "result": "readout 36.7 Hz (seed 1)",
+   "goal_met": false,
+   "t": 648.5
+  },
+  {
+   "agent": "attacker-search",
+   "step": 11,
+   "hypothesis": "beam level 1: inject 178231",
+   "intervention": "inject 1",
+   "result": "readout 73.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 649.3
+  },
+  {
+   "agent": "attacker-search",
+   "step": 12,
+   "hypothesis": "beam level 1: inject 1580",
+   "intervention": "inject 1",
+   "result": "readout 30.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 651.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 13,
+   "hypothesis": "beam level 1: inject 1720",
+   "intervention": "inject 1",
+   "result": "readout 33.3 Hz (seed 1)",
+   "goal_met": false,
+   "t": 653.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 14,
+   "hypothesis": "beam level 1: lesion 63",
+   "intervention": "lesion 1",
+   "result": "readout 0.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 653.9
+  },
+  {
+   "agent": "attacker-search",
+   "step": 15,
+   "hypothesis": "beam level 1: lesion 245",
+   "intervention": "lesion 1",
+   "result": "readout 0.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 654.1
+  },
+  {
+   "agent": "attacker-search",
+   "step": 16,
+   "hypothesis": "beam level 1: lesion 1127",
+   "intervention": "lesion 1",
+   "result": "readout 0.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 654.4
+  },
+  {
+   "agent": "attacker-search",
+   "step": 17,
+   "hypothesis": "beam level 1: lesion 3097",
+   "intervention": "lesion 1",
+   "result": "readout 0.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 654.6
+  },
+  {
+   "agent": "attacker-search",
+   "step": 18,
+   "hypothesis": "beam level 1: lesion 135",
+   "intervention": "lesion 1",
+   "result": "readout 0.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 654.8
+  },
+  {
+   "agent": "attacker-search",
+   "step": 19,
+   "hypothesis": "beam level 1: lesion 750",
+   "intervention": "lesion 1",
+   "result": "readout 0.0 Hz (seed 1)",
+   "goal_met": false,
+   "t": 655.1
+  }
+ ]
+}

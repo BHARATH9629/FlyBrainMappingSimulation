@@ -1,0 +1,136 @@
+{
+ "sex": "female",
+ "behaviour": "eat",
+ "budget": 12,
+ "models": [
+  {
+   "model": "T0",
+   "single_shot": 2,
+   "single_shot_strategy": "T0-base-inject",
+   "winner": "attacker (no repair)",
+   "attacker_cost": 5,
+   "defender_cost": 12,
+   "exchange_ratio": 2.4,
+   "rounds": [
+    {
+     "round": 1,
+     "attack": 2,
+     "strategy": "T0-r1-inject",
+     "repair": 3,
+     "move": "bias + potentiate",
+     "fragile": true
+    },
+    {
+     "round": 2,
+     "attack": 1,
+     "strategy": "T0-r2-greedy",
+     "repair": 3,
+     "move": "depress + bias",
+     "fragile": true
+    },
+    {
+     "round": 3,
+     "attack": 1,
+     "strategy": "T0-r3-greedy",
+     "repair": 6,
+     "move": "bias + potentiate",
+     "fragile": true
+    },
+    {
+     "round": 4,
+     "attack": 1,
+     "repair": null
+    }
+   ]
+  },
+  {
+   "model": "T1",
+   "single_shot": 3,
+   "single_shot_strategy": "T1-base-greedy",
+   "winner": "attacker (no repair)",
+   "attacker_cost": 4,
+   "defender_cost": 5,
+   "exchange_ratio": 1.25,
+   "rounds": [
+    {
+     "round": 1,
+     "attack": 3,
+     "strategy": "T1-r1-greedy",
+     "repair": 5,
+     "move": "bias + potentiate",
+     "fragile": true
+    },
+    {
+     "round": 2,
+     "attack": 1,
+     "repair": null
+    }
+   ]
+  },
+  {
+   "model": "T2",
+   "single_shot": 2,
+   "single_shot_strategy": "T2-base-inject",
+   "winner": "attacker (no repair)",
+   "attacker_cost": 4,
+   "defender_cost": 7,
+   "exchange_ratio": 1.75,
+   "rounds": [
+    {
+     "round": 1,
+     "attack": 2,
+     "strategy": "T2-r1-inject",
+     "repair": 7,
+     "move": "bias + potentiate",
+     "fragile": true
+    },
+    {
+     "round": 2,
+     "attack": 2,
+     "repair": null
+    }
+   ]
+  },
+  {
+   "model": "T3",
+   "single_shot": 2,
+   "single_shot_strategy": "T3-base-inject",
+   "winner": "attacker (no repair)",
+   "attacker_cost": 5,
+   "defender_cost": 12,
+   "exchange_ratio": 2.4,
+   "rounds": [
+    {
+     "round": 1,
+     "attack": 2,
+     "strategy": "T3-r1-inject",
+     "repair": 3,
+     "move": "bias + potentiate",
+     "fragile": true
+    },
+    {
+     "round": 2,
+     "attack": 1,
+     "strategy": "T3-r2-greedy",
+     "repair": 3,
+     "move": "depress + bias",
+     "fragile": true
+    },
+    {
+     "round": 3,
+     "attack": 1,
+     "strategy": "T3-r3-greedy",
+     "repair": 6,
+     "move": "bias + potentiate",
+     "fragile": true
+    },
+    {
+     "round": 4,
+     "attack": 1,
+     "repair": null
+    }
+   ]
+  }
+ ],
+ "seconds": 1064
+}

@@ -1,4 +1,10 @@
 __pycache__/
 *.pyc
-data/*.parquet
-data/*.csv
+data/*/*.parquet
+data/*/*.csv
+data/*/*.feather
+data/*/*.tsv
+virtual_fly/out/*.mp4
+neuroredteam/atlas/*/log_*.json
+neuroredteam/atlas/*/*.log
+neuroredteam/atlas/*.log
