@@ -29,3 +29,11 @@ What is and is not the connectome, say it on the slide:
   possible future step.
 
 Speed: ~10 wall seconds per simulated second of body + ~0.1 s per brain frame; one 3.8 s clip takes about a minute.
+
+## Live window (`live.py`) and the Phase 2 launcher (`phase2.py`)
+`python virtual_fly/live.py` = everything (behaviour keys + red / blue team keys A F H D R).
+`python virtual_fly/phase2.py` = behaviours only. Keys: S sugar, V water, B bitter, L looming, DOWN approach,
+1 / 2 threat on the left / right eye, W walk, arrows steer, SPACE stop, M swap sex, Q quit.
+`--script "S@2,V@3,Q@4"` presses keys automatically (each N s after the system is idle); `--record out.mp4` saves the session.
+Attacks and repairs are cached in `virtual_fly/cache/` so a repeated demo is instant (`--no_cache` recomputes,
+`--robust` uses the slow probing defender).

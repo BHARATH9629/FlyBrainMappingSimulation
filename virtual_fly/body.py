@@ -37,7 +37,7 @@ def make_fly(name="fly", colorize=True):
 
 class FlyBody:
     """sim + walking controller + proboscis. step(left, right, eat) advances one physics step."""
-    def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None, bitter_at=None, buffer=True):
+    def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None, bitter_at=None, water_at=None, buffer=True):
         self.fly, neutral = make_fly()
         cams = {"side": dict(pos_offset=(-0.5, -7.5, 0.0), rotation=Rotation3D("euler", (1.57, 0, 0)), fovy=35.0),
                 "top":  dict(pos_offset=(0, 0, 12.0), rotation=Rotation3D("euler", (0, 0, 0)), fovy=35.0),
@@ -54,6 +54,10 @@ class FlyBody:
             self.world.mjcf_root.worldbody.add_geom(name="bitter", type=mujoco.mjtGeom.mjGEOM_ELLIPSOID, size=[0.75, 0.6, 0.14],
                                                     pos=[float(bitter_at[0]), float(bitter_at[1]), 0.12],
                                                     rgba=[0.35, 0.2, 0.5, 1.0], contype=0, conaffinity=0)
+        if water_at is not None:                        # a clear blue drop (water)
+            self.world.mjcf_root.worldbody.add_geom(name="water", type=mujoco.mjtGeom.mjGEOM_ELLIPSOID, size=[0.75, 0.6, 0.14],
+                                                    pos=[float(water_at[0]), float(water_at[1]), 0.12],
+                                                    rgba=[0.45, 0.75, 1.0, 0.85], contype=0, conaffinity=0)
         self.sim = Simulation(self.world)
         self.sim.set_renderer([cam], camera_res=res, playback_speed=playback_speed, output_fps=fps)
         self.sim.renderer.buffer_frames = buffer          # live mode: do not accumulate frames in memory

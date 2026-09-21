@@ -37,18 +37,25 @@ FEMALE = {   # FlyWire IDs (18-digit root ids)
         "description": "a looming object drives the giant fiber (DNp01), the escape command neuron",
         "source": "LC4 / LPLC2 -> giant fiber: Ache et al. 2019 Curr Biol; von Reyn et al. 2017 Neuron",
     },
+    "drink": {
+        "stimulus": {"types": ["LB3"], "subclass": "sugar/water", "side": "L", "exclude_ids": SUGAR_IDS},   # left LB3 taste GRNs that are NOT the 20 sugar cells
+        "readout": MN9_ID,
+        "on_threshold": 40.0, "off_threshold": 10.0,
+        "description": "the other labellar taste GRNs (water / sugar class) also drive MN9: drinking",
+        "source": "female annotation lumps sugar and water GRNs as 'LB3 sugar/water' (Schlegel 2024); water-specific typing only in the male (LB3a)",
+    },
     "retreat": {
-        "stimulus": {"types": ["LC16"], "side": "L"},                    # LC16 visual neurons: approaching object -> backing up
-        "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking)
-        "on_threshold": 40.0, "off_threshold": 10.0,    # to calibrate
+        "stimulus": {"types": ["LC16"], "side": None},                   # LC16 in BOTH eyes: an object approaching head-on
+        "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking), mean of 4
+        "on_threshold": 10.0, "off_threshold": 5.0,     # male calibrate: both eyes 13 +/- 1 Hz (weaker than the female's 42), 0 Hz without
         "description": "an approaching object (LC16) drives the moonwalker descending neurons: the fly backs up",
         "source": "LC16 -> backward walking: Wu et al. 2016 eLife; MDN: Bidaye et al. 2014 Science",
     },
     "turn": {
         "stimulus": {"types": ["LC4", "LPLC2"], "side": "L"},            # looming on the LEFT eye
-        "readout": {"types": ["DNa02"]},                                 # steering descending neurons, both sides (asymmetry = turn)
-        "on_threshold": 20.0, "off_threshold": 10.0,    # to calibrate
-        "description": "one-sided visual threat drives the steering descending neurons DNa02 asymmetrically",
+        "readout": {"types": ["DNa02"], "side": "L"},                    # male: the LEFT-labelled DNa02 fires (110 Hz); right-eye looming -> nothing
+        "on_threshold": 40.0, "off_threshold": 10.0,    # LATERALITY DIFFERS from the female (R eye -> DNa02_L): likely a soma-side labelling convention; verify in neuroglancer before claiming
+        "description": "a threat on one side drives the opposite steering neuron DNa02: the fly turns away from it",
         "source": "DNa02 steering: Rayshubskiy et al. 2020 bioRxiv; Braun et al. 2024",
         "batch": False,
     },
@@ -94,18 +101,25 @@ MALE = {
         "description": "a looming object drives the giant fiber (DNp01), the escape command neuron",
         "source": "LC4 / LPLC2 -> giant fiber: Ache et al. 2019 Curr Biol; von Reyn et al. 2017 Neuron",
     },
+    "drink": {
+        "stimulus": {"types": ["LB3a"], "side": None},                   # labellar water GRNs (ppk28 match), both sides (one side alone: 27-160 Hz, seed-unstable)
+        "readout": {"types": ["MN9"], "side": "L"},
+        "on_threshold": 40.0, "off_threshold": 10.0,
+        "description": "water on the tongue (water GRNs) makes the feeding motor neuron MN9 fire: drinking",
+        "source": "water GRNs ppk28 / LB3a: Cameron et al. 2010 Nature; taste connectome papers",
+    },
     "retreat": {
-        "stimulus": {"types": ["LC16"], "side": "L"},                    # LC16 visual neurons: approaching object -> backing up
-        "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking)
-        "on_threshold": 40.0, "off_threshold": 10.0,    # to calibrate
+        "stimulus": {"types": ["LC16"], "side": None},                   # LC16 in BOTH eyes: an object approaching head-on
+        "readout": {"types": ["MDN"]},                                   # moonwalker descending neurons (backward walking), mean of 4
+        "on_threshold": 10.0, "off_threshold": 5.0,     # male calibrate: both eyes 13 +/- 1 Hz (weaker than the female's 42), 0 Hz without
         "description": "an approaching object (LC16) drives the moonwalker descending neurons: the fly backs up",
         "source": "LC16 -> backward walking: Wu et al. 2016 eLife; MDN: Bidaye et al. 2014 Science",
     },
     "turn": {
         "stimulus": {"types": ["LC4", "LPLC2"], "side": "L"},            # looming on the LEFT eye
-        "readout": {"types": ["DNa02"]},                                 # steering descending neurons, both sides (asymmetry = turn)
-        "on_threshold": 20.0, "off_threshold": 10.0,    # to calibrate
-        "description": "one-sided visual threat drives the steering descending neurons DNa02 asymmetrically",
+        "readout": {"types": ["DNa02"], "side": "L"},                    # male: the LEFT-labelled DNa02 fires (110 Hz); right-eye looming -> nothing
+        "on_threshold": 40.0, "off_threshold": 10.0,    # LATERALITY DIFFERS from the female (R eye -> DNa02_L): likely a soma-side labelling convention; verify in neuroglancer before claiming
+        "description": "a threat on one side drives the opposite steering neuron DNa02: the fly turns away from it",
         "source": "DNa02 steering: Rayshubskiy et al. 2020 bioRxiv; Braun et al. 2024",
         "batch": False,
     },
@@ -179,6 +193,9 @@ class Behaviour:
         """A list of dataset IDs, a single ID, a by_type query dict, or {"union": [spec, spec, ...]}."""
         if isinstance(spec, dict) and "union" in spec:
             return np.unique(np.concatenate([self._resolve(x) for x in spec["union"]])).astype(int)
+        if isinstance(spec, dict) and "exclude_ids" in spec:
+            spec = dict(spec); excl = set(self.brain.idx(spec.pop("exclude_ids")).tolist())
+            return np.array([i for i in self._resolve(spec) if i not in excl], int)
         if isinstance(spec, dict):
             return self.brain.by_type(types=spec.get("types"), side=spec.get("side"), subclass=spec.get("subclass"),
                                       superclass=spec.get("superclass"), exclude_types=spec.get("exclude_types", ()),

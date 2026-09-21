@@ -120,6 +120,28 @@ silencing (3 cells) and to its own inhibition (2 cells), and far easier to hijac
 2-neuron inhibitory exploit that we had not found by hand.
 
 
+
+## Phase 2: the fly and its brain (`python virtual_fly/phase2.py [--sex female|male]`)
+
+Six behaviours, each a real run of the connectome deciding what the 3-D body does. Press a key, the stimulus neurons
+fire, the brain runs (every spike drawn on the right), the readout neuron's rate is compared with a pass/fail bar set
+from the healthy brain, and the body acts. Walking gait is FlyGym's controller; everything else is the connectome.
+
+| key | stimulus (neurons) | readout | female healthy / bar | male healthy / bar | the fly |
+|---|---|---|---|---|---|
+| S sugar | sugar GRNs (Shiu ids / LB3b+c) | MN9 | 107 Hz / 40 | 157 / 40 | walks to the drop, proboscis down: EATS |
+| V water | other labellar taste GRNs (LB3 sugar/water class) / LB3a | MN9 | 94 / 40 | 173 / 40 | DRINKS |
+| B bitter | sugar + bitter GRNs (LB1a-d) | MN9 stays silent | 0 / <=10 | 20 / <=25 | REFUSES BITTER, walks off |
+| L looming | LC4 + LPLC2, one eye | giant fiber DNp01 | 233 / 80 | 216 / 80 | ESCAPES (take-off hop) |
+| DOWN approach | LC16, both eyes | moonwalker MDN (mean of 4) | 42 / 20 | 13 / 10 | BACKS UP |
+| 1 / 2 threat on the left / right eye | LC4 + LPLC2, that eye | steering DNa02, left vs right | R eye -> DNa02_L 62 Hz; L eye -> DNa02_R 11 (below bar) | L eye -> DNa02_L 110; R eye -> 0 | TURNS AWAY from the threat |
+
+Notes, said plainly: the male's retreat signal is weak (13 Hz); the female's left-eye steering signal is weak (11 Hz,
+under the 20 Hz bar, so "NO TURN"); the two datasets disagree on which DNa02 fires for a given eye (a soma-side labelling
+convention to verify before claiming anything about laterality); water GRNs are not separately typed in the female
+annotation. Left out: grooming and courtship (no citable readout). Clips: `virtual_fly/out/phase2_{female,male}.mp4`
+(`--script` + `--record` regenerate them).
+
 ## Milestone 3 (20-21 September 2026): three behaviours, two sexes, choke points, search, the game
 
 All numbers: 3 seeds per check; batch rows are mean +/- sd over 3 independent seed-sets; every behaviour passed the
