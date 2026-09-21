@@ -312,9 +312,13 @@ while running:
         near = [(np.linalg.norm(spot - pos), kind, spot) for kind, spot in st["drops"].items() if np.linalg.norm(spot - pos) < 12.0]
         if near:
             dist, kind, spot = min(near)
-            err = (np.arctan2(*(spot - pos)[::-1]) - body.heading + np.pi) % (2 * np.pi) - np.pi
-            st["wander"] = 0.7 * st["wander"] + 0.3 * np.clip(0.9 * err, -0.6, 0.6)
-            if st["msg"].startswith("EXPLORE") or "placed" in st["msg"]: st["msg"] = f"smells the {kind} drop ({dist:.0f} mm; steering rule, not the connectome)"
+            if dist < 5.0:                                             # close: direct approach (same control as the S / B keys)
+                st.update(target=spot, kind=kind, phase="approach", walking=True)
+                st["msg"] = f"found the {kind} drop; walking up to it"
+            else:
+                err = (np.arctan2(*(spot - pos)[::-1]) - body.heading + np.pi) % (2 * np.pi) - np.pi
+                st["wander"] = 0.7 * st["wander"] + 0.3 * np.clip(0.9 * err, -0.6, 0.6)
+                if st["msg"].startswith("EXPLORE") or "placed" in st["msg"]: st["msg"] = f"smells the {kind} drop ({dist:.0f} mm; steering rule, not the connectome)"
         w = float(np.clip(st["wander"], -0.6, 0.6)); left, right = np.clip(0.9 - w, 0.2, 1.2), np.clip(0.9 + w, 0.2, 1.2)
         for kind, spot in list(st["drops"].items()):                  # anything within reach gets tasted
             if np.linalg.norm(spot - pos) < ARRIVE:
@@ -382,7 +386,11 @@ while running:
     keys_p2 = "E explore + click (L sugar, R bitter, M water)   S V B drops   C arena   L looming   DOWN approach   1/2 threat   W walk   SPACE stop   Q"
     draw_text([keys_p2 + ("" if args.mode == "phase2" else "  |  A attack  F hijack  H no-sugar test  D repair  R reset")], 10, PH + BAR - 22, (140, 140, 160))
     pygame.display.flip(); clock.tick(30)
-    if args.record: frames_out.append(np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2)).copy())
+    if args.record:
+        f_ = np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2))
+        if f_.shape[:2] != (PH + BAR, 2 * PW):                          # window resized / minimised: keep a fixed frame size
+            from PIL import Image as _I; f_ = np.asarray(_I.fromarray(f_).resize((2 * PW, PH + BAR)))
+        frames_out.append(f_.copy())
 pygame.quit()
 if args.record and frames_out:
     import imageio.v2 as iio
