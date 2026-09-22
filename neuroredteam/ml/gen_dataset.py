@@ -1,4 +1,4 @@
-"""Generate the intervention -> readout dataset for the surrogate brain and the choke-point predictor.
+"""Generate the intervention -> readout dataset for the surrogate brain.
 
 Pool = neurons active with the stimulus + the readout's strongest inputs (excitatory and inhibitory).
 Samples = every single-neuron lesion / inject / weaken in the pool (the per-neuron labels), plus random mixed sets
