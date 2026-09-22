@@ -1,0 +1,114 @@
+{
+ "sex": "female",
+ "seeds": 3,
+ "tests": [
+  {
+   "test": "sugar GRNs -> MN9 fires",
+   "paper": "Shiu et al. 2024 Nature (model + optogenetics); Gordon & Scott 2009",
+   "prediction": "MN9 fires (proboscis extension)",
+   "measured": "107 Hz (vs 0 Hz unstimulated)",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "silencing sugar GRNs abolishes it",
+   "paper": "Gr5a silencing abolishes PER to sugar (Dahanukar 2007; Marella 2006)",
+   "prediction": "MN9 silent",
+   "measured": "0 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "bitter + sugar -> MN9 eliminated",
+   "paper": "Shiu et al. 2024: strong bitter activation eliminates MN9 firing to sugar (confirmed optogenetically)",
+   "prediction": "MN9 silent despite sugar",
+   "measured": "0 Hz (sugar alone 107 Hz)",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "bitter alone -> no feeding",
+   "paper": "bitter GRNs do not drive PER (Scott lab)",
+   "prediction": "MN9 silent",
+   "measured": "0 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "weak bitter -> graded suppression",
+   "paper": "Shiu et al. 2024: suppression is graded with bitter strength (Ir94e reduces but does not eliminate)",
+   "prediction": "MN9 between silent and full",
+   "measured": "71 Hz (full bitter 0, none 107)",
+   "verdict": "MATCH",
+   "note": "our only graded-dose test; Ir94e GRNs are not typed in the female annotation, so that specific comparison cannot be run",
+   "kind": "independent"
+  },
+  {
+   "test": "looming -> giant fibre DNp01",
+   "paper": "von Reyn et al. 2017 Neuron; Ache et al. 2019 Curr Biol",
+   "prediction": "DNp01 fires strongly",
+   "measured": "233 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "either eye drives its giant fibre",
+   "paper": "azimuthal invariance of the giant-fibre escape circuit (Card lab, 2023)",
+   "prediction": "left and right similar",
+   "measured": "L 233 Hz, R 269 Hz (ratio 1.15)",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "independent"
+  },
+  {
+   "test": "specificity: sugar does not drive DNp01",
+   "paper": "escape and feeding are separate pathways",
+   "prediction": "DNp01 silent",
+   "measured": "0 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "specificity: looming does not drive MN9",
+   "paper": "escape and feeding are separate pathways",
+   "prediction": "MN9 silent",
+   "measured": "0 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "consistency"
+  },
+  {
+   "test": "LC16 -> moonwalker neurons (MDN)",
+   "paper": "Wu et al. 2016 eLife (LC16 activation drives backward walking via MDN)",
+   "prediction": "MDN fires",
+   "measured": "42 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "independent"
+  },
+  {
+   "test": "threat on the right -> left DNa02",
+   "paper": "Rayshubskiy et al. 2020: DNa02 activity predicts ipsilateral turning, so turning away from a right-side threat = left DNa02",
+   "prediction": "left DNa02 > right DNa02",
+   "measured": "left 62 Hz, right 0 Hz",
+   "verdict": "MATCH",
+   "note": "",
+   "kind": "independent"
+  },
+  {
+   "test": "odour direction -> asymmetric steering",
+   "kind": "independent",
+   "paper": "flies track odour plumes by comparing the two antennae (Gaudry et al. 2013; Alvarez-Salvado et al. 2018)",
+   "prediction": "one-sided odour gives a left/right difference in DNa02",
+   "measured": "odour reaches the descending neurons, but DNa02 shows no graded left/right difference (calibrate_smell.log)",
+   "verdict": "MISMATCH",
+   "note": "expected: our stimulus model drives receptor neurons directly, with no antenna geometry and no concentration gradient, so the asymmetry this test needs is absent by construction. A limit of the setup, not evidence against the connectome."
+  }
+ ]
+}

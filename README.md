@@ -220,9 +220,55 @@ Files: `neuroredteam/atlas/crosssex_<behaviour>.csv` (the only files where both 
 fidelity_*.json (sub-network vs full brain, every behaviour), sensitivity_*.csv (thresholds 30/15 to 60/5:
 attack sizes unchanged; repair grows with a stricter ON bar; escape 60/5 finds no repair), batch logs, run logs.
 
+## Does the model match real flies? (`python neuroredteam/literature.py --sex female`)
+
+Twelve manipulations that have been done in real flies, each with the published outcome and what our simulation gives
+(mean of seeds 1-3). Nothing was fitted: the LIF parameters are the ones Shiu et al. published, and no threshold was
+changed to make a row pass. Full table with citations: `atlas/female/literature.md`.
+
+The rows are split, because most of them could not have failed:
+
+- **Consistency checks: 7/7.** Sugar drives MN9, cutting the sugar cells silences it, bitter with sugar eliminates it,
+  bitter alone does nothing, looming drives the giant fibre, and the two pathways do not cross-talk. This is the circuit
+  Shiu et al. built the model on and the rates our own thresholds were calibrated from, so passing is expected. We report
+  these as evidence the pipeline is wired up correctly, not as validation.
+- **Independent tests: 4/5.** These were not used to build or calibrate anything:
+  - graded bitter dose: a quarter of the bitter cells gives 71 Hz, between full bitter (0 Hz) and none (107 Hz) -- the
+    suppression is graded, as reported;
+  - azimuthal invariance of the escape circuit: left eye 233 Hz, right eye 269 Hz into their own giant fibres (ratio 1.15);
+  - LC16 -> moonwalker descending neurons: 42 Hz (Wu et al. 2016);
+  - laterality: a threat on the right drives the *left* DNa02 (62 Hz) and not the right (0 Hz), matching DNa02's known
+    ipsilateral-turning role;
+  - **MISMATCH -- odour direction:** an odour on one side does not give a graded left/right difference in DNa02. Expected,
+    and kept in the table on purpose: our stimulus model drives receptor neurons directly, with no antenna geometry and no
+    concentration gradient, so the asymmetry this test needs is absent by construction. It is a limit of our setup, not
+    evidence against the connectome.
+
+## Is the red team better than guessing? (`python neuroredteam/nullmodels.py`)
+
+An attack of size *k* only means something if *k* neurons chosen without simulation do not do the same job. Every
+baseline below is judged by the referee the attacker itself uses (goal met on seeds 1-3).
+
+**Female, eat, block (attacker: 3 lesions)** -- healthy MN9 107 Hz, blocked means <= 10 Hz:
+
+| 3-neuron cut chosen by | MN9 | blocked? |
+|---|---|---|
+| the red team (simulated search) | 0-7 Hz | **yes** |
+| highest degree | 98 Hz | no |
+| strongest synaptic input to MN9 | 43 Hz | no |
+| most active under sugar | 99 Hz | no |
+| 200 random draws from the 357 active neurons | 98 Hz mean | **0 / 200** |
+
+Zero of 200 random triples block feeding (95 % upper bound 1.5 %), and no wiring heuristic of the same size comes close.
+The attack is not a coincidence of size, and choke points are not the obvious hubs -- the same conclusion the
+choke-point analysis reached from topology, now with a baseline attached.
+
 ## What is new and what is not (we do not overclaim)
 
 Not new, reproduced by us: simulating the connectome (Shiu et al. 2024); the male connectome itself (MaleCNS, Cell 2026); perturbing it by hand (Shiu 2024; bioRxiv Dec 2025 stress tests); control-theory driver neurons in the worm (Yan et al. 2017); using connectome wiring as a neural network (conn2res 2024, FlyGM 2026, Dhiman 2026).
+
+Validation status: the model reproduces 4 of 5 independent published results and all 7 consistency checks (see above);
+the one mismatch (odour direction) is a limit of our stimulus model and is reported, not hidden.
 
 New, as far as our literature search found: automated search for the minimal perturbation that breaks a behaviour in a whole-brain behavioural simulation; an automated repair agent with a no-forcing test; the attack -> repair loop; a fragility atlas across behaviours; the same attack/repair benchmark run on the female and the male connectome; the iterated attack -> repair game with cumulative budgets; choke-point enumeration compared with topology; cross-sex matching of attacked cell types.
 

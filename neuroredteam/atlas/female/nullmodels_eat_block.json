@@ -1,0 +1,58 @@
+{
+ "sex": "female",
+ "behaviour": "eat",
+ "goal": "block",
+ "k": 3,
+ "healthy_hz": 106.66666666666667,
+ "baselines": {
+  "highest degree": {
+   "set": [
+    47604,
+    58597,
+    35701
+   ],
+   "types": [
+    "cL20",
+    "LT37",
+    "DNg35"
+   ],
+   "hz": 97.8,
+   "blocked": false
+  },
+  "strongest input to readout": {
+   "set": [
+    80293,
+    121117,
+    59455
+   ],
+   "types": [
+    "DNge062",
+    "CB0465",
+    "CB0553"
+   ],
+   "hz": 43.3,
+   "blocked": false
+  },
+  "most active": {
+   "set": [
+    33909,
+    100978,
+    56459
+   ],
+   "types": [
+    "CB0700",
+    "CB0700",
+    "CB0248"
+   ],
+   "hz": 98.9,
+   "blocked": false
+  },
+  "random": {
+   "reps": 200,
+   "hits": 0,
+   "rate": 0.0,
+   "mean_hz": 97.7,
+   "ci95_upper_if_zero": 0.0149
+  }
+ }
+}
