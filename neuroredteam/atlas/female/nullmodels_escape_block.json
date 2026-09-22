@@ -1,0 +1,138 @@
+{
+ "sex": "female",
+ "behaviour": "escape",
+ "goal": "block",
+ "move": "inject",
+ "k": 11,
+ "healthy_hz": 240.0,
+ "baselines": {
+  "highest degree": {
+   "set": [
+    74067,
+    21291,
+    116843,
+    118536,
+    41335,
+    85630,
+    71912,
+    74562,
+    48970,
+    83920,
+    126635
+   ],
+   "types": [
+    "Li33",
+    "cML01",
+    "cML01",
+    "cL21",
+    "LPi15",
+    "OA-AL2b2",
+    "OA-AL2b2",
+    "Pm14",
+    "Pm14",
+    "VCH",
+    "DCH"
+   ],
+   "hz": 233.3,
+   "blocked": false
+  },
+  "strongest input to readout": {
+   "set": [
+    65912,
+    116937,
+    63536,
+    80272,
+    8498,
+    2955,
+    5536,
+    14979,
+    94420,
+    22613,
+    130768
+   ],
+   "types": [
+    "DNp70",
+    "LHAD1g1",
+    "PVLP010",
+    "CB0010",
+    "CB3707",
+    "CB0563",
+    "PVLP122b",
+    "CB0563",
+    "PVLP122b",
+    "DNpe042",
+    "SAD013"
+   ],
+   "hz": 162.2,
+   "blocked": false
+  },
+  "strongest inhibitor of readout": {
+   "set": [
+    116937,
+    63536,
+    80272,
+    8498,
+    2955,
+    14979,
+    130768,
+    40093,
+    10517,
+    90242,
+    50942
+   ],
+   "types": [
+    "LHAD1g1",
+    "PVLP010",
+    "CB0010",
+    "CB3707",
+    "CB0563",
+    "CB0563",
+    "SAD013",
+    "PVLP024",
+    "CB3513b",
+    "PVLP017",
+    "PVLP100"
+   ],
+   "hz": 66.7,
+   "blocked": false
+  },
+  "most active": {
+   "set": [
+    130068,
+    36506,
+    1133,
+    11082,
+    62546,
+    116937,
+    45143,
+    40093,
+    125852,
+    14649,
+    73773
+   ],
+   "types": [
+    "PVLP011",
+    "PVLP069",
+    "DNp04",
+    "PVLP130",
+    "DNp103",
+    "LHAD1g1",
+    "AVLP479",
+    "PVLP024",
+    "PVLP011",
+    "PVLP151",
+    "PVLP111"
+   ],
+   "hz": 217.8,
+   "blocked": false
+  },
+  "random": {
+   "move": "inject",
+   "reps": 60,
+   "hits": 0,
+   "rate": 0.0,
+   "mean_hz": 235.1,
+   "ci95_upper_if_zero": 0.0487
+  }
+ }
+}

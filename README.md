@@ -263,6 +263,19 @@ Zero of 200 random triples block feeding (95 % upper bound 1.5 %), and no wiring
 The attack is not a coincidence of size, and choke points are not the obvious hubs -- the same conclusion the
 choke-point analysis reached from topology, now with a baseline attached.
 
+**Female, escape, block (attacker: 11 driven neurons)** -- healthy DNp01 240 Hz. 0 / 60 random 11-neuron sets met the
+goal, and all four heuristics failed (best: the strongest inhibitors of DNp01, 67 Hz, still far above the bar). The
+escape circuit is hard to break by any means, which is the point of a giant fibre.
+
+**Female, eat, force (attacker: 1 driven neuron) -- the baseline that goes against us.** Making the fly try to eat with
+no food needs one driven neuron; so does **7 of 100 randomly chosen active neurons** (mean readout 5.7 Hz, but 7 draws
+cleared the 40 Hz bar). The heuristics all failed, so the attacker is still better than any rule of thumb, but here it is
+*not* better than chance by much: roughly one active neuron in fourteen can trigger phantom feeding on its own.
+
+The contrast is the interesting result, and we report it that way: in this circuit **making a behaviour happen is easy
+and making it stop is hard**. Blocking needs a specific, simulated choice (0 / 200 random); forcing does not (7 / 100).
+A single "minimal attack size" number without its null model would have hidden that completely.
+
 ## What is new and what is not (we do not overclaim)
 
 Not new, reproduced by us: simulating the connectome (Shiu et al. 2024); the male connectome itself (MaleCNS, Cell 2026); perturbing it by hand (Shiu 2024; bioRxiv Dec 2025 stress tests); control-theory driver neurons in the worm (Yan et al. 2017); using connectome wiring as a neural network (conn2res 2024, FlyGM 2026, Dhiman 2026).
