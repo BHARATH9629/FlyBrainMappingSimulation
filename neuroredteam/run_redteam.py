@@ -3,8 +3,9 @@ Usage:  python run_redteam.py [--behaviour eat] [--goal block|force|both] [--sex
 import argparse, json, time, os
 import numpy as np
 from brain import Brain
-from behaviours import Behaviour, RULES
+from behaviours import Behaviour, RULES, BEHAVIOURS
 from agents import Attacker, Defender, Log, redundancy, CHECK_SEEDS
+FRESH_SEEDS = (11, 12, 13)                   # held out of every search, used only to confirm a finished attack
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--behaviour", default="eat"); ap.add_argument("--goal", default="both", choices=["block", "force", "both", "corrupt"])
@@ -45,6 +46,14 @@ for goal in goals:
         print(f"  {'search':18s}: " + (f"size {srch['size']}  ({srch['simulations']} sims)  {srch['intervention']}" if srch
                                        else f"nothing smaller than {best['size']} within budget" if best else "no attack found within budget"))
         if srch and (best is None or srch["size"] < best["size"]): best = srch
+    # every attack is re-checked on seeds the search never used: an attack that only works on its own seeds is
+    # marginal, not a result.
+    if best:
+        fresh = [b.measure(goal in ("block", "corrupt"), seed=s, **best["intervention"])[0] for s in FRESH_SEEDS]
+        holds = all(r <= b.off_thr for r in fresh) if goal == "block" else all(r >= b.on_thr for r in fresh)
+        best["fresh_seeds"] = [round(r, 1) for r in fresh]; best["verified_on_unseen_seeds"] = bool(holds)
+        print(f"  verify on unseen seeds {FRESH_SEEDS}: {[round(r) for r in fresh]} Hz -> "
+              + ("holds" if holds else "DOES NOT HOLD (marginal attack, reported as such)"))
     g = {"attacks": results, "best": best, "greedy_best_size": min((r["size"] for k, r in results.items() if r and k != "search"), default=None)}
 
     if goal in ("block", "corrupt") and best:
@@ -52,12 +61,32 @@ for goal in goals:
         sets = redundancy(b, log, goal=goal)
         g["disjoint_attacks"] = [s["size"] for s in sets]
         print(f"  -> {len(sets)} disjoint attacks of sizes {g['disjoint_attacks']}")
+    if goal == "corrupt" and best:
+        ctrl_name = (b.cfg.get("control") if hasattr(b, "cfg") else None) or BEHAVIOURS[args.sex][b.name].get("control")
+        ctrl = Behaviour(brain, ctrl_name) if ctrl_name else None
+        print("\n== BLUE TEAM: restore the refusal after the CORRUPT attack " + f"({best['strategy']}, size {best['size']}) ==")
+        if ctrl: print(f"  the repair must also keep '{ctrl_name}' working (>= {ctrl.on_thr:.0f} Hz): no fixing this by breaking feeding")
+        rep = Defender(b, best, log).restore_off(control=ctrl)
+        g["repair"] = rep
+        if rep and rep.get("partial"): print(f"  -> BLUE TEAM LOST: {rep.get('why', '')}")
+        else: print("  -> " + (f"REPAIR: {rep['move']} on {rep['size']} neurons; refused stimulus back to {rep['on_hz']:.1f} Hz"
+                         + (f", '{ctrl_name}' still {rep['control_hz']:.1f} Hz" if ctrl else "") + f"  ({rep['simulations']} sims)"
+                         if rep else "no repair found within budget"))
     if goal == "block" and best:
         print(f"\n== BLUE TEAM: repair after the best BLOCK attack ({best['strategy']}, size {best['size']}) ==")
-        rep = Defender(b, best, log).greedy()
+        # restore(): back to >= 80 % of healthy on every seed. greedy() (fewest neurons that clear the bar) is recorded
+        # alongside for comparison.
+        rep = Defender(b, best, log).restore(target=0.8)
+        old = Defender(b, best, log).greedy()
+        g["repair_greedy"] = old
+        # no fallback to greedy: restore() itself returns its strongest working repair when 80 % is out of reach
         g["repair"] = rep
-        print("  -> " + (f"REPAIR: {rep['move']} on {rep['size']} neurons; {rep['on_hz']:.1f} Hz with sugar, {rep['off_hz']:.1f} Hz without  ({rep['simulations']} sims)"
-                         if rep else "no repair found within budget (atlas entry: hard to repair)"))
+        if rep and not rep.get("partial"):
+            rec = f", worst run {rep['recovery'] * 100:.0f}% of healthy" if "recovery" in rep else ""
+            print(f"  -> REPAIR: {rep['move']} on {rep['size']} neurons; {rep['on_hz']:.1f} Hz with the stimulus, "
+                  f"{rep['off_hz']:.1f} Hz without{rec}  ({rep['simulations']} sims)")
+            if old: print(f"     (old greedy defender: {old['size']} neurons, {old['on_hz']:.1f} Hz)")
+        else: print("  -> no repair found within budget (atlas entry: hard to repair)")
     entry["goals"][goal] = g
 
 entry["total_seconds"] = round(time.time() - t0)
@@ -75,6 +104,13 @@ for goal, g in entry["goals"].items():
     bst = g["best"]
     line = f"  {goal:5s}: " + (f"smallest attack = {bst['size']} neurons via {bst['strategy']}" if bst else "no attack found")
     if "disjoint_attacks" in g: line += f" | disjoint attacks: {g['disjoint_attacks']}"
-    if g.get("repair"): line += f" | repair = {g['repair']['size']} neurons ({g['repair']['on_hz']/entry['healthy_on_hz']*100:.0f} % recovery)"
+    if g.get("repair") and g["repair"].get("partial"):
+        line += " | repair: BLUE TEAM LOST"
+    elif g.get("repair"):
+        rp = g["repair"]; line += f" | repair = {rp['size']} neurons"
+        if entry["healthy_on_hz"] > 0:                       # a behaviour that should be ON: how much came back
+            line += f" ({rp['on_hz']/entry['healthy_on_hz']*100:.0f} % recovery)"
+        else:                                                # a behaviour that should be OFF (refuse_bitter): how quiet it is again
+            line += f" (refused stimulus back to {rp['on_hz']:.1f} Hz" + (f", control {rp['control_hz']:.0f} Hz)" if rp.get("control_hz") is not None else ")")
     print(line)
 print(f"  saved {out_dir}/{b.name}{tag}.json")

@@ -28,6 +28,7 @@ FEMALE = {   # FlyWire IDs (18-digit root ids)
         "on_threshold": 40.0, "off_threshold": 10.0,    # calibrate.py: sugar+bitter 0.0 Hz on 3 seeds vs sugar alone 107 Hz
         "description": "sugar mixed with bitter should NOT make MN9 fire (bitter gates feeding); goal 'corrupt' = make it fire",
         "source": "bitter subtypes LB1a-d, sugar LB3 per the taste connectome papers (Cell 2026 / bioRxiv 2025.08.25)",
+        "control": "eat",       # after a corrupt attack the defender must restore refusal WITHOUT losing plain feeding
         "batch": False,
     },
     "escape": {
@@ -158,7 +159,7 @@ DEFENCE_RULES = {
         "bias":       {"max_mv": 6.0, "max_neurons": 12},     # hold neurons closer to threshold (below it)
         "potentiate": {"max_factor": 3.0, "max_synapses": 12},  # strengthen surviving synapses onto the readout
         "silence":    {"max": 3},                               # lesion inhibitory neurons that suppress the readout (never attacked ones)
-        "depress":    {"min_factor": 0.33, "max_synapses": 12}, # weaken inhibitory synapses onto the readout (plasticity, mirror of potentiate)
+        "depress":    {"min_factor": 0.33, "deep_factor": 0.1, "max_synapses": 12}, # weaken a synapse onto the readout (plasticity, mirror of potentiate); deep_factor = near-silent, used only to stop the readout listening to a hijacked wire
     },
     "budget": 40,
     "robust_budget": 90,                         # Defender.robust() also probes each candidate with a small attacker

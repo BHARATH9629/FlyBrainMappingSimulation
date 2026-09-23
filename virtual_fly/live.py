@@ -17,8 +17,10 @@ Usage: python live.py [--sex female|male] [--camera head|side]
 import argparse, os, sys, threading, queue, time, json, hashlib, pickle
 import numpy as np, pygame
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, "..", "neuroredteam"))
+CODE_VERSION = hashlib.md5(b"".join(open(os.path.join(HERE, "..", "neuroredteam", f), "rb").read()
+                                    for f in ("agents.py", "behaviours.py", "brain.py"))).hexdigest()[:8]
 from brain import Brain
-from behaviours import Behaviour
+from behaviours import Behaviour, BEHAVIOURS
 from agents import Attacker, Defender, Log, merge_iv, size_of
 from body import FlyBody
 from brainview import BrainView
@@ -30,7 +32,8 @@ ap.add_argument("--record", default="", help="save the session to this mp4")
 ap.add_argument("--robust", action="store_true", help="blue team uses the slow robust defender (default: greedy, fast)")
 ap.add_argument("--no_cache", action="store_true", help="always recompute attacks / repairs")
 ap.add_argument("--max_seconds", type=float, default=0, help="quit after this many seconds (safety for scripted runs)")
-ap.add_argument("--mode", default="full", choices=["full", "phase2"], help="phase2 = behaviours only (no red / blue team keys or panels)")
+ap.add_argument("--mode", default="full", choices=["full", "phase2", "phase3"],
+                help="phase2 = behaviours only (every red/blue key refused); phase3 = the attack/repair demo; full = both")
 args = ap.parse_args()
 
 PW, PH, BAR, TOP = 640, 480, 240, 44            # panel size, bottom panel, title bar
@@ -43,7 +46,7 @@ class BrainWorker(threading.Thread):
     """Runs connectome jobs off the UI thread. Jobs: ('measure', name, with_stim), ('attack', name), ('repair', name)."""
     def __init__(self, sex):
         super().__init__(daemon=True); self.sex = sex; self.q = queue.Queue(); self.out = queue.Queue(); self.busy = ""
-        self.brain = None; self.iv = {}; self.attack = None; self.repair = None; self.start()
+        self.brain = None; self.iv = {}; self.attack = None; self.repair = None; self.attack_name = None; self.attack_goal = None; self.start()
 
     def run(self):
         self.busy = f"loading the {self.sex} brain"
@@ -60,6 +63,8 @@ class BrainWorker(threading.Thread):
 
     def _cache_key(self, kind, name, goal):
         h = hashlib.md5(json.dumps(sorted((k, sorted(str(x) for x in (v if isinstance(v, list) else v.items()))) for k, v in self.iv.items())).encode()).hexdigest()[:10]
+        # the agents' own code is part of the key: a cached result is never replayed after the agents' code changes
+        h += "_" + CODE_VERSION
         return os.path.join(HERE, "cache", f"{self.sex}_{kind}_{name}_{goal}_{'robust' if args.robust else 'greedy'}_{h}.pkl")
 
     def _do(self, job):
@@ -88,21 +93,31 @@ class BrainWorker(threading.Thread):
                                      Attacker(b, log, goal, fixed=self.iv).weaken_only()) if a]
                 best = min(found, key=lambda a: (a["size"], a["simulations"])) if found else None
                 rows = log.rows; os.makedirs(os.path.dirname(ck), exist_ok=True); pickle.dump((best, rows), open(ck, "wb"))
-            if best: self.iv = merge_iv(self.iv, best["intervention"]); self.attack = best
+            if best:
+                self.iv = merge_iv(self.iv, best["intervention"]); self.attack = best; self.attack_name = name; self.attack_goal = goal
+                self.repair = None                          # a new attack re-opens the brain for repair
             self.out.put(("attacked", dict(best=best, log=rows, goal=goal)))
         elif kind == "repair":
-            _, name = job; b = self.bhv[name]; self.busy = f"BLUE TEAM repairing {name}"
-            ck = self._cache_key("repair", name, "block")
+            _, name, goal = (job + ("block",))[:3]; b = self.bhv[name]; self.busy = f"BLUE TEAM repairing {name}"
+            ck = self._cache_key("repair", name, goal)          # the goal MUST be in the key: a corrupt repair and a
             if not args.no_cache and os.path.exists(ck):
                 rep, rows = pickle.load(open(ck, "rb")); time.sleep(1.0)
             else:
                 log = Log(quiet=True); D = Defender(b, {"intervention": self.iv}, log)
-                rep = D.robust() if args.robust else D.greedy()
+                if goal == "corrupt":
+                    # restoring a REFUSAL means pushing the readout DOWN, which restore_off() does (greedy() pushes it UP)
+                    ctrl = BEHAVIOURS[self.sex][name].get("control")
+                    rep = D.restore_off(control=self.bhv[ctrl] if ctrl in self.bhv else None)
+                elif args.robust: rep = D.robust()
+                else:
+                    # restore(): bring the behaviour back to >= 80 % of healthy on every seed
+                    rep = D.restore(target=0.8)       # below 80 %: restore() returns its strongest working repair itself
                 rows = log.rows; os.makedirs(os.path.dirname(ck), exist_ok=True); pickle.dump((rep, rows), open(ck, "wb"))
-            if rep: self.iv = merge_iv(self.iv, rep["intervention"]); self.repair = rep
+            # a PARTIAL result is the blue team losing: never apply it to the brain and never call it a repair
+            if rep and not rep.get("partial"): self.iv = merge_iv(self.iv, rep["intervention"]); self.repair = rep
             self.out.put(("repaired", dict(rep=rep, log=rows)))
         elif kind == "reset":
-            self.iv = {}; self.attack = None; self.repair = None; self.out.put(("reset", None))
+            self.iv = {}; self.attack = None; self.repair = None; self.attack_name = None; self.attack_goal = None; self.out.put(("reset", None))
 
 
 def neurons_of(iv):
@@ -111,7 +126,7 @@ def neurons_of(iv):
                   | {a for (a, b) in iv.get("potentiate", {})})
 
 
-pygame.init(); screen = pygame.display.set_mode((2 * PW, TOP + PH + BAR)); pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else "NeuroRedTeam LIVE")
+pygame.init(); screen = pygame.display.set_mode((2 * PW, TOP + PH + BAR)); pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else ("NeuroRedTeam -- PHASE 3: red team vs blue team" if args.mode == "phase3" else "NeuroRedTeam LIVE"))
 font = pygame.font.SysFont("segoeui", 17); mono = pygame.font.SysFont("consolas", 15); big = pygame.font.SysFont("segoeui", 36, bold=True)
 title_font = pygame.font.SysFont("segoeui", 22, bold=True); small = pygame.font.SysFont("segoeui", 14)
 
@@ -139,6 +154,11 @@ clock = pygame.time.Clock()
 worker = BrainWorker(args.sex)
 body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False)   # drops parked off-screen
 geoms = {"sugar": body.sim.mj_model.geom("sugar"), "bitter": body.sim.mj_model.geom("bitter"), "water": body.sim.mj_model.geom("water")}
+
+# which behaviour the red/blue team acts on, given what the fly is doing right now: every stimulus maps to its own
+# behaviour.
+TARGET = {"sugar": "eat", "water": "drink", "bitter": "refuse_bitter", "looming": "escape",
+          "approach": "retreat", "threat": "turn", "hijack": "eat"}
 
 LABELS = {"eat": ("sugar taste neurons", "MN9 (feeding muscle)"), "drink": ("water taste neurons", "MN9 (feeding muscle)"),
           "refuse_bitter": ("sugar + bitter taste neurons", "MN9 (feeding muscle)"), "escape": ("looming detectors LC4/LPLC2", "giant fiber DNp01 (escape)"),
@@ -238,17 +258,29 @@ while running:
             elif k in (pygame.K_1, pygame.K_2):
                 side = "L" if k == pygame.K_1 else "R"; state.update(phase="think", kind="threat", walking=False)
                 state["msg"] = f"threat on the {'LEFT' if side == 'L' else 'RIGHT'} eye: brain: which steering neuron fires?"; worker.q.put(("threat", side))
+            # ---- PHASE 3 KEYS ONLY BELOW THIS LINE -------------------------------------------------------------
+            # Phase 2 is the behaviour demo and must never attack or repair anything: every red/blue key is swallowed
+            # here, BEFORE any of them is handled.
+            elif args.mode == "phase2" and k in (pygame.K_a, pygame.K_f, pygame.K_h, pygame.K_d, pygame.K_r):
+                state["msg"] = "attack / repair belong to Phase 3 -- run:  python virtual_fly/phase3.py"
             elif k == pygame.K_h: state.update(phase="think", kind="hijack", walking=False); state["msg"] = "HIJACK: no sugar at all; does the attacked/forced brain eat?"; worker.q.put(("measure", "eat", False))
-            elif args.mode == "phase2" and k in (pygame.K_a, pygame.K_f, pygame.K_h, pygame.K_d, pygame.K_r): pass
             elif k == pygame.K_a:
-                name = "refuse_bitter" if state["kind"] == "bitter" else ("escape" if state["kind"] == "looming" else "eat")
-                goal = "corrupt" if name == "refuse_bitter" else "block"
+                name = TARGET.get(state["kind"], "eat")            # whatever the fly is doing right now
+                goal = "corrupt" if BEHAVIOURS[worker.sex][name].get("expected") == "off" else "block"
                 state["msg"] = f"RED TEAM: attacking {name} ..."; worker.q.put(("attack", name, goal))
             elif k == pygame.K_f:
                 state["msg"] = "RED TEAM: hijack -- make the fly eat with NO sugar (goal force) ..."; state["kind"] = "sugar"; worker.q.put(("attack", "eat", "force"))
+            elif k == pygame.K_d and worker.attack is not None and worker.repair is not None:
+                state["msg"] = "BLUE TEAM: already repaired. Test it (S/B/V/L/DOWN/2), attack again (A), or reset (R)."
+            elif k == pygame.K_d and worker.attack is None:
+                # nothing is broken: there is nothing for the defender to repair
+                state["msg"] = "BLUE TEAM: nothing to repair -- the brain is healthy. Attack it first (A or F)."
             elif k == pygame.K_d:
-                name = "escape" if state["kind"] == "looming" else "eat"
-                state["msg"] = f"BLUE TEAM: repairing {name} ..."; worker.q.put(("repair", name))
+                name = worker.attack_name or TARGET.get(state["kind"], "eat")   # repair what was actually attacked
+                # ...and against the goal it was actually attacked with: after F (force) the damage is "fires with NO
+                # stimulus", which is a different repair from "silent WITH the stimulus" (block)
+                goal = worker.attack_goal or ("corrupt" if BEHAVIOURS[worker.sex][name].get("expected") == "off" else "block")
+                state["msg"] = f"BLUE TEAM: repairing {name} ..."; worker.q.put(("repair", name, goal))
             elif k == pygame.K_r: worker.q.put(("reset",)); state["msg"] = "brain reset: no attacks, no repairs"
             elif k == pygame.K_m:
                 worker = BrainWorker("male" if worker.sex == "female" else "female"); state["msg"] = f"loading the {worker.sex} brain ..."
@@ -286,8 +318,15 @@ while running:
                     ok = d["hz"] >= d["on_thr"]
                     if st["kind"] == "sugar": st["verdict"] = "EATS" if ok else "NO FEEDING"; st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
                     elif st["kind"] == "water": st["verdict"] = "DRINKS" if ok else "NO DRINKING"; st["verdict_col"] = (120, 200, 255) if ok else (240, 110, 110)
-                    else: st["verdict"] = "EATS BITTER!" if ok else "REFUSES BITTER"; st["verdict_col"] = (240, 110, 110) if ok else (120, 230, 120)
+                    else:
+                        # refusal is judged against the OFF bar, not the ON bar: between the two the brain is neither
+                        # eating nor cleanly refusing, so it is shown as partly corrupted.
+                        off_bar = worker.bhv["refuse_bitter"].off_thr
+                        if ok: st["verdict"] = "EATS BITTER!"; st["verdict_col"] = (240, 110, 110)
+                        elif d["hz"] <= off_bar: st["verdict"] = "REFUSES BITTER"; st["verdict_col"] = (120, 230, 120)
+                        else: st["verdict"] = "PARTLY CORRUPTED"; st["verdict_col"] = (240, 200, 90)
                     st["phase"] = "eating" if ok else "refuse"; st["t_phase"] = 0.0
+                    if st["kind"] == "bitter" and st["verdict"] == "PARTLY CORRUPTED": st["phase"] = "refuse"
                     st["msg"] = f"MN9 {d['hz']:.0f} Hz with {st['kind']} (bar {d['on_thr']:.0f}) -> {st['verdict']}"
                     st["meter"] = (f"MN9 with {st['kind']}", d["hz"], d["on_thr"], ok if st["kind"] != "bitter" else not ok)
                 elif not d["with_stim"]:
@@ -295,13 +334,18 @@ while running:
             elif kind == "threat":
                 d = data; st = state; st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=3.0, fresh=True)
                 diff = d["dna_L"] - d["dna_R"]                          # steering neurons fire asymmetrically -> a turn
-                if abs(diff) >= d["on_thr"]:                             # direction: away from the threatened eye
-                    away = -1.0 if d["side"] == "L" else 1.0             # +1 = turn left
-                    st["verdict"] = "TURNS RIGHT" if away < 0 else "TURNS LEFT"; st["verdict_col"] = (120, 230, 120)
-                    st["phase"] = "turn"; st["t_phase"] = 0.0; st["turn_dir"] = away
+                if abs(diff) >= d["on_thr"]:
+                    # the BRAIN decides the direction: DNa02 drives ipsilateral turning, so whichever side fires harder
+                    # is the way the fly turns, including INTO the threat if the brain has been corrupted.
+                    turn = 1.0 if diff > 0 else -1.0                     # +1 = turn left
+                    away = 1.0 if d["side"] == "R" else -1.0             # the direction that escapes this threat
+                    ok = turn == away
+                    st["verdict"] = ("TURNS LEFT" if turn > 0 else "TURNS RIGHT") + ("" if ok else " -- INTO THE THREAT")
+                    st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
+                    st["phase"] = "turn"; st["t_phase"] = 0.0; st["turn_dir"] = turn
                 else: st["verdict"] = "NO TURN"; st["verdict_col"] = (240, 110, 110); st["phase"] = "idle"
                 st["loglines"].append(f"brain run: threat on {d['side']} eye -> DNa02 left {d['dna_L']:.0f} Hz, right {d['dna_R']:.0f} Hz")
-                st["msg"] = f"steering neurons: DNa02 L {d['dna_L']:.0f} Hz, R {d['dna_R']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}" + (" (away from the threat)" if st["phase"] == "turn" else "")
+                st["msg"] = f"steering neurons: DNa02 L {d['dna_L']:.0f} Hz, R {d['dna_R']:.0f} Hz (bar {d['on_thr']:.0f}) -> {st['verdict']}"
                 st["meter"] = ("DNa02 left minus right", abs(diff), d["on_thr"], abs(diff) >= d["on_thr"])
             elif kind == "attacked":
                 b_ = data["best"]
@@ -311,8 +355,15 @@ while running:
             elif kind == "repaired":
                 r_ = data["rep"]
                 for row in data["log"][-6:]: state["loglines"].append(f"  [blue {row['step']:2d}] {'GOAL ' if row['goal_met'] else '     '}{row['hypothesis'][:48]:48s} -> {row['result']}")
-                state["msg"] = (f"BLUE TEAM: repaired with {r_['size']} neurons ({r_['move']}), {r_['on_hz']:.0f} Hz{' [fragile]' if r_.get('fragile') else ''}. Press S to test."
-                                if r_ else "BLUE TEAM: no repair found within budget")
+                test_key = {"eat": "S", "drink": "V", "refuse_bitter": "B", "escape": "L", "retreat": "DOWN", "turn": "2"}.get(worker.attack_name, "S")
+                if not r_:
+                    state["msg"] = "BLUE TEAM: no repair found within budget"
+                elif r_.get("partial"):
+                    state["msg"] = "BLUE TEAM LOST: " + r_.get("why", "no repair restores this behaviour")
+                else:
+                    rec = f", {r_['recovery'] * 100:.0f}% of healthy on every run" if "recovery" in r_ else ""
+                    state["msg"] = (f"BLUE TEAM: repaired with {r_['size']} neurons ({r_['move']}){rec}"
+                                    f"{' [fragile]' if r_.get('fragile') else ''}. Press {test_key} to test.")
             elif kind == "reset": state["msg"] = "brain reset"
             elif kind == "error": state["msg"] = "error: " + data
             state["loglines"] = state["loglines"][-7:]
@@ -405,7 +456,8 @@ while running:
     # ---- draw
     screen.fill(BG)
     # title bar
-    title = "The fly and its brain" if args.mode == "phase2" else "NeuroRedTeam LIVE"
+    title = ("The fly and its brain" if args.mode == "phase2"
+             else "NeuroRedTeam -- PHASE 3: red team vs blue team" if args.mode == "phase3" else "NeuroRedTeam LIVE")
     screen.blit(title_font.render(title, True, INK), (16, 9))
     sub = f"{worker.sex} fly  -  {worker.brain.N:,} neurons" if worker.brain is not None else "loading the brain ..."
     screen.blit(font.render(sub, True, DIM), (16 + title_font.size(title)[0] + 18, 13))

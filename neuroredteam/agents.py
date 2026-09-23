@@ -14,7 +14,11 @@ Defence moves (DEFENCE_RULES): bias, potentiate.  A repair must pass the two-con
 import numpy as np, time
 from behaviours import RULES, DEFENCE_RULES
 
-CHECK_SEEDS = (1, 2, 3)          # every goal is verified on these seeds
+CHECK_SEEDS = (1, 2, 3)          # cheap screening: every candidate is tried on these seeds
+ROBUST_SEEDS = (1, 2, 3, 4, 5, 6, 7, 8)
+# ROBUST_SEEDS: a result is only ACCEPTED -- and a neuron only dropped during minimisation -- if the goal holds on all of
+# these, so that minimisation cannot stop at the edge of the threshold for a small set of seeds. Seeds 11 and up stay
+# held out entirely (run_redteam.py, verify_phase3.py) as the independent check.
 
 
 class Log:
@@ -53,13 +57,28 @@ def size_of(iv):
     return len(s)
 
 
+def readout_col(b):
+    """Signed synapse counts from every neuron onto the WHOLE readout set. Behaviours with several readout neurons
+    (retreat: all four MDNs) are judged on the mean over the set, so candidates are ranked against the set too."""
+    return np.asarray(b.brain.W[:, b.readouts].sum(axis=1)).ravel()
+
+
+def onto_readouts(b, S, f):
+    """{(pre, readout): f} for every readout neuron each neuron in S actually synapses onto (potentiate / depress
+    moves), so a repair acts on the whole readout set."""
+    W = b.brain.W; out = {}
+    for i in S:
+        for r in ([r for r in b.readouts if W[i, r] != 0] or [b.readout]): out[(int(i), int(r))] = f
+    return out
+
+
 # ====================================================================== ATTACKER
 class Attacker:
     def __init__(self, behaviour, log, goal="block", budget=RULES["budget"], seeds=CHECK_SEEDS, excluded=(), fixed=None):
         self.b, self.log, self.goal, self.budget, self.seeds = behaviour, log, goal, budget, seeds
         self.used = 0; self.excluded = set(excluded)      # neurons a previous attack used (for redundancy search)
         self.fixed = fixed or {}                          # interventions already on the brain (earlier attacks + repairs)
-        self.excluded |= set(self.fixed.get("lesion", [])) | set(self.fixed.get("inject", {}))   # do not re-use them
+        self.excluded |= {int(i) for i in set(self.fixed.get("lesion", [])) | set(self.fixed.get("inject", {}))}   # do not re-use them
 
     # ---- the referee -------------------------------------------------------
     def _check(self, iv):
@@ -75,8 +94,18 @@ class Attacker:
 
     def _try(self, name, hypothesis, iv):
         ok, hz = self._check(iv)
+        if ok: ok = self._confirm(iv)                     # screened on 3 seeds, accepted only if it holds on 8
         self.log.add(name, self.used, hypothesis, _fmt(iv), f"readout {hz:.1f} Hz", ok)
         return ok, hz
+
+    def _confirm(self, iv):
+        """The goal holds on every ROBUST_SEED (the screening seeds are already known to pass)."""
+        extra = [s for s in ROBUST_SEEDS if s not in self.seeds]
+        if not extra: return True
+        self.used += 1
+        with_stim = self.goal in ("block", "corrupt")
+        rates = [self.b.measure(with_stim, seed=s, **merge_iv(self.fixed, iv))[0] for s in extra]
+        return all(r <= self.b.off_thr for r in rates) if self.goal == "block" else all(r >= self.b.on_thr for r in rates)
 
     # ---- candidate generators ---------------------------------------------
     def drivers(self):
@@ -84,7 +113,7 @@ class Attacker:
         If every direct driver is excluded (threat model T2), fall back one hop upstream: active neurons that excite
         the direct drivers, ranked by rate x (synapses onto drivers, weighted by the drivers' synapses onto the readout)."""
         _, r = self.b.measure(True, **self.fixed)
-        W = self.b.brain.W; col = W[:, self.b.readout].toarray().ravel()
+        W = self.b.brain.W; col = readout_col(self.b)
         score = {i: hz * col[i] for i, hz in r["active"].items()
                  if col[i] > 0 and i not in self.b.protected and i not in self.excluded}
         if not score and self.excluded:
@@ -103,7 +132,7 @@ class Attacker:
         first: the candidates for a corrupt attack (cut the brake so a refused stimulus drives the behaviour)."""
         _, r = self.b.measure(True, **self.fixed)
         W = self.b.brain.W; ro = self.b.readout
-        col = W[:, ro].toarray().ravel()
+        col = readout_col(self.b)
         exc = np.flatnonzero(col > 0)                              # direct excitatory inputs to the readout
         score = {}
         for i, hz in r["active"].items():
@@ -117,7 +146,7 @@ class Attacker:
     def inhibitors(self):
         """Neurons with inhibitory synapses onto the readout, strongest first (they are usually silent: inject wakes them).
         If all are excluded (T2), fall back to the strongest excitatory inputs OF those inhibitors (drive them indirectly)."""
-        W = self.b.brain.W; col = W[:, self.b.readout].toarray().ravel()
+        W = self.b.brain.W; col = readout_col(self.b)
         out = [int(i) for i in np.argsort(col) if col[i] < 0 and i not in self.b.protected and i not in self.excluded][:20]
         if not out and self.excluded:
             inh = [int(i) for i in np.argsort(col) if col[i] < 0][:20]
@@ -127,7 +156,7 @@ class Attacker:
         return out
 
     def excitatory_inputs(self):
-        col = self.b.brain.W[:, self.b.readout].toarray().ravel()
+        col = readout_col(self.b)
         return [int(i) for i in np.argsort(-col) if col[i] > 0 and i not in self.b.protected and i not in self.excluded][:20]
 
     # ---- shrink a successful set --------------------------------------------
@@ -171,7 +200,8 @@ class Attacker:
         """block WITHOUT cutting anything: wake up the readout's own inhibitory inputs."""
         if self.goal != "block": return None
         cands = self.inhibitors(); hz = RULES["moves"]["inject"]["max_hz"]
-        for k in (1, 2, 3, 5, 8, 12):
+        cap = RULES["moves"]["inject"]["max_neurons"]         # the ladder follows the limit in RULES
+        for k in [k for k in (1, 2, 3, 5, 8, 12, 16, 20) if k <= cap]:
             if self.used >= self.budget or k > len(cands): return None
             iv = {"inject": {i: hz for i in cands[:k]}}
             ok, _ = self._try(name, f"drive the {k} strongest inhibitors of the readout (no cuts)", iv)
@@ -296,12 +326,21 @@ class Defender:
         self.fixed = attack["intervention"]                   # the attack, which cannot be undone
 
     def _test(self, iv):
-        """Two-condition test on every seed: on with stimulus, off without."""
+        """Two-condition test: on with stimulus, off without. Screened on the check seeds; ACCEPTED only if it also
+        holds on every ROBUST_SEED, so minimisation cannot strip a repair to the edge of the ON bar."""
         self.used += 1
-        ons, offs = [], []
-        for s in self.seeds:
-            ok, on, off = self.b.is_normal(seed=s, **merge_iv(self.fixed, iv)); ons.append(on); offs.append(off)
+        def run(seeds):
+            ons, offs = [], []
+            for s in seeds:
+                _, on, off = self.b.is_normal(seed=s, **merge_iv(self.fixed, iv)); ons.append(on); offs.append(off)
+            return ons, offs
+        ons, offs = run(self.seeds)
         ok = all(o >= self.b.on_thr for o in ons) and all(o <= self.b.off_thr for o in offs)
+        if ok:
+            extra = [s for s in ROBUST_SEEDS if s not in self.seeds]
+            if extra:
+                self.used += 1; e_on, e_off = run(extra)
+                ok = all(o >= self.b.on_thr for o in e_on) and all(o <= self.b.off_thr for o in e_off)
         return ok, float(np.mean(ons)), float(np.mean(offs))
 
     def _try(self, name, hypothesis, iv):
@@ -312,22 +351,23 @@ class Defender:
     def survivors(self):
         """Neurons still firing after the attack that excite the readout, ranked by rate x synapses."""
         _, r = self.b.measure(True, **self.fixed)
-        col = self.b.brain.W[:, self.b.readout].toarray().ravel()
-        dead = set(self.fixed.get("lesion", []))
+        col = readout_col(self.b)
+        dead = {int(i) for i in self.fixed.get("lesion", [])}
         score = {i: hz * col[i] for i, hz in r["active"].items() if col[i] > 0 and i not in dead and i not in self.b.protected}
         return [i for i, _ in sorted(score.items(), key=lambda kv: -kv[1])]
 
     def attacked(self):
         """Neurons the attacker touched: the defender may never modify these (the attack cannot be undone)."""
         f = self.fixed
-        return set(f.get("lesion", [])) | set(f.get("inject", {})) | set(f.get("weaken", {}))
+        # int(): an attack read back from an atlas JSON has string keys ('80293'); normalise so membership tests work
+        return {int(i) for i in set(f.get("lesion", [])) | set(f.get("inject", {})) | set(f.get("weaken", {}))}
 
     def suppressors(self):
         """Inhibitory neurons that fire WITH the stimulus and inhibit the readout (directly or via its drivers),
         not touched by the attacker: candidates for the defender's 'silence' move."""
         _, r = self.b.measure(True, **self.fixed)
         W = self.b.brain.W; ro = self.b.readout
-        col = W[:, ro].toarray().ravel(); exc = np.flatnonzero(col > 0)
+        col = readout_col(self.b); exc = np.flatnonzero(col > 0)
         no = self.attacked() | self.b.protected
         score = {}
         for i, hz in r["active"].items():
@@ -342,7 +382,7 @@ class Defender:
         """Inhibitory synapses onto the readout that are ACTIVE with the stimulus (incl. attacker-injected ones), ranked
         by rate x synapses: candidates for the 'depress' move."""
         _, r = self.b.measure(True, **self.fixed)
-        col = self.b.brain.W[:, self.b.readout].toarray().ravel()
+        col = readout_col(self.b)
         score = {int(i): hz * -col[i] for i, hz in r["active"].items() if col[i] < 0}
         return [i for i, _ in sorted(score.items(), key=lambda kv: -kv[1])]
 
@@ -361,15 +401,23 @@ class Defender:
         surv = self.survivors()
         mv = DEFENCE_RULES["moves"]["bias"]["max_mv"]; maxn = DEFENCE_RULES["moves"]["bias"]["max_neurons"]
         maxf = DEFENCE_RULES["moves"]["potentiate"]["max_factor"]; ro = self.b.readout
-        plans = (("bias only", lambda S: {"bias": {i: mv for i in S}}),
-                 ("potentiate only", lambda S: {"potentiate": {(i, ro): maxf for i in S}}),
-                 ("bias + potentiate", lambda S: {"bias": {i: mv for i in S}, "potentiate": {(i, ro): min(maxf, 2.0) for i in S}}))
+        plans = [("bias only", surv, lambda S: {"bias": {i: mv for i in S}}),
+                 ("potentiate only", surv, lambda S: {"potentiate": onto_readouts(self.b, S, maxf)}),
+                 ("bias + potentiate", surv, lambda S: {"bias": {i: mv for i in S}, "potentiate": onto_readouts(self.b, S, min(maxf, 2.0))})]
+        # against an INJECT attack the readout can simply stop listening to the hijacked wire: postsynaptic depression
+        # on the attacker's own synapses onto the readout. It does not undo the attack -- the neuron still fires at
+        # 150 Hz -- and it is the only move that beats a neuron wired straight into the readout.
+        W = self.b.brain.W; DEEP = DEFENCE_RULES["moves"]["depress"].get("deep_factor", 0.1)
+        hij = [i for i in (int(x) for x in self.attacked()) if any(W[i, r] != 0 for r in self.b.readouts)]
+        if hij:
+            plans.append(("stop listening to the hijacked wire", hij,
+                          lambda S: {"potentiate": {(i, r): DEEP for i in S for r in self.b.readouts if W[i, r] != 0}}))
         best = None
-        for label, make in plans:                                  # every plan is tried; the smallest repair wins
-            for k in (2, 4, 6, 8, maxn):
-                if self.used >= self.budget or k > len(surv): break
+        for label, cands, make in plans:                           # every plan is tried; the smallest repair wins
+            for k in (1, 2, 4, 6, 8, maxn):
+                if self.used >= self.budget or k > len(cands): break
                 if best and k >= best["size"]: break               # cannot beat the current best
-                S = surv[:k]; ok, on, off = self._try(name, f"{label} on the {k} strongest surviving drivers", make(S))
+                S = cands[:k]; ok, on, off = self._try(name, f"{label}: {k} neurons", make(S))
                 if ok:
                     for i in list(S):                              # minimise
                         if self.used >= self.budget: break
@@ -400,17 +448,17 @@ class Defender:
         n_sil = DEFENCE_RULES["moves"].get("silence", {}).get("max", 3)
         dep = DEFENCE_RULES["moves"].get("depress", {}).get("min_factor", 0.33); inh = self.inhibitory_inputs()
         ro_mv = DEFENCE_RULES.get("readout_bias_mv", 0.0)
-        plans = ([("bias the readout itself", lambda S: {"bias": {ro: ro_mv}}, [ro], (1,)),
-                  ("readout bias + depress", lambda S: {"bias": {ro: ro_mv}, "potentiate": {(i, ro): dep for i in S if i != ro}}, [ro] + inh, (2, 3, 5))]
+        plans = ([("bias the readout itself", lambda S: {"bias": {r: ro_mv for r in self.b.readouts}}, [ro], (1,)),
+                  ("readout bias + depress", lambda S: {"bias": {r: ro_mv for r in self.b.readouts}, "potentiate": onto_readouts(self.b, [i for i in S if i != ro], dep)}, [ro] + inh, (2, 3, 5))]
                  if ro_mv > 0 else []) + \
-                [("depress inhibitory synapses onto readout", lambda S: {"potentiate": {(i, ro): dep for i in S}}, inh, (1, 2, 3, 4, 6, 8, 12)),
-                 ("depress + bias", lambda S: {"potentiate": {(i, ro): dep for i in S[:2]}, "bias": {i: mv for i in S[2:]}}, inh[:2] + surv, (3, 4, 6, 8)),
+                [("depress inhibitory synapses onto readout", lambda S: {"potentiate": onto_readouts(self.b, S, dep)}, inh, (1, 2, 3, 4, 6, 8, 12)),
+                 ("depress + bias", lambda S: {"potentiate": onto_readouts(self.b, S[:2], dep), "bias": {i: mv for i in S[2:]}}, inh[:2] + surv, (3, 4, 6, 8)),
                  ("silence suppressors", lambda S: {"lesion": list(S)}, sup, (1, 2, n_sil)),
                  ("bias only", lambda S: {"bias": {i: mv for i in S}}, surv, (2, 4, 6, 8, maxn)),
                  ("spread bias (half strength, more neurons)", lambda S: {"bias": {i: mv / 2 for i in S}}, surv, (4, 6, 8, maxn)),
-                 ("potentiate only", lambda S: {"potentiate": {(i, ro): maxf for i in S}}, surv, (2, 4, 6, 8, maxn)),
-                 ("spread potentiate (x1.5, more neurons)", lambda S: {"potentiate": {(i, ro): min(maxf, 1.5) for i in S}}, surv, (4, 6, 8, maxn)),
-                 ("bias + potentiate", lambda S: {"bias": {i: mv for i in S}, "potentiate": {(i, ro): min(maxf, 2.0) for i in S}}, surv, (2, 4, 6, 8, maxn)),
+                 ("potentiate only", lambda S: {"potentiate": onto_readouts(self.b, S, maxf)}, surv, (2, 4, 6, 8, maxn)),
+                 ("spread potentiate (x1.5, more neurons)", lambda S: {"potentiate": onto_readouts(self.b, S, min(maxf, 1.5))}, surv, (4, 6, 8, maxn)),
+                 ("bias + potentiate", lambda S: {"bias": {i: mv for i in S}, "potentiate": onto_readouts(self.b, S, min(maxf, 2.0))}, surv, (2, 4, 6, 8, maxn)),
                  ("silence + bias", lambda S: {"lesion": list(S[:1]), "bias": {i: mv for i in S[1:]}}, sup[:1] + surv, (3, 5, 7))]
         cands = []
         def probe_and_record(label, iv, on, off, note=""):
@@ -447,3 +495,192 @@ class Defender:
         pick["alternatives"] = [(c["move"], c["size"], "fragile" if c["fragile"] else "robust") for c in cands]
         pick["minimal_size"] = min(c["size"] for c in cands)     # the cheapest (fragile) repair, for the redundancy cost
         return pick
+
+    # ---- repair after a CORRUPT attack -------------------------------------------------------------------------
+    def suppressors_of(self, stim_on=True):
+        """Inhibitory neurons that are active under the attacked stimulus and inhibit the readout, directly or through
+        its excitatory drivers. Candidates for 'boost the brake'. Never neurons the attacker touched."""
+        _, r = self.b.measure(stim_on, **self.fixed)
+        W = self.b.brain.W; ro = self.b.readout
+        col = readout_col(self.b); exc = np.flatnonzero(col > 0)
+        no = self.attacked() | self.b.protected
+        score = {}
+        for i, hz in r["active"].items():
+            i = int(i)
+            if i in no: continue
+            direct = -col[i] if col[i] < 0 else 0.0
+            row = W[i, exc].toarray().ravel(); indirect = -row[row < 0].sum() if row.size else 0.0
+            v = max(hz, 1.0) * (direct + 0.5 * indirect)          # a silent brake is still worth biasing
+            if v > 0: score[i] = v
+        return [i for i, _ in sorted(score.items(), key=lambda kv: -kv[1])]
+
+    def drivers_now(self):
+        """Excitatory neurons firing under the attacked stimulus that push the readout: candidates for 'weaken'.
+        Never neurons the attacker touched (its work cannot be undone) and never the readout itself."""
+        _, r = self.b.measure(True, **self.fixed)
+        col = readout_col(self.b)
+        no = self.attacked() | self.b.protected
+        score = {int(i): hz * col[int(i)] for i, hz in r["active"].items() if col[int(i)] > 0 and int(i) not in no}
+        return [i for i, _ in sorted(score.items(), key=lambda kv: -kv[1])]
+
+    def _test_off(self, iv, control):
+        """The corrupt-repair test, on every seed:
+             1. the refused stimulus must NOT drive the readout any more (<= off_thr)  -- the repair worked;
+             2. nothing must fire with no stimulus at all (<= off_thr)                 -- no silencing-by-sabotage;
+             3. the control behaviour must still pass (>= its on_thr)                  -- the fly must still eat sugar.
+        Without 3, the defender could 'repair' bitter-refusal by breaking feeding altogether."""
+        self.used += 1
+        full = merge_iv(self.fixed, iv)
+        def run(seeds):
+            bad = [self.b.measure(True, seed=s, **full)[0] for s in seeds]
+            quiet = [self.b.measure(False, seed=s, **full)[0] for s in seeds]
+            ctrl = [control.measure(True, seed=s, **full)[0] for s in seeds] if control else [np.inf]
+            ok = (all(v <= self.b.off_thr for v in bad) and all(v <= self.b.off_thr for v in quiet)
+                  and (control is None or all(v >= control.on_thr for v in ctrl)))
+            return ok, bad, ctrl
+        ok, bad, ctrl = run(self.seeds)
+        if ok:                                            # accepted only if it holds on every ROBUST_SEED
+            extra = [s for s in ROBUST_SEEDS if s not in self.seeds]
+            if extra: self.used += 1; ok = run(extra)[0]
+        return ok, float(np.mean(bad)), float(np.mean(ctrl))
+
+    # ---- repair to a TARGET LEVEL, not just past the bar ------------------------------------------------------------
+    def healthy_rate(self, seeds=None):
+        """Mean readout rate of the unmodified brain with the stimulus (what 100 % recovery means)."""
+        return float(np.mean([self.b.measure(True, seed=s)[0] for s in (seeds or ROBUST_SEEDS)]))
+
+    def _level(self, iv, seeds):
+        """Readout rates with and without the stimulus, on the attacked brain plus `iv`."""
+        full = merge_iv(self.fixed, iv); self.used += 1
+        on = [self.b.measure(True, seed=s, **full)[0] for s in seeds]
+        off = [self.b.measure(False, seed=s, **full)[0] for s in seeds]
+        return on, off
+
+    def restore(self, name="defender-restore", target=0.8, overshoot=1.3, ladder=(1, 2, 3, 4, 6, 8, 12)):
+        """Repair to a LEVEL: the behaviour must come back to at least `target` x healthy on EVERY robust seed, and
+        never above `overshoot` x healthy (a fly that fires harder than normal is not repaired either).
+
+        greedy() finds the fewest neurons that clear the ON bar; restore() targets a recovery LEVEL instead and asks
+        what it costs to bring the behaviour back.
+
+        Moves: bias + potentiate on the strongest surviving drivers, at four strengths, optionally combined with
+        stop-listening on the attacker's hijacked wires. Returns the cheapest repair meeting the target, and in
+        every case the full COST-RECOVERY CURVE: for each repair size, the best worst-seed recovery reached."""
+        H = self.healthy_rate(); lo, hi = target * H, overshoot * H
+        surv = self.survivors(); W = self.b.brain.W
+        mv = DEFENCE_RULES["moves"]["bias"]["max_mv"]; maxf = DEFENCE_RULES["moves"]["potentiate"]["max_factor"]
+        DEEP = DEFENCE_RULES["moves"]["depress"].get("deep_factor", 0.1)
+        hij = [i for i in sorted(self.attacked()) if any(W[i, r] != 0 for r in self.b.readouts)]   # attacker wired into the readout
+        strengths = [(mv * s, 1.0 + (maxf - 1.0) * s) for s in (0.25, 0.5, 0.75, 1.0)]
+
+        def make(S, bmv, pf, listen):
+            iv = {"bias": {i: bmv for i in S}, "potentiate": onto_readouts(self.b, S, pf)}
+            if listen and hij: iv["potentiate"].update(onto_readouts(self.b, hij, DEEP))
+            return iv
+
+        curve, best, fallback = [], None, None      # fallback: the best repair that WORKS (clears the ON bar on every
+        for k in ladder:                             # seed) when none reaches the target level
+            if k > len(surv): break
+            S = surv[:k]; best_k = None
+            for listen in ([False, True] if hij else [False]):
+                for bmv, pf in strengths:
+                    if self.used >= max(self.budget, 120): break
+                    iv = make(S, bmv, pf, listen)
+                    on, off = self._level(iv, ROBUST_SEEDS)
+                    worst, peak = min(on), max(on)
+                    ok = worst >= lo and peak <= hi and all(o <= self.b.off_thr for o in off)
+                    self.log.add(name, self.used, f"{k} drivers, bias {bmv:.1f} mV, x{pf:.1f}" + (" + stop listening" if listen else ""),
+                                 _fmt(iv), f"worst {worst:.0f} / best {peak:.0f} Hz ({worst / H * 100:.0f}-{peak / H * 100:.0f} %)", ok)
+                    if peak <= hi and all(o <= self.b.off_thr for o in off) and (best_k is None or worst > best_k["worst_hz"]):
+                        best_k = {"size": size_of(iv), "worst_hz": worst, "mean_hz": float(np.mean(on)), "recovery": worst / H, "intervention": iv}
+                    works = worst >= self.b.on_thr and peak <= hi and all(o <= self.b.off_thr for o in off)
+                    if works and (fallback is None or worst > fallback["worst_hz"]):
+                        fallback = {"strategy": name, "move": f"bias {bmv:.1f} mV + potentiate x{pf:.1f}" + (" + stop listening" if listen else ""),
+                                    "intervention": iv, "size": size_of(iv), "on_hz": float(np.mean(on)), "off_hz": float(np.mean(off)),
+                                    "worst_hz": worst, "recovery": worst / H, "healthy_hz": H, "below_target": True}
+                    if ok:
+                        cand = {"strategy": name, "move": f"bias {bmv:.1f} mV + potentiate x{pf:.1f}" + (" + stop listening" if listen else ""),
+                                "intervention": iv, "size": size_of(iv), "on_hz": float(np.mean(on)), "off_hz": float(np.mean(off)),
+                                "worst_hz": worst, "recovery": worst / H, "healthy_hz": H, "simulations": self.used}
+                        if best is None or (cand["size"], -cand["recovery"]) < (best["size"], -best["recovery"]): best = cand
+                        break                                        # weakest strength that meets the target at this size
+            if best_k: curve.append({k2: v for k2, v in best_k.items() if k2 != "intervention"})
+            if best is not None and best["size"] <= k: break        # nothing cheaper can appear at larger k
+        if best is None and fallback is not None:
+            # the target level is out of reach: hand back the STRONGEST working repair found, labelled with the level
+            # it actually reaches
+            fallback["simulations"] = self.used
+            fallback["why"] = (f"{target * 100:.0f} % of healthy not reachable with up to {ladder[-1]} drivers; "
+                               f"best working repair reaches {fallback['recovery'] * 100:.0f} % on every seed")
+            best = fallback
+        result = best or {"strategy": name, "partial": True, "healthy_hz": H, "simulations": self.used,
+                          "why": f"no repair of up to {ladder[-1]} drivers restores the behaviour on every seed"}
+        result["curve"] = curve; result["target"] = target
+        return result
+
+    def restore_off(self, name="defender-restore", control=None):
+        """Repair after a CORRUPT attack: make the fly refuse the bad stimulus again, without losing the good one.
+
+        Moves, in order of how invasive they are:
+          boost the brake  -- bias the inhibitory neurons that gate the readout, so they fire more readily;
+          strengthen the brake -- potentiate those inhibitory synapses onto the readout (a signed synapse, so
+                                  potentiating an inhibitory one deepens the inhibition);
+          weaken the push  -- scale down the outgoing synapses of the excitatory neurons now driving the readout.
+        The attacker's own neurons are off limits throughout."""
+        sup = self.suppressors_of(True); drv = self.drivers_now(); partial = None
+        col = readout_col(self.b)
+        hij = {int(i) for i in self.attacked()} | {int(i) for i in drv}                  # ids may come back from JSON as strings
+        hij = sorted(hij - {int(i) for i in self.b.protected}, key=lambda i: -col[i])    # strongest wires into the readout
+        hij = [i for i in hij if col[i] > 0]
+        mv = DEFENCE_RULES["moves"]["bias"]["max_mv"]; maxn = DEFENCE_RULES["moves"]["bias"]["max_neurons"]
+        maxf = DEFENCE_RULES["moves"]["potentiate"]["max_factor"]; wk = DEFENCE_RULES["moves"]["depress"]["min_factor"]
+        DEEP = DEFENCE_RULES["moves"]["depress"].get("deep_factor", 0.1)     # near-silent synapse, still not a lesion
+        ro = self.b.readout
+        plans = (
+            ("boost the brake", sup, lambda S: {"bias": {i: mv for i in S}}),
+            ("strengthen the brake", sup, lambda S: {"potentiate": onto_readouts(self.b, S, maxf)}),
+            ("boost + strengthen the brake", sup, lambda S: {"bias": {i: mv for i in S},
+                                                             "potentiate": onto_readouts(self.b, S, min(maxf, 2.0))}),
+            ("weaken the push", drv, lambda S: {"weaken": {i: wk for i in S}}),
+            # last resort: stop the READOUT listening to the hijacked wire. This does not undo the attack (the injected
+            # neuron still fires); it is postsynaptic depression at the motor neuron, the mirror of 'potentiate'. It is
+            # the only move that can beat an injected neuron wired straight into the readout, so attacked neurons'
+            # synapses ARE allowed here -- but the control behaviour must still pass, which is what makes it honest.
+            ("stop listening to the hijacked wire", hij, lambda S: {"potentiate": onto_readouts(self.b, S, wk)}),
+            ("stop listening, hard", hij, lambda S: {"potentiate": onto_readouts(self.b, S, DEEP)}),
+            ("stop listening + boost the brake", hij, lambda S: {"potentiate": onto_readouts(self.b, S, DEEP),
+                                                                 "bias": {i: mv for i in sup[:len(S)]}}),
+        )
+        best = None
+        for label, cands, make in plans:
+            if not cands: continue
+            for k in (1, 2, 4, 6, 8, maxn):
+                if self.used >= self.budget or k > len(cands): break
+                if best and k >= best["size"]: break
+                S = cands[:k]
+                ok, bad, ctrl = self._test_off(make(S), control)
+                self.log.add(name, self.used, f"{label} on {k} neurons", _fmt(make(S)),
+                             f"refused stimulus {bad:.1f} Hz, control {ctrl:.1f} Hz", ok)
+                if ok:
+                    for i in list(S):                                     # minimise
+                        if self.used >= self.budget: break
+                        T = [j for j in S if j != i]
+                        if not T: continue
+                        ok2, bad2, ctrl2 = self._test_off(make(T), control)
+                        self.log.add(name, self.used, f"is neuron {i} needed?", _fmt(make(T)),
+                                     f"refused stimulus {bad2:.1f} Hz, control {ctrl2:.1f} Hz", ok2)
+                        if ok2: S, bad, ctrl = T, bad2, ctrl2
+                    iv = make(S)
+                    cand = {"strategy": name, "move": label, "intervention": iv, "size": size_of(iv),
+                            "on_hz": bad, "off_hz": 0.0, "control_hz": ctrl, "simulations": self.used}
+                    if best is None or cand["size"] < best["size"]: best = cand
+                    break
+                # not a full repair: remember how close it got, and what it cost the control behaviour
+                if partial is None or bad < partial["on_hz"]:
+                    partial = {"strategy": name, "move": label, "intervention": make(S), "size": size_of(make(S)),
+                               "on_hz": bad, "control_hz": ctrl, "partial": True}
+        if best: return best
+        if partial:                       # the blue team LOST this one: say so, with the numbers that show why
+            partial["why"] = (f"no repair restores the refusal ({partial['on_hz']:.1f} Hz, needs <= {self.b.off_thr:.0f}) "
+                              f"without pushing the control behaviour below its bar ({partial['control_hz']:.1f} Hz)")
+        return partial
