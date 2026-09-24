@@ -77,6 +77,16 @@ class BrainView:
 
     def reset(self): self.glow[:] = 0; self.fired[:] = False; self.last_t = 0.0
 
+    def snapshot(self, spike_t, spike_i, size, **frame_kw):
+        """A small picture of a whole run (the brain as it looks at the end of the 300 ms run), cropped to the brain and
+        scaled to `size`; the live animation state is saved and restored, so the main panel is not disturbed."""
+        saved = (self.glow.copy(), self.fired.copy(), self.last_t)
+        self.reset(); self.advance(300.0, spike_t, spike_i); img = self.frame(bare=True, **frame_kw)
+        self.glow, self.fired, self.last_t = saved
+        xs, ys = self.px[self.vis], self.py[self.vis]; m = 6
+        box = (max(int(xs.min()) - m, 0), max(int(ys.min()) - m, 0), min(int(xs.max()) + m, self.W), min(int(ys.max()) + m, self.H))
+        return np.asarray(Image.fromarray(img).crop(box).resize(size, Image.LANCZOS))
+
     def advance(self, t_ms, spike_t, spike_i):
         """Bring the glow state to brain time t_ms using spikes in (last_t, t_ms]."""
         dt = max(t_ms - self.last_t, 0.0)
@@ -130,7 +140,7 @@ class BrainView:
 
     def frame(self, stimulus=(), readout=None, attacked=(), repaired=(), readout_hz=None, title="", subtitle="",
               stim_on=False, blink=1.0, stim_label="stimulus neurons", readout_label="readout neuron", show_redblue=True,
-              readout_bar=40.0, silenced=(), counts="", readouts=None, score=()):
+              readout_bar=40.0, silenced=(), counts="", readouts=None, score=(), bare=False):
         img = self.base.copy()
         sil = np.array([i for i in silenced if self.vis[i]], int) if show_redblue else np.array([], int)
         if sil.size: self._splat(img, sil, (0.55, 0.06, 0.10), size=1.4)   # fired on the healthy brain, silent now
@@ -164,7 +174,9 @@ class BrainView:
         for i in outs:
             x, y = self.px[i], self.py[i]; fired_now = bool(self.fired[i] or self.glow[i] > 0.05); out_fired |= fired_now
             d.ellipse((x - 7, y - 7, x + 7, y + 7), fill=(51, 255, 77, A) if fired_now else None, outline=(51, 255, 77, 230), width=2)
-        im = Image.alpha_composite(im, ov).convert("RGB"); d = ImageDraw.Draw(im)
+        im = Image.alpha_composite(im, ov).convert("RGB")
+        if bare: return np.asarray(im)                  # no text: for the small before / after pictures
+        d = ImageDraw.Draw(im)
         if outs:                                        # its name and rate, top right: green if it fired in this run
             tag = readout_label.split(" (")[0] + (f"  {readout_hz:.0f} Hz" if readout_hz is not None else "") + ("  (fired)" if out_fired else "  (silent)")
             d.text((self.W - 12 - d.textlength(tag, font=self.font), 8), tag, fill=(51, 255, 77) if out_fired else (170, 190, 170), font=self.font)

@@ -24,7 +24,7 @@ from behaviours import Behaviour, BEHAVIOURS
 from agents import Attacker, Defender, Log, merge_iv, size_of
 from body import FlyBody
 from brainview import BrainView
-from explain import explain_key, explain_result, score_lines
+from explain import explain_key, explain_result, score_lines, SHORT
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--sex", default="female", choices=["female", "male"]); ap.add_argument("--camera", default="side", choices=["side", "head", "top"])
@@ -66,6 +66,7 @@ class BrainWorker(threading.Thread):
         self.brain = None; self.iv = {}; self.attack = None; self.repair = None; self.attack_name = None; self.attack_goal = None
         self.healthy_fired = {}                     # (behaviour, with_stim) -> neurons that fire on the UNMODIFIED brain
         self.healthy_hz = {}                        # (behaviour, with_stim) -> readout rate of the UNMODIFIED brain
+        self.healthy_spk = {}                       # (behaviour, with_stim) -> spikes of the UNMODIFIED brain (the 'healthy' picture)
         self.start()
 
     def run(self):
@@ -98,13 +99,15 @@ class BrainWorker(threading.Thread):
             r0 = self.brain.run(stim, record=b.readouts, seed=1, spikes=True, **dict(b.sim))
             self.healthy_fired[key] = set(np.unique(r0["spike_i"]).tolist())
             self.healthy_hz[key] = float(np.mean([r0["rates"][i] for i in b.readouts]))
+            self.healthy_spk[key] = (r0["spike_t"], r0["spike_i"])
         now = set(np.unique(r["spike_i"]).tolist()); healthy = self.healthy_fired[key]
         self.out.put(("replay", dict(name=name, stage=stage, with_stim=with_stim,
                                      hz=float(np.mean([r["rates"][i] for i in b.readouts])),
                                      spike_t=r["spike_t"], spike_i=r["spike_i"],
                                      silenced=np.array(sorted(healthy - now), int), n_fired=len(now),
                                      n_silenced=len(healthy - now), n_new=len(now - healthy),
-                                     on_thr=b.on_thr, off_thr=b.off_thr, healthy=self.healthy_hz[key])))
+                                     on_thr=b.on_thr, off_thr=b.off_thr, healthy=self.healthy_hz[key],
+                                     h_spike_t=self.healthy_spk[key][0], h_spike_i=self.healthy_spk[key][1])))
 
     def _do(self, job):
         kind = job[0]
@@ -219,7 +222,8 @@ state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}
              msg="loading the brain ...", loglines=[], last_frame=None, brain_img=None, anim=None,
              silenced=None, counts=None,
              drag=None, spin=False, t_spin=None,
-             explain=("", "", ""), score=None, show_log=False)   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
+             explain=("", "", ""), score=None, show_log=False,
+             thumbs=None)   # before / after pictures: dict(name, healthy=(img, hz), attack=(img, hz), repair=(img, hz) | "lost")   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
 
 
 def place_drop(kind, dist=9.0):
@@ -267,6 +271,26 @@ def remove_drop(kind):
 
 def start_verdict(name):
     state.update(phase="think", t_phase=0.0); worker.q.put(("measure", name, True)); worker.q.put(("measure", name, False))
+
+
+THUMB = (192, 72)                                # before / after pictures: 3 across the top of the fly panel
+
+
+def draw_thumbs(th):
+    """healthy / attacked / repaired: the whole brain at the end of each run, side by side, each with its readout rate
+    written on a dark strip above the picture (never on top of the firing neurons)"""
+    short = SHORT.get(th["name"], "output"); x, y = 12, TOP + 92
+    for key, lab, col in (("healthy", "healthy", (220, 220, 230)), ("attack", "attacked", (255, 90, 80)), ("repair", "repaired", (110, 160, 255))):
+        has = key in th; lost = has and th[key] == "lost"
+        rrect(screen, (20, 21, 28), (x - 2, y - 20, THUMB[0] + 4, THUMB[1] + 22), r=4)
+        txt = lab + (f"   {short} {th[key][1]:.0f} Hz" if has and not lost else "")
+        screen.blit(small.render(txt, True, col), (x + 4, y - 19))
+        if has and not lost: screen.blit(pygame.surfarray.make_surface(np.transpose(th[key][0], (1, 0, 2))), (x, y))
+        else:
+            t = small.render("no repair works" if lost else ("press D to repair" if key == "repair" else ""), True, col if lost else (120, 122, 135))
+            screen.blit(t, (x + (THUMB[0] - t.get_width()) // 2, y + THUMB[1] // 2 - 9))
+        pygame.draw.rect(screen, col if has else (80, 82, 96), (x - 2, y - 20, THUMB[0] + 4, THUMB[1] + 22), 2, border_radius=4)
+        x += THUMB[0] + 12
 
 
 def draw_text(lines, x, y, col=(230, 230, 230)):
@@ -467,9 +491,19 @@ while running:
                 hz_, on_, off_ = d["hz"], d["on_thr"], d["off_thr"]
                 normal_ = (hz_ <= off_) if (d["name"] == "refuse_bitter" or not d["with_stim"]) else (hz_ >= on_)
                 st["meter"] = (f"{LABELS[d['name']][1].split(' (')[0]} after the {d['stage']}", hz_, on_, normal_)
+                if args.mode != "phase2":
+                    b_ = worker.bhv[d["name"]]; stim_ = b_.stim if d["with_stim"] else ()
+                    att_ = neurons_of(worker.attack["intervention"]) if worker.attack else []
+                    rep_ = neurons_of(worker.repair["intervention"]) if (worker.repair and d["stage"] == "repair") else []
+                    snap_ = lambda t_, i_, a_, r_: worker.view.snapshot(t_, i_, THUMB, stimulus=stim_, readout=b_.readout, readouts=b_.readouts,
+                                                                      attacked=a_, repaired=r_)
+                    if d["stage"] == "attack":
+                        st["thumbs"] = dict(name=d["name"], with_stim=d["with_stim"], healthy=(snap_(d["h_spike_t"], d["h_spike_i"], [], []), d["healthy"]))
+                    if st["thumbs"] and st["thumbs"]["name"] == d["name"]:
+                        st["thumbs"][d["stage"]] = (snap_(d["spike_t"], d["spike_i"], att_, rep_), d["hz"])
                 st["loglines"].append(f"brain after the {d['stage']}: readout {d['hz']:.0f} Hz, {d['n_fired']:,} neurons fired, "
                                       f"{d['n_silenced']:,} went silent")
-            elif kind == "reset": state["msg"] = "brain reset"; state["silenced"] = None; state["counts"] = None; state["readout_hz"] = None
+            elif kind == "reset": state["msg"] = "brain reset"; state["thumbs"] = None; state["silenced"] = None; state["counts"] = None; state["readout_hz"] = None
             elif kind == "error": state["msg"] = "error: " + data
             state["loglines"] = state["loglines"][-7:]
             d_x = data if isinstance(data, dict) else {}
@@ -487,7 +521,9 @@ while running:
                     state["score"] = dict(name=d_x["name"], goal=worker.attack_goal, healthy=d_x["healthy"],
                                           red=(worker.attack["size"], d_x["hz"]), blue=None)
                 elif state["score"]: state["score"]["blue"] = (worker.repair["size"], d_x["hz"])
-            elif kind == "repaired" and d_x.get("rep") and d_x["rep"].get("partial") and state["score"]: state["score"]["blue"] = "lost"
+            elif kind == "repaired" and d_x.get("rep") and d_x["rep"].get("partial") and state["score"]:
+                state["score"]["blue"] = "lost"
+                if state["thumbs"]: state["thumbs"]["repair"] = "lost"
             elif kind == "reset": state["score"] = None
             if args.events:                                   # what the screen now shows, and the brain it came from
                 d_ = data if isinstance(data, dict) else {}
@@ -633,6 +669,7 @@ while running:
     if st["verdict"]:
         t = big.render(st["verdict"], True, (12, 12, 16)); w_ = t.get_width() + 28
         rrect(screen, st["verdict_col"], (PW - w_ - 14, TOP + 12, w_, t.get_height() + 8), r=10); screen.blit(t, (PW - w_, TOP + 16))
+    if st["thumbs"] and args.mode != "phase2": draw_thumbs(st["thumbs"])
     # bottom panel: message, meter, log, keys
     y0 = TOP + PH
     rrect(screen, PANEL, (0, y0, 2 * PW, BAR), r=0)
