@@ -64,7 +64,7 @@ STORY_CARD, SCORE_CARD = pygame.Rect(12, 556, 770, 186), pygame.Rect(794, 556, 4
 STRIP_Y, KEYS_Y = 58, 752
 BG, PANEL, INK, DIM, ACCENT = (13, 14, 19), (24, 26, 34), (236, 237, 242), (146, 150, 166), (255, 214, 102)
 EDGE, RED, BLUE, GREEN = (46, 50, 66), (255, 96, 86), (110, 160, 255), (110, 215, 140)
-SIM_PER_FRAME = 0.012                           # simulated seconds per screen frame (~1/8 real time)
+SIM_PER_FRAME = 0.02                            # simulated seconds per screen frame (about a quarter of real time)
 ARRIVE = 0.95                                   # mm from drop centre = "at the drop"
 
 
@@ -351,7 +351,7 @@ def meter(x, y, w, hz, bar, col, top=None, h=10):
 clock = pygame.time.Clock()
 worker = BrainWorker(args.sex)
 body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False,   # drops parked off-screen
-               ctrl_every=10)            # leg controller at 1 kHz (physics still at 10 kHz): ~4.7x faster, same walking
+               ctrl_every=4, timestep=2.5e-4)   # physics at 4 kHz, leg controller at 1 kHz: same walking, ~8x faster than the default
 geoms = {"sugar": body.sim.mj_model.geom("sugar"), "bitter": body.sim.mj_model.geom("bitter"), "water": body.sim.mj_model.geom("water")}
 
 # which behaviour the red/blue team acts on, given what the fly is doing right now: every stimulus maps to its own
@@ -1135,13 +1135,23 @@ while running:
                 counts_txt += f"  |  {len(att)} attacked  |  {len(sil):,} went silent  |  {len(rep)} repaired"
         no_food = st["kind"] == "hijack"                                  # the no-food test: no taste neurons are stimulated
         if no_food: stim_label = stim_label + " (not stimulated: no food)"
-        bimg = v.frame(stimulus=(() if no_food else cur.stim), readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
+        # nothing in the picture changes while no spikes are glowing and the view is still (e.g. while the fly walks):
+        # then the last picture is shown again instead of being redrawn
+        chosen_ = tuple(sorted(st["try"]["lesion"])) if st["try"] is not None else ()
+        stim_on_ = st["phase"] in ("think", "eating", "refuse", "escape", "retreat", "turn")
+        blink_ = 0.5 + 0.5 * np.sin(time.time() * 4)
+        sig_ = (cur_name, stim_on_, round(blink_ * 3) if att else 0, counts_txt, st.get("readout_hz"), tuple(att), tuple(rep),
+                len(sil), chosen_, v.yaw, v.pitch, v.zoom, no_food, st["kind"])
+        still_ = anim is None and not st["spin"] and st["drag"] is None and float(v.glow.max()) <= 0.05
+        if still_ and st.get("bsig") == sig_ and st.get("bimg_") is not None: bimg = st["bimg_"]
+        else: bimg = None
+        if bimg is None: bimg = v.frame(stimulus=(() if no_food else cur.stim), readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
                        silenced=sil, counts=counts_txt, readouts=cur.readouts,
                        chosen=(sorted(st["try"]["lesion"]) if st["try"] is not None else ()),
                        readout_hz=(st["readout_hz"][1] if st.get("readout_hz") and st["readout_hz"][0] == cur_name else None),
                        show_redblue=(args.mode != "phase2"), readout_bar=cur.on_thr,
                        title="", subtitle="", score=[],
-                       stim_on=st["phase"] in ("think", "eating", "refuse", "escape", "retreat", "turn"), blink=0.5 + 0.5 * np.sin(time.time() * 4))
+                       stim_on=stim_on_, blink=blink_); st["bsig"] = sig_; st["bimg_"] = bimg
 
     if st.get("snap_pending") and bimg is not None:
         if args.snapshots:

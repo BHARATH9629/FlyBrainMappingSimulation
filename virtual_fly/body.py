@@ -38,10 +38,11 @@ def make_fly(name="fly", colorize=True):
 class FlyBody:
     """sim + walking controller + proboscis. step(left, right, eat) advances one physics step."""
     def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None, bitter_at=None, water_at=None, buffer=True,
-                 ctrl_every=1):
+                 ctrl_every=1, timestep=None):
         """ctrl_every: run the walking controller once every this many physics steps and hold its commands in between.
         MuJoCo still integrates every 0.1 ms step; only the leg-pattern controller (Python, about 6x the cost of the
-        physics itself) runs less often. 10 = a 1 kHz controller, plenty for walking."""
+        physics itself) runs less often. 10 = a 1 kHz controller, plenty for walking.
+        timestep: MuJoCo's physics step in seconds (None = FlyGym's default, 0.1 ms)."""
         self.ctrl_every = max(1, int(ctrl_every)); self._k = 0; self._held = None
         self.fly, neutral = make_fly()
         cams = {"side": dict(pos_offset=(-0.5, -7.5, 0.0), rotation=Rotation3D("euler", (1.57, 0, 0)), fovy=35.0),
@@ -68,7 +69,8 @@ class FlyBody:
             self.world.mjcf_root.worldbody.add_geom(name="water", type=mujoco.mjtGeom.mjGEOM_ELLIPSOID, size=[0.75, 0.6, 0.14],
                                                     pos=[float(water_at[0]), float(water_at[1]), 0.12],
                                                     rgba=[0.45, 0.75, 1.0, 0.85], contype=0, conaffinity=0)
-        self.sim = Simulation(self.world)
+        self.sim = Simulation(self.world, timestep=timestep)
+        self._k_ctrl = self.sim.timestep * self.ctrl_every / 1e-4        # controller period in units of the original 0.1 ms step
         self.sim.set_renderer([cam], camera_res=res, playback_speed=playback_speed, output_fps=fps)
         self.sim.renderer.buffer_frames = buffer          # live mode: do not accumulate frames in memory
         self.cam_name = cam
@@ -81,7 +83,7 @@ class FlyBody:
         self.ctrl = HybridTurningController(timestep=self.sim.timestep * self.ctrl_every, preprogrammed_steps=self.steps,
                                             output_dof_order=self.leg_dofs)
         # the one controller setting counted in STEPS rather than seconds: keep the same duration in real time
-        self.ctrl.retraction_persistence_steps = max(1, int(round(self.ctrl.retraction_persistence_steps / self.ctrl_every)))
+        self.ctrl.retraction_persistence_steps = max(1, int(round(self.ctrl.retraction_persistence_steps / self._k_ctrl)))
         self.thorax = self.fly.get_bodysegs_order().index(BodySegment("c_thorax"))
         # take-off pose: the default stance with femur-tibia joints straightened (tibia flexion -> 0) and coxae pushed back
         base = self.steps.default_pose_by_dof_order(self.leg_dofs); jp = np.array(base, float)
@@ -121,7 +123,7 @@ class FlyBody:
         if self._k % self.ctrl_every == 0 or self._held is None:        # new leg commands; held for ctrl_every steps
             obs = HybridControllerObservation.from_sim(self.sim, self.fly.name)
             act = self.ctrl.step(np.array([left, right], float), obs)
-            alpha = 1 - (1 - 0.02) ** self.ctrl_every                  # same proboscis smoothing per second as before
+            alpha = 1 - (1 - 0.02) ** self._k_ctrl                     # same proboscis smoothing per second as before
             self.eat_level += alpha * (eat - self.eat_level)
             q = np.zeros(len(self.all_dofs)); q[self.leg_idx] = act.joint_angles
             q[self.prob_idx] = self.prob_neutral + self.eat_level * PROBOSCIS_EXTENDED
