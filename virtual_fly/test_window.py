@@ -38,6 +38,8 @@ SCENARIOS = {   # name: (mode, script, behaviour, the trigger key)
     "quick_escape": ("phase3", S("L", "A", "T", "D", "T"), "escape", "t"),
     "quick_hijack": ("phase3", S("H", "F", "T", "D", "T"), "eat", "t"),
     "quick_p2":     ("phase2", S("T", "B", "T", "DOWN", "T"), "eat", "t"),
+    # YOU TRY IT: the viewer silences a cell type and picks the seed; the same seed twice must give the same number
+    "try":     ("phase3", S("P", "TYPE_LB3", "4", "2", "RETURN", "RETURN", "BACKSPACE", "7", "RETURN", "L", "RETURN", "X", "RETURN", "P", "S"), "eat", "return"),
     # the 3-D view controls (O = spin, 0 = front view) must not change any result, in either phase
     "view":    ("phase3", S("S", "O", "A", "D", "0", "S"), "eat", "s"),
     "view2":   ("phase2", S("S", "O", "S", "0", "S"), "eat", "s"),
@@ -93,7 +95,7 @@ def expected_verdict(name, hz, dL=None, dR=None):
 
 report = {}; all_ok = True
 for name, (mode, script, bname, trig) in SCENARIOS.items():
-    role = {"quick_drink": "drink", "quick_escape": "escape", "quick_hijack": "hijack", "quick_p2": "phase2"}.get(name, name)   # the story it must tell
+    role = {"try": "try", "quick_drink": "drink", "quick_escape": "escape", "quick_hijack": "hijack", "quick_p2": "phase2"}.get(name, name)   # the story it must tell
     path = os.path.join(OUT, f"{name}.jsonl")
     fails = []; lines = []
     if not os.path.exists(path):
@@ -101,7 +103,7 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
     E = [json.loads(l) for l in open(path, encoding="utf-8")]
     MODIFIERS = ("alt", "ctrl", "shift", "tab", "meta", "windows", "super", "caps")
     keys = [e["key"] for e in E if e["event"] == "key" and not any(m in e["key"] for m in MODIFIERS)]   # Alt-Tab etc.
-    expected_keys = [k.lower() for k in script.split(",") for k in [k.split("@")[0]]]
+    expected_keys = [k.lower() for k in script.split(",") for k in [k.split("@")[0]] if not k.startswith("TYPE_")]
     if keys != expected_keys: fails.append(f"keys pressed {keys} != script {expected_keys}")
     stage = "healthy"; seen_attack = seen_repair = False; replays = []
     # ---- explanation panel and scoreboard (Step 4) ---------------------------------------------------------------
@@ -160,13 +162,17 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
         iv = load_iv(e["iv"])
         if e["event"] == "threat":
             stim = brain.by_type(["LC4", "LPLC2"], side=e["side"])
-            r = brain.run(stim, record=list(DNA.values()), seed=1, **iv)
+            r = brain.run(stim, record=list(DNA.values()), seed=e.get("seed") or 1, **iv)
             dL, dR = r["rates"][DNA["L"]], r["rates"][DNA["R"]]; shown = (e["dna_L"], e["dna_R"]); true = (dL, dR)
             exp = expected_verdict("turn", None, dL, dR); beh = "turn"
         else:
             beh = e["name"]; b = B[beh]
             kw = dict(b.sim); kw.update(iv)
-            true_hz = b.measure(bool(e["with_stim"]), seed=1, **kw)[0]; shown = e["hz"]; true = true_hz
+            true_hz = b.measure(bool(e["with_stim"]), seed=e.get("seed") or 1, **kw)[0]; shown = e["hz"]; true = true_hz
+            if e.get("custom"):                                        # YOU TRY IT: the 'normal brain' bar, same seed, no changes
+                base = b.measure(bool(e["with_stim"]), seed=e["seed"], **dict(b.sim))[0]
+                lines.append(f"   [you try it] {beh:13s} seed {e['seed']}: your brain {e['hz']:.1f} Hz, normal brain shown {e['base_hz']:.1f} / independent {base:.1f}")
+                if abs(base - e["base_hz"]) > 1e-6: fails.append(f"you try it: normal-brain bar {e['base_hz']} != independent {base}")
             exp = ("EATS NOTHING" if true_hz >= b.on_thr else "no feeding") if not e["with_stim"] else expected_verdict(beh, true_hz)
         exact = np.allclose(np.atleast_1d(shown), np.atleast_1d(true), atol=1e-6)
         ok_v = e["verdict"] == exp
@@ -175,7 +181,7 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
         if not exact: fails.append(f"{stage}: displayed rate {shown} but the same brain state gives {true}")
         if not ok_v: fails.append(f"{stage}: displayed '{e['verdict']}' but the rate means '{exp}'")
         # the story each scenario must tell
-        if role in ("phase2", "view2"): continue
+        if role in ("phase2", "view2", "try"): continue
         v = e["verdict"]
         if role == "hijack":
             want = {"healthy": "no feeding", "after F": "EATS NOTHING", "after D": "no feeding"}.get(stage)
@@ -201,7 +207,7 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
         if n_rep != 1: fails.append(f"edge case: {n_rep} repairs ran -- exactly one is allowed (D on a healthy brain and a second D must do nothing)")
     if role == "bitter" and seen_repair and "BLUE TEAM LOST" not in allmsgs and "repaired with" in allmsgs:
         lines.append("   note: blue team WON on bitter this time (attack was the repairable kind)")
-    if role not in ("phase2", "view2", "edges") and not seen_attack: fails.append("no attack result was ever shown")
+    if role not in ("phase2", "view2", "edges", "try") and not seen_attack: fails.append("no attack result was ever shown")
     # T (quick test): every press must be followed by a brain result before the next key
     seq = [e for e in E if e["event"] in ("key", "measured", "threat") and (e["event"] == "key" or e.get("verdict"))]
     for a_, e in enumerate(seq):

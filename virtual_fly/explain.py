@@ -34,10 +34,11 @@ def explain_key(key, mode, has_attack=False, has_repair=False):
         "o": ("You toggled the slow spin of the brain view.", "", "Only the view turns; the brain itself is not changed."),
         "0": ("You reset the brain view to the front.", "", "Only the view changes; the brain itself is not changed."),
         "tab": ("You toggled the technical log.", "", ""),
+        "i": ("You opened: where the data comes from.", "", "The files, their fingerprints and the counts made on this laptop."),
         "t": ("QUICK TEST: the same test, with the stimulus put straight in front of the fly -- no walking.", wait, ""),
     }
     if key in table: return table[key]
-    if mode == "phase2" and key in ("a", "d", "f", "h", "r"):
+    if mode == "phase2" and key in ("a", "d", "f", "h", "r", "p"):
         return ("That key belongs to Phase 3 (the red team / blue team demo).", "", "Run  python virtual_fly/phase3.py  to use it.")
     if key == "a": return ("You sent in the RED TEAM.", "It is searching for the smallest damage that switches the fly's current behaviour off ...", "")
     if key == "f": return ("You sent in the RED TEAM with a hijack.", "It is searching for the fewest neurons that make the fly try to eat with NO food ...", "")
@@ -46,6 +47,7 @@ def explain_key(key, mode, has_attack=False, has_repair=False):
         if not has_attack: return ("You asked the BLUE TEAM to repair.", "Nothing is broken: the brain is healthy.", "Attack it first with A (or F).")
         if has_repair: return ("You asked the BLUE TEAM to repair again.", "It is already repaired.", "Test it, attack again with A, or reset with R.")
         return ("You sent in the BLUE TEAM.", "It is searching for the cheapest repair that brings the behaviour back ...", "")
+    if key == "p": return ("You left YOU TRY IT.", "", "Back to the red team / blue team demo.")
     if key == "r": return ("You reset the brain.", "Every attack and every repair has been removed.", "The brain is back to the real, healthy connectome.")
     return ("", "", "")
 

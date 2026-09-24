@@ -143,7 +143,7 @@ class BrainView:
 
     def frame(self, stimulus=(), readout=None, attacked=(), repaired=(), readout_hz=None, title="", subtitle="",
               stim_on=False, blink=1.0, stim_label="stimulus neurons", readout_label="readout neuron", show_redblue=True,
-              readout_bar=40.0, silenced=(), counts="", readouts=None, score=(), bare=False):
+              readout_bar=40.0, silenced=(), counts="", readouts=None, score=(), bare=False, chosen=()):
         img = self.base.copy()
         sil = np.array([i for i in silenced if self.vis[i]], int) if show_redblue else np.array([], int)
         if sil.size: self._splat(img, sil, (0.55, 0.06, 0.10), size=1.4)   # fired on the healthy brain, silent now
@@ -170,6 +170,11 @@ class BrainView:
             for i in sil: x, y = self.px[i], self.py[i]; d.ellipse((x - 3, y - 3, x + 3, y + 3), outline=(235, 70, 130, A), width=1)
             for i in rep: x, y = self.px[i], self.py[i]; d.ellipse((x - 7, y - 7, x + 7, y + 7), outline=(90, 150, 255, A), width=2)
             for i in att: x, y = self.px[i], self.py[i]; d.ellipse((x - 8, y - 8, x + 8, y + 8), outline=(255, 50, 40, A), width=2)
+        # neurons the viewer silenced (YOU TRY IT): a magenta cross on each
+        for i in list(chosen)[:800]:
+            if self.vis[i]:
+                x, y = self.px[i], self.py[i]
+                d.line((x - 4, y - 4, x + 4, y + 4), fill=(255, 90, 255, 235), width=2); d.line((x - 4, y + 4, x + 4, y - 4), fill=(255, 90, 255, 235), width=2)
         # the output neuron(s) the behaviour is judged on: always ringed in green -- FILLED if it fired during this run,
         # HOLLOW if it stayed silent -- so "did MN9 fire?" can be read at a glance long after the glow has faded
         outs = [i for i in (readouts if readouts is not None else ([readout] if readout is not None else [])) if self.vis[i]]
@@ -190,7 +195,8 @@ class BrainView:
         if counts: d.text((10, yt), counts, fill=(255, 217, 89), font=self.font)
         # full legend, left to right
         legend = [((76, 230, 255), stim_label), ((255, 217, 89), "fired in this run"), ((51, 255, 77), readout_label)]
-        if show_redblue: legend += [((235, 70, 130), "went silent"), ((255, 38, 26), "attacked"), ((77, 128, 255), "repaired")]
+        if show_redblue and not chosen: legend += [((235, 70, 130), "went silent"), ((255, 38, 26), "attacked"), ((77, 128, 255), "repaired")]
+        if chosen: legend += [((255, 90, 255), "silenced by you")]
         rows, row, x = [], [], 10                                         # wrap the legend onto as many lines as it needs
         for col, lab in legend:
             w = 15 + d.textlength(lab, font=self.font) + 14

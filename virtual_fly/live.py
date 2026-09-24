@@ -25,6 +25,7 @@ from agents import Attacker, Defender, Log, merge_iv, size_of
 from body import FlyBody
 from brainview import BrainView
 from explain import explain_key, explain_result, score_lines, SHORT
+from behaviours import MN9_ID
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--sex", default="female", choices=["female", "male"]); ap.add_argument("--camera", default="side", choices=["side", "head", "top"])
@@ -84,11 +85,35 @@ class BrainWorker(threading.Thread):
         self.view = BrainView(brain, PW, PH); self.busy = ""
         self.brain = brain                                     # published last: the UI checks `worker.brain is not None`
         self.out.put(("loaded", None))
+        self.facts = None
+        try: self._facts()
+        except Exception as e: self.facts = dict(error=repr(e))
         while True:
             job = self.q.get()
             try: self._do(job)
             except Exception as e: self.out.put(("error", repr(e)))
             self.busy = ""
+
+    def _n_sim(self, stim, record, kw):
+        """how many neurons Brain.run simulated for this run (the same sub-network rule it uses itself)"""
+        seeds = list(stim) + list((kw.get("inject") or {}).keys())
+        must = list(record) + list(kw.get("lesion", [])) + list((kw.get("weaken") or {})) + list((kw.get("bias") or {})) \
+            + [x for pr in (kw.get("potentiate") or {}) for x in pr]
+        return int(self.brain.subnetwork(seeds, kw.get("depth", 3), kw.get("min_syn", 5), must_include=must).size)
+
+    def _facts(self):
+        """where the data comes from: the files, their size and SHA-256 fingerprint, counted after loading"""
+        import hashlib as _h
+        d = os.path.join(HERE, "..", "data", "female_flywire" if self.sex == "female" else "male_malecns"); files = []
+        for f in sorted(os.listdir(d)):
+            fp = os.path.join(d, f)
+            if not os.path.isfile(fp) or os.path.getsize(fp) < 1e6: continue
+            h = _h.sha256()
+            with open(fp, "rb") as fh:
+                for chunk in iter(lambda: fh.read(1 << 22), b""): h.update(chunk)
+            files.append((f, os.path.getsize(fp), h.hexdigest()))
+        W = self.brain.W
+        self.facts = dict(files=files, neurons=self.brain.N, connections=int(W.nnz), synapses=int(abs(W).sum()))
 
     def _cache_key(self, kind, name, goal):
         h = hashlib.md5(json.dumps(sorted((k, sorted(str(x) for x in (v if isinstance(v, list) else v.items()))) for k, v in self.iv.items())).encode()).hexdigest()[:10]
@@ -120,18 +145,34 @@ class BrainWorker(threading.Thread):
     def _do(self, job):
         kind = job[0]
         if kind == "measure":
-            _, name, with_stim = job; b = self.bhv[name]; self.busy = f"brain: {name} {'with' if with_stim else 'without'} stimulus"
+            _, name, with_stim, *cu = job; cu = cu[0] if cu else None; b = self.bhv[name]
+            self.busy = f"brain: {name} {'with' if with_stim else 'without'} stimulus"
+            stim = b.stim if with_stim else []; seed = cu["seed"] if cu else 1
             kw = dict(b.sim); kw.update(self.iv)
-            r = self.brain.run(b.stim if with_stim else [], record=b.readouts, seed=1, spikes=True, **kw)
+            if cu: kw["lesion"] = sorted(set(kw.get("lesion", [])) | set(cu["lesion"]))    # YOU TRY IT: the neurons the viewer chose
+            t0 = time.time(); r = self.brain.run(stim, record=b.readouts, seed=seed, spikes=True, **kw); dt = time.time() - t0
             hz = float(np.mean([r["rates"][i] for i in b.readouts]))
-            self.out.put(("measured", dict(name=name, with_stim=with_stim, hz=hz, spike_t=r["spike_t"], spike_i=r["spike_i"],
-                                           on_thr=b.on_thr, off_thr=b.off_thr, expected=b.expected)))
+            d = dict(name=name, with_stim=with_stim, hz=hz, spike_t=r["spike_t"], spike_i=r["spike_i"],
+                     on_thr=b.on_thr, off_thr=b.off_thr, expected=b.expected, seed=seed, lesion=kw.get("lesion", []))
+            if cu:                                              # the same brain WITHOUT the viewer's changes, same seed
+                kb = dict(b.sim); kb.update(self.iv)
+                rb = self.brain.run(stim, record=b.readouts, seed=seed, **kb)
+                d.update(custom=cu, base_hz=float(np.mean([rb["rates"][i] for i in b.readouts])), sim_s=dt,
+                         n_sim=self._n_sim(stim, b.readouts, kw))
+            self.out.put(("measured", d))
         elif kind == "threat":                                  # looming on one eye: read BOTH steering neurons DNa02
-            _, side = job; self.busy = f"brain: threat on the {'left' if side == 'L' else 'right'} eye"
-            stim = self.brain.by_type(["LC4", "LPLC2"], side=side); rec = list(self.dna02.values())
-            kw = dict(self.iv); r = self.brain.run(stim, record=rec, seed=1, spikes=True, **kw)
-            self.out.put(("threat", dict(side=side, dna_L=r["rates"][self.dna02["L"]], dna_R=r["rates"][self.dna02["R"]],
-                                         spike_t=r["spike_t"], spike_i=r["spike_i"], on_thr=self.bhv["turn"].on_thr)))
+            _, side, *cu = job; cu = cu[0] if cu else None; self.busy = f"brain: threat on the {'left' if side == 'L' else 'right'} eye"
+            stim = self.brain.by_type(["LC4", "LPLC2"], side=side); rec = list(self.dna02.values()); seed = cu["seed"] if cu else 1
+            kw = dict(self.iv)
+            if cu: kw["lesion"] = sorted(set(kw.get("lesion", [])) | set(cu["lesion"]))
+            t0 = time.time(); r = self.brain.run(stim, record=rec, seed=seed, spikes=True, **kw); dt = time.time() - t0
+            d = dict(side=side, dna_L=r["rates"][self.dna02["L"]], dna_R=r["rates"][self.dna02["R"]],
+                     spike_t=r["spike_t"], spike_i=r["spike_i"], on_thr=self.bhv["turn"].on_thr, seed=seed, lesion=kw.get("lesion", []))
+            if cu:
+                rb = self.brain.run(stim, record=rec, seed=seed, **dict(self.iv))
+                d.update(custom=cu, base_L=rb["rates"][self.dna02["L"]], base_R=rb["rates"][self.dna02["R"]], sim_s=dt,
+                         n_sim=self._n_sim(stim, rec, kw))
+            self.out.put(("threat", d))
         elif kind == "attack":
             _, name, goal = job; b = self.bhv[name]; self.busy = f"RED TEAM attacking {name} ({goal})"
             ck = self._cache_key("attack", name, goal)
@@ -329,7 +370,9 @@ state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}
              silenced=None, counts=None,
              drag=None, spin=False, t_spin=None,
              explain=("", "", ""), score=None, show_log=False,
-             thumbs=None, t_healthy=False, t_att=False, t_rep=False, lost=False)   # stepper: which tests have been done   # before / after pictures: dict(name, healthy=(img, hz), attack=(img, hz), repair=(img, hz) | "lost")   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
+             thumbs=None, t_healthy=False, t_att=False, t_rep=False, lost=False,
+             info=False, click0=None)
+state["try"] = None   # YOU TRY IT: dict(name, lesion, seed, last, hist) while it is on   # stepper: which tests have been done   # before / after pictures: dict(name, healthy=(img, hz), attack=(img, hz), repair=(img, hz) | "lost")   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
 
 
 def place_drop(kind, dist=9.0):
@@ -375,8 +418,15 @@ def remove_drop(kind):
     body.sim.mj_model.geom_pos[geoms[kind].id][:2] = (1e6, 1e6); state["drops"].pop(kind, None)
 
 
+def take_custom():
+    """YOU TRY IT: the viewer's neurons + seed, handed to the next brain test only (every other test uses seed 1, no changes)"""
+    c = state.pop("custom_run", None)
+    return (c,) if c else ()
+
+
 def start_verdict(name):
-    state.update(phase="think", t_phase=0.0); worker.q.put(("measure", name, True)); worker.q.put(("measure", name, False))
+    c = take_custom()
+    state.update(phase="think", t_phase=0.0); worker.q.put(("measure", name, True) + c); worker.q.put(("measure", name, False) + c)
 
 
 THUMB = (140, 60)                                # before / after pictures in the scoreboard card
@@ -432,12 +482,12 @@ NAMES_UI = {"eat": "eating", "drink": "drinking", "refuse_bitter": "refusing bit
 def draw_strip(cur_name):
     """Phase 3: the five steps of the red/blue story, the current one lit. Phase 2: the six behaviours, the current one lit."""
     y = STRIP_Y; st = state
-    if args.mode == "phase2":
+    if args.mode == "phase2" or st["try"] is not None:
         items = [("eat", "Eat", "S"), ("drink", "Drink", "V"), ("refuse_bitter", "Refuse bitter", "B"), ("escape", "Escape", "L"),
-                 ("retreat", "Back away", "DOWN"), ("turn", "Turn away", "2")]
+                 ("retreat", "Back away", "DOWN"), ("turn", "Turn away", "2" if st["try"] is None else "\u2192")]
         w = (W - 24 - 5 * 10) // 6; x = 12
         for nm, lab, key in items:
-            on = nm == cur_name and st["kind"] is not None
+            on = nm == cur_name and (st["kind"] is not None or st["try"] is not None)
             rrect(screen, (40, 46, 36) if on else PANEL, (x, y, w, 32), r=16); rrect(screen, GREEN if on else EDGE, (x, y, w, 32), r=16, width=2 if on else 1)
             t = font.render(lab, True, INK if on else DIM); k = mono.render(key, True, INK)
             tw = t.get_width() + 10 + k.get_width() + 10; x0 = x + (w - tw) // 2
@@ -473,6 +523,242 @@ def draw_strip(cur_name):
         x += w + 22
 
 
+# ---------------------------------------------------------------- YOU TRY IT: the viewer designs the experiment
+TRY_KEYS = {pygame.K_s: "eat", pygame.K_v: "drink", pygame.K_b: "refuse_bitter", pygame.K_l: "escape", pygame.K_DOWN: "retreat",
+            pygame.K_RIGHT: "turn"}
+DIGITS = {getattr(pygame, f"K_{n}"): str(n) for n in range(10)}
+DIGITS.update({getattr(pygame, f"K_KP_{n}", getattr(pygame, f"K_KP{n}", -1)): str(n) for n in range(10)})
+
+
+def try_explain():
+    tr = state["try"]; n = len(tr["lesion"])
+    return (f"YOU TRY IT: {NAMES_UI[tr['name']]}; {n:,} neuron{'s' if n != 1 else ''} silenced by you; your number: "
+            f"{tr['seed'] or '(type one)'}.", "", "Press ENTER to run it live on the connectome.")
+
+
+def try_key(k):
+    """keys while YOU TRY IT is on; returns the key the normal handler should still see, or None if used here"""
+    tr = state["try"]
+    if k in (pygame.K_p, pygame.K_ESCAPE):
+        state["try"] = None; state.pop("custom_run", None); state["msg"] = "Back to the red team / blue team demo."; return None
+    if k in (pygame.K_i, pygame.K_TAB): return k
+    if k in DIGITS:
+        if len(tr["seed"]) < 9: tr["seed"] += DIGITS[k]
+        return None
+    if k == pygame.K_BACKSPACE: tr["seed"] = tr["seed"][:-1]; return None
+    if k == pygame.K_x: tr["lesion"] = set(); state["msg"] = "Cleared: no neurons silenced."; return None
+    if k in TRY_KEYS: tr["name"] = TRY_KEYS[k]; state["msg"] = f"Behaviour: {NAMES_UI[tr['name']]}."; return None
+    if k in (pygame.K_RETURN, pygame.K_KP_ENTER):
+        if state["phase"] not in ("idle", "free", "explore") or worker.busy: state["msg"] = "Wait: the brain is still busy."; return None
+        if not tr["seed"]: state["msg"] = "Type any number first: it becomes the random seed."; return None
+        state["custom_run"] = dict(lesion=sorted(tr["lesion"]), seed=int(tr["seed"])); name = tr["name"]
+        state["msg"] = f"Running your experiment live: {NAMES_UI[name]}, {len(tr['lesion']):,} neurons silenced, seed {tr['seed']} ..."
+        if name in QUICK_TASTE: place_drop(QUICK_TASTE[name], dist=0.3); return None
+        return {"escape": pygame.K_l, "retreat": pygame.K_DOWN, "turn": pygame.K_2}[name]
+    return None
+
+
+def nearest_neuron(pos, r=6):
+    """the neuron under a point of the brain picture: among those within r pixels, the one that fired most (else the nearest)"""
+    v = worker.view; x, y = pos[0] - BRAIN_C.x, pos[1] - BRAIN_C.y
+    idx = np.flatnonzero(v.vis); d2 = (v.px[idx] - x) ** 2 + (v.py[idx] - y) ** 2
+    near = d2 <= r * r
+    if not near.any(): return None
+    c = idx[near]; score = v.glow[c] + 0.5 * v.fired[c] - 0.001 * d2[near]
+    return int(c[np.argmax(score)])
+
+
+def neuron_label(i):
+    b = worker.brain; t = b.type_of(i) or "no type"
+    cls = b.types["class"].iloc[i] if b.types is not None else ""
+    return int(b.ids[i]), t, ("" if cls is None or (isinstance(cls, float) and np.isnan(cls)) else str(cls).replace("_", " "))
+
+
+def try_pick(pos, whole_type=False):
+    tr = state["try"]; i = nearest_neuron(pos)
+    if i is None: state["msg"] = "No neuron there: click on a dot."; return
+    fid, t, _ = neuron_label(i)
+    if whole_type and t != "no type":
+        members = set(worker.brain.by_type(types=[t]).tolist())
+        if members <= tr["lesion"]: tr["lesion"] -= members; state["msg"] = f"Un-silenced all {len(members)} neurons of type {t}."
+        else: tr["lesion"] |= members; state["msg"] = f"Silenced all {len(members)} neurons of type {t}."
+    elif i in tr["lesion"]: tr["lesion"].discard(i); state["msg"] = f"Un-silenced neuron {fid} ({t})."
+    else: tr["lesion"].add(i); state["msg"] = f"Silenced neuron {fid} ({t})."
+    state["explain"] = try_explain()
+
+
+def draw_hover():
+    """the neuron under the mouse: a ring, and its real FlyWire ID and cell type"""
+    mp = to_canvas(pygame.mouse.get_pos())
+    if not BRAIN_C.collidepoint(mp) or not pygame.mouse.get_focused(): return
+    i = nearest_neuron(mp)
+    if i is None: return
+    v = worker.view; x, y = BRAIN_C.x + v.px[i], BRAIN_C.y + v.py[i]
+    pygame.draw.circle(screen, (255, 255, 255), (x, y), 7, 2)
+    fid, t, cls = neuron_label(i)
+    lines = [(f"FlyWire ID {fid}", INK), (f"{t}" + (f"  ·  {cls}" if cls else ""), (190, 196, 214))]
+    if state["try"] is not None:
+        lines.append(("click: silence it   ·   right-click: all " + (t if t != "no type" else "of its type"), ACCENT))
+    w = max(small.size(tx)[0] for tx, _ in lines) + 20; h = 20 * len(lines) + 12
+    bx = min(max(x + 14, BRAIN_C.x + 6), BRAIN_C.right - w - 6); by = min(max(y - h - 10, BRAIN_C.y + 6), BRAIN_C.bottom - h - 6)
+    box = pygame.Surface((w, h), pygame.SRCALPHA); box.fill((10, 11, 16, 225)); screen.blit(box, (bx, by))
+    rrect(screen, (90, 96, 120), (bx, by, w, h), r=6, width=1)
+    for k_, (tx, col) in enumerate(lines): screen.blit(small.render(tx, True, col), (bx + 10, by + 6 + 20 * k_))
+
+
+def draw_story(r):
+    st = state; y = card(r, "What just happened", right="TAB: technical log", accent=ACCENT)
+    msg_ = st["msg"]; hf = next((f_ for f_ in HEAD_FONTS if f_.size(msg_)[0] <= r.w - 32), HEAD_FONTS[-1])   # shrink to fit first
+    while msg_ and hf.size(msg_)[0] > r.w - 32: msg_ = msg_[:-2]
+    screen.blit(hf.render(msg_ if msg_ == st["msg"] else msg_.rstrip() + " ...", True, ACCENT), (r.x + 16, y + 2 + (head.get_height() - hf.get_height()) // 2))
+    yy = y + 30; y_max = r.bottom - 16
+    if st["show_log"]:
+        for line in st["loglines"][-6:]:
+            if yy < y_max: screen.blit(mono.render(line[:96], True, (185, 187, 200)), (r.x + 16, yy)); yy += 19
+    else:
+        for lab, txt, col in zip(("You did", "The brain did", "What it means"), st["explain"], ((215, 218, 230), (255, 217, 89), (140, 230, 160))):
+            if not txt: continue
+            screen.blit(cap.render(lab.upper(), True, (120, 124, 142)), (r.x + 16, yy + 3))
+            y0_ = yy
+            for line in wrap(txt, body_f, r.w - 136 - 16):
+                if yy < y_max: screen.blit(body_f.render(line[:1].upper() + line[1:] if yy == y0_ else line, True, col), (r.x + 136, yy))
+                yy += 19
+            yy += 3
+    card_edge(r)
+
+
+def draw_try_intro(r):
+    y = card(r, "You try it: design your own experiment", right="P: leave", accent=ACCENT)
+    screen.blit(head.render(state["msg"][:90], True, ACCENT), (r.x + 16, y + 2))
+    steps = [("1", "Click any neuron in the brain to silence it.", "Right-click: silence its whole cell type. Hover: see its real FlyWire ID."),
+             ("2", "Type any number.", "It becomes the random seed: the noise in every neuron comes from your number."),
+             ("3", "Press ENTER.", "The connectome runs live, with your changes, and the fly acts on the result.")]
+    yy = y + 36
+    for n, a, b in steps:
+        pygame.draw.circle(screen, ACCENT, (r.x + 30, yy + 14), 13); t = cap.render(n, True, (14, 14, 18)); screen.blit(t, (r.x + 30 - t.get_width() // 2, yy + 7))
+        screen.blit(font.render(a, True, INK), (r.x + 54, yy + 2)); screen.blit(small.render(b, True, DIM), (r.x + 54 + font.size(a)[0] + 10, yy + 5))
+        yy += 36
+    card_edge(r)
+
+
+def draw_try_card(r):
+    tr = state["try"]; last = tr["last"]
+    y = card(r, "Your experiment", right=NAMES_UI[tr["name"]], accent=ACCENT)
+    screen.blit(cap.render("YOUR NUMBER (RANDOM SEED)", True, (150, 156, 176)), (r.x + 16, y + 8))
+    cur = "_" if int(time.time() * 2) % 2 else " "
+    t = title_font.render((tr["seed"] or "") + cur, True, ACCENT if tr["seed"] else DIM); screen.blit(t, (r.x + 220, y + 1))
+    n = len(tr["lesion"])
+    screen.blit(cap.render("YOU SILENCED", True, (150, 156, 176)), (r.x + 16, y + 38))
+    if n:
+        types = {}
+        for i in tr["lesion"]: t_ = worker.brain.type_of(i) or "?"; types[t_] = types.get(t_, 0) + 1
+        desc = ", ".join(f"{k} x{v}" if v > 1 else k for k, v in sorted(types.items(), key=lambda kv: -kv[1])[:3]) + (" ..." if len(types) > 3 else "")
+        txt = f"{n:,} neuron{'s' if n != 1 else ''}  ({desc})"
+        while font.size(txt)[0] > r.right - 16 - (r.x + 220) and len(txt) > 12: txt = txt[:-5] + " ...)"
+        screen.blit(font.render(txt, True, (255, 120, 255)), (r.x + 220, y + 33))
+    else: screen.blit(font.render("nothing yet: click neurons in the brain", True, DIM), (r.x + 220, y + 33))
+    if last is None or last["name"] != tr["name"]:
+        screen.blit(font.render("Press ENTER to run it live.", True, INK), (r.x + 16, y + 74)); card_edge(r); return
+    b = worker.bhv[last["name"]]; short = SHORT.get(last["name"], "output")
+    unit = "DNa02 left - right" if last["name"] == "turn" else short
+    top = max(b.on_thr * 2.5, abs(last["base"]) * 1.15, abs(last["hz"]) * 1.15, 20.0)
+    for k_, (lab, val, col) in enumerate((("normal brain", last["base"], (200, 205, 220)), ("your brain", last["hz"], (255, 120, 255)))):
+        yy = y + 66 + 24 * k_
+        screen.blit(small.render(lab, True, col), (r.x + 16, yy - 3)); meter(r.x + 120, yy, 230, max(val, 0.0), b.on_thr, col, top=top, h=10)
+        screen.blit(small.render(f"{unit} {val:.0f} Hz", True, INK), (r.x + 362, yy - 3))
+    screen.blit(small.render(f"simulated {last['n_sim']:,} neurons live, in {last['sim_s']:.1f} s, seed {last['seed']}", True, DIM), (r.x + 16, y + 118))
+    if last["repeat"] is None: rtxt, rcol = "ENTER again, same number: exactly the same result", DIM
+    elif last["repeat"]: rtxt, rcol = f"Same number, recomputed: IDENTICAL ({last['hz']:.1f} Hz both times)", GREEN
+    else: rtxt, rcol = f"Same number, NOT identical ({last['prev']:.1f} vs {last['hz']:.1f} Hz)", RED
+    screen.blit(small.render(rtxt, True, rcol), (r.x + 16, y + 138))
+    card_edge(r)
+
+
+def draw_keys():
+    if state["try"] is not None:
+        rows = [[("YOU TRY IT", [("CLICK", "silence a neuron"), ("RIGHT-CLICK", "its whole type"), ("0-9", "your number"), ("ENTER", "run it"),
+                                 ("X", "clear"), ("P", "leave")])],
+                [("BEHAVIOUR", [("S", "eat"), ("V", "drink"), ("B", "refuse bitter"), ("L", "escape"), ("DOWN", "back away"), ("→", "turn away")]),
+                 ("", [("I", "where the data comes from"), ("Q", "quit")])]]
+    else:
+        rows = [[("TEST", [("T", "quick test"), ("S", "sugar"), ("V", "water"), ("B", "bitter"), ("L", "looming"), ("DOWN", "approach"), ("1 2", "threat L / R")]
+                          + ([("H", "no food")] if args.mode != "phase2" else []))]
+                + ([("TEAMS", [("A", "attack"), ("F", "hijack"), ("D", "repair"), ("R", "reset")])] if args.mode != "phase2" else []),
+                [("FLY", [("W", "walk"), ("← →", "steer"), ("SPACE", "stop"), ("C", "arena"), ("E", "explore")]),
+                 ("VIEW", [("O", "spin"), ("0", "front"), ("TAB", "log"), ("F11", "window")]),
+                 ("PROOF", ([("P", "you try it")] if args.mode != "phase2" else []) + [("I", "data")]), ("", [("M", "sex"), ("Q", "quit")])]]
+    for ri, row in enumerate(rows):
+        x = 16; y = KEYS_Y + 24 * ri
+        for gname, keys in row:
+            if gname:
+                gcol = {"TEAMS": (255, 140, 130), "TEST": ACCENT, "YOU TRY IT": ACCENT, "PROOF": GREEN}.get(gname, (150, 156, 176))
+                g = cap.render(gname, True, gcol); screen.blit(g, (x, y + 3)); x += g.get_width() + 10
+            for k_, lab in keys:
+                col = (120, 44, 44) if k_ in ("A", "F") else (44, 64, 124) if k_ == "D" else (40, 90, 60) if k_ in ("P", "I") else (52, 56, 72)
+                x = chip(x, y, k_, lab, col)
+            x += 14
+
+
+SOURCES = {"Connectivity_783.parquet": "github.com/philshiu/Drosophila_brain_model   (Shiu et al., Nature 2024)",
+           "Completeness_783.csv": "github.com/philshiu/Drosophila_brain_model   (Shiu et al., Nature 2024)",
+           "flywire_annotations.tsv": "github.com/flyconnectome/flywire_annotations   (Schlegel et al., Nature 2024)"}
+_QR = {}
+
+
+def qr_surface(url, size=196):
+    if url not in _QR:
+        try:
+            import qrcode
+            q = qrcode.QRCode(border=2, box_size=10); q.add_data(url); q.make(fit=True)
+            im = q.make_image(fill_color="black", back_color="white").convert("RGB").resize((size, size))
+            _QR[url] = pygame.image.fromstring(im.tobytes(), im.size, "RGB")
+        except Exception: _QR[url] = None
+    return _QR[url]
+
+
+def draw_info():
+    """WHERE THE DATA COMES FROM: the files, their fingerprints, counts made on this laptop, and a link anyone can check"""
+    shade = pygame.Surface((W, H), pygame.SRCALPHA); shade.fill((5, 6, 9, 200)); screen.blit(shade, (0, 0))
+    r = pygame.Rect(70, 96, W - 140, 600); y = card(r, "Where the data comes from", right="I: close", accent=GREEN)
+    f = worker.facts; x0 = r.x + 24; yy = y + 12
+    if not f:
+        screen.blit(font.render("fingerprinting the data files ...", True, DIM), (x0, yy)); card_edge(r); return
+    if f.get("error"): screen.blit(font.render(f["error"], True, RED), (x0, yy)); card_edge(r); return
+    screen.blit(head.render(f"A real fruit fly's brain, mapped neuron by neuron (FlyWire, {worker.sex})", True, INK), (x0, yy)); yy += 38
+    for k_, (val, lab) in enumerate(((f["neurons"], "neurons"), (f["connections"], "connections between them"), (f["synapses"], "synapses"))):
+        bx = x0 + k_ * 270
+        screen.blit(big.render(f"{val:,}", True, ACCENT), (bx, yy)); screen.blit(font.render(lab, True, INK), (bx, yy + 44))
+    screen.blit(small.render("counted on this laptop from the files below, when the program started", True, DIM), (x0, yy + 68))
+    yy += 98
+    screen.blit(cap.render("THE FILES THIS PROGRAM READ  (SHA-256 = their fingerprint: the same file anywhere gives the same code)", True, (150, 156, 176)), (x0, yy)); yy += 22
+    for name, size, sha in f["files"]:
+        screen.blit(font.render(name, True, INK), (x0, yy)); screen.blit(small.render(f"{size / 1e6:.1f} MB", True, DIM), (x0 + 250, yy + 3))
+        screen.blit(mono.render(sha[:40] + "...", True, (150, 210, 255)), (x0 + 330, yy + 2)); yy += 20
+        if name in SOURCES: screen.blit(small.render("public download: " + SOURCES[name], True, DIM), (x0 + 16, yy)); yy += 22
+        yy += 4
+    yy += 6
+    screen.blit(cap.render("THE MODEL", True, (150, 156, 176)), (x0, yy)); yy += 20
+    for tx in ("Spiking neurons (leaky integrate-and-fire) with the parameters published by Shiu et al., Nature 2024.",
+               "Nothing is pre-recorded: every result on screen is computed on this laptop when you press the key."):
+        screen.blit(font.render(tx, True, INK), (x0, yy)); yy += 22
+    yy += 12
+    screen.blit(cap.render("CHECK IT YOURSELF", True, GREEN), (x0, yy)); yy += 22
+    for n_, tx in enumerate(("Scan the code: find the same neuron, with the same ID, on the public FlyWire website.",
+                             "Press P: silence any neurons you like and type any number; the brain runs your experiment live.",
+                             "Download the files from the links above: their fingerprints will match the ones shown here."), 1):
+        pygame.draw.circle(screen, GREEN, (x0 + 9, yy + 10), 9); t_ = cap.render(str(n_), True, (14, 14, 18)); screen.blit(t_, (x0 + 9 - t_.get_width() // 2, yy + 3))
+        screen.blit(font.render(tx, True, INK), (x0 + 28, yy)); yy += 26
+    url = f"https://codex.flywire.ai/app/cell_details?cell_id={MN9_ID}"
+    q = qr_surface(url); qx = r.right - 24 - 196; qy = y + 150
+    if q is not None:
+        rrect(screen, (255, 255, 255), (qx - 6, qy - 6, 208, 208), r=8); screen.blit(q, (qx, qy))
+    for k_, tx in enumerate(("Scan: MN9, the feeding neuron,", "on the public FlyWire website", "(free Google sign-in).",
+                             f"FlyWire ID {MN9_ID}", "the same ID as in this program:", "hover any neuron to see its ID.")):
+        screen.blit(small.render(tx, True, INK if k_ < 3 else DIM), (qx - 6, qy + 212 + 18 * k_))
+    card_edge(r)
+
+
+
 def draw_text(lines, x, y, col=(230, 230, 230)):
     for i, l in enumerate(lines): screen.blit(font.render(l, True, col), (x, y + 18 * i))
 
@@ -491,7 +777,10 @@ while running:
     if t_loaded is not None and script and time.time() - t_loaded >= script[0][0]:
         _, key = script.pop(0); t_loaded = None
         if os.environ.get("LIVE_PROFILE"): print(f"script: pressing {key} at t={time.time()-t_start:.0f}s phase={state['phase']} msg={state['msg']!r}", flush=True)
-        if key in ("LCLICK", "RCLICK", "MCLICK"):                    # scripted mouse clicks on the fly panel (for tests / clips)
+        if key.startswith("TYPE_") and state["try"] is not None:      # scripted "right-click a neuron of this type" (tests / clips)
+            T_ = worker.brain.types["type"].astype(str).str.upper().values
+            state["try"]["lesion"] |= set(np.flatnonzero(T_ == key[5:]).tolist()); state["explain"] = try_explain()
+        elif key in ("LCLICK", "RCLICK", "MCLICK"):                  # scripted mouse clicks on the fly panel (for tests / clips)
             btn = {"LCLICK": 1, "RCLICK": 3, "MCLICK": 2}[key]; x = FLY_C.x + {"LCLICK": int(PW * 0.25), "RCLICK": int(PW * 0.75), "MCLICK": PW // 2}[key]
             pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, button=btn, pos=(x, FLY_C.centery), scripted=True))
         else:
@@ -503,6 +792,9 @@ while running:
         elif ev.type == pygame.KEYDOWN:
             k = ev.key
             log_event("key", key=pygame.key.name(k), mode=args.mode, kind_before=state["kind"])
+            consumed = False
+            if state["try"] is not None and worker.brain is not None and k != pygame.K_q:
+                k = try_key(k); consumed = k is None
             if k == pygame.K_q: running = False
             elif worker.brain is None: pass
             # T = quick test: the same brain test as the behaviour's own key, on whatever was attacked (or is on screen),
@@ -533,15 +825,16 @@ while running:
                 state["spin"] = not state["spin"]; state["t_spin"] = None
                 state["msg"] = "brain view: slowly spinning (O to stop, 0 for the front view)" if state["spin"] else "brain view: spin stopped"
             elif k == pygame.K_SPACE: state.update(walking=False, steer=0.0, target=None, phase="idle", verdict=None, tour=[], explore=False); state["msg"] = "stopped"
-            elif k == pygame.K_l: state.update(phase="think", kind="looming", walking=False); state["msg"] = "looming shadow! brain: escape?"; worker.q.put(("measure", "escape", True))
-            elif k == pygame.K_DOWN: state.update(phase="think", kind="approach", walking=False); state["msg"] = "object approaching head-on (LC16, both eyes): brain: back up?"; worker.q.put(("measure", "retreat", True))
+            elif k == pygame.K_l: state.update(phase="think", kind="looming", walking=False); state["msg"] = "looming shadow! brain: escape?"; worker.q.put(("measure", "escape", True) + take_custom())
+            elif k == pygame.K_DOWN: state.update(phase="think", kind="approach", walking=False); state["msg"] = "object approaching head-on (LC16, both eyes): brain: back up?"; worker.q.put(("measure", "retreat", True) + take_custom())
             elif k in (pygame.K_1, pygame.K_2):
                 side = "L" if k == pygame.K_1 else "R"; state.update(phase="think", kind="threat", walking=False)
-                state["msg"] = f"threat on the {'LEFT' if side == 'L' else 'RIGHT'} eye: brain: which steering neuron fires?"; worker.q.put(("threat", side))
+                state["msg"] = f"threat on the {'LEFT' if side == 'L' else 'RIGHT'} eye: brain: which steering neuron fires?"; worker.q.put(("threat", side) + take_custom())
             # ---- PHASE 3 KEYS ONLY BELOW THIS LINE -------------------------------------------------------------
             # Phase 2 is the behaviour demo and must never attack or repair anything: every red/blue key is swallowed
             # here, BEFORE any of them is handled.
-            elif args.mode == "phase2" and k in (pygame.K_a, pygame.K_f, pygame.K_h, pygame.K_d, pygame.K_r):
+            elif k == pygame.K_i: state["info"] = not state["info"]
+            elif args.mode == "phase2" and k in (pygame.K_a, pygame.K_f, pygame.K_h, pygame.K_d, pygame.K_r, pygame.K_p):
                 state["msg"] = "attack / repair belong to Phase 3 -- run:  python virtual_fly/phase3.py"
             elif k == pygame.K_h: state.update(phase="think", kind="hijack", walking=False); state["msg"] = "HIJACK: no sugar at all; does the attacked/forced brain eat?"; worker.q.put(("measure", "eat", False))
             elif k == pygame.K_a:
@@ -562,20 +855,28 @@ while running:
                 goal = worker.attack_goal or ("corrupt" if BEHAVIOURS[worker.sex][name].get("expected") == "off" else "block")
                 state["msg"] = f"BLUE TEAM: repairing {name} ..."; worker.q.put(("repair", name, goal))
             elif k == pygame.K_r: worker.q.put(("reset",)); state["msg"] = "brain reset: no attacks, no repairs"
+            elif k == pygame.K_p:
+                state["try"] = dict(name=TARGET.get(state["kind"], "eat"), lesion=set(), seed="", last=None, hist={})
+                state["msg"] = "YOU TRY IT: your own experiment on the real connectome"; state["info"] = False
             elif k == pygame.K_m:
                 worker = BrainWorker("male" if worker.sex == "female" else "female"); state["msg"] = f"loading the {worker.sex} brain ..."
             if k == pygame.K_TAB: state["show_log"] = not state["show_log"]
-            ex_ = explain_key(pygame.key.name(ev.key), args.mode, worker.attack is not None, worker.repair is not None)
-            if any(ex_): state["explain"] = ex_
+            if state["try"] is not None: state["explain"] = try_explain()
+            else:
+                ex_ = explain_key(pygame.key.name(ev.key), args.mode, worker.attack is not None, worker.repair is not None)
+                if any(ex_): state["explain"] = ex_
             log_event("after_key", key=pygame.key.name(ev.key), msg=state["msg"], explain=state["explain"])     # what the screen says right after the key
 
         elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1 and worker.brain is not None and BRAIN_C.collidepoint(to_canvas(ev)):
-            state["drag"] = to_canvas(ev)
+            state["drag"] = to_canvas(ev); state["click0"] = to_canvas(ev)
+        elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 3 and state["try"] is not None and worker.brain is not None and BRAIN_C.collidepoint(to_canvas(ev)):
+            try_pick(to_canvas(ev), whole_type=True)
         elif ev.type == pygame.MOUSEMOTION and state["drag"] is not None and worker.brain is not None:
             mp = to_canvas(ev); dx, dy = mp[0] - state["drag"][0], mp[1] - state["drag"][1]; state["drag"] = mp
             worker.view.rotate_by(dx * 0.01, dy * 0.01)                  # about 0.6 degrees per pixel dragged
         elif ev.type == pygame.MOUSEBUTTONUP and ev.button == 1:
-            state["drag"] = None
+            c0 = state.get("click0"); mp = to_canvas(ev); state["drag"] = None; state["click0"] = None
+            if c0 and state["try"] is not None and abs(mp[0] - c0[0]) + abs(mp[1] - c0[1]) < 6: try_pick(c0, whole_type=False)
         elif ev.type == pygame.MOUSEWHEEL and worker.brain is not None and BRAIN_C.collidepoint(to_canvas(pygame.mouse.get_pos())):
             worker.view.zoom_by(1.15 ** ev.y)
         elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and FLY_C.collidepoint(to_canvas(ev)):
@@ -700,7 +1001,17 @@ while running:
                             fired=(state["counts"] or {}).get("fired"), on_thr=bh_.on_thr, off_thr=bh_.off_thr)
                 ex_ = explain_result(kind, d_x, ctx_)
                 if ex_: state["explain"] = tuple(n_ if n_ is not None else o_ for n_, o_ in zip(ex_, state["explain"]))
-            if drawn_ and kind in ("measured", "threat"):                  # the stepper: a test of the brain as it now stands
+            if d_x.get("custom") and kind in ("measured", "threat") and (kind == "threat" or d_x.get("with_stim")) and state["try"] is not None:
+                tr = state["try"]
+                if kind == "threat": now_, base_ = d_x["dna_L"] - d_x["dna_R"], d_x["base_L"] - d_x["base_R"]
+                else: now_, base_ = d_x["hz"], d_x["base_hz"]
+                key_ = (nm_, tuple(sorted(d_x["custom"]["lesion"])), d_x["seed"]); prev_ = tr["hist"].get(key_)
+                tr["last"] = dict(name=nm_, hz=now_, base=base_, seed=d_x["seed"], n=len(d_x["custom"]["lesion"]), n_sim=d_x["n_sim"],
+                                  sim_s=d_x["sim_s"], repeat=(None if prev_ is None else prev_ == now_), prev=prev_)
+                tr["hist"][key_] = now_
+                state["explain"] = (f"Your experiment: {len(d_x['custom']['lesion']):,} neurons you chose silenced, your number {d_x['seed']} as the random seed.",
+                                    state["explain"][1], state["explain"][2])
+            if drawn_ and kind in ("measured", "threat") and not d_x.get("custom"):   # the stepper: a test of the brain as it now stands
                 if worker.attack is None: state["t_healthy"] = True
                 elif worker.repair is None and not state["lost"]: state["t_att"] = True
                 else: state["t_rep"] = True
@@ -725,7 +1036,10 @@ while running:
                           attack_name=worker.attack_name, attack_goal=worker.attack_goal,
                           attack_size=(worker.attack or {}).get("size"), repair_size=(worker.repair or {}).get("size"),
                           explain=state["explain"], score=[t for t, _ in score_lines(state["score"])],
-                          iv={k_: v_ for k_, v_ in worker.iv.items() if k_ != "potentiate"} | ({"potentiate": pot} if pot else {}))
+                          iv=({k_: v_ for k_, v_ in worker.iv.items() if k_ != "potentiate"} | ({"potentiate": pot} if pot else {})
+                              | ({"lesion": list(d_["lesion"])} if d_.get("custom") else {})),
+                          seed=d_.get("seed"), custom=bool(d_.get("custom")), base_hz=d_.get("base_hz"),
+                          base_L=d_.get("base_L"), base_R=d_.get("base_R"), n_sim=d_.get("n_sim"))
     except queue.Empty: pass
 
     _t0 = time.time()
@@ -806,6 +1120,7 @@ while running:
                 st["anim"] = None
         else: v.glow *= 0.95
         cur_name = {"looming": "escape", "bitter": "refuse_bitter", "approach": "retreat", "threat": "turn", "water": "drink"}.get(st["kind"], "eat")
+        if st["try"] is not None: cur_name = st["try"]["name"]
         cur = worker.bhv[cur_name]
         stim_label, readout_label = LABELS[cur_name]
         att = neurons_of(worker.attack["intervention"]) if worker.attack else []
@@ -822,6 +1137,7 @@ while running:
         if no_food: stim_label = stim_label + " (not stimulated: no food)"
         bimg = v.frame(stimulus=(() if no_food else cur.stim), readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
                        silenced=sil, counts=counts_txt, readouts=cur.readouts,
+                       chosen=(sorted(st["try"]["lesion"]) if st["try"] is not None else ()),
                        readout_hz=(st["readout_hz"][1] if st.get("readout_hz") and st["readout_hz"][0] == cur_name else None),
                        show_redblue=(args.mode != "phase2"), readout_bar=cur.on_thr,
                        title="", subtitle="", score=[],
@@ -853,6 +1169,7 @@ while running:
                 txt = f"modified: attack {worker.attack['size']}" + (f"  +  repair {worker.repair['size']}" if worker.repair else "") + " neurons"
                 xr = pill(xr, 13, txt, INK, (58, 30, 32), dot=RED if not worker.repair else BLUE)
         xr = pill(xr, 13, f"{worker.sex} fly  \u00b7  {worker.brain.N:,} neurons", DIM, (30, 34, 46))
+        if st["try"] is not None: xr = pill(xr, 13, "YOU TRY IT", (14, 14, 18), ACCENT)
     draw_strip(cur_name if worker.brain is not None else None)
     # the fly
     card(FLY_CARD, "The fly", right="FlyGym body  \u00b7  MuJoCo physics", accent=ACCENT)
@@ -872,42 +1189,14 @@ while running:
         t = head.render(f"loading the {worker.sex} brain{dots}", True, DIM); screen.blit(t, (BRAIN_C.centerx - t.get_width() // 2, BRAIN_C.centery - 20))
         t = small.render("female ~10 s, male ~40 s", True, DIM); screen.blit(t, (BRAIN_C.centerx - t.get_width() // 2, BRAIN_C.centery + 10))
     card_edge(BRAIN_CARD)
+    if worker.brain is not None and st["drag"] is None: draw_hover()
     # what just happened
-    r = STORY_CARD; y = card(r, "What just happened", right="TAB: technical log", accent=ACCENT)
-    msg_ = st["msg"]; hf = next((f_ for f_ in HEAD_FONTS if f_.size(msg_)[0] <= r.w - 32), HEAD_FONTS[-1])   # shrink to fit first
-    while msg_ and hf.size(msg_)[0] > r.w - 32: msg_ = msg_[:-2]
-    screen.blit(hf.render(msg_ if msg_ == st["msg"] else msg_.rstrip() + " ...", True, ACCENT), (r.x + 16, y + 2 + (head.get_height() - hf.get_height()) // 2))
-    yy = y + 30; y_max = r.bottom - 16
-    if st["show_log"]:
-        for line in st["loglines"][-6:]:
-            if yy < y_max: screen.blit(mono.render(line[:96], True, (185, 187, 200)), (r.x + 16, yy)); yy += 19
-    else:
-        for lab, txt, col in zip(("You did", "The brain did", "What it means"), st["explain"], ((215, 218, 230), (255, 217, 89), (140, 230, 160))):
-            if not txt: continue
-            screen.blit(cap.render(lab.upper(), True, (120, 124, 142)), (r.x + 16, yy + 3))
-            y0_ = yy
-            for line in wrap(txt, body_f, r.w - 136 - 16):
-                if yy < y_max: screen.blit(body_f.render(line[:1].upper() + line[1:] if yy == y0_ else line, True, col), (r.x + 136, yy))
-                yy += 19
-            yy += 3
-    card_edge(r)
-    draw_score(st)
-    # keys, in families
-    rows = [[("TEST", [("T", "quick test"), ("S", "sugar"), ("V", "water"), ("B", "bitter"), ("L", "looming"), ("DOWN", "approach"), ("1 2", "threat L / R")]
-                      + ([("H", "no food")] if args.mode != "phase2" else []))]
-            + ([("TEAMS", [("A", "attack"), ("F", "hijack"), ("D", "repair"), ("R", "reset")])] if args.mode != "phase2" else []),
-            [("FLY", [("W", "walk"), ("\u2190 \u2192", "steer"), ("SPACE", "stop"), ("C", "choice arena"), ("E", "explore")]),
-             ("VIEW", [("O", "spin"), ("0", "front"), ("TAB", "log"), ("F11", "window")]), ("", [("M", "male / female"), ("Q", "quit")])]]
-    for ri, row in enumerate(rows):
-        x = 16; y = KEYS_Y + 24 * ri
-        for gname, keys in row:
-            if gname:
-                gcol = {"TEAMS": (255, 140, 130), "TEST": ACCENT}.get(gname, (150, 156, 176))
-                g = cap.render(gname, True, gcol); screen.blit(g, (x, y + 3)); x += g.get_width() + 10
-            for k_, lab in keys:
-                col = (120, 44, 44) if k_ in ("A", "F") else (44, 64, 124) if k_ == "D" else (52, 56, 72)
-                x = chip(x, y, k_, lab, col)
-            x += 14
+    if st["try"] is not None and st["try"]["last"] is None: draw_try_intro(STORY_CARD)
+    else: draw_story(STORY_CARD)
+    if st["try"] is not None: draw_try_card(SCORE_CARD)
+    else: draw_score(st)
+    draw_keys()
+    if st["info"] and worker.brain is not None: draw_info()
     present(); clock.tick(30)
     if st.get("snap_full") and args.snapshots:
         pygame.image.save(screen, os.path.join(args.snapshots, st["snap_full"] + "_window.png")); st["snap_full"] = None
