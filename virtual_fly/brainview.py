@@ -94,6 +94,15 @@ class BrainView:
             self._peak[size] = float(gaussian_filter(k, size, truncate=2.5)[20, 20])
         return self._peak[size]
 
+    _kern = {}
+
+    def _kernel(self, size):
+        """a single neuron's blurred dot at this blur size (cached; same filter as gaussian_filter(..., truncate=2.5))"""
+        if size not in self._kern:
+            r = int(2.5 * size + 0.5); k = np.zeros((2 * r + 3, 2 * r + 3)); k[r + 1, r + 1] = 1.0
+            self._kern[size] = gaussian_filter(k, size, truncate=2.5)[1:-1, 1:-1]
+        return self._kern[size]
+
     def _accumulate(self, idx, w):
         """sum of weights per pixel (bincount is far faster than np.add.at)"""
         flat = self.py[idx] * self.W + self.px[idx]
@@ -103,9 +112,20 @@ class BrainView:
         """Every neuron in `idx` is drawn as a dot at FULL brightness at its own pixel: the layer is scaled by the peak of
         a single neuron's dot, not by the layer's maximum, so a dense cluster can never dim a neuron firing alone."""
         if len(idx) == 0: return
+        size = round(size * 20) / 20               # the blinking ring changes size every frame: keep the dot cache small
         w = None if strength is None else np.clip(strength, 0.0, 1.0).astype(np.float64)
-        layer = self._accumulate(np.asarray(idx), w)
-        layer = np.clip(gaussian_filter(layer, size, truncate=2.5) / self._unit_peak(size), 0.0, 1.0)
+        idx = np.asarray(idx); K = self._kernel(size); k = K.shape[0] // 2
+        if idx.size * K.size < 250_000:            # few neurons: add a pre-blurred dot at each one (same result, far cheaper)
+            dy, dx = np.mgrid[-k:k + 1, -k:k + 1]
+            ys = self.py[idx][:, None] + dy.ravel(); xs = self.px[idx][:, None] + dx.ravel()
+            ww = K.ravel()[None, :] * (1.0 if w is None else w[:, None])
+            m = (ys >= 0) & (ys < self.H) & (xs >= 0) & (xs < self.W)
+            pix, inv = np.unique((ys * self.W + xs)[m], return_inverse=True)     # only the pixels the dots cover
+            val = np.clip(np.bincount(inv, weights=np.broadcast_to(ww, m.shape)[m]) / self._unit_peak(size), 0.0, 1.0)
+            img.reshape(-1, 3)[pix] += (val[:, None] * np.asarray(color)[None, :]).astype(np.float32)
+            return
+        layer = gaussian_filter(self._accumulate(idx, w), size, truncate=2.5)
+        layer = np.clip(layer / self._unit_peak(size), 0.0, 1.0).astype(np.float32)
         for c in range(3): img[..., c] += layer * color[c]
 
     def frame(self, stimulus=(), readout=None, attacked=(), repaired=(), readout_hz=None, title="", subtitle="",
