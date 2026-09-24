@@ -49,6 +49,11 @@ class FlyBody:
                 "head": dict(pos_offset=(3.4, -3.0, 0.2), rotation=Rotation3D("euler", (1.40, 0, 0.85)), fovy=26.0)}
         cam = self.fly.add_tracking_camera(name="cam", **cams[camera])
         self.world = FlatGroundWorld()
+        # a dark gradient sky behind the fly (the scene has none, so the renderer shows plain white); looks only
+        for t in self.world.mjcf_root.textures:
+            if t.type == mujoco.mjtTexture.mjTEXTURE_SKYBOX:
+                t.builtin = mujoco.mjtBuiltin.mjBUILTIN_GRADIENT; t.rgb1 = [0.20, 0.24, 0.34]; t.rgb2 = [0.03, 0.035, 0.06]
+                t.width = t.height = 256
         self.world.add_fly(self.fly, [0, 0, 0.8], Rotation3D("quat", [1, 0, 0, 0]),
                            bodysegs_with_ground_contact=ContactBodiesPreset.TIBIA_TARSUS_ONLY, add_ground_contact_sensors=False)
         if sugar_at is not None:                        # a visual-only sugar drop (no collision)

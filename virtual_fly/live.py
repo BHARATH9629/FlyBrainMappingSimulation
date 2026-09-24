@@ -35,6 +35,7 @@ ap.add_argument("--no_cache", action="store_true", help="always recompute attack
 ap.add_argument("--max_seconds", type=float, default=0, help="quit after this many seconds (safety for scripted runs)")
 ap.add_argument("--snapshots", default="", help="save the brain panel at the end of every attack / repair replay to this folder (tests)")
 ap.add_argument("--events", default="", help="append every key press and every on-screen result to this JSONL file (tests)")
+ap.add_argument("--windowed", action="store_true", help="a window instead of the full screen (scripted runs are always windowed)")
 ap.add_argument("--mode", default="full", choices=["full", "phase2", "phase3"],
                 help="phase2 = behaviours only (every red/blue key refused); phase3 = the attack/repair demo; full = both")
 args = ap.parse_args()
@@ -52,9 +53,16 @@ def log_event(kind, **fields):
     with open(args.events, "a", encoding="utf-8") as f:
         f.write(json.dumps(plain(dict(event=kind, t=round(time.time(), 2), **fields))) + "\n")
 
-PW, PH, BAR, TOP = 640, 436, 244, 40            # panel size, bottom panel, title bar: 720 px tall, fits a 1280 x 800 laptop
-FLY_H = 480                                     # the fly camera renders 640 x 480; the panel shows its middle 436 rows
-BG, PANEL, INK, DIM, ACCENT = (16, 17, 22), (26, 28, 36), (235, 235, 240), (150, 152, 165), (255, 214, 102)
+W, H = 1280, 800                                # the canvas: everything is drawn at this size, then fills the screen
+PW, PH = 622, 418                               # the fly picture and the brain picture (inside their cards)
+FLY_H = 466                                     # the fly camera renders 640 x 480 -> 622 x 466; the card shows its middle 418 rows
+HDR = 30                                        # card title strip
+FLY_CARD, BRAIN_CARD = pygame.Rect(12, 98, PW, HDR + PH), pygame.Rect(646, 98, PW, HDR + PH)
+FLY_C, BRAIN_C = pygame.Rect(12, 98 + HDR, PW, PH), pygame.Rect(646, 98 + HDR, PW, PH)     # the pictures themselves
+STORY_CARD, SCORE_CARD = pygame.Rect(12, 556, 770, 186), pygame.Rect(794, 556, 474, 186)
+STRIP_Y, KEYS_Y = 58, 752
+BG, PANEL, INK, DIM, ACCENT = (13, 14, 19), (24, 26, 34), (236, 237, 242), (146, 150, 166), (255, 214, 102)
+EDGE, RED, BLUE, GREEN = (46, 50, 66), (255, 96, 86), (110, 160, 255), (110, 215, 140)
 SIM_PER_FRAME = 0.012                           # simulated seconds per screen frame (~1/8 real time)
 ARRIVE = 0.95                                   # mm from drop centre = "at the drop"
 
@@ -177,30 +185,120 @@ def neurons_of(iv):
                   | {a for (a, b) in iv.get("potentiate", {})})
 
 
-pygame.init(); screen = pygame.display.set_mode((2 * PW, TOP + PH + BAR)); pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else ("NeuroRedTeam -- PHASE 3: red team vs blue team" if args.mode == "phase3" else "NeuroRedTeam LIVE"))
-font = pygame.font.SysFont("segoeui", 17); mono = pygame.font.SysFont("consolas", 15); big = pygame.font.SysFont("segoeui", 36, bold=True)
-title_font = pygame.font.SysFont("segoeui", 22, bold=True); small = pygame.font.SysFont("segoeui", 14)
+pygame.init()
+pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else ("NeuroRedTeam -- PHASE 3: red team vs blue team" if args.mode == "phase3" else "NeuroRedTeam LIVE"))
+
+
+def open_display(full):
+    """full screen at the screen's own size, or a window that fits on it; the canvas is scaled into either"""
+    ds = pygame.display.get_desktop_sizes()[0]
+    if full: return pygame.display.set_mode(ds, pygame.FULLSCREEN)
+    k = min(1.0, (ds[0] - 16) / W, (ds[1] - 90) / H)
+    return pygame.display.set_mode((int(W * k), int(H * k)))
+
+
+FULL = not (args.script or args.windowed)
+display = open_display(FULL); screen = pygame.Surface((W, H))
+
+
+def _fit():
+    dw, dh = display.get_size(); k = min(dw / W, dh / H)
+    return k, (dw - int(W * k)) // 2, (dh - int(H * k)) // 2
+
+
+def present():
+    k, ox, oy = _fit()
+    if k == 1.0: display.blit(screen, (ox, oy))
+    else: display.fill(BG); display.blit(pygame.transform.smoothscale(screen, (int(W * k), int(H * k))), (ox, oy))
+    pygame.display.flip()
+
+
+def to_canvas(ev_or_pos):
+    """screen pixel -> canvas pixel (scripted clicks are already in canvas pixels)"""
+    if getattr(ev_or_pos, "scripted", False): return ev_or_pos.pos
+    pos = getattr(ev_or_pos, "pos", ev_or_pos); k, ox, oy = _fit()
+    return (int((pos[0] - ox) / k), int((pos[1] - oy) / k))
+
+
+F = lambda size, bold=False: pygame.font.SysFont("segoeui", size, bold=bold)
+font, small, cap, head, title_font, big = F(17), F(14), F(12, True), F(19, True), F(24, True), F(34, True)
+body_f = F(16)                                  # the explanation text
+HEAD_FONTS = (head, F(17, True), F(15, True))   # the headline: largest that fits
+mono = pygame.font.SysFont("consolas", 14)
 
 
 def rrect(surface, color, rect, r=8, width=0):
     pygame.draw.rect(surface, color, rect, width=width, border_radius=r)
 
 
-def chip(x, y, key, label, col=(60, 64, 80)):
-    """A keycap + label; returns the x after it."""
-    k = mono.render(key, True, INK); rrect(screen, col, (x, y, k.get_width() + 12, 22), r=5); screen.blit(k, (x + 6, y + 2))
-    l = small.render(label, True, DIM); screen.blit(l, (x + k.get_width() + 17, y + 3))
-    return x + k.get_width() + 17 + l.get_width() + 14
+def _corner_masks(r=12, col=BG):
+    """small patches that round off the bottom corners of a picture (outside the quarter circle: background colour)"""
+    out = []
+    for flip in (False, True):
+        m = pygame.Surface((r, r), pygame.SRCALPHA)
+        for y in range(r):
+            for x in range(r):
+                cx, cy = (x + 0.5, y + 0.5) if flip else (r - x - 0.5, y + 0.5)     # distance from the arc's centre
+                if cx * cx + cy * cy > r * r: m.set_at((x, y), col)
+        out.append(m)
+    return out
+CORNER_L, CORNER_R = _corner_masks()
 
 
-def meter(x, y, w, label, hz, bar, ok_col):
-    """Firing-rate meter with the pass bar marked."""
-    top = max(bar * 2.5, hz * 1.15, 60.0)
-    rrect(screen, (40, 42, 54), (x, y + 22, w, 14), r=7)
-    fill = int(w * min(hz / top, 1.0)); rrect(screen, ok_col, (x, y + 22, max(fill, 4), 14), r=7)
-    bx = x + int(w * bar / top); pygame.draw.line(screen, INK, (bx, y + 18), (bx, y + 40), 2)
-    screen.blit(small.render(f"pass bar {bar:.0f} Hz", True, DIM), (bx + 6, y + 40))
-    screen.blit(font.render(f"{label}: {hz:.0f} Hz", True, INK), (x, y - 2))
+def card(rect, title, right="", accent=None):
+    """a rounded panel with a small caps title strip; returns the inner content top y"""
+    rrect(screen, (6, 7, 10), rect.move(0, 3), r=12)                             # soft shadow
+    rrect(screen, PANEL, rect, r=12)
+    if accent: pygame.draw.rect(screen, accent, (rect.x + 14, rect.y + 11, 3, 12), border_radius=2)
+    screen.blit(cap.render(title.upper(), True, (178, 182, 198)), (rect.x + (22 if accent else 14), rect.y + 9))
+    if right:
+        t = small.render(right, True, DIM); screen.blit(t, (rect.right - t.get_width() - 14, rect.y + 7))
+    return rect.y + HDR
+
+
+def card_edge(rect):
+    rrect(screen, EDGE, rect, r=12, width=1)
+
+
+def picture(img, rect, crop_y=0):
+    """a picture inside a card, bottom corners rounded to match the card"""
+    screen.blit(img, rect.topleft, area=pygame.Rect(0, crop_y, rect.w, rect.h))
+    screen.blit(CORNER_L, (rect.x, rect.bottom - 12)); screen.blit(CORNER_R, (rect.right - 12, rect.bottom - 12))
+
+
+def pill(right_x, y, text, fg, bg, dot=None):
+    """a rounded label ending at right_x; returns the x where the next pill (to its left) must end"""
+    t = small.render(text, True, fg); w = t.get_width() + (32 if dot else 20)
+    rrect(screen, bg, (right_x - w, y, w, 26), r=13)
+    if dot: pygame.draw.circle(screen, dot, (right_x - w + 14, y + 13), 4)
+    screen.blit(t, (right_x - w + (24 if dot else 10), y + 4))
+    return right_x - w - 8
+
+
+def wrap(text, f, width):
+    lines, line = [], ""
+    for w_ in text.split():
+        if f.size((line + " " + w_).strip())[0] > width and line: lines.append(line); line = w_
+        else: line = (line + " " + w_).strip()
+    if line: lines.append(line)
+    return lines
+
+
+def chip(x, y, key, label, col=(52, 56, 72)):
+    """a keycap + label; returns the x after it"""
+    k = mono.render(key, True, INK); w = k.get_width() + 12
+    rrect(screen, (col[0] // 2, col[1] // 2, col[2] // 2), (x, y + 2, w, 20), r=5); rrect(screen, col, (x, y, w, 20), r=5)
+    screen.blit(k, (x + 6, y + 1))
+    l = small.render(label, True, DIM); screen.blit(l, (x + w + 5, y + 1))
+    return x + w + 5 + l.get_width() + 12
+
+
+def meter(x, y, w, hz, bar, col, top=None, h=10):
+    """firing-rate bar with the pass bar marked"""
+    top = top or max(bar * 2.5, hz * 1.15, 60.0)
+    rrect(screen, (40, 43, 56), (x, y, w, h), r=h // 2)
+    if hz > 0: rrect(screen, col, (x, y, max(int(w * min(hz / top, 1.0)), h), h), r=h // 2)
+    bx = x + int(w * min(bar / top, 1.0)); pygame.draw.line(screen, INK, (bx, y - 4), (bx, y + h + 3), 2)
 clock = pygame.time.Clock()
 worker = BrainWorker(args.sex)
 body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False,   # drops parked off-screen
@@ -223,7 +321,7 @@ state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}
              silenced=None, counts=None,
              drag=None, spin=False, t_spin=None,
              explain=("", "", ""), score=None, show_log=False,
-             thumbs=None)   # before / after pictures: dict(name, healthy=(img, hz), attack=(img, hz), repair=(img, hz) | "lost")   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
+             thumbs=None, t_healthy=False, t_att=False, t_rep=False, lost=False)   # stepper: which tests have been done   # before / after pictures: dict(name, healthy=(img, hz), attack=(img, hz), repair=(img, hz) | "lost")   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
 
 
 def place_drop(kind, dist=9.0):
@@ -273,24 +371,98 @@ def start_verdict(name):
     state.update(phase="think", t_phase=0.0); worker.q.put(("measure", name, True)); worker.q.put(("measure", name, False))
 
 
-THUMB = (192, 72)                                # before / after pictures: 3 across the top of the fly panel
+THUMB = (140, 60)                                # before / after pictures in the scoreboard card
 
 
-def draw_thumbs(th):
-    """healthy / attacked / repaired: the whole brain at the end of each run, side by side, each with its readout rate
-    written on a dark strip above the picture (never on top of the firing neurons)"""
-    short = SHORT.get(th["name"], "output"); x, y = 12, TOP + 92
-    for key, lab, col in (("healthy", "healthy", (220, 220, 230)), ("attack", "attacked", (255, 90, 80)), ("repair", "repaired", (110, 160, 255))):
-        has = key in th; lost = has and th[key] == "lost"
-        rrect(screen, (20, 21, 28), (x - 2, y - 20, THUMB[0] + 4, THUMB[1] + 22), r=4)
-        txt = lab + (f"   {short} {th[key][1]:.0f} Hz" if has and not lost else "")
-        screen.blit(small.render(txt, True, col), (x + 4, y - 19))
-        if has and not lost: screen.blit(pygame.surfarray.make_surface(np.transpose(th[key][0], (1, 0, 2))), (x, y))
+def draw_score(st):
+    """SCOREBOARD card: healthy / attacked / repaired brain pictures side by side, each with its readout bar.
+    Before any attack (and in Phase 2) it shows the readout of the last test against its pass bar."""
+    r = SCORE_CARD; th = st["thumbs"] if args.mode != "phase2" else None
+    if not th:
+        y = card(r, "Readout" if args.mode == "phase2" else "Scoreboard", accent=GREEN if args.mode == "phase2" else None)
+        if st["meter"]:
+            label, hz, bar_, ok = st["meter"]
+            t = title_font.render(f"{hz:.0f} Hz", True, GREEN if ok else RED); screen.blit(t, (r.x + 16, y + 6))
+            screen.blit(font.render(label, True, INK), (r.x + 26 + t.get_width(), y + 12))
+            meter(r.x + 16, y + 48, r.w - 32, hz, bar_, GREEN if ok else RED, h=14)
+            screen.blit(small.render(f"white line = the pass bar ({bar_:.0f} Hz): above it, this neuron counts as firing", True, DIM), (r.x + 16, y + 72))
         else:
-            t = small.render("no repair works" if lost else ("press D to repair" if key == "repair" else ""), True, col if lost else (120, 122, 135))
-            screen.blit(t, (x + (THUMB[0] - t.get_width()) // 2, y + THUMB[1] // 2 - 9))
-        pygame.draw.rect(screen, col if has else (80, 82, 96), (x - 2, y - 20, THUMB[0] + 4, THUMB[1] + 22), 2, border_radius=4)
-        x += THUMB[0] + 12
+            t = font.render("No test yet: pick a behaviour" + (" above." if args.mode == "phase2" else " and test the healthy fly."), True, DIM)
+            screen.blit(t, (r.x + 16, y + 12))
+        if args.mode != "phase2":
+            hint = "Press A to send in the RED TEAM (F: hijack attack)" if worker.attack is None else ""
+            if hint: screen.blit(font.render(hint, True, (255, 150, 140)), (r.x + 16, r.bottom - 34))
+        card_edge(r); return
+    name = th["name"]; short = SHORT.get(name, "output"); healthy = th["healthy"][1]
+    right = f"red {worker.attack['size'] if worker.attack else '-'}  vs  blue " + ("lost" if th.get("repair") == "lost" else (str(worker.repair["size"]) if worker.repair else "-"))
+    y = card(r, f"Scoreboard: {NAMES_UI.get(name, name)}", right=f"neurons used: {right}")
+    vals = [th[k][1] for k in ("healthy", "attack", "repair") if k in th and th[k] != "lost"]
+    bar_ = worker.bhv[name].on_thr; top = max(bar_ * 2.0, max(vals) * 1.12, 20.0)
+    x = r.x + 14; cw = THUMB[0]
+    for key, lab, col in (("healthy", "HEALTHY" + (" (no food)" if not th["with_stim"] else ""), (200, 205, 220)), ("attack", "ATTACKED", RED), ("repair", "REPAIRED", BLUE)):
+        has = key in th; lost = has and th[key] == "lost"
+        screen.blit(cap.render(lab, True, col), (x, y + 6))
+        box = pygame.Rect(x, y + 24, *THUMB)
+        if has and not lost:
+            screen.blit(pygame.surfarray.make_surface(np.transpose(th[key][0], (1, 0, 2))), box.topleft)
+            rrect(screen, col, box.inflate(4, 4), r=6, width=2)
+            hz = th[key][1]; meter(x, box.bottom + 12, cw, hz, bar_, col, top=top, h=8)
+            pct = f"  {hz / healthy * 100:.0f}%" if healthy > 1 and th["with_stim"] and name != "refuse_bitter" else ""
+            screen.blit(small.render(f"{short} {hz:.0f} Hz{pct}", True, INK), (x, box.bottom + 24))
+        else:
+            rrect(screen, (18, 19, 25), box, r=6); rrect(screen, col if lost else EDGE, box.inflate(4, 4), r=6, width=2 if lost else 1)
+            t = small.render("no repair works" if lost else "press D to repair" if key == "repair" else "", True, col if lost else DIM)
+            screen.blit(t, (box.centerx - t.get_width() // 2, box.centery - 9))
+        x += cw + 16
+    card_edge(r)
+
+
+NAMES_UI = {"eat": "eating", "drink": "drinking", "refuse_bitter": "refusing bitter", "escape": "escaping",
+            "retreat": "backing away", "turn": "turning away"}
+
+
+def draw_strip(cur_name):
+    """Phase 3: the five steps of the red/blue story, the current one lit. Phase 2: the six behaviours, the current one lit."""
+    y = STRIP_Y; st = state
+    if args.mode == "phase2":
+        items = [("eat", "Eat", "S"), ("drink", "Drink", "V"), ("refuse_bitter", "Refuse bitter", "B"), ("escape", "Escape", "L"),
+                 ("retreat", "Back away", "DOWN"), ("turn", "Turn away", "2")]
+        w = (W - 24 - 5 * 10) // 6; x = 12
+        for nm, lab, key in items:
+            on = nm == cur_name and st["kind"] is not None
+            rrect(screen, (40, 46, 36) if on else PANEL, (x, y, w, 32), r=16); rrect(screen, GREEN if on else EDGE, (x, y, w, 32), r=16, width=2 if on else 1)
+            t = font.render(lab, True, INK if on else DIM); k = mono.render(key, True, INK)
+            tw = t.get_width() + 10 + k.get_width() + 10; x0 = x + (w - tw) // 2
+            screen.blit(t, (x0, y + 5)); rrect(screen, (60, 64, 80), (x0 + t.get_width() + 8, y + 7, k.get_width() + 10, 19), r=4); screen.blit(k, (x0 + t.get_width() + 13, y + 8))
+            x += w + 10
+        return
+    lost = st["lost"]
+    steps = [("Test the healthy fly", "", (200, 205, 220)), ("Red team attacks", "A", RED), ("Test it", "T", ACCENT),
+             ("Blue team repairs" if not lost else "Blue team loses", "D", BLUE if not lost else (200, 90, 90)), ("Test it again", "T", ACCENT)]
+    attacked = worker.attack is not None; repaired = worker.repair is not None or lost
+    cur = (0 if not st["t_healthy"] else 1) if not attacked else ((2 if not st["t_att"] else 3) if not repaired else (4 if not st["t_rep"] else 5))
+    w = (W - 24 - 4 * 22) // 5; x = 12; pulse = 0.5 + 0.5 * np.sin(time.time() * 3)
+    for i, (lab, key, col) in enumerate(steps):
+        done = i < cur and (i != 0 or st["t_healthy"]); now = i == cur
+        bg = tuple(int(c * 0.22) for c in col) if done else ((32, 34, 44) if now else PANEL)
+        rrect(screen, bg, (x, y, w, 32), r=16)
+        edge = tuple(int(c * (0.65 + 0.35 * pulse)) for c in col) if now else (col if done else EDGE)
+        rrect(screen, edge, (x, y, w, 32), r=16, width=2 if (now or done) else 1)
+        pygame.draw.circle(screen, col if (done or now) else (60, 63, 78), (x + 18, y + 16), 10)
+        if done and i == 3 and lost:                                                # the blue team lost: a cross, not a tick
+            pygame.draw.line(screen, (14, 14, 18), (x + 13, y + 11), (x + 23, y + 21), 3); pygame.draw.line(screen, (14, 14, 18), (x + 23, y + 11), (x + 13, y + 21), 3)
+        elif done: pygame.draw.lines(screen, (14, 14, 18), False, [(x + 13, y + 16), (x + 17, y + 20), (x + 24, y + 11)], 3)   # a tick
+        else:
+            n = cap.render(str(i + 1), True, (14, 14, 18) if now else DIM)
+            screen.blit(n, (x + 18 - n.get_width() // 2, y + 16 - n.get_height() // 2))
+        t = font.render(lab, True, INK if (now or done) else DIM); screen.blit(t, (x + 36, y + 5))
+        if key:
+            kk = mono.render(key, True, INK); kx = x + w - kk.get_width() - 20
+            if kx > x + 36 + t.get_width() + 6:
+                rrect(screen, (60, 64, 80), (kx - 5, y + 7, kk.get_width() + 10, 19), r=4); screen.blit(kk, (kx, y + 8))
+        if i < 4:                                                                   # the arrow to the next step
+            ax = x + w + 6; pygame.draw.polygon(screen, (80, 84, 100), [(ax, y + 10), (ax + 10, y + 16), (ax, y + 22)])
+        x += w + 22
 
 
 def draw_text(lines, x, y, col=(230, 230, 230)):
@@ -312,12 +484,14 @@ while running:
         _, key = script.pop(0); t_loaded = None
         if os.environ.get("LIVE_PROFILE"): print(f"script: pressing {key} at t={time.time()-t_start:.0f}s phase={state['phase']} msg={state['msg']!r}", flush=True)
         if key in ("LCLICK", "RCLICK", "MCLICK"):                    # scripted mouse clicks on the fly panel (for tests / clips)
-            btn = {"LCLICK": 1, "RCLICK": 3, "MCLICK": 2}[key]; x = {"LCLICK": int(PW * 0.25), "RCLICK": int(PW * 0.75), "MCLICK": PW // 2}[key]
-            pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, button=btn, pos=(x, TOP + PH // 2)))
+            btn = {"LCLICK": 1, "RCLICK": 3, "MCLICK": 2}[key]; x = FLY_C.x + {"LCLICK": int(PW * 0.25), "RCLICK": int(PW * 0.75), "MCLICK": PW // 2}[key]
+            pygame.event.post(pygame.event.Event(pygame.MOUSEBUTTONDOWN, button=btn, pos=(x, FLY_C.centery), scripted=True))
         else:
             pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=getattr(pygame, f"K_{key.lower()}") if len(key) == 1 else getattr(pygame, f"K_{key}")))
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT: running = False
+        elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_F11:                       # full screen <-> window
+            FULL = not FULL; display = open_display(FULL)
         elif ev.type == pygame.KEYDOWN:
             k = ev.key
             log_event("key", key=pygame.key.name(k), mode=args.mode, kind_before=state["kind"])
@@ -387,19 +561,19 @@ while running:
             if any(ex_): state["explain"] = ex_
             log_event("after_key", key=pygame.key.name(ev.key), msg=state["msg"], explain=state["explain"])     # what the screen says right after the key
 
-        elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1 and worker.brain is not None and ev.pos[0] >= PW and TOP <= ev.pos[1] < TOP + PH:
-            state["drag"] = ev.pos
+        elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1 and worker.brain is not None and BRAIN_C.collidepoint(to_canvas(ev)):
+            state["drag"] = to_canvas(ev)
         elif ev.type == pygame.MOUSEMOTION and state["drag"] is not None and worker.brain is not None:
-            dx, dy = ev.pos[0] - state["drag"][0], ev.pos[1] - state["drag"][1]; state["drag"] = ev.pos
+            mp = to_canvas(ev); dx, dy = mp[0] - state["drag"][0], mp[1] - state["drag"][1]; state["drag"] = mp
             worker.view.rotate_by(dx * 0.01, dy * 0.01)                  # about 0.6 degrees per pixel dragged
         elif ev.type == pygame.MOUSEBUTTONUP and ev.button == 1:
             state["drag"] = None
-        elif ev.type == pygame.MOUSEWHEEL and worker.brain is not None and pygame.mouse.get_pos()[0] >= PW:
+        elif ev.type == pygame.MOUSEWHEEL and worker.brain is not None and BRAIN_C.collidepoint(to_canvas(pygame.mouse.get_pos())):
             worker.view.zoom_by(1.15 ** ev.y)
-        elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and ev.pos[0] < PW and TOP <= ev.pos[1] < TOP + PH:
+        elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and FLY_C.collidepoint(to_canvas(ev)):
             kind = {1: "sugar", 3: "bitter", 2: "water"}.get(ev.button)
             if kind:
-                angle = (PW / 2 - ev.pos[0]) / (PW / 2) * 1.0            # click left of centre -> to the fly's left (up to ~57 deg)
+                angle = (FLY_C.centerx - to_canvas(ev)[0]) / (PW / 2) * 1.0   # click left of centre -> to the fly's left (up to ~57 deg)
                 drop_at(kind, angle)
                 if not state["explore"]: state.update(target=state["drops"][kind], kind=kind, walking=True, phase="approach", verdict=None)
 
@@ -407,7 +581,9 @@ while running:
     try:
         while True:
             kind, data = worker.out.get_nowait()
-            if kind == "loaded": state["msg"] = f"{worker.sex} brain ready: {worker.brain.N:,} neurons. S = sugar, B = bitter, L = looming, A/D = attack/repair"
+            if kind == "loaded":
+                state["msg"] = (f"{worker.sex.capitalize()} brain ready: {worker.brain.N:,} neurons. Pick a behaviour above to test it."
+                                if args.mode == "phase2" else f"{worker.sex.capitalize()} brain ready. Test the healthy fly first, then press A to attack.")
             elif kind == "measured":
                 d = data; st = state
                 if d["with_stim"] or st["kind"] == "hijack":        # draw the stimulus run; the no-stimulus control is only logged
@@ -503,7 +679,7 @@ while running:
                         st["thumbs"][d["stage"]] = (snap_(d["spike_t"], d["spike_i"], att_, rep_), d["hz"])
                 st["loglines"].append(f"brain after the {d['stage']}: readout {d['hz']:.0f} Hz, {d['n_fired']:,} neurons fired, "
                                       f"{d['n_silenced']:,} went silent")
-            elif kind == "reset": state["msg"] = "brain reset"; state["thumbs"] = None; state["silenced"] = None; state["counts"] = None; state["readout_hz"] = None
+            elif kind == "reset": state["msg"] = "brain reset"; state["thumbs"] = None; state.update(t_healthy=False, t_att=False, t_rep=False, lost=False); state["silenced"] = None; state["counts"] = None; state["readout_hz"] = None
             elif kind == "error": state["msg"] = "error: " + data
             state["loglines"] = state["loglines"][-7:]
             d_x = data if isinstance(data, dict) else {}
@@ -516,6 +692,12 @@ while running:
                             fired=(state["counts"] or {}).get("fired"), on_thr=bh_.on_thr, off_thr=bh_.off_thr)
                 ex_ = explain_result(kind, d_x, ctx_)
                 if ex_: state["explain"] = tuple(n_ if n_ is not None else o_ for n_, o_ in zip(ex_, state["explain"]))
+            if drawn_ and kind in ("measured", "threat"):                  # the stepper: a test of the brain as it now stands
+                if worker.attack is None: state["t_healthy"] = True
+                elif worker.repair is None and not state["lost"]: state["t_att"] = True
+                else: state["t_rep"] = True
+            if kind == "attacked": state.update(t_att=False, t_rep=False, lost=False)
+            if kind == "repaired": state.update(t_rep=False, lost=bool(d_x.get("rep") and d_x["rep"].get("partial")))
             if kind == "replay":                                          # the scoreboard: what each team achieved
                 if d_x["stage"] == "attack":
                     state["score"] = dict(name=d_x["name"], goal=worker.attack_goal, healthy=d_x["healthy"],
@@ -634,8 +816,7 @@ while running:
                        silenced=sil, counts=counts_txt, readouts=cur.readouts,
                        readout_hz=(st["readout_hz"][1] if st.get("readout_hz") and st["readout_hz"][0] == cur_name else None),
                        show_redblue=(args.mode != "phase2"), readout_bar=cur.on_thr,
-                       title=f"{worker.sex} fly connectome: {worker.brain.N:,} neurons", subtitle="",
-                       score=(score_lines(st["score"]) if args.mode != "phase2" else []),
+                       title="", subtitle="", score=[],
                        stim_on=st["phase"] in ("think", "eating", "refuse", "escape", "retreat", "turn"), blink=0.5 + 0.5 * np.sin(time.time() * 4))
 
     if st.get("snap_pending") and bimg is not None:
@@ -647,67 +828,79 @@ while running:
     _t2 = time.time()
     # ---- draw
     screen.fill(BG)
-    # title bar
-    title = ("The fly and its brain" if args.mode == "phase2"
-             else "NeuroRedTeam -- PHASE 3: red team vs blue team" if args.mode == "phase3" else "NeuroRedTeam LIVE")
-    screen.blit(title_font.render(title, True, INK), (16, 9))
-    sub = f"{worker.sex} fly  -  {worker.brain.N:,} neurons" if worker.brain is not None else "loading the brain ..."
-    screen.blit(font.render(sub, True, DIM), (16 + title_font.size(title)[0] + 18, 13))
-    status = worker.busy or ("brain: thinking ..." if st["phase"] == "think" else "brain: idle")
-    pill_col = (120, 90, 30) if worker.busy or st["phase"] == "think" else (34, 70, 48)
-    tw = font.size(status)[0]; rrect(screen, pill_col, (2 * PW - tw - 40, 9, tw + 24, 26), r=13); screen.blit(font.render(status, True, INK), (2 * PW - tw - 28, 12))
-    if args.mode != "phase2":
-        iv_txt = "brain: healthy" if not worker.iv else f"brain modified: {size_of(worker.iv)} neurons" + (f"  (attack {worker.attack['size']}" if worker.attack else "") + (f", repair {worker.repair['size']})" if worker.repair else (")" if worker.attack else ""))
-        screen.blit(font.render(iv_txt, True, ACCENT), (2 * PW - tw - 60 - font.size(iv_txt)[0], 13))
-    # panels
+    # header: mark, title, status pills
+    pygame.draw.circle(screen, RED, (30, 27), 13); pygame.draw.circle(screen, BLUE, (30, 27), 13, draw_top_right=True, draw_bottom_right=True)
+    pygame.draw.circle(screen, BG, (30, 27), 5)
+    screen.blit(title_font.render("NeuroRedTeam", True, INK), (52, 11))
+    sub = ("Phase 2  \u00b7  a virtual fly run by its real connectome" if args.mode == "phase2"
+           else "Phase 3  \u00b7  red team vs blue team on a real fly brain")
+    screen.blit(font.render(sub, True, DIM), (52 + title_font.size("NeuroRedTeam")[0] + 14, 16))
+    busy = worker.busy or st["phase"] == "think"
+    status = worker.busy or ("brain thinking ..." if st["phase"] == "think" else "brain idle")
+    xr = pill(W - 12, 13, status, INK, (70, 56, 24) if busy else (26, 52, 38), dot=(255, 190, 60) if busy else GREEN)
+    if worker.brain is not None:
+        if args.mode != "phase2":
+            if not worker.iv: xr = pill(xr, 13, "healthy brain", INK, (30, 34, 46), dot=GREEN)
+            else:
+                txt = f"modified: attack {worker.attack['size']}" + (f"  +  repair {worker.repair['size']}" if worker.repair else "") + " neurons"
+                xr = pill(xr, 13, txt, INK, (58, 30, 32), dot=RED if not worker.repair else BLUE)
+        xr = pill(xr, 13, f"{worker.sex} fly  \u00b7  {worker.brain.N:,} neurons", DIM, (30, 34, 46))
+    draw_strip(cur_name if worker.brain is not None else None)
+    # the fly
+    card(FLY_CARD, "The fly", right="FlyGym body  \u00b7  MuJoCo physics", accent=ACCENT)
     surf = pygame.surfarray.make_surface(np.transpose(fly_img, (1, 0, 2))); surf = pygame.transform.smoothscale(surf, (PW, FLY_H))
-    screen.blit(surf, (0, TOP), area=pygame.Rect(0, (FLY_H - PH) // 2, PW, PH))          # crop top and bottom, never squash
-    if bimg is not None: screen.blit(pygame.surfarray.make_surface(np.transpose(bimg, (1, 0, 2))), (PW, TOP))
-    else:
-        rrect(screen, PANEL, (PW, TOP, PW, PH)); screen.blit(font.render("loading the brain (female ~10 s, male ~40 s) ...", True, DIM), (PW + 24, TOP + PH // 2))
-    pygame.draw.line(screen, (60, 62, 76), (PW, TOP), (PW, TOP + PH), 2)
+    picture(surf, FLY_C, crop_y=(FLY_H - PH) // 2)
     if st["verdict"]:
-        t = big.render(st["verdict"], True, (12, 12, 16)); w_ = t.get_width() + 28
-        rrect(screen, st["verdict_col"], (PW - w_ - 14, TOP + 12, w_, t.get_height() + 8), r=10); screen.blit(t, (PW - w_, TOP + 16))
-    if st["thumbs"] and args.mode != "phase2": draw_thumbs(st["thumbs"])
-    # bottom panel: message, meter, log, keys
-    y0 = TOP + PH
-    rrect(screen, PANEL, (0, y0, 2 * PW, BAR), r=0)
-    msg_ = st["msg"]; room_ = (2 * PW - 400 if st["meter"] else 2 * PW - 32)
-    while msg_ and font.size(msg_)[0] > room_: msg_ = msg_[:-2]
-    screen.blit(font.render(msg_ if msg_ == st["msg"] else msg_.rstrip() + " ...", True, ACCENT), (16, y0 + 8))
-    if st["meter"]:
-        label, hz, bar_, ok = st["meter"]
-        meter(2 * PW - 380, y0 + 12, 340, label, hz, bar_, (86, 200, 110) if ok else (230, 100, 90))
-    if st["show_log"]:
-        for i, line in enumerate(st["loglines"][-6:]): screen.blit(mono.render(line, True, (185, 187, 200)), (16, y0 + 40 + 19 * i))
+        t = big.render(st["verdict"], True, (12, 12, 16)); w_ = t.get_width() + 32; bx = FLY_C.right - w_ - 14
+        rrect(screen, (0, 0, 0), (bx + 2, FLY_C.y + 16, w_, t.get_height() + 10), r=12)
+        rrect(screen, st["verdict_col"], (bx, FLY_C.y + 12, w_, t.get_height() + 10), r=12); screen.blit(t, (bx + 16, FLY_C.y + 16))
+    card_edge(FLY_CARD)
+    # the brain
+    card(BRAIN_CARD, "Its brain", right=("drag to turn  \u00b7  wheel to zoom" if worker.brain is not None else ""), accent=(120, 200, 255))
+    if bimg is not None: picture(pygame.surfarray.make_surface(np.transpose(bimg, (1, 0, 2))), BRAIN_C)
     else:
-        yy = y0 + 36; y_max = y0 + BAR - 84                          # three key rows below this line
-        for lab, txt, col in zip(("You did:", "The brain did:", "What it means:"), st["explain"], ((200, 205, 220), (255, 217, 89), (140, 230, 160))):
+        rrect(screen, (18, 19, 25), BRAIN_C, r=0)
+        dots = "." * (1 + int(time.time() * 2) % 3)
+        t = head.render(f"loading the {worker.sex} brain{dots}", True, DIM); screen.blit(t, (BRAIN_C.centerx - t.get_width() // 2, BRAIN_C.centery - 20))
+        t = small.render("female ~10 s, male ~40 s", True, DIM); screen.blit(t, (BRAIN_C.centerx - t.get_width() // 2, BRAIN_C.centery + 10))
+    card_edge(BRAIN_CARD)
+    # what just happened
+    r = STORY_CARD; y = card(r, "What just happened", right="TAB: technical log", accent=ACCENT)
+    msg_ = st["msg"]; hf = next((f_ for f_ in HEAD_FONTS if f_.size(msg_)[0] <= r.w - 32), HEAD_FONTS[-1])   # shrink to fit first
+    while msg_ and hf.size(msg_)[0] > r.w - 32: msg_ = msg_[:-2]
+    screen.blit(hf.render(msg_ if msg_ == st["msg"] else msg_.rstrip() + " ...", True, ACCENT), (r.x + 16, y + 2 + (head.get_height() - hf.get_height()) // 2))
+    yy = y + 30; y_max = r.bottom - 16
+    if st["show_log"]:
+        for line in st["loglines"][-6:]:
+            if yy < y_max: screen.blit(mono.render(line[:96], True, (185, 187, 200)), (r.x + 16, yy)); yy += 19
+    else:
+        for lab, txt, col in zip(("You did", "The brain did", "What it means"), st["explain"], ((215, 218, 230), (255, 217, 89), (140, 230, 160))):
             if not txt: continue
-            screen.blit(font.render(lab, True, (150, 155, 175)), (16, yy))
-            words, line_, x0 = txt.split(), "", 150
-            for w_ in words:                                            # wrap to the panel width
-                room_w = (2 * PW - 400 - x0) if (st["meter"] and yy < y0 + 64) else (2 * PW - x0 - 20)   # keep clear of the meter
-                if font.size(line_ + " " + w_)[0] > room_w and line_:
-                    if yy < y_max: screen.blit(font.render(line_, True, col), (x0, yy))
-                    yy += 20; line_ = w_
-                else: line_ = (line_ + " " + w_).strip()
-            if yy < y_max: screen.blit(font.render(line_, True, col), (x0, yy))
-            yy += 22
-    x = 16; y = y0 + BAR - 80
-    if args.mode != "phase2":
-        for k_, lab in [("A", "attack"), ("F", "hijack attack"), ("H", "test with no sugar"), ("D", "repair"), ("R", "reset brain")]:
-            x = chip(x, y, k_, lab, col=(110, 48, 48) if k_ in ("A", "F") else (48, 66, 120) if k_ == "D" else (60, 64, 80))
-        x = 16; y += 26
-    groups = [("T", "quick test"), ("S", "sugar"), ("V", "water"), ("B", "bitter"), ("C", "choice arena"), ("E", "explore + click"), ("L", "looming"),
-              ("DOWN", "approaching object"), ("1 / 2", "threat left / right"), ("W", "walk"), ("<- ->", "steer"), ("SPACE", "stop"), ("drag / wheel", "turn / zoom brain"), ("O", "spin brain"),
-              ("0", "front view"), ("TAB", "technical log"), ("M", "swap sex"), ("Q", "quit")]
-    for k_, lab in groups:
-        if x > 2 * PW - 150: x = 16; y += 26
-        x = chip(x, y, k_, lab)
-
-    pygame.display.flip(); clock.tick(30)
+            screen.blit(cap.render(lab.upper(), True, (120, 124, 142)), (r.x + 16, yy + 3))
+            y0_ = yy
+            for line in wrap(txt, body_f, r.w - 136 - 16):
+                if yy < y_max: screen.blit(body_f.render(line[:1].upper() + line[1:] if yy == y0_ else line, True, col), (r.x + 136, yy))
+                yy += 19
+            yy += 3
+    card_edge(r)
+    draw_score(st)
+    # keys, in families
+    rows = [[("TEST", [("T", "quick test"), ("S", "sugar"), ("V", "water"), ("B", "bitter"), ("L", "looming"), ("DOWN", "approach"), ("1 2", "threat L / R")]
+                      + ([("H", "no food")] if args.mode != "phase2" else []))]
+            + ([("TEAMS", [("A", "attack"), ("F", "hijack"), ("D", "repair"), ("R", "reset")])] if args.mode != "phase2" else []),
+            [("FLY", [("W", "walk"), ("\u2190 \u2192", "steer"), ("SPACE", "stop"), ("C", "choice arena"), ("E", "explore")]),
+             ("VIEW", [("O", "spin"), ("0", "front"), ("TAB", "log"), ("F11", "window")]), ("", [("M", "male / female"), ("Q", "quit")])]]
+    for ri, row in enumerate(rows):
+        x = 16; y = KEYS_Y + 24 * ri
+        for gname, keys in row:
+            if gname:
+                gcol = {"TEAMS": (255, 140, 130), "TEST": ACCENT}.get(gname, (150, 156, 176))
+                g = cap.render(gname, True, gcol); screen.blit(g, (x, y + 3)); x += g.get_width() + 10
+            for k_, lab in keys:
+                col = (120, 44, 44) if k_ in ("A", "F") else (44, 64, 124) if k_ == "D" else (52, 56, 72)
+                x = chip(x, y, k_, lab, col)
+            x += 14
+    present(); clock.tick(30)
     if st.get("snap_full") and args.snapshots:
         pygame.image.save(screen, os.path.join(args.snapshots, st["snap_full"] + "_window.png")); st["snap_full"] = None
     _t3 = time.time()
@@ -715,9 +908,7 @@ while running:
         _prof = state.setdefault("_prof", [0.0, 0.0, 0.0, 0]); _prof[0] += _t1 - _t0; _prof[1] += _t2 - _t1; _prof[2] += _t3 - _t2; _prof[3] += 1
         if _prof[3] % 20 == 0: print(f"per frame: body {_prof[0]/_prof[3]*1000:.0f} ms, brain panel {_prof[1]/_prof[3]*1000:.0f} ms, draw+flip {_prof[2]/_prof[3]*1000:.0f} ms, phase {st['phase']}", flush=True)
     if args.record:
-        f_ = np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2))
-        if f_.shape[:2] != (TOP + PH + BAR, 2 * PW):                    # window resized / minimised: keep a fixed frame size
-            from PIL import Image as _I; f_ = np.asarray(_I.fromarray(f_).resize((2 * PW, TOP + PH + BAR)))
+        f_ = np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2))     # the canvas: always 1280 x 800, whatever the screen
         while rec_n < (time.time() - t_start) * REC_FPS: rec_w.append_data(f_); rec_n += 1     # straight to disk, never held in memory
 pygame.quit()
 if args.record: rec_w.close(); print("saved", args.record, rec_n, "frames")

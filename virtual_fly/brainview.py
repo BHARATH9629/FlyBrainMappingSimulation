@@ -80,12 +80,15 @@ class BrainView:
     def snapshot(self, spike_t, spike_i, size, **frame_kw):
         """A small picture of a whole run (the brain as it looks at the end of the 300 ms run), cropped to the brain and
         scaled to `size`; the live animation state is saved and restored, so the main panel is not disturbed."""
-        saved = (self.glow.copy(), self.fired.copy(), self.last_t)
+        saved = (self.glow.copy(), self.fired.copy(), self.last_t); view = (self.yaw, self.pitch, self.zoom)
+        self.reset_view()                               # always the front view, so the pictures can be compared side by side
         self.reset(); self.advance(300.0, spike_t, spike_i); img = self.frame(bare=True, **frame_kw)
         self.glow, self.fired, self.last_t = saved
         xs, ys = self.px[self.vis], self.py[self.vis]; m = 6
         box = (max(int(xs.min()) - m, 0), max(int(ys.min()) - m, 0), min(int(xs.max()) + m, self.W), min(int(ys.max()) + m, self.H))
-        return np.asarray(Image.fromarray(img).crop(box).resize(size, Image.LANCZOS))
+        out = np.asarray(Image.fromarray(img).crop(box).resize(size, Image.LANCZOS))
+        self.set_view(*view)
+        return out
 
     def advance(self, t_ms, spike_t, spike_i):
         """Bring the glow state to brain time t_ms using spikes in (last_t, t_ms]."""
