@@ -274,6 +274,9 @@ def draw_text(lines, x, y, col=(230, 230, 230)):
 
 
 running = True; escape_kick = 0.0; t_loaded = None; frames_out = []; t_start = time.time()
+REC_FPS = 10; rec_n = 0                                     # the video plays in real time: frames are repeated / skipped by the clock
+if args.record:
+    import imageio.v2 as iio; rec_w = iio.get_writer(args.record, fps=REC_FPS, codec="libx264", quality=8, macro_block_size=8)
 script = [(float(x.split("@")[1]), x.split("@")[0].strip().upper()) for x in args.script.split(",") if "@" in x]
 while running:
     # scripted keys: each fires N seconds after the system went idle (brain done, fly not busy) following the previous key
@@ -589,7 +592,9 @@ while running:
             if off_: counts_txt += f" ({off_:,} outside the zoomed view)"
             if args.mode != "phase2" and worker.iv:
                 counts_txt += f"  |  {len(att)} attacked  |  {len(sil):,} went silent  |  {len(rep)} repaired"
-        bimg = v.frame(stimulus=cur.stim, readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
+        no_food = st["kind"] == "hijack"                                  # the no-food test: no taste neurons are stimulated
+        if no_food: stim_label = stim_label + " (not stimulated: no food)"
+        bimg = v.frame(stimulus=(() if no_food else cur.stim), readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
                        silenced=sil, counts=counts_txt, readouts=cur.readouts,
                        readout_hz=(st["readout_hz"][1] if st.get("readout_hz") and st["readout_hz"][0] == cur_name else None),
                        show_redblue=(args.mode != "phase2"), readout_bar=cur.on_thr,
@@ -676,8 +681,6 @@ while running:
         f_ = np.transpose(pygame.surfarray.array3d(screen), (1, 0, 2))
         if f_.shape[:2] != (TOP + PH + BAR, 2 * PW):                    # window resized / minimised: keep a fixed frame size
             from PIL import Image as _I; f_ = np.asarray(_I.fromarray(f_).resize((2 * PW, TOP + PH + BAR)))
-        frames_out.append(f_.copy())
+        while rec_n < (time.time() - t_start) * REC_FPS: rec_w.append_data(f_); rec_n += 1     # straight to disk, never held in memory
 pygame.quit()
-if args.record and frames_out:
-    import imageio.v2 as iio
-    iio.mimwrite(args.record, frames_out[::1], fps=30, codec="libx264", quality=8); print("saved", args.record, len(frames_out), "frames")
+if args.record: rec_w.close(); print("saved", args.record, rec_n, "frames")

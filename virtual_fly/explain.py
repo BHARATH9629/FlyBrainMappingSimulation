@@ -71,7 +71,8 @@ def explain_result(kind, d, ctx):
     name = ctx.get("name"); out = OUT.get(name, "the output neuron"); short = SHORT.get(name, "output")
     if kind == "measured":
         hz, fired, stim = d["hz"], ctx.get("fired"), ctx.get("stim_count")
-        brain = (f"{stim} {'taste' if name in ('eat', 'drink', 'refuse_bitter') else 'sensory'} neurons fired" if stim else "")
+        brain = (f"{stim} {'taste' if name in ('eat', 'drink', 'refuse_bitter') else 'sensory'} neurons fired" if stim and d.get("with_stim")
+                 else "No food, so no taste neurons were stimulated" if not d.get("with_stim") else "")
         brain += (f"; {fired:,} neurons lit up across the brain" if fired else "") + f"; {out} fired at {hz:.0f} spikes per second."
         v = ctx.get("verdict") or ""; on, off = ctx["on_thr"], ctx["off_thr"]
         if not d.get("with_stim"):                           # the hijack test: no food at all
