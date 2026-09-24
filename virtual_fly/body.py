@@ -37,7 +37,12 @@ def make_fly(name="fly", colorize=True):
 
 class FlyBody:
     """sim + walking controller + proboscis. step(left, right, eat) advances one physics step."""
-    def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None, bitter_at=None, water_at=None, buffer=True):
+    def __init__(self, camera="side", res=(360, 480), playback_speed=0.2, fps=30, sugar_at=None, bitter_at=None, water_at=None, buffer=True,
+                 ctrl_every=1):
+        """ctrl_every: run the walking controller once every this many physics steps and hold its commands in between.
+        MuJoCo still integrates every 0.1 ms step; only the leg-pattern controller (Python, about 6x the cost of the
+        physics itself) runs less often. 10 = a 1 kHz controller, plenty for walking."""
+        self.ctrl_every = max(1, int(ctrl_every)); self._k = 0; self._held = None
         self.fly, neutral = make_fly()
         cams = {"side": dict(pos_offset=(-0.5, -7.5, 0.0), rotation=Rotation3D("euler", (1.57, 0, 0)), fovy=35.0),
                 "top":  dict(pos_offset=(0, 0, 12.0), rotation=Rotation3D("euler", (0, 0, 0)), fovy=35.0),
@@ -68,8 +73,10 @@ class FlyBody:
         self.prob_idx = [self.all_dofs.index(d) for d in PROBOSCIS_DOFS]
         self.leg_idx = [self.all_dofs.index(d) for d in self.leg_dofs]
         self.prob_neutral = np.array([neutral.joint_angles_lookup_rad.get(d, 0.0) for d in PROBOSCIS_DOFS])
-        self.ctrl = HybridTurningController(timestep=self.sim.timestep, preprogrammed_steps=self.steps,
+        self.ctrl = HybridTurningController(timestep=self.sim.timestep * self.ctrl_every, preprogrammed_steps=self.steps,
                                             output_dof_order=self.leg_dofs)
+        # the one controller setting counted in STEPS rather than seconds: keep the same duration in real time
+        self.ctrl.retraction_persistence_steps = max(1, int(round(self.ctrl.retraction_persistence_steps / self.ctrl_every)))
         self.thorax = self.fly.get_bodysegs_order().index(BodySegment("c_thorax"))
         # take-off pose: the default stance with femur-tibia joints straightened (tibia flexion -> 0) and coxae pushed back
         base = self.steps.default_pose_by_dof_order(self.leg_dofs); jp = np.array(base, float)
@@ -104,15 +111,19 @@ class FlyBody:
     def step(self, left=1.0, right=1.0, eat=0.0, render=True, jump=0.0):
         """left/right: descending drive in [0, 1.2] (0 = stand still). eat in [0, 1]: proboscis extension target.
         jump in [0, 1]: escape pose (all legs pushed to extension, the take-off crouch-and-push)."""
-        obs = HybridControllerObservation.from_sim(self.sim, self.fly.name)
-        act = self.ctrl.step(np.array([left, right], float), obs)
-        self.eat_level += 0.02 * (eat - self.eat_level)                 # smooth extension / retraction
-        q = np.zeros(len(self.all_dofs)); q[self.leg_idx] = act.joint_angles
         if jump > 0:                                                    # escape take-off: a push-off impulse on the body
             self.kick(jump)
-        q[self.prob_idx] = self.prob_neutral + self.eat_level * PROBOSCIS_EXTENDED
-        self.sim.set_actuator_inputs(self.fly.name, ActuatorType.POSITION, q)
-        if act.adhesion_onoff is not None: self.sim.set_leg_adhesion_states(self.fly.name, act.adhesion_onoff)
+        if self._k % self.ctrl_every == 0 or self._held is None:        # new leg commands; held for ctrl_every steps
+            obs = HybridControllerObservation.from_sim(self.sim, self.fly.name)
+            act = self.ctrl.step(np.array([left, right], float), obs)
+            alpha = 1 - (1 - 0.02) ** self.ctrl_every                  # same proboscis smoothing per second as before
+            self.eat_level += alpha * (eat - self.eat_level)
+            q = np.zeros(len(self.all_dofs)); q[self.leg_idx] = act.joint_angles
+            q[self.prob_idx] = self.prob_neutral + self.eat_level * PROBOSCIS_EXTENDED
+            self.sim.set_actuator_inputs(self.fly.name, ActuatorType.POSITION, q)
+            if act.adhesion_onoff is not None: self.sim.set_leg_adhesion_states(self.fly.name, act.adhesion_onoff)
+            self._held = q
+        self._k += 1
         self.sim.step()
         if render: self.sim.render_as_needed()
 

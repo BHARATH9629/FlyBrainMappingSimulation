@@ -24,6 +24,7 @@ from behaviours import Behaviour, BEHAVIOURS
 from agents import Attacker, Defender, Log, merge_iv, size_of
 from body import FlyBody
 from brainview import BrainView
+from explain import explain_key, explain_result, score_lines
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--sex", default="female", choices=["female", "male"]); ap.add_argument("--camera", default="side", choices=["side", "head", "top"])
@@ -32,11 +33,27 @@ ap.add_argument("--record", default="", help="save the session to this mp4")
 ap.add_argument("--robust", action="store_true", help="blue team uses the slow robust defender (default: greedy, fast)")
 ap.add_argument("--no_cache", action="store_true", help="always recompute attacks / repairs")
 ap.add_argument("--max_seconds", type=float, default=0, help="quit after this many seconds (safety for scripted runs)")
+ap.add_argument("--snapshots", default="", help="save the brain panel at the end of every attack / repair replay to this folder (tests)")
+ap.add_argument("--events", default="", help="append every key press and every on-screen result to this JSONL file (tests)")
 ap.add_argument("--mode", default="full", choices=["full", "phase2", "phase3"],
                 help="phase2 = behaviours only (every red/blue key refused); phase3 = the attack/repair demo; full = both")
 args = ap.parse_args()
 
-PW, PH, BAR, TOP = 640, 480, 240, 44            # panel size, bottom panel, title bar
+
+def log_event(kind, **fields):
+    """One JSON line per key press / on-screen result, for the end-to-end window test (tests only, off by default)."""
+    if not args.events: return
+    def plain(v):
+        if isinstance(v, dict): return {str(k): plain(x) for k, x in v.items()}
+        if isinstance(v, (list, tuple)): return [plain(x) for x in v]
+        if isinstance(v, (np.integer,)): return int(v)
+        if isinstance(v, (np.floating,)): return float(v)
+        return v
+    with open(args.events, "a", encoding="utf-8") as f:
+        f.write(json.dumps(plain(dict(event=kind, t=round(time.time(), 2), **fields))) + "\n")
+
+PW, PH, BAR, TOP = 640, 436, 244, 40            # panel size, bottom panel, title bar: 720 px tall, fits a 1280 x 800 laptop
+FLY_H = 480                                     # the fly camera renders 640 x 480; the panel shows its middle 436 rows
 BG, PANEL, INK, DIM, ACCENT = (16, 17, 22), (26, 28, 36), (235, 235, 240), (150, 152, 165), (255, 214, 102)
 SIM_PER_FRAME = 0.012                           # simulated seconds per screen frame (~1/8 real time)
 ARRIVE = 0.95                                   # mm from drop centre = "at the drop"
@@ -46,7 +63,10 @@ class BrainWorker(threading.Thread):
     """Runs connectome jobs off the UI thread. Jobs: ('measure', name, with_stim), ('attack', name), ('repair', name)."""
     def __init__(self, sex):
         super().__init__(daemon=True); self.sex = sex; self.q = queue.Queue(); self.out = queue.Queue(); self.busy = ""
-        self.brain = None; self.iv = {}; self.attack = None; self.repair = None; self.attack_name = None; self.attack_goal = None; self.start()
+        self.brain = None; self.iv = {}; self.attack = None; self.repair = None; self.attack_name = None; self.attack_goal = None
+        self.healthy_fired = {}                     # (behaviour, with_stim) -> neurons that fire on the UNMODIFIED brain
+        self.healthy_hz = {}                        # (behaviour, with_stim) -> readout rate of the UNMODIFIED brain
+        self.start()
 
     def run(self):
         self.busy = f"loading the {self.sex} brain"
@@ -66,6 +86,25 @@ class BrainWorker(threading.Thread):
         # the agents' own code is part of the key: a cached result is never replayed after the agents' code changes
         h += "_" + CODE_VERSION
         return os.path.join(HERE, "cache", f"{self.sex}_{kind}_{name}_{goal}_{'robust' if args.robust else 'greedy'}_{h}.pkl")
+
+    def _replay(self, name, stage, with_stim):
+        """Run the behaviour once on the brain as it now stands (after an attack or a repair) and send the spikes to the
+        brain panel, with which neurons went silent compared with the healthy brain. Same call as the 'measure' job."""
+        b = self.bhv[name]; stim = b.stim if with_stim else []
+        kw = dict(b.sim); kw.update(self.iv)
+        r = self.brain.run(stim, record=b.readouts, seed=1, spikes=True, **kw)
+        key = (name, bool(with_stim))
+        if key not in self.healthy_fired:
+            r0 = self.brain.run(stim, record=b.readouts, seed=1, spikes=True, **dict(b.sim))
+            self.healthy_fired[key] = set(np.unique(r0["spike_i"]).tolist())
+            self.healthy_hz[key] = float(np.mean([r0["rates"][i] for i in b.readouts]))
+        now = set(np.unique(r["spike_i"]).tolist()); healthy = self.healthy_fired[key]
+        self.out.put(("replay", dict(name=name, stage=stage, with_stim=with_stim,
+                                     hz=float(np.mean([r["rates"][i] for i in b.readouts])),
+                                     spike_t=r["spike_t"], spike_i=r["spike_i"],
+                                     silenced=np.array(sorted(healthy - now), int), n_fired=len(now),
+                                     n_silenced=len(healthy - now), n_new=len(now - healthy),
+                                     on_thr=b.on_thr, off_thr=b.off_thr, healthy=self.healthy_hz[key])))
 
     def _do(self, job):
         kind = job[0]
@@ -97,6 +136,7 @@ class BrainWorker(threading.Thread):
                 self.iv = merge_iv(self.iv, best["intervention"]); self.attack = best; self.attack_name = name; self.attack_goal = goal
                 self.repair = None                          # a new attack re-opens the brain for repair
             self.out.put(("attacked", dict(best=best, log=rows, goal=goal)))
+            if best: self._replay(name, "attack", with_stim=(goal != "force"))
         elif kind == "repair":
             _, name, goal = (job + ("block",))[:3]; b = self.bhv[name]; self.busy = f"BLUE TEAM repairing {name}"
             ck = self._cache_key("repair", name, goal)          # the goal MUST be in the key: a corrupt repair and a
@@ -114,10 +154,18 @@ class BrainWorker(threading.Thread):
                     rep = D.restore(target=0.8)       # below 80 %: restore() returns its strongest working repair itself
                 rows = log.rows; os.makedirs(os.path.dirname(ck), exist_ok=True); pickle.dump((rep, rows), open(ck, "wb"))
             # a PARTIAL result is the blue team losing: never apply it to the brain and never call it a repair
-            if rep and not rep.get("partial"): self.iv = merge_iv(self.iv, rep["intervention"]); self.repair = rep
+            applied = bool(rep) and not rep.get("partial")
+            if applied: self.iv = merge_iv(self.iv, rep["intervention"]); self.repair = rep
             self.out.put(("repaired", dict(rep=rep, log=rows)))
+            if applied: self._replay(name, "repair", with_stim=(self.attack_goal != "force"))
         elif kind == "reset":
             self.iv = {}; self.attack = None; self.repair = None; self.attack_name = None; self.attack_goal = None; self.out.put(("reset", None))
+
+
+def run_counts(spike_i):
+    """neurons that fired in a run, and how many of them have no recorded position (reported, never hidden)"""
+    u = np.unique(spike_i)
+    return dict(fired=int(u.size), missing=int((~worker.view.ok[u]).sum()) if u.size else 0)
 
 
 def neurons_of(iv):
@@ -137,9 +185,9 @@ def rrect(surface, color, rect, r=8, width=0):
 
 def chip(x, y, key, label, col=(60, 64, 80)):
     """A keycap + label; returns the x after it."""
-    k = mono.render(key, True, INK); rrect(screen, col, (x, y, k.get_width() + 14, 24), r=5); screen.blit(k, (x + 7, y + 3))
-    l = small.render(label, True, DIM); screen.blit(l, (x + k.get_width() + 20, y + 4))
-    return x + k.get_width() + 20 + l.get_width() + 18
+    k = mono.render(key, True, INK); rrect(screen, col, (x, y, k.get_width() + 12, 22), r=5); screen.blit(k, (x + 6, y + 2))
+    l = small.render(label, True, DIM); screen.blit(l, (x + k.get_width() + 17, y + 3))
+    return x + k.get_width() + 17 + l.get_width() + 14
 
 
 def meter(x, y, w, label, hz, bar, ok_col):
@@ -152,7 +200,8 @@ def meter(x, y, w, label, hz, bar, ok_col):
     screen.blit(font.render(f"{label}: {hz:.0f} Hz", True, INK), (x, y - 2))
 clock = pygame.time.Clock()
 worker = BrainWorker(args.sex)
-body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False)   # drops parked off-screen
+body = FlyBody(camera=args.camera, sugar_at=(1e6, 1e6), bitter_at=(1e6, 1e6), water_at=(1e6, 1e6), buffer=False,   # drops parked off-screen
+               ctrl_every=10)            # leg controller at 1 kHz (physics still at 10 kHz): ~4.7x faster, same walking
 geoms = {"sugar": body.sim.mj_model.geom("sugar"), "bitter": body.sim.mj_model.geom("bitter"), "water": body.sim.mj_model.geom("water")}
 
 # which behaviour the red/blue team acts on, given what the fly is doing right now: every stimulus maps to its own
@@ -165,7 +214,10 @@ LABELS = {"eat": ("sugar taste neurons", "MN9 (feeding muscle)"), "drink": ("wat
           "retreat": ("approach detectors LC16, both eyes", "MDN moonwalker (walk backward)"), "turn": ("looming detectors, one eye", "DNa02 (steering)")}
 
 state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}, explore=False, wander=0.0, drops={}, meter=None, phase="idle", t_phase=0.0, eat=0.0, turn_dir=0.0, verdict=None, verdict_col=(255, 255, 255),
-             msg="loading the brain ...", loglines=[], last_frame=None, brain_img=None, anim=None)
+             msg="loading the brain ...", loglines=[], last_frame=None, brain_img=None, anim=None,
+             silenced=None, counts=None,
+             drag=None, spin=False, t_spin=None,
+             explain=("", "", ""), score=None, show_log=False)   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
 
 
 def place_drop(kind):
@@ -239,6 +291,7 @@ while running:
         if ev.type == pygame.QUIT: running = False
         elif ev.type == pygame.KEYDOWN:
             k = ev.key
+            log_event("key", key=pygame.key.name(k), mode=args.mode, kind_before=state["kind"])
             if k == pygame.K_q: running = False
             elif worker.brain is None: pass
             elif k == pygame.K_s: place_drop("sugar")
@@ -252,6 +305,11 @@ while running:
             elif k == pygame.K_w: state["walking"] = not state["walking"]; state["phase"] = "free"; state["msg"] = "walking" if state["walking"] else "stopped"
             elif k == pygame.K_LEFT: state["steer"] = min(state["steer"] + 0.4, 0.8)
             elif k == pygame.K_RIGHT: state["steer"] = max(state["steer"] - 0.4, -0.8)
+            elif k == pygame.K_0 and worker.brain is not None:
+                worker.view.reset_view(); state["spin"] = False; state["msg"] = "brain view: front"
+            elif k == pygame.K_o and worker.brain is not None:
+                state["spin"] = not state["spin"]; state["t_spin"] = None
+                state["msg"] = "brain view: slowly spinning (O to stop, 0 for the front view)" if state["spin"] else "brain view: spin stopped"
             elif k == pygame.K_SPACE: state.update(walking=False, steer=0.0, target=None, phase="idle", verdict=None, tour=[], explore=False); state["msg"] = "stopped"
             elif k == pygame.K_l: state.update(phase="think", kind="looming", walking=False); state["msg"] = "looming shadow! brain: escape?"; worker.q.put(("measure", "escape", True))
             elif k == pygame.K_DOWN: state.update(phase="think", kind="approach", walking=False); state["msg"] = "object approaching head-on (LC16, both eyes): brain: back up?"; worker.q.put(("measure", "retreat", True))
@@ -284,7 +342,20 @@ while running:
             elif k == pygame.K_r: worker.q.put(("reset",)); state["msg"] = "brain reset: no attacks, no repairs"
             elif k == pygame.K_m:
                 worker = BrainWorker("male" if worker.sex == "female" else "female"); state["msg"] = f"loading the {worker.sex} brain ..."
+            if k == pygame.K_TAB: state["show_log"] = not state["show_log"]
+            ex_ = explain_key(pygame.key.name(k), args.mode, worker.attack is not None, worker.repair is not None)
+            if any(ex_): state["explain"] = ex_
+            log_event("after_key", key=pygame.key.name(k), msg=state["msg"], explain=state["explain"])     # what the screen says right after the key
 
+        elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1 and worker.brain is not None and ev.pos[0] >= PW and TOP <= ev.pos[1] < TOP + PH:
+            state["drag"] = ev.pos
+        elif ev.type == pygame.MOUSEMOTION and state["drag"] is not None and worker.brain is not None:
+            dx, dy = ev.pos[0] - state["drag"][0], ev.pos[1] - state["drag"][1]; state["drag"] = ev.pos
+            worker.view.rotate_by(dx * 0.01, dy * 0.01)                  # about 0.6 degrees per pixel dragged
+        elif ev.type == pygame.MOUSEBUTTONUP and ev.button == 1:
+            state["drag"] = None
+        elif ev.type == pygame.MOUSEWHEEL and worker.brain is not None and pygame.mouse.get_pos()[0] >= PW:
+            worker.view.zoom_by(1.15 ** ev.y)
         elif ev.type == pygame.MOUSEBUTTONDOWN and worker.brain is not None and ev.pos[0] < PW and TOP <= ev.pos[1] < TOP + PH:
             kind = {1: "sugar", 3: "bitter", 2: "water"}.get(ev.button)
             if kind:
@@ -301,6 +372,8 @@ while running:
                 d = data; st = state
                 if d["with_stim"] or st["kind"] == "hijack":        # draw the stimulus run; the no-stimulus control is only logged
                     st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=3.0, fresh=True)
+                    st["counts"] = run_counts(d["spike_i"]); st["readout_hz"] = (d["name"], d["hz"])
+                    if not worker.iv: st["silenced"] = None
                 st["loglines"].append(f"brain run: {d['name']} {'WITH' if d['with_stim'] else 'without'} stimulus -> readout {d['hz']:.0f} Hz")
                 if d["name"] == "escape" and d["with_stim"]:
                     ok = d["hz"] >= d["on_thr"]; st["verdict"] = "ESCAPES" if ok else "NO ESCAPE"; st["verdict_col"] = (120, 230, 120) if ok else (240, 110, 110)
@@ -333,6 +406,8 @@ while running:
                     st["loglines"].append(f"   (control without stimulus: {d['hz']:.0f} Hz, must be <= {d['off_thr']:.0f})")
             elif kind == "threat":
                 d = data; st = state; st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=3.0, fresh=True)
+                st["counts"] = run_counts(d["spike_i"]); st["readout_hz"] = ("turn", d["dna_L"])
+                if not worker.iv: st["silenced"] = None
                 diff = d["dna_L"] - d["dna_R"]                          # steering neurons fire asymmetrically -> a turn
                 if abs(diff) >= d["on_thr"]:
                     # the BRAIN decides the direction: DNa02 drives ipsilateral turning, so whichever side fires harder
@@ -350,7 +425,9 @@ while running:
             elif kind == "attacked":
                 b_ = data["best"]
                 for row in data["log"][-6:]: state["loglines"].append(f"  [red {row['step']:2d}] {'GOAL ' if row['goal_met'] else '     '}{row['hypothesis'][:48]:48s} -> {row['result']}")
-                state["msg"] = (f"RED TEAM: {data['goal']} with {b_['size']} neurons ({b_['strategy'].replace('attacker-', '')}). Press S/B/L to test the fly."
+                tk_ = {"eat": "S", "drink": "V", "refuse_bitter": "B", "escape": "L", "retreat": "DOWN", "turn": "2"}.get(worker.attack_name, "S")
+                if data.get("goal") == "force": tk_ = "H"
+                state["msg"] = (f"RED TEAM: {data['goal']} with {b_['size']} neurons ({b_['strategy'].replace('attacker-', '')}). Press {tk_} to test the fly."
                                 if b_ else "RED TEAM: no attack found within budget")
             elif kind == "repaired":
                 r_ = data["rep"]
@@ -361,12 +438,52 @@ while running:
                 elif r_.get("partial"):
                     state["msg"] = "BLUE TEAM LOST: " + r_.get("why", "no repair restores this behaviour")
                 else:
-                    rec = f", {r_['recovery'] * 100:.0f}% of healthy on every run" if "recovery" in r_ else ""
+                    rec = ""
                     state["msg"] = (f"BLUE TEAM: repaired with {r_['size']} neurons ({r_['move']}){rec}"
                                     f"{' [fragile]' if r_.get('fragile') else ''}. Press {test_key} to test.")
-            elif kind == "reset": state["msg"] = "brain reset"
+            elif kind == "replay":
+                d = data; st = state
+                st["anim"] = dict(t0=time.time(), spike_t=d["spike_t"], spike_i=d["spike_i"], dur=3.0, fresh=True,
+                                  snap=f"{d['name']}_after_{d['stage']}")
+                st["silenced"] = d["silenced"]; st["silenced_for"] = d["name"]; st["counts"] = run_counts(d["spike_i"])
+                st["readout_hz"] = (d["name"], d["hz"])
+                st["verdict"] = None                                   # the old badge described the brain BEFORE this change
+                hz_, on_, off_ = d["hz"], d["on_thr"], d["off_thr"]
+                normal_ = (hz_ <= off_) if (d["name"] == "refuse_bitter" or not d["with_stim"]) else (hz_ >= on_)
+                st["meter"] = (f"{LABELS[d['name']][1].split(' (')[0]} after the {d['stage']}", hz_, on_, normal_)
+                st["loglines"].append(f"brain after the {d['stage']}: readout {d['hz']:.0f} Hz, {d['n_fired']:,} neurons fired, "
+                                      f"{d['n_silenced']:,} went silent")
+            elif kind == "reset": state["msg"] = "brain reset"; state["silenced"] = None; state["counts"] = None; state["readout_hz"] = None
             elif kind == "error": state["msg"] = "error: " + data
             state["loglines"] = state["loglines"][-7:]
+            d_x = data if isinstance(data, dict) else {}
+            nm_ = ({"measured": d_x.get("name"), "replay": d_x.get("name"), "threat": "turn"}.get(kind) or worker.attack_name)
+            drawn_ = kind in ("threat", "replay", "attacked", "repaired", "reset") or (kind == "measured" and (d_x.get("with_stim") or state["kind"] == "hijack"))
+            if nm_ in getattr(worker, "bhv", {}) and drawn_:
+                bh_ = worker.bhv[nm_]
+                ctx_ = dict(name=nm_, verdict=state.get("verdict"), attacked=worker.attack is not None,
+                            healthy=worker.healthy_hz.get((nm_, worker.attack_goal != "force")), stim_count=len(bh_.stim),
+                            fired=(state["counts"] or {}).get("fired"), on_thr=bh_.on_thr, off_thr=bh_.off_thr)
+                ex_ = explain_result(kind, d_x, ctx_)
+                if ex_: state["explain"] = tuple(n_ if n_ is not None else o_ for n_, o_ in zip(ex_, state["explain"]))
+            if kind == "replay":                                          # the scoreboard: what each team achieved
+                if d_x["stage"] == "attack":
+                    state["score"] = dict(name=d_x["name"], goal=worker.attack_goal, healthy=d_x["healthy"],
+                                          red=(worker.attack["size"], d_x["hz"]), blue=None)
+                elif state["score"]: state["score"]["blue"] = (worker.repair["size"], d_x["hz"])
+            elif kind == "repaired" and d_x.get("rep") and d_x["rep"].get("partial") and state["score"]: state["score"]["blue"] = "lost"
+            elif kind == "reset": state["score"] = None
+            if args.events:                                   # what the screen now shows, and the brain it came from
+                d_ = data if isinstance(data, dict) else {}
+                pot = {f"{a_},{b_}": v for (a_, b_), v in worker.iv.get("potentiate", {}).items()} if worker.iv else {}
+                log_event(kind, name=d_.get("name"), with_stim=d_.get("with_stim"), side=d_.get("side"),
+                          stage=d_.get("stage"), n_fired=d_.get("n_fired"), n_silenced=d_.get("n_silenced"),
+                          hz=d_.get("hz"), dna_L=d_.get("dna_L"), dna_R=d_.get("dna_R"),
+                          verdict=state.get("verdict"), msg=state.get("msg"), meter=state.get("meter"),
+                          attack_name=worker.attack_name, attack_goal=worker.attack_goal,
+                          attack_size=(worker.attack or {}).get("size"), repair_size=(worker.repair or {}).get("size"),
+                          explain=state["explain"], score=[t for t, _ in score_lines(state["score"])],
+                          iv={k_: v_ for k_, v_ in worker.iv.items() if k_ != "potentiate"} | ({"potentiate": pot} if pot else {}))
     except queue.Empty: pass
 
     _t0 = time.time()
@@ -437,21 +554,42 @@ while running:
     bimg = None
     if worker.brain is not None:
         v = worker.view; anim = st["anim"]
+        if st["spin"] and st["drag"] is None:
+            now_ = time.time(); v.rotate_by(0.35 * (now_ - st["t_spin"]) if st["t_spin"] else 0.0); st["t_spin"] = now_   # ~20 deg/s
         if anim is not None:
             if anim.get("fresh"): v.reset(); anim["fresh"] = False
             frac = min((time.time() - anim["t0"]) / anim["dur"], 1.0); v.advance(300.0 * frac, anim["spike_t"], anim["spike_i"])
-            if frac >= 1.0: st["anim"] = None
+            if frac >= 1.0:
+                if anim.get("snap"): st["snap_pending"] = anim["snap"]
+                st["anim"] = None
         else: v.glow *= 0.95
         cur_name = {"looming": "escape", "bitter": "refuse_bitter", "approach": "retreat", "threat": "turn", "water": "drink"}.get(st["kind"], "eat")
         cur = worker.bhv[cur_name]
         stim_label, readout_label = LABELS[cur_name]
         att = neurons_of(worker.attack["intervention"]) if worker.attack else []
         rep = neurons_of(worker.repair["intervention"]) if worker.repair else []
+        sil = st["silenced"] if (st["silenced"] is not None and st.get("silenced_for") == cur_name and worker.iv) else ()
+        c = st["counts"]; counts_txt = ""
+        if c:
+            counts_txt = f"{c['fired']:,} neurons fired" + (f" ({c['missing']:,} not drawn: no position)" if c["missing"] else "")
+            off_ = int((v.fired & v.ok & ~v.vis).sum())
+            if off_: counts_txt += f" ({off_:,} outside the zoomed view)"
+            if args.mode != "phase2" and worker.iv:
+                counts_txt += f"  |  {len(att)} attacked  |  {len(sil):,} went silent  |  {len(rep)} repaired"
         bimg = v.frame(stimulus=cur.stim, readout=cur.readout, attacked=att, repaired=rep, stim_label=stim_label, readout_label=readout_label,
+                       silenced=sil, counts=counts_txt, readouts=cur.readouts,
+                       readout_hz=(st["readout_hz"][1] if st.get("readout_hz") and st["readout_hz"][0] == cur_name else None),
                        show_redblue=(args.mode != "phase2"), readout_bar=cur.on_thr,
-                       title=f"{worker.sex} fly connectome: {worker.brain.N:,} neurons", subtitle=(worker.busy or "idle"),
+                       title=f"{worker.sex} fly connectome: {worker.brain.N:,} neurons", subtitle="",
+                       score=(score_lines(st["score"]) if args.mode != "phase2" else []),
                        stim_on=st["phase"] in ("think", "eating", "refuse", "escape", "retreat", "turn"), blink=0.5 + 0.5 * np.sin(time.time() * 4))
 
+    if st.get("snap_pending") and bimg is not None:
+        if args.snapshots:
+            os.makedirs(args.snapshots, exist_ok=True)
+            from PIL import Image as _Im; _Im.fromarray(bimg).save(os.path.join(args.snapshots, st["snap_pending"] + ".png"))
+            st["snap_full"] = st["snap_pending"]                           # and the whole window, once it is drawn
+        st["snap_pending"] = None
     _t2 = time.time()
     # ---- draw
     screen.fill(BG)
@@ -468,7 +606,8 @@ while running:
         iv_txt = "brain: healthy" if not worker.iv else f"brain modified: {size_of(worker.iv)} neurons" + (f"  (attack {worker.attack['size']}" if worker.attack else "") + (f", repair {worker.repair['size']})" if worker.repair else (")" if worker.attack else ""))
         screen.blit(font.render(iv_txt, True, ACCENT), (2 * PW - tw - 60 - font.size(iv_txt)[0], 13))
     # panels
-    surf = pygame.surfarray.make_surface(np.transpose(fly_img, (1, 0, 2))); surf = pygame.transform.smoothscale(surf, (PW, PH)); screen.blit(surf, (0, TOP))
+    surf = pygame.surfarray.make_surface(np.transpose(fly_img, (1, 0, 2))); surf = pygame.transform.smoothscale(surf, (PW, FLY_H))
+    screen.blit(surf, (0, TOP), area=pygame.Rect(0, (FLY_H - PH) // 2, PW, PH))          # crop top and bottom, never squash
     if bimg is not None: screen.blit(pygame.surfarray.make_surface(np.transpose(bimg, (1, 0, 2))), (PW, TOP))
     else:
         rrect(screen, PANEL, (PW, TOP, PW, PH)); screen.blit(font.render("loading the brain (female ~10 s, male ~40 s) ...", True, DIM), (PW + 24, TOP + PH // 2))
@@ -479,22 +618,43 @@ while running:
     # bottom panel: message, meter, log, keys
     y0 = TOP + PH
     rrect(screen, PANEL, (0, y0, 2 * PW, BAR), r=0)
-    screen.blit(font.render(st["msg"], True, ACCENT), (16, y0 + 10))
+    msg_ = st["msg"]; room_ = (2 * PW - 400 if st["meter"] else 2 * PW - 32)
+    while msg_ and font.size(msg_)[0] > room_: msg_ = msg_[:-2]
+    screen.blit(font.render(msg_ if msg_ == st["msg"] else msg_.rstrip() + " ...", True, ACCENT), (16, y0 + 8))
     if st["meter"]:
         label, hz, bar_, ok = st["meter"]
         meter(2 * PW - 380, y0 + 12, 340, label, hz, bar_, (86, 200, 110) if ok else (230, 100, 90))
-    for i, line in enumerate(st["loglines"][-6:]): screen.blit(mono.render(line, True, (185, 187, 200)), (16, y0 + 40 + 19 * i))
-    x = 16; y = y0 + BAR - 62
-    groups = [("S", "sugar"), ("V", "water"), ("B", "bitter"), ("C", "choice arena"), ("E", "explore + click"), ("L", "looming"),
-              ("DOWN", "approaching object"), ("1 / 2", "threat left / right"), ("W", "walk"), ("<- ->", "steer"), ("SPACE", "stop"), ("M", "swap sex"), ("Q", "quit")]
-    for k_, lab in groups:
-        if x > 2 * PW - 150: x = 16; y += 30
-        x = chip(x, y, k_, lab)
+    if st["show_log"]:
+        for i, line in enumerate(st["loglines"][-6:]): screen.blit(mono.render(line, True, (185, 187, 200)), (16, y0 + 40 + 19 * i))
+    else:
+        yy = y0 + 36; y_max = y0 + BAR - 84                          # three key rows below this line
+        for lab, txt, col in zip(("You did:", "The brain did:", "What it means:"), st["explain"], ((200, 205, 220), (255, 217, 89), (140, 230, 160))):
+            if not txt: continue
+            screen.blit(font.render(lab, True, (150, 155, 175)), (16, yy))
+            words, line_, x0 = txt.split(), "", 150
+            for w_ in words:                                            # wrap to the panel width
+                room_w = (2 * PW - 400 - x0) if (st["meter"] and yy < y0 + 64) else (2 * PW - x0 - 20)   # keep clear of the meter
+                if font.size(line_ + " " + w_)[0] > room_w and line_:
+                    if yy < y_max: screen.blit(font.render(line_, True, col), (x0, yy))
+                    yy += 20; line_ = w_
+                else: line_ = (line_ + " " + w_).strip()
+            if yy < y_max: screen.blit(font.render(line_, True, col), (x0, yy))
+            yy += 22
+    x = 16; y = y0 + BAR - 80
     if args.mode != "phase2":
-        x = 16; y += 30
         for k_, lab in [("A", "attack"), ("F", "hijack attack"), ("H", "test with no sugar"), ("D", "repair"), ("R", "reset brain")]:
             x = chip(x, y, k_, lab, col=(110, 48, 48) if k_ in ("A", "F") else (48, 66, 120) if k_ == "D" else (60, 64, 80))
+        x = 16; y += 26
+    groups = [("S", "sugar"), ("V", "water"), ("B", "bitter"), ("C", "choice arena"), ("E", "explore + click"), ("L", "looming"),
+              ("DOWN", "approaching object"), ("1 / 2", "threat left / right"), ("W", "walk"), ("<- ->", "steer"), ("SPACE", "stop"), ("drag / wheel", "turn / zoom brain"), ("O", "spin brain"),
+              ("0", "front view"), ("TAB", "technical log"), ("M", "swap sex"), ("Q", "quit")]
+    for k_, lab in groups:
+        if x > 2 * PW - 150: x = 16; y += 26
+        x = chip(x, y, k_, lab)
+
     pygame.display.flip(); clock.tick(30)
+    if st.get("snap_full") and args.snapshots:
+        pygame.image.save(screen, os.path.join(args.snapshots, st["snap_full"] + "_window.png")); st["snap_full"] = None
     _t3 = time.time()
     if os.environ.get("LIVE_PROFILE"):
         _prof = state.setdefault("_prof", [0.0, 0.0, 0.0, 0]); _prof[0] += _t1 - _t0; _prof[1] += _t2 - _t1; _prof[2] += _t3 - _t2; _prof[3] += 1
