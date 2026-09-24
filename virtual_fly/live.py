@@ -185,6 +185,10 @@ def neurons_of(iv):
                   | {a for (a, b) in iv.get("potentiate", {})})
 
 
+if sys.platform == "win32":                     # see the screen's real pixels, not the 'display scaling' (125 %, 150 %) size
+    try:
+        import ctypes; ctypes.windll.shcore.SetProcessDpiAwareness(2)
+    except Exception: pass
 pygame.init()
 pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else ("NeuroRedTeam -- PHASE 3: red team vs blue team" if args.mode == "phase3" else "NeuroRedTeam LIVE"))
 
@@ -192,8 +196,12 @@ pygame.display.set_caption("The fly and its brain" if args.mode == "phase2" else
 def open_display(full):
     """full screen at the screen's own size, or a window that fits on it; the canvas is scaled into either"""
     ds = pygame.display.get_desktop_sizes()[0]
-    if full: return pygame.display.set_mode(ds, pygame.FULLSCREEN)
-    k = min(1.0, (ds[0] - 16) / W, (ds[1] - 90) / H)
+    if full:                                    # a borderless window exactly the size of the screen, at its top-left corner
+        os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
+        return pygame.display.set_mode(ds, pygame.NOFRAME)
+    os.environ["SDL_VIDEO_WINDOW_POS"] = ""; os.environ.pop("SDL_VIDEO_WINDOW_POS")
+    os.environ["SDL_VIDEO_CENTERED"] = "1"
+    k = min((ds[0] - 16) / W, (ds[1] - 110) / H)                                      # the largest window that fits
     return pygame.display.set_mode((int(W * k), int(H * k)))
 
 
