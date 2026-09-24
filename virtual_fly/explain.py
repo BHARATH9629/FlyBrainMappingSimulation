@@ -34,6 +34,7 @@ def explain_key(key, mode, has_attack=False, has_repair=False):
         "o": ("You toggled the slow spin of the brain view.", "", "Only the view turns; the brain itself is not changed."),
         "0": ("You reset the brain view to the front.", "", "Only the view changes; the brain itself is not changed."),
         "tab": ("You toggled the technical log.", "", ""),
+        "t": ("QUICK TEST: the same test, with the stimulus put straight in front of the fly -- no walking.", wait, ""),
     }
     if key in table: return table[key]
     if mode == "phase2" and key in ("a", "d", "f", "h", "r"):
@@ -100,7 +101,7 @@ def explain_result(kind, d, ctx):
         if not best: return ("RED TEAM: no attack found.", "Within its budget it found no damage that switches this behaviour off.", "")
         what, why = _attack_words(best, name, d.get("goal"))
         return (f"The RED TEAM attacked {NAMES.get(name, name)}.", f"It {what} -- {why}.",
-                f"Red rings show those neurons. Press {TEST_KEY.get(name, 'S')} to test the fly.")
+                f"Red rings show those neurons. Press {TEST_KEY.get(name, 'S')} to test the fly, or T for a quick test with no walking.")
     if kind == "replay":
         stage = d["stage"]; hz = d["hz"]; h = ctx.get("healthy")
         pct = f" ({hz / h * 100:.0f}% of healthy)" if h else ""
@@ -126,7 +127,7 @@ def explain_result(kind, d, ctx):
                if rep.get("below_target") else " It checked this repair on 8 separate test runs before accepting it.")
         return (f"The BLUE TEAM repaired {NAMES.get(name, name)} using {rep['size']} neurons.",
                 "It " + ", ".join(parts[:-1]) + (" and " if len(parts) > 1 else "") + parts[-1] + ".",
-                f"Blue rings show them.{lvl} Press {TEST_KEY.get(name, 'S')} to test the fly.")
+                f"Blue rings show them.{lvl} Press {TEST_KEY.get(name, 'S')} to test the fly, or T for a quick test with no walking.")
     if kind == "reset": return ("You reset the brain.", "Every attack and every repair has been removed.", "The brain is back to the real, healthy connectome.")
     return None
 

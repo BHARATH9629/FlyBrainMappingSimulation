@@ -209,6 +209,8 @@ geoms = {"sugar": body.sim.mj_model.geom("sugar"), "bitter": body.sim.mj_model.g
 TARGET = {"sugar": "eat", "water": "drink", "bitter": "refuse_bitter", "looming": "escape",
           "approach": "retreat", "threat": "turn", "hijack": "eat"}
 
+QUICK_TASTE = {"eat": "sugar", "drink": "water", "refuse_bitter": "bitter"}
+
 LABELS = {"eat": ("sugar taste neurons", "MN9 (feeding muscle)"), "drink": ("water taste neurons", "MN9 (feeding muscle)"),
           "refuse_bitter": ("sugar + bitter taste neurons", "MN9 (feeding muscle)"), "escape": ("looming detectors LC4/LPLC2", "giant fiber DNp01 (escape)"),
           "retreat": ("approach detectors LC16, both eyes", "MDN moonwalker (walk backward)"), "turn": ("looming detectors, one eye", "DNa02 (steering)")}
@@ -220,13 +222,13 @@ state = dict(walking=False, steer=0.0, target=None, kind=None, tour=[], spots={}
              explain=("", "", ""), score=None, show_log=False)   # explanation panel lines, red/blue scoreboard, TAB = technical log           # 3-D brain view: mouse-drag origin, auto-spin on/off   # counts: dict(fired, missing, silenced, stage) for the brain-panel line
 
 
-def place_drop(kind):
+def place_drop(kind, dist=9.0):
     pos = body.position[:2]; h = float(body.heading)
-    tgt = pos + 9.0 * np.array([np.cos(h), np.sin(h)])
+    tgt = pos + dist * np.array([np.cos(h), np.sin(h)])
     for k_, g in geoms.items(): body.sim.mj_model.geom_pos[g.id][:2] = tgt if k_ == kind else (1e6, 1e6)
     state["drops"] = {kind: tgt}
     state.update(target=tgt, kind=kind, walking=True, phase="approach", verdict=None)
-    state["msg"] = f"{kind} placed 9 mm ahead; walking to it"
+    state["msg"] = f"{kind} placed {dist:.0f} mm ahead; walking to it" if dist >= ARRIVE else f"quick test: {kind} placed at the mouth"
 
 
 def place_arena():
@@ -294,6 +296,17 @@ while running:
             log_event("key", key=pygame.key.name(k), mode=args.mode, kind_before=state["kind"])
             if k == pygame.K_q: running = False
             elif worker.brain is None: pass
+            # T = quick test: the same brain test as the behaviour's own key, on whatever was attacked (or is on screen),
+            # with the drop put straight at the mouth -- no walk. The taste is judged by the same arrival code as S / V / B.
+            elif k == pygame.K_t:
+                name_ = worker.attack_name if (worker.attack is not None and worker.attack_name) else TARGET.get(state["kind"], "eat")
+                if worker.attack is not None and worker.attack_goal == "force" and args.mode != "phase2":
+                    k = pygame.K_h
+                elif name_ in QUICK_TASTE:
+                    place_drop(QUICK_TASTE[name_], dist=0.3); k = None
+                else:
+                    k = {"escape": pygame.K_l, "retreat": pygame.K_DOWN, "turn": pygame.K_2}[name_]
+            if k is None or ev.key == pygame.K_q or worker.brain is None: pass
             elif k == pygame.K_s: place_drop("sugar")
             elif k == pygame.K_b: place_drop("bitter")
             elif k == pygame.K_v: place_drop("water")
@@ -343,9 +356,9 @@ while running:
             elif k == pygame.K_m:
                 worker = BrainWorker("male" if worker.sex == "female" else "female"); state["msg"] = f"loading the {worker.sex} brain ..."
             if k == pygame.K_TAB: state["show_log"] = not state["show_log"]
-            ex_ = explain_key(pygame.key.name(k), args.mode, worker.attack is not None, worker.repair is not None)
+            ex_ = explain_key(pygame.key.name(ev.key), args.mode, worker.attack is not None, worker.repair is not None)
             if any(ex_): state["explain"] = ex_
-            log_event("after_key", key=pygame.key.name(k), msg=state["msg"], explain=state["explain"])     # what the screen says right after the key
+            log_event("after_key", key=pygame.key.name(ev.key), msg=state["msg"], explain=state["explain"])     # what the screen says right after the key
 
         elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1 and worker.brain is not None and ev.pos[0] >= PW and TOP <= ev.pos[1] < TOP + PH:
             state["drag"] = ev.pos
@@ -645,7 +658,7 @@ while running:
         for k_, lab in [("A", "attack"), ("F", "hijack attack"), ("H", "test with no sugar"), ("D", "repair"), ("R", "reset brain")]:
             x = chip(x, y, k_, lab, col=(110, 48, 48) if k_ in ("A", "F") else (48, 66, 120) if k_ == "D" else (60, 64, 80))
         x = 16; y += 26
-    groups = [("S", "sugar"), ("V", "water"), ("B", "bitter"), ("C", "choice arena"), ("E", "explore + click"), ("L", "looming"),
+    groups = [("T", "quick test"), ("S", "sugar"), ("V", "water"), ("B", "bitter"), ("C", "choice arena"), ("E", "explore + click"), ("L", "looming"),
               ("DOWN", "approaching object"), ("1 / 2", "threat left / right"), ("W", "walk"), ("<- ->", "steer"), ("SPACE", "stop"), ("drag / wheel", "turn / zoom brain"), ("O", "spin brain"),
               ("0", "front view"), ("TAB", "technical log"), ("M", "swap sex"), ("Q", "quit")]
     for k_, lab in groups:

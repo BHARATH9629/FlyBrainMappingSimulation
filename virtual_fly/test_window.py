@@ -33,6 +33,11 @@ SCENARIOS = {   # name: (mode, script, behaviour, the trigger key)
     "hijack":  ("phase3", S("H", "F", "H", "D", "H"), "eat", "h"),
     "edges":   ("phase3", S("D", "S", "A", "D", "D", "R", "S"), "eat", "s"),
     "phase2":  ("phase2", S("S", "A", "D", "F", "H", "R", "S"), "eat", "s"),
+    # T = quick test (no walk): must give exactly the results the behaviour's own key gives
+    "quick_drink":  ("phase3", S("V", "A", "T", "D", "T"), "drink", "t"),
+    "quick_escape": ("phase3", S("L", "A", "T", "D", "T"), "escape", "t"),
+    "quick_hijack": ("phase3", S("H", "F", "T", "D", "T"), "eat", "t"),
+    "quick_p2":     ("phase2", S("T", "B", "T", "DOWN", "T"), "eat", "t"),
     # the 3-D view controls (O = spin, 0 = front view) must not change any result, in either phase
     "view":    ("phase3", S("S", "O", "A", "D", "0", "S"), "eat", "s"),
     "view2":   ("phase2", S("S", "O", "S", "0", "S"), "eat", "s"),
@@ -88,6 +93,7 @@ def expected_verdict(name, hz, dL=None, dR=None):
 
 report = {}; all_ok = True
 for name, (mode, script, bname, trig) in SCENARIOS.items():
+    role = {"quick_drink": "drink", "quick_escape": "escape", "quick_hijack": "hijack", "quick_p2": "phase2"}.get(name, name)   # the story it must tell
     path = os.path.join(OUT, f"{name}.jsonl")
     fails = []; lines = []
     if not os.path.exists(path):
@@ -116,9 +122,9 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
             fails.append(f"scoreboard: red line does not show the attacked rate {e['hz']:.0f} Hz: {sc}")
         if e["event"] == "replay" and e["stage"] == "repair" and not (len(sc) > 1 and f"{e['hz']:.0f} Hz" in sc[1]):
             fails.append(f"scoreboard: blue line does not show the repaired rate {e['hz']:.0f} Hz: {sc}")
-        if name in ("phase2", "view2") and (sc or any(w in " ".join(ex) for w in ("RED TEAM", "BLUE TEAM"))):
+        if role in ("phase2", "view2") and (sc or any(w in " ".join(ex) for w in ("RED TEAM", "BLUE TEAM"))):
             fails.append(f"PHASE 2 showed red/blue text: {sc or ex}")
-    if name == "bitter":
+    if role == "bitter":
         last_sc = [e.get("score") for e in E if e.get("score")]
         if not last_sc or "cannot repair" not in " ".join(last_sc[-1]): fails.append(f"scoreboard: bitter loss not shown: {last_sc[-1:] }")
     ex_lines = [e.get("explain") for e in E if e["event"] in ("repaired", "replay") and e.get("explain")]
@@ -169,9 +175,9 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
         if not exact: fails.append(f"{stage}: displayed rate {shown} but the same brain state gives {true}")
         if not ok_v: fails.append(f"{stage}: displayed '{e['verdict']}' but the rate means '{exp}'")
         # the story each scenario must tell
-        if name in ("phase2", "view2"): continue
+        if role in ("phase2", "view2"): continue
         v = e["verdict"]
-        if name == "hijack":
+        if role == "hijack":
             want = {"healthy": "no feeding", "after F": "EATS NOTHING", "after D": "no feeding"}.get(stage)
             if want and v != want: fails.append(f"hijack story: {stage} shows '{v}', expected '{want}'")
         elif stage == "healthy" and v != HEALTHY.get(beh): fails.append(f"story: healthy brain shows '{v}'")
@@ -181,21 +187,28 @@ for name, (mode, script, bname, trig) in SCENARIOS.items():
             elif v != HEALTHY.get(beh): fails.append(f"story: after the repair '{v}'")
     msgs = [e.get("msg") or "" for e in E if e["event"] != "key"]
     allmsgs = " | ".join(msgs)
-    if name in ("phase2", "view2"):
+    if role in ("phase2", "view2"):
         if seen_attack or seen_repair or replays: fails.append("PHASE 2 ran an attack, a repair or a replay")
-    elif name in ("eat", "drink", "escape", "retreat", "turn", "hijack", "view"):
+    elif role in ("eat", "drink", "escape", "retreat", "turn", "hijack", "view"):
         if replays != ["attack", "repair"]: fails.append(f"expected a replay after the attack and after the repair, got {replays}")
-    elif name == "bitter":
+    elif role == "bitter":
         if replays != ["attack"]: fails.append(f"bitter: expected one replay (after the attack; a lost repair changes nothing), got {replays}")
-    if name == "edges":
+    if role == "edges":
         for need in ("nothing to repair", "already repaired", "brain reset"):
             if need not in allmsgs:
                 fails.append(f"edge case: never showed '{need}'")
         n_rep = sum(e["event"] == "repaired" for e in E)
         if n_rep != 1: fails.append(f"edge case: {n_rep} repairs ran -- exactly one is allowed (D on a healthy brain and a second D must do nothing)")
-    if name == "bitter" and seen_repair and "BLUE TEAM LOST" not in allmsgs and "repaired with" in allmsgs:
+    if role == "bitter" and seen_repair and "BLUE TEAM LOST" not in allmsgs and "repaired with" in allmsgs:
         lines.append("   note: blue team WON on bitter this time (attack was the repairable kind)")
-    if name not in ("phase2", "view2", "edges") and not seen_attack: fails.append("no attack result was ever shown")
+    if role not in ("phase2", "view2", "edges") and not seen_attack: fails.append("no attack result was ever shown")
+    # T (quick test): every press must be followed by a brain result before the next key
+    seq = [e for e in E if e["event"] in ("key", "measured", "threat") and (e["event"] == "key" or e.get("verdict"))]
+    for a_, e in enumerate(seq):
+        if e["event"] == "key" and e["key"] == "t":
+            nxt = seq[a_ + 1] if a_ + 1 < len(seq) else None
+            if nxt is None or nxt["event"] == "key": fails.append("quick test: a T press gave no brain result")
+            else: lines.append(f"   T -> {nxt['event']} {nxt.get('name', 'turn')}: '{nxt['verdict']}'")
     report[name] = {"ok": not fails, "fails": fails, "lines": lines}; all_ok &= not fails
 
 print("\n" + "=" * 110)
