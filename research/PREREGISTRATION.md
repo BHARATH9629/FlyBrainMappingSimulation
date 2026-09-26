@@ -159,3 +159,13 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   definitions (*m_eat_L/R*, *m_drink_L/R*, *m_bitter_L/R*, *m_escape_L/R*, *m_retreat*, *m_turn_R/L*; both MN9s
   averaged; turn readout = the DNa02 on the opposite side label from the stimulated eye, as in FlyWire), same
   thresholds, same inclusion rule. All male instances count as confirmation.
+- **26 Sep 2026, validity amendment (found at the male inclusion check), applied to all data sets.** An "expected
+  off" instance (refuse bitter) only tests anything if the same sugar stimulus **without** bitter drives the output
+  above its ON bar; otherwise the output is quiet because nothing drives it, and the "refusal" is trivial. New rule:
+  such an instance is included only if its sugar-only counterpart passes inclusion. Consequences: FlyWire *bitter_R*
+  (right taste alone 35 Hz, excluded) is **demoted to exploratory**, so its attack/repair result no longer counts as
+  confirmation; BANC *b_bitter_R* (sugar alone 32 Hz) and male *m_bitter_L/R* (sugar alone 3 / 40 Hz, scaled) are
+  excluded. The discovery case *refuse_bitter* is unaffected (sugar alone 107 Hz).
+  **Male inclusion (primary, × 0.556):** included *m_escape_L*, *m_escape_R*, *m_retreat*; excluded *m_eat_L/R*,
+  *m_drink_L/R*, *m_turn_R/L* (both 0 Hz: the DNa02 side labels behave oppositely to FlyWire and BANC), and
+  *m_bitter_L/R* by the amendment. Secondary (unscaled): *m_eat_L/R* and *m_escape_L/R* pass and are run as secondary.
