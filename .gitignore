@@ -10,3 +10,9 @@ neuroredteam/atlas/*/*.log
 neuroredteam/atlas/*.log
 virtual_fly/cache/
 virtual_fly/out/*.png
+# generated output in sub-folders (demo clips, test snapshots) -- large, and the presenter script is private
+virtual_fly/out/*/
+# Phase 4: local backups and bulky intermediate results stay off GitHub
+research/backup_*/
+research/results/**/*.npz
+research/PROTECTED_MANIFEST.json
