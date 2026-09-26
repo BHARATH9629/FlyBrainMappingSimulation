@@ -119,3 +119,9 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   same side), escape, back away, turn (same types and thresholds as FlyWire). BANC splits taste neurons into subtypes
   that FlyWire lumps together, and the side labels of taste neurons look uneven, so the MN9 readout is **both MN9s
   averaged** (no side chosen). The same inclusion rule applies. All BANC instances count as confirmation.
+- **26 Sep 2026, after the BANC inclusion check, before any BANC attack run.** Included (primary, scaled):
+  *b_bitter_R*, *b_escape_R*, *b_retreat*, *b_turn_R*, *b_turn_L*; excluded: *b_eat_L/R*, *b_drink_L/R*,
+  *b_bitter_L*, *b_escape_L*. Because *b_eat_R* (the control of *b_bitter_R*) was excluded, no repair of *b_bitter_R*
+  could pass its control check; *b_bitter_R* therefore counts for the attack hypotheses (H1, H2) only, not for the
+  repair hypotheses (H3, H4). The same applies to the FlyWire *bitter_R* instance only if its control fails for the
+  same reason (it did not: its control passed inclusion).
