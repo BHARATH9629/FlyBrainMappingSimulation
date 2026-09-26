@@ -1,0 +1,51 @@
+{
+ "eat": {
+  "R1_strong_drivers": 10,
+  "R2_vertex_cut": 20,
+  "R2_subgraph_neurons": 226,
+  "n_stimulus": 20,
+  "readouts": 1
+ },
+ "drink": {
+  "R1_strong_drivers": 9,
+  "R2_vertex_cut": 31,
+  "R2_subgraph_neurons": 282,
+  "n_stimulus": 44,
+  "readouts": 1
+ },
+ "escape": {
+  "R1_strong_drivers": 33,
+  "R2_vertex_cut": 115,
+  "R2_subgraph_neurons": 901,
+  "n_stimulus": 162,
+  "readouts": 1
+ },
+ "retreat": {
+  "R1_strong_drivers": 43,
+  "R2_vertex_cut": 79,
+  "R2_subgraph_neurons": 762,
+  "n_stimulus": 151,
+  "readouts": 4
+ },
+ "turn": {
+  "R1_strong_drivers": 15,
+  "R2_vertex_cut": 121,
+  "R2_subgraph_neurons": 1080,
+  "n_stimulus": 152,
+  "readouts": 1
+ },
+ "r_taste_L": {
+  "R1_strong_drivers": 10,
+  "R2_vertex_cut": 31,
+  "R2_subgraph_neurons": 325,
+  "n_stimulus": 64,
+  "readouts": 1
+ },
+ "r_escape_R": {
+  "R1_strong_drivers": 47,
+  "R2_vertex_cut": 152,
+  "R2_subgraph_neurons": 1061,
+  "n_stimulus": 152,
+  "readouts": 1
+ }
+}

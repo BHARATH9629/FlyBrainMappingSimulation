@@ -1,0 +1,918 @@
+{
+ "rows": [
+  {
+   "fly": "FlyWire",
+   "name": "s_00_FlyWire",
+   "R1": 31,
+   "R2": 84,
+   "cost": 4,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_02_FlyWire",
+   "R1": 24,
+   "R2": 101,
+   "cost": 5,
+   "lesion": 1000,
+   "cost_solid": 5,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_03_FlyWire",
+   "R1": 22,
+   "R2": 91,
+   "cost": 6,
+   "lesion": 7,
+   "cost_solid": 6,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_04_FlyWire",
+   "R1": 9,
+   "R2": 49,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_05_FlyWire",
+   "R1": 64,
+   "R2": 12,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_06_FlyWire",
+   "R1": 65,
+   "R2": 6,
+   "cost": 19,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_07_FlyWire",
+   "R1": 42,
+   "R2": 98,
+   "cost": 6,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_08_FlyWire",
+   "R1": 14,
+   "R2": 68,
+   "cost": 1,
+   "lesion": 4,
+   "cost_solid": 1,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_10_FlyWire",
+   "R1": 20,
+   "R2": 21,
+   "cost": 1,
+   "lesion": 3,
+   "cost_solid": 1,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_12_FlyWire",
+   "R1": 3,
+   "R2": 14,
+   "cost": 2,
+   "lesion": 1000,
+   "cost_solid": 2,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_13_FlyWire",
+   "R1": 2,
+   "R2": 4,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_14_FlyWire",
+   "R1": 22,
+   "R2": 31,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_15_FlyWire",
+   "R1": 55,
+   "R2": 35,
+   "cost": 11,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_16_FlyWire",
+   "R1": 21,
+   "R2": 94,
+   "cost": 7,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_17_FlyWire",
+   "R1": 12,
+   "R2": 50,
+   "cost": 3,
+   "lesion": 3,
+   "cost_solid": 3,
+   "lesion_solid": 3
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_18_FlyWire",
+   "R1": 43,
+   "R2": 68,
+   "cost": 15,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_19_FlyWire",
+   "R1": 47,
+   "R2": 54,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_20_FlyWire",
+   "R1": 30,
+   "R2": 18,
+   "cost": 7,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_21_FlyWire",
+   "R1": 18,
+   "R2": 58,
+   "cost": 3,
+   "lesion": 1000,
+   "cost_solid": 3,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_23_FlyWire",
+   "R1": 9,
+   "R2": 66,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_25_FlyWire",
+   "R1": 28,
+   "R2": 43,
+   "cost": 6,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_26_FlyWire",
+   "R1": 16,
+   "R2": 44,
+   "cost": 3,
+   "lesion": 1000,
+   "cost_solid": 3,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_27_FlyWire",
+   "R1": 5,
+   "R2": 49,
+   "cost": 2,
+   "lesion": 2,
+   "cost_solid": 2,
+   "lesion_solid": 2
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_28_FlyWire",
+   "R1": 3,
+   "R2": 4,
+   "cost": 2,
+   "lesion": 2,
+   "cost_solid": 2,
+   "lesion_solid": 2
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_29_FlyWire",
+   "R1": 8,
+   "R2": 35,
+   "cost": 2,
+   "lesion": 3,
+   "cost_solid": 2,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_30_FlyWire",
+   "R1": 28,
+   "R2": 54,
+   "cost": 15,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_31_FlyWire",
+   "R1": 11,
+   "R2": 39,
+   "cost": 2,
+   "lesion": 4,
+   "cost_solid": 2,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "FlyWire",
+   "name": "s_34_FlyWire",
+   "R1": 12,
+   "R2": 18,
+   "cost": 3,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_00_BANC",
+   "R1": 76,
+   "R2": 41,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_01_BANC",
+   "R1": 22,
+   "R2": 20,
+   "cost": 6,
+   "lesion": 6,
+   "cost_solid": 6,
+   "lesion_solid": 6
+  },
+  {
+   "fly": "BANC",
+   "name": "s_02_BANC",
+   "R1": 58,
+   "R2": 26,
+   "cost": 19,
+   "lesion": 1000,
+   "cost_solid": 19,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_03_BANC",
+   "R1": 68,
+   "R2": 40,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_04_BANC",
+   "R1": 65,
+   "R2": 22,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_05_BANC",
+   "R1": 83,
+   "R2": 12,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_06_BANC",
+   "R1": 66,
+   "R2": 6,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_07_BANC",
+   "R1": 87,
+   "R2": 50,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_08_BANC",
+   "R1": 70,
+   "R2": 25,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_09_BANC",
+   "R1": 22,
+   "R2": 27,
+   "cost": 3,
+   "lesion": 3,
+   "cost_solid": 3,
+   "lesion_solid": 3
+  },
+  {
+   "fly": "BANC",
+   "name": "s_11_BANC",
+   "R1": 5,
+   "R2": 9,
+   "cost": 6,
+   "lesion": 6,
+   "cost_solid": 6,
+   "lesion_solid": 6
+  },
+  {
+   "fly": "BANC",
+   "name": "s_15_BANC",
+   "R1": 22,
+   "R2": 32,
+   "cost": 3,
+   "lesion": 1000,
+   "cost_solid": 3,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_16_BANC",
+   "R1": 15,
+   "R2": 29,
+   "cost": 4,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_17_BANC",
+   "R1": 20,
+   "R2": 14,
+   "cost": 9,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_20_BANC",
+   "R1": 14,
+   "R2": 17,
+   "cost": 7,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_21_BANC",
+   "R1": 85,
+   "R2": 10,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_22_BANC",
+   "R1": 124,
+   "R2": 23,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_23_BANC",
+   "R1": 40,
+   "R2": 24,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_24_BANC",
+   "R1": 7,
+   "R2": 4,
+   "cost": 4,
+   "lesion": 5,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_25_BANC",
+   "R1": 39,
+   "R2": 28,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_26_BANC",
+   "R1": 78,
+   "R2": 22,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_27_BANC",
+   "R1": 8,
+   "R2": 6,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_29_BANC",
+   "R1": 18,
+   "R2": 4,
+   "cost": 2,
+   "lesion": 2,
+   "cost_solid": 2,
+   "lesion_solid": 2
+  },
+  {
+   "fly": "BANC",
+   "name": "s_30_BANC",
+   "R1": 13,
+   "R2": 10,
+   "cost": 9,
+   "lesion": 9,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_31_BANC",
+   "R1": 30,
+   "R2": 9,
+   "cost": 5,
+   "lesion": 5,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "BANC",
+   "name": "s_32_BANC",
+   "R1": 0,
+   "R2": 1,
+   "cost": 4,
+   "lesion": 4,
+   "cost_solid": 4,
+   "lesion_solid": 4
+  },
+  {
+   "fly": "BANC",
+   "name": "s_33_BANC",
+   "R1": 52,
+   "R2": 21,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_00_male",
+   "R1": 47,
+   "R2": 108,
+   "cost": 3,
+   "lesion": 3,
+   "cost_solid": 3,
+   "lesion_solid": 3
+  },
+  {
+   "fly": "male",
+   "name": "s_01_male",
+   "R1": 19,
+   "R2": 115,
+   "cost": 1,
+   "lesion": 3,
+   "cost_solid": 1,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_02_male",
+   "R1": 41,
+   "R2": 107,
+   "cost": 6,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_03_male",
+   "R1": 21,
+   "R2": 135,
+   "cost": 3,
+   "lesion": 4,
+   "cost_solid": 3,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_04_male",
+   "R1": 12,
+   "R2": 115,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "male",
+   "name": "s_05_male",
+   "R1": 94,
+   "R2": 14,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_06_male",
+   "R1": 108,
+   "R2": 12,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_07_male",
+   "R1": 75,
+   "R2": 143,
+   "cost": 7,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_09_male",
+   "R1": 11,
+   "R2": 68,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "male",
+   "name": "s_10_male",
+   "R1": 12,
+   "R2": 41,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "male",
+   "name": "s_11_male",
+   "R1": 8,
+   "R2": 16,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "male",
+   "name": "s_12_male",
+   "R1": 8,
+   "R2": 25,
+   "cost": 4,
+   "lesion": 8,
+   "cost_solid": 4,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_13_male",
+   "R1": 3,
+   "R2": 11,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "male",
+   "name": "s_14_male",
+   "R1": 17,
+   "R2": 23,
+   "cost": 11,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_15_male",
+   "R1": 27,
+   "R2": 23,
+   "cost": 4,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_16_male",
+   "R1": 106,
+   "R2": 94,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_17_male",
+   "R1": 8,
+   "R2": 61,
+   "cost": 1,
+   "lesion": 2,
+   "cost_solid": 1,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_18_male",
+   "R1": 82,
+   "R2": 68,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_19_male",
+   "R1": 82,
+   "R2": 71,
+   "cost": 1000,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_20_male",
+   "R1": 32,
+   "R2": 16,
+   "cost": 4,
+   "lesion": 1000,
+   "cost_solid": 4,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_21_male",
+   "R1": 48,
+   "R2": 59,
+   "cost": 7,
+   "lesion": 1000,
+   "cost_solid": 7,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_22_male",
+   "R1": 29,
+   "R2": 94,
+   "cost": 2,
+   "lesion": 2,
+   "cost_solid": 2,
+   "lesion_solid": 2
+  },
+  {
+   "fly": "male",
+   "name": "s_24_male",
+   "R1": 4,
+   "R2": 11,
+   "cost": 1,
+   "lesion": 1,
+   "cost_solid": 1,
+   "lesion_solid": 1
+  },
+  {
+   "fly": "male",
+   "name": "s_25_male",
+   "R1": 30,
+   "R2": 38,
+   "cost": 6,
+   "lesion": 1000,
+   "cost_solid": 6,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_26_male",
+   "R1": 25,
+   "R2": 75,
+   "cost": 2,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_27_male",
+   "R1": 3,
+   "R2": 63,
+   "cost": 1,
+   "lesion": 2,
+   "cost_solid": 1,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_28_male",
+   "R1": 8,
+   "R2": 13,
+   "cost": 3,
+   "lesion": 5,
+   "cost_solid": 3,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_30_male",
+   "R1": 35,
+   "R2": 59,
+   "cost": 7,
+   "lesion": 1000,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_31_male",
+   "R1": 13,
+   "R2": 59,
+   "cost": 1,
+   "lesion": 2,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_32_male",
+   "R1": 18,
+   "R2": 104,
+   "cost": 5,
+   "lesion": 8,
+   "cost_solid": 1000,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_33_male",
+   "R1": 22,
+   "R2": 41,
+   "cost": 1,
+   "lesion": 5,
+   "cost_solid": 1,
+   "lesion_solid": 1000
+  },
+  {
+   "fly": "male",
+   "name": "s_34_male",
+   "R1": 11,
+   "R2": 16,
+   "cost": 5,
+   "lesion": 8,
+   "cost_solid": 5,
+   "lesion_solid": 1000
+  }
+ ],
+ "report": {
+  "primary": {
+   "R1 vs cost": {
+    "per_fly": {
+     "FlyWire": 0.838,
+     "BANC": 0.716,
+     "male": 0.776
+    },
+    "pooled_rho": 0.777,
+    "p_one_sided": 0.0001
+   },
+   "R2 vs lesion": {
+    "per_fly": {
+     "FlyWire": 0.147,
+     "BANC": 0.521,
+     "male": 0.023
+    },
+    "pooled_rho": 0.23,
+    "p_one_sided": 0.0192
+   },
+   "H1_confirmed": false
+  },
+  "SOLID only": {
+   "R1 vs cost_solid": {
+    "per_fly": {
+     "FlyWire": 0.809,
+     "BANC": 0.407,
+     "male": 0.691
+    },
+    "pooled_rho": 0.635,
+    "p_one_sided": 0.0001
+   },
+   "R2 vs lesion_solid": {
+    "per_fly": {
+     "FlyWire": 0.162,
+     "BANC": 0.319,
+     "male": 0.088
+    },
+    "pooled_rho": 0.19,
+    "p_one_sided": 0.0408
+   },
+   "H1_confirmed": false
+  }
+ }
+}

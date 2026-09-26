@@ -21,7 +21,17 @@ from behaviours import Behaviour
 
 MIN_SYN_R1, MIN_SYN_R2, MAX_STEPS = 10, 5, 4
 BANC = "--banc" in sys.argv; args = [a for a in sys.argv[1:] if not a.startswith("--")]
-if BANC:
+SCREEN = sys.argv[sys.argv.index("--screen") + 1] if "--screen" in sys.argv else None   # FlyWire / BANC / male
+if SCREEN:                                             # the screen attack set ("s_" instances) in that fly's primary model
+    args = [a for a in args if a != SCREEN]; SCF = os.path.join(os.path.dirname(out), "{}", "scale_factor.json")
+    if SCREEN == "BANC":
+        from banc import BancBrain; brain = BancBrain(scale=json.load(open(SCF.format("banc")))["median_ratio"])
+    elif SCREEN == "male":
+        from malecns import MaleBrain; brain = MaleBrain(scale=json.load(open(SCF.format("male")))["median_ratio"])
+    else:
+        from brain import Brain; brain = Brain("female")
+    names = args or instances.register_screen(brain, SCREEN); instances.register_screen(brain, SCREEN)
+elif BANC:
     from banc import BancBrain
     brain = BancBrain(scale=json.load(open(os.path.join(os.path.dirname(out), "banc", "scale_factor.json")))["median_ratio"])
     names = args or instances.register_banc(); instances.register_banc()
@@ -29,7 +39,7 @@ else:
     from brain import Brain
     brain = Brain("female"); instances.register(brain=brain)
     names = args or ["eat", "drink", "escape", "retreat", "turn", "r_taste_L", "r_escape_R"]
-synapses = (brain.W / (1.0 if not BANC else brain.scale))                       # back to raw synapse counts
+synapses = (brain.W / getattr(brain, "scale", 1.0))                       # back to raw synapse counts
 E = synapses.multiply(synapses >= MIN_SYN_R2).tocsr(); E.eliminate_zeros()      # excitatory, >= 5 synapses
 E.data[:] = 1
 
@@ -72,7 +82,7 @@ for name in names:
     res[name] = dict(R1_strong_drivers=len(strong), R2_vertex_cut=cut, R2_subgraph_neurons=n_sub,
                      n_stimulus=len(b.stim), readouts=len(b.readouts))
     print(f"{name:12s} R1 strong drivers {len(strong):3d} | R2 vertex cut {cut:3d} (sub-graph {n_sub:,} neurons)", flush=True)
-fn = os.path.join(out, "wiring_banc.json" if BANC else "wiring_flywire.json")
+fn = os.path.join(out, f"wiring_screen_{SCREEN}.json" if SCREEN else "wiring_banc.json" if BANC else "wiring_flywire.json")
 old = json.load(open(fn)) if os.path.exists(fn) else {}
 json.dump(old | res, open(fn, "w"), indent=1)
 finish()

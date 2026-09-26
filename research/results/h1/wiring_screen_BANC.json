@@ -1,0 +1,191 @@
+{
+ "s_00_BANC": {
+  "R1_strong_drivers": 76,
+  "R2_vertex_cut": 41,
+  "R2_subgraph_neurons": 377,
+  "n_stimulus": 77,
+  "readouts": 1
+ },
+ "s_01_BANC": {
+  "R1_strong_drivers": 22,
+  "R2_vertex_cut": 20,
+  "R2_subgraph_neurons": 233,
+  "n_stimulus": 104,
+  "readouts": 1
+ },
+ "s_02_BANC": {
+  "R1_strong_drivers": 58,
+  "R2_vertex_cut": 26,
+  "R2_subgraph_neurons": 307,
+  "n_stimulus": 43,
+  "readouts": 1
+ },
+ "s_03_BANC": {
+  "R1_strong_drivers": 68,
+  "R2_vertex_cut": 40,
+  "R2_subgraph_neurons": 377,
+  "n_stimulus": 88,
+  "readouts": 1
+ },
+ "s_04_BANC": {
+  "R1_strong_drivers": 65,
+  "R2_vertex_cut": 22,
+  "R2_subgraph_neurons": 315,
+  "n_stimulus": 104,
+  "readouts": 1
+ },
+ "s_05_BANC": {
+  "R1_strong_drivers": 83,
+  "R2_vertex_cut": 12,
+  "R2_subgraph_neurons": 615,
+  "n_stimulus": 14,
+  "readouts": 1
+ },
+ "s_06_BANC": {
+  "R1_strong_drivers": 66,
+  "R2_vertex_cut": 6,
+  "R2_subgraph_neurons": 202,
+  "n_stimulus": 12,
+  "readouts": 1
+ },
+ "s_07_BANC": {
+  "R1_strong_drivers": 87,
+  "R2_vertex_cut": 50,
+  "R2_subgraph_neurons": 422,
+  "n_stimulus": 101,
+  "readouts": 1
+ },
+ "s_08_BANC": {
+  "R1_strong_drivers": 70,
+  "R2_vertex_cut": 25,
+  "R2_subgraph_neurons": 240,
+  "n_stimulus": 69,
+  "readouts": 1
+ },
+ "s_09_BANC": {
+  "R1_strong_drivers": 22,
+  "R2_vertex_cut": 27,
+  "R2_subgraph_neurons": 275,
+  "n_stimulus": 65,
+  "readouts": 1
+ },
+ "s_11_BANC": {
+  "R1_strong_drivers": 5,
+  "R2_vertex_cut": 9,
+  "R2_subgraph_neurons": 112,
+  "n_stimulus": 17,
+  "readouts": 1
+ },
+ "s_15_BANC": {
+  "R1_strong_drivers": 22,
+  "R2_vertex_cut": 32,
+  "R2_subgraph_neurons": 157,
+  "n_stimulus": 65,
+  "readouts": 1
+ },
+ "s_16_BANC": {
+  "R1_strong_drivers": 15,
+  "R2_vertex_cut": 29,
+  "R2_subgraph_neurons": 248,
+  "n_stimulus": 85,
+  "readouts": 1
+ },
+ "s_17_BANC": {
+  "R1_strong_drivers": 20,
+  "R2_vertex_cut": 14,
+  "R2_subgraph_neurons": 171,
+  "n_stimulus": 50,
+  "readouts": 1
+ },
+ "s_20_BANC": {
+  "R1_strong_drivers": 14,
+  "R2_vertex_cut": 17,
+  "R2_subgraph_neurons": 206,
+  "n_stimulus": 17,
+  "readouts": 1
+ },
+ "s_21_BANC": {
+  "R1_strong_drivers": 85,
+  "R2_vertex_cut": 10,
+  "R2_subgraph_neurons": 258,
+  "n_stimulus": 63,
+  "readouts": 1
+ },
+ "s_22_BANC": {
+  "R1_strong_drivers": 124,
+  "R2_vertex_cut": 23,
+  "R2_subgraph_neurons": 549,
+  "n_stimulus": 85,
+  "readouts": 1
+ },
+ "s_23_BANC": {
+  "R1_strong_drivers": 40,
+  "R2_vertex_cut": 24,
+  "R2_subgraph_neurons": 230,
+  "n_stimulus": 65,
+  "readouts": 1
+ },
+ "s_24_BANC": {
+  "R1_strong_drivers": 7,
+  "R2_vertex_cut": 4,
+  "R2_subgraph_neurons": 20,
+  "n_stimulus": 33,
+  "readouts": 1
+ },
+ "s_25_BANC": {
+  "R1_strong_drivers": 39,
+  "R2_vertex_cut": 28,
+  "R2_subgraph_neurons": 163,
+  "n_stimulus": 38,
+  "readouts": 1
+ },
+ "s_26_BANC": {
+  "R1_strong_drivers": 78,
+  "R2_vertex_cut": 22,
+  "R2_subgraph_neurons": 224,
+  "n_stimulus": 40,
+  "readouts": 1
+ },
+ "s_27_BANC": {
+  "R1_strong_drivers": 8,
+  "R2_vertex_cut": 6,
+  "R2_subgraph_neurons": 50,
+  "n_stimulus": 37,
+  "readouts": 1
+ },
+ "s_29_BANC": {
+  "R1_strong_drivers": 18,
+  "R2_vertex_cut": 4,
+  "R2_subgraph_neurons": 73,
+  "n_stimulus": 86,
+  "readouts": 1
+ },
+ "s_30_BANC": {
+  "R1_strong_drivers": 13,
+  "R2_vertex_cut": 10,
+  "R2_subgraph_neurons": 162,
+  "n_stimulus": 63,
+  "readouts": 1
+ },
+ "s_31_BANC": {
+  "R1_strong_drivers": 30,
+  "R2_vertex_cut": 9,
+  "R2_subgraph_neurons": 82,
+  "n_stimulus": 33,
+  "readouts": 1
+ },
+ "s_32_BANC": {
+  "R1_strong_drivers": 0,
+  "R2_vertex_cut": 1,
+  "R2_subgraph_neurons": 17,
+  "n_stimulus": 86,
+  "readouts": 1
+ },
+ "s_33_BANC": {
+  "R1_strong_drivers": 52,
+  "R2_vertex_cut": 21,
+  "R2_subgraph_neurons": 345,
+  "n_stimulus": 130,
+  "readouts": 1
+ }
+}

@@ -1,0 +1,198 @@
+{
+ "s_00_FlyWire": {
+  "R1_strong_drivers": 31,
+  "R2_vertex_cut": 84,
+  "R2_subgraph_neurons": 694,
+  "n_stimulus": 93,
+  "readouts": 1
+ },
+ "s_02_FlyWire": {
+  "R1_strong_drivers": 24,
+  "R2_vertex_cut": 101,
+  "R2_subgraph_neurons": 1099,
+  "n_stimulus": 102,
+  "readouts": 1
+ },
+ "s_03_FlyWire": {
+  "R1_strong_drivers": 22,
+  "R2_vertex_cut": 91,
+  "R2_subgraph_neurons": 753,
+  "n_stimulus": 115,
+  "readouts": 1
+ },
+ "s_04_FlyWire": {
+  "R1_strong_drivers": 9,
+  "R2_vertex_cut": 49,
+  "R2_subgraph_neurons": 673,
+  "n_stimulus": 82,
+  "readouts": 1
+ },
+ "s_05_FlyWire": {
+  "R1_strong_drivers": 64,
+  "R2_vertex_cut": 12,
+  "R2_subgraph_neurons": 921,
+  "n_stimulus": 12,
+  "readouts": 1
+ },
+ "s_06_FlyWire": {
+  "R1_strong_drivers": 65,
+  "R2_vertex_cut": 6,
+  "R2_subgraph_neurons": 424,
+  "n_stimulus": 27,
+  "readouts": 1
+ },
+ "s_07_FlyWire": {
+  "R1_strong_drivers": 42,
+  "R2_vertex_cut": 98,
+  "R2_subgraph_neurons": 1206,
+  "n_stimulus": 106,
+  "readouts": 1
+ },
+ "s_08_FlyWire": {
+  "R1_strong_drivers": 14,
+  "R2_vertex_cut": 68,
+  "R2_subgraph_neurons": 775,
+  "n_stimulus": 68,
+  "readouts": 1
+ },
+ "s_10_FlyWire": {
+  "R1_strong_drivers": 20,
+  "R2_vertex_cut": 21,
+  "R2_subgraph_neurons": 581,
+  "n_stimulus": 198,
+  "readouts": 1
+ },
+ "s_12_FlyWire": {
+  "R1_strong_drivers": 3,
+  "R2_vertex_cut": 14,
+  "R2_subgraph_neurons": 60,
+  "n_stimulus": 31,
+  "readouts": 1
+ },
+ "s_13_FlyWire": {
+  "R1_strong_drivers": 2,
+  "R2_vertex_cut": 4,
+  "R2_subgraph_neurons": 76,
+  "n_stimulus": 11,
+  "readouts": 1
+ },
+ "s_14_FlyWire": {
+  "R1_strong_drivers": 22,
+  "R2_vertex_cut": 31,
+  "R2_subgraph_neurons": 107,
+  "n_stimulus": 35,
+  "readouts": 1
+ },
+ "s_15_FlyWire": {
+  "R1_strong_drivers": 55,
+  "R2_vertex_cut": 35,
+  "R2_subgraph_neurons": 460,
+  "n_stimulus": 35,
+  "readouts": 1
+ },
+ "s_16_FlyWire": {
+  "R1_strong_drivers": 21,
+  "R2_vertex_cut": 94,
+  "R2_subgraph_neurons": 810,
+  "n_stimulus": 108,
+  "readouts": 1
+ },
+ "s_17_FlyWire": {
+  "R1_strong_drivers": 12,
+  "R2_vertex_cut": 50,
+  "R2_subgraph_neurons": 653,
+  "n_stimulus": 52,
+  "readouts": 1
+ },
+ "s_18_FlyWire": {
+  "R1_strong_drivers": 43,
+  "R2_vertex_cut": 68,
+  "R2_subgraph_neurons": 724,
+  "n_stimulus": 68,
+  "readouts": 1
+ },
+ "s_19_FlyWire": {
+  "R1_strong_drivers": 47,
+  "R2_vertex_cut": 54,
+  "R2_subgraph_neurons": 326,
+  "n_stimulus": 54,
+  "readouts": 1
+ },
+ "s_20_FlyWire": {
+  "R1_strong_drivers": 30,
+  "R2_vertex_cut": 18,
+  "R2_subgraph_neurons": 621,
+  "n_stimulus": 18,
+  "readouts": 1
+ },
+ "s_21_FlyWire": {
+  "R1_strong_drivers": 18,
+  "R2_vertex_cut": 58,
+  "R2_subgraph_neurons": 807,
+  "n_stimulus": 65,
+  "readouts": 1
+ },
+ "s_23_FlyWire": {
+  "R1_strong_drivers": 9,
+  "R2_vertex_cut": 66,
+  "R2_subgraph_neurons": 969,
+  "n_stimulus": 66,
+  "readouts": 1
+ },
+ "s_25_FlyWire": {
+  "R1_strong_drivers": 28,
+  "R2_vertex_cut": 43,
+  "R2_subgraph_neurons": 663,
+  "n_stimulus": 43,
+  "readouts": 1
+ },
+ "s_26_FlyWire": {
+  "R1_strong_drivers": 16,
+  "R2_vertex_cut": 44,
+  "R2_subgraph_neurons": 943,
+  "n_stimulus": 54,
+  "readouts": 1
+ },
+ "s_27_FlyWire": {
+  "R1_strong_drivers": 5,
+  "R2_vertex_cut": 49,
+  "R2_subgraph_neurons": 556,
+  "n_stimulus": 49,
+  "readouts": 1
+ },
+ "s_28_FlyWire": {
+  "R1_strong_drivers": 3,
+  "R2_vertex_cut": 4,
+  "R2_subgraph_neurons": 52,
+  "n_stimulus": 14,
+  "readouts": 1
+ },
+ "s_29_FlyWire": {
+  "R1_strong_drivers": 8,
+  "R2_vertex_cut": 35,
+  "R2_subgraph_neurons": 351,
+  "n_stimulus": 77,
+  "readouts": 1
+ },
+ "s_30_FlyWire": {
+  "R1_strong_drivers": 28,
+  "R2_vertex_cut": 54,
+  "R2_subgraph_neurons": 720,
+  "n_stimulus": 65,
+  "readouts": 1
+ },
+ "s_31_FlyWire": {
+  "R1_strong_drivers": 11,
+  "R2_vertex_cut": 39,
+  "R2_subgraph_neurons": 252,
+  "n_stimulus": 120,
+  "readouts": 1
+ },
+ "s_34_FlyWire": {
+  "R1_strong_drivers": 12,
+  "R2_vertex_cut": 18,
+  "R2_subgraph_neurons": 213,
+  "n_stimulus": 18,
+  "readouts": 1
+ }
+}

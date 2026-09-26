@@ -1,0 +1,226 @@
+{
+ "s_00_male": {
+  "R1_strong_drivers": 47,
+  "R2_vertex_cut": 108,
+  "R2_subgraph_neurons": 1928,
+  "n_stimulus": 108,
+  "readouts": 1
+ },
+ "s_01_male": {
+  "R1_strong_drivers": 19,
+  "R2_vertex_cut": 115,
+  "R2_subgraph_neurons": 1702,
+  "n_stimulus": 115,
+  "readouts": 1
+ },
+ "s_02_male": {
+  "R1_strong_drivers": 41,
+  "R2_vertex_cut": 107,
+  "R2_subgraph_neurons": 2911,
+  "n_stimulus": 107,
+  "readouts": 1
+ },
+ "s_03_male": {
+  "R1_strong_drivers": 21,
+  "R2_vertex_cut": 135,
+  "R2_subgraph_neurons": 1944,
+  "n_stimulus": 135,
+  "readouts": 1
+ },
+ "s_04_male": {
+  "R1_strong_drivers": 12,
+  "R2_vertex_cut": 115,
+  "R2_subgraph_neurons": 1760,
+  "n_stimulus": 115,
+  "readouts": 1
+ },
+ "s_05_male": {
+  "R1_strong_drivers": 94,
+  "R2_vertex_cut": 14,
+  "R2_subgraph_neurons": 2175,
+  "n_stimulus": 14,
+  "readouts": 1
+ },
+ "s_06_male": {
+  "R1_strong_drivers": 108,
+  "R2_vertex_cut": 12,
+  "R2_subgraph_neurons": 2006,
+  "n_stimulus": 12,
+  "readouts": 1
+ },
+ "s_07_male": {
+  "R1_strong_drivers": 75,
+  "R2_vertex_cut": 143,
+  "R2_subgraph_neurons": 2622,
+  "n_stimulus": 143,
+  "readouts": 1
+ },
+ "s_09_male": {
+  "R1_strong_drivers": 11,
+  "R2_vertex_cut": 68,
+  "R2_subgraph_neurons": 2358,
+  "n_stimulus": 68,
+  "readouts": 1
+ },
+ "s_10_male": {
+  "R1_strong_drivers": 12,
+  "R2_vertex_cut": 41,
+  "R2_subgraph_neurons": 1356,
+  "n_stimulus": 256,
+  "readouts": 1
+ },
+ "s_11_male": {
+  "R1_strong_drivers": 8,
+  "R2_vertex_cut": 16,
+  "R2_subgraph_neurons": 895,
+  "n_stimulus": 16,
+  "readouts": 1
+ },
+ "s_12_male": {
+  "R1_strong_drivers": 8,
+  "R2_vertex_cut": 25,
+  "R2_subgraph_neurons": 207,
+  "n_stimulus": 25,
+  "readouts": 1
+ },
+ "s_13_male": {
+  "R1_strong_drivers": 3,
+  "R2_vertex_cut": 11,
+  "R2_subgraph_neurons": 398,
+  "n_stimulus": 11,
+  "readouts": 1
+ },
+ "s_14_male": {
+  "R1_strong_drivers": 17,
+  "R2_vertex_cut": 23,
+  "R2_subgraph_neurons": 569,
+  "n_stimulus": 23,
+  "readouts": 1
+ },
+ "s_15_male": {
+  "R1_strong_drivers": 27,
+  "R2_vertex_cut": 23,
+  "R2_subgraph_neurons": 1207,
+  "n_stimulus": 23,
+  "readouts": 1
+ },
+ "s_16_male": {
+  "R1_strong_drivers": 106,
+  "R2_vertex_cut": 94,
+  "R2_subgraph_neurons": 1978,
+  "n_stimulus": 94,
+  "readouts": 1
+ },
+ "s_17_male": {
+  "R1_strong_drivers": 8,
+  "R2_vertex_cut": 61,
+  "R2_subgraph_neurons": 1514,
+  "n_stimulus": 61,
+  "readouts": 1
+ },
+ "s_18_male": {
+  "R1_strong_drivers": 82,
+  "R2_vertex_cut": 68,
+  "R2_subgraph_neurons": 1594,
+  "n_stimulus": 68,
+  "readouts": 1
+ },
+ "s_19_male": {
+  "R1_strong_drivers": 82,
+  "R2_vertex_cut": 71,
+  "R2_subgraph_neurons": 1270,
+  "n_stimulus": 71,
+  "readouts": 1
+ },
+ "s_20_male": {
+  "R1_strong_drivers": 32,
+  "R2_vertex_cut": 16,
+  "R2_subgraph_neurons": 1515,
+  "n_stimulus": 16,
+  "readouts": 1
+ },
+ "s_21_male": {
+  "R1_strong_drivers": 48,
+  "R2_vertex_cut": 59,
+  "R2_subgraph_neurons": 2571,
+  "n_stimulus": 59,
+  "readouts": 1
+ },
+ "s_22_male": {
+  "R1_strong_drivers": 29,
+  "R2_vertex_cut": 94,
+  "R2_subgraph_neurons": 3096,
+  "n_stimulus": 94,
+  "readouts": 1
+ },
+ "s_24_male": {
+  "R1_strong_drivers": 4,
+  "R2_vertex_cut": 11,
+  "R2_subgraph_neurons": 199,
+  "n_stimulus": 126,
+  "readouts": 1
+ },
+ "s_25_male": {
+  "R1_strong_drivers": 30,
+  "R2_vertex_cut": 38,
+  "R2_subgraph_neurons": 986,
+  "n_stimulus": 38,
+  "readouts": 1
+ },
+ "s_26_male": {
+  "R1_strong_drivers": 25,
+  "R2_vertex_cut": 75,
+  "R2_subgraph_neurons": 3024,
+  "n_stimulus": 75,
+  "readouts": 1
+ },
+ "s_27_male": {
+  "R1_strong_drivers": 3,
+  "R2_vertex_cut": 63,
+  "R2_subgraph_neurons": 1722,
+  "n_stimulus": 63,
+  "readouts": 1
+ },
+ "s_28_male": {
+  "R1_strong_drivers": 8,
+  "R2_vertex_cut": 13,
+  "R2_subgraph_neurons": 216,
+  "n_stimulus": 13,
+  "readouts": 1
+ },
+ "s_30_male": {
+  "R1_strong_drivers": 35,
+  "R2_vertex_cut": 59,
+  "R2_subgraph_neurons": 2247,
+  "n_stimulus": 59,
+  "readouts": 1
+ },
+ "s_31_male": {
+  "R1_strong_drivers": 13,
+  "R2_vertex_cut": 59,
+  "R2_subgraph_neurons": 421,
+  "n_stimulus": 126,
+  "readouts": 1
+ },
+ "s_32_male": {
+  "R1_strong_drivers": 18,
+  "R2_vertex_cut": 104,
+  "R2_subgraph_neurons": 1223,
+  "n_stimulus": 104,
+  "readouts": 1
+ },
+ "s_33_male": {
+  "R1_strong_drivers": 22,
+  "R2_vertex_cut": 41,
+  "R2_subgraph_neurons": 2112,
+  "n_stimulus": 178,
+  "readouts": 1
+ },
+ "s_34_male": {
+  "R1_strong_drivers": 11,
+  "R2_vertex_cut": 16,
+  "R2_subgraph_neurons": 737,
+  "n_stimulus": 16,
+  "readouts": 1
+ }
+}
