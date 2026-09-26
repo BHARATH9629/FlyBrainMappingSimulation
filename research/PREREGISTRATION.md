@@ -169,3 +169,12 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   **Male inclusion (primary, × 0.556):** included *m_escape_L*, *m_escape_R*, *m_retreat*; excluded *m_eat_L/R*,
   *m_drink_L/R*, *m_turn_R/L* (both 0 Hz: the DNa02 side labels behave oppositely to FlyWire and BANC), and
   *m_bitter_L/R* by the amendment. Secondary (unscaled): *m_eat_L/R* and *m_escape_L/R* pass and are run as secondary.
+- **26 Sep 2026, before running it: systematic pathway screen (to replace hand-picked behaviours).**
+  *Candidate inputs:* every cell type whose superclass is sensory or visual projection, present under the same name in
+  all three flies, with 10–300 neurons on the left side. *Screen (1 seed per fly, primary model of each fly):* drive
+  the type's left-side neurons at 150 Hz and record every descending neuron; the candidate output is the single
+  descending neuron with the highest rate. *Pathway* = (input type, left side, that output neuron's type and side).
+  *Inclusion:* the pathway passes the usual two-condition test (output ≥ 40 Hz with the input on all 8 seeds, ≤ 10 Hz
+  without) in **at least two of the three flies**, with the output identified by the same type and side in each.
+  Every included pathway becomes a confirmation instance ("s_" instances) for H1–H5 in the flies where it passes.
+  Pathways are listed and frozen before any attack is run on them.
