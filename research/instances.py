@@ -67,3 +67,33 @@ def register(sex="female", brain=None):
 
 
 def role(name): return INSTANCES[name][1]
+
+
+# ---------------------------------------------------------------- BANC (Confirmation C): the same behaviours in a
+# second female fly, defined by cell type (research/PREREGISTRATION.md, section 7). All of them count as confirmation.
+SUGAR, WATER, BITTER = ["LB3b", "LB3c"], ["LB3a"], ["LB1a", "LB1b", "LB1c", "LB1d", "LB1e"]
+
+
+def banc_instances():
+    both_mn9 = {"types": ["MN9"]}                                   # both MN9s, averaged: no side has to be chosen
+    look = lambda s: {"types": ["LC4", "LPLC2"], "side": s}
+    return {
+        "b_eat_L":     dict(stimulus={"types": SUGAR, "side": "L"}, readout=both_mn9, on_threshold=40.0, off_threshold=10.0),
+        "b_eat_R":     dict(stimulus={"types": SUGAR, "side": "R"}, readout=both_mn9, on_threshold=40.0, off_threshold=10.0),
+        "b_drink_L":   dict(stimulus={"types": WATER, "side": "L"}, readout=both_mn9, on_threshold=40.0, off_threshold=10.0),
+        "b_drink_R":   dict(stimulus={"types": WATER, "side": "R"}, readout=both_mn9, on_threshold=40.0, off_threshold=10.0),
+        "b_bitter_L":  dict(stimulus={"types": SUGAR + BITTER, "side": "L"}, readout=both_mn9, expected="off",
+                            on_threshold=40.0, off_threshold=10.0, control="b_eat_L"),
+        "b_bitter_R":  dict(stimulus={"types": SUGAR + BITTER, "side": "R"}, readout=both_mn9, expected="off",
+                            on_threshold=40.0, off_threshold=10.0, control="b_eat_R"),
+        "b_escape_L":  dict(stimulus=look("L"), readout={"types": ["DNp01"], "side": "L"}, on_threshold=80.0, off_threshold=10.0),
+        "b_escape_R":  dict(stimulus=look("R"), readout={"types": ["DNp01"], "side": "R"}, on_threshold=80.0, off_threshold=10.0),
+        "b_retreat":   dict(stimulus={"types": ["LC16"], "side": None}, readout={"types": ["MDN"]}, on_threshold=20.0, off_threshold=10.0),
+        "b_turn_R":    dict(stimulus=look("R"), readout={"types": ["DNa02"], "side": "L"}, on_threshold=20.0, off_threshold=10.0),
+        "b_turn_L":    dict(stimulus=look("L"), readout={"types": ["DNa02"], "side": "R"}, on_threshold=20.0, off_threshold=10.0),
+    }
+
+
+def register_banc():
+    for name, spec in banc_instances().items(): BEHAVIOURS["female"][name] = dict(spec)
+    return list(banc_instances())

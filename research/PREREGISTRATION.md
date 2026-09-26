@@ -109,3 +109,13 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   neurons of the same cell types → the other aDN1 (DNg62 L). Thresholds 40 / 10 Hz, as in the pre-existing grooming
   spec. Deviation from the paper: stimuli are driven at 150 Hz like every other behaviour here (the paper used up to
   220 Hz).
+- **26 Sep 2026, before any BANC behaviour run: BANC (Confirmation C).** Loader `research/banc.py` (same sign rule:
+  GABA and glutamate inhibitory; glia left out; FlyWire-matched cell types). **Synapse scaling:** across 3,448 cell
+  types present with the same neuron count in both flies, FlyWire neurons receive a median 1.815× more input synapses
+  than their BANC counterparts (IQR 1.29–2.55), so the model (tuned on FlyWire counts) would be under-driven in BANC for
+  reasons of synapse detection, not wiring. **Primary analysis: all BANC weights × 1.815** (computed from wiring only,
+  before any behaviour run); the unscaled version is reported as a secondary check. Behaviours are defined by cell
+  type: eat (sugar LB3b + LB3c), drink (water LB3a), bitter (sugar + LB1a–e, MN9 expected quiet, control = eat of the
+  same side), escape, back away, turn (same types and thresholds as FlyWire). BANC splits taste neurons into subtypes
+  that FlyWire lumps together, and the side labels of taste neurons look uneven, so the MN9 readout is **both MN9s
+  averaged** (no side chosen). The same inclusion rule applies. All BANC instances count as confirmation.
