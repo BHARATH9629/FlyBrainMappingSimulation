@@ -134,3 +134,12 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   cell type on the target side (mirror side within a fly; same side across flies), same move and strength; cell types
   missing in the target are dropped and counted. A transfer "breaks" the behaviour if its goal is met on at least 12 of
   the 15 unseen seeds (11–25). Transfers are run in both directions for every pair whose two instances passed inclusion.
+- **26 Sep 2026, after seeing H2's first measure, before running this test: H2 revised.** The first H2 measure (share
+  of attack neurons that are direct inputs of the output) is partly built into the attacker: its "jam inhibitors"
+  strategy only considers direct inhibitory inputs. It is therefore reported but **not used to judge H2**. H2 is judged
+  instead by a threat-model test: the same three strategies are rerun with **every direct presynaptic partner of the
+  output forbidden** (the agents then fall back one step upstream), and the best attack is checked on the 15 unseen
+  seeds (found = goal met on at least 12 of 15, the same standard as the baseline attacks it is compared with).
+  **H2 is confirmed** if, in at least 75 % of the confirmation instances with a baseline attack (*escape_R*,
+  *bitter_R*, *b_turn_R*, *b_turn_L*), the forbidden-direct-inputs attack costs at least twice the baseline or is not
+  found within the rules. Discovery instances are run the same way and reported as discovery.
