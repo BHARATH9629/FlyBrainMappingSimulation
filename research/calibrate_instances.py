@@ -12,7 +12,9 @@ from brain import Brain
 from behaviours import Behaviour
 
 SEEDS = range(1, 9)
-brain = Brain("female"); names = instances.register(); report = {}
+import sys
+brain = Brain("female"); names = instances.register(brain=brain); report = {}
+if len(sys.argv) > 1: names = sys.argv[1:]
 for n in names:
     t0 = time.time(); b = Behaviour(brain, n)
     on = [b.measure(True, seed=s)[0] for s in SEEDS]; off = [b.measure(False, seed=s)[0] for s in SEEDS]
@@ -23,5 +25,6 @@ for n in names:
                      on_thr=b.on_thr, off_thr=b.off_thr, with_stim=on, without_stim=off, passes=int(sum(passes)), included=ok)
     print(f"{n:11s} ({instances.role(n):9s}) stim {len(b.stim):3d}  with {np.mean(on):6.1f} Hz (min {min(on):5.1f}, max {max(on):5.1f})"
           f"  without {np.mean(off):4.1f} Hz  -> {sum(passes)}/8 {'INCLUDED' if ok else 'EXCLUDED'}  ({time.time() - t0:.0f}s)", flush=True)
-json.dump(report, open(os.path.join(out, "calibration.json"), "w"), indent=1)
+fn = os.path.join(out, "calibration.json"); old = json.load(open(fn)) if os.path.exists(fn) else {}
+json.dump(old | report, open(fn, "w"), indent=1)
 finish()

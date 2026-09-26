@@ -32,14 +32,38 @@ INSTANCES = {
                               description="all left taste neurons -> MN9 L (control for r_bitter_R)"), "control"),
     "r_escape_R": (dict(stimulus={"types": ["LC4", "LPLC2"], "side": RIGHT}, readout={"types": ["DNp01"], "side": RIGHT},
                         on_threshold=80.0, off_threshold=10.0, description="right-eye looming -> giant fibre DNp01 R"), "confirm"),
+    # antennal grooming (Shiu et al. 2024, Fig. 5): Johnston's-organ touch neurons (their JO-CE, JO-F and JO-m lists,
+    # left side) -> aDN1 (FlyWire DNg62). groom_R uses the same cell types on the right side and the other aDN1.
+    "r_groom_L":  (dict(stimulus="JON_LEFT", readout=720575940616185531, on_threshold=40.0, off_threshold=10.0,
+                        description="left antennal touch neurons (Shiu JON list) -> aDN1 (DNg62)"), "confirm"),
+    "r_groom_R":  (dict(stimulus="JON_RIGHT_TYPEMATCHED", readout={"types": ["DNg62"], "side": "L"}, on_threshold=40.0,
+                        off_threshold=10.0, description="right antennal touch neurons, same types -> the other aDN1"), "confirm"),
     "r_turn_L":   (dict(stimulus={"types": ["LC4", "LPLC2"], "side": LEFT}, readout={"types": ["DNa02"], "side": RIGHT},
                         on_threshold=20.0, off_threshold=10.0, description="left-eye looming -> DNa02 R (turn right, away)"), "confirm"),
 }
 
 
-def register(sex="female"):
-    for name, (spec, _) in INSTANCES.items(): BEHAVIOURS[sex][name] = dict(spec)
-    return list(INSTANCES)
+def _jon_lists():
+    import json, os
+    d = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "grooming_ids_from_shiu_figures.json")))
+    return d["neu_JON_CE"] + d["neu_JON_F"] + d["neu_JON_D_m"]
+
+
+def register(sex="female", brain=None):
+    """add the instances to BEHAVIOURS (this process only). The grooming stimulus is resolved to neuron IDs here:
+    the left set is the published list; the right set is every right-side neuron of the same cell types."""
+    for name, (spec, _) in INSTANCES.items():
+        spec = dict(spec)
+        if spec["stimulus"] in ("JON_LEFT", "JON_RIGHT_TYPEMATCHED"):
+            left = _jon_lists()
+            if spec["stimulus"] == "JON_LEFT": spec["stimulus"] = left
+            else:
+                if brain is None: continue                          # needs the brain to look up types
+                idx = brain.idx(left); types = sorted({brain.type_of(i) for i in idx if brain.type_of(i)})
+                right = brain.by_type(types=types, side="R")
+                spec["stimulus"] = [int(brain.ids[i]) for i in right]
+        BEHAVIOURS[sex][name] = spec
+    return [n for n in INSTANCES if n in BEHAVIOURS[sex]]
 
 
 def role(name): return INSTANCES[name][1]

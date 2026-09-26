@@ -103,3 +103,9 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   (normal feeding must survive the repair) was *taste_R*, which failed inclusion (35 Hz). Replaced by left taste →
   MN9 L: the same output neuron as *bitter_R*, and it must itself pass inclusion. Inclusion results: *taste_L*,
   *bitter_R*, *escape_R* included; *taste_R* (1/8), *bitter_L* (4/8), *turn_L* (1/8) excluded.
+- **26 Sep 2026, before its inclusion check: new behaviour, antennal grooming (Confirmation B).** *groom_L*: the
+  Johnston's-organ touch neurons of Shiu et al. 2024 (their JO-CE, JO-F and JO-m lists from `figures.ipynb`; 145 of
+  146 present in v783, all left) → aDN1 (DNg62), the neuron they used for grooming. *groom_R*: all right-side
+  neurons of the same cell types → the other aDN1 (DNg62 L). Thresholds 40 / 10 Hz, as in the pre-existing grooming
+  spec. Deviation from the paper: stimuli are driven at 150 Hz like every other behaviour here (the paper used up to
+  220 Hz).
