@@ -178,3 +178,11 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   without) in **at least two of the three flies**, with the output identified by the same type and side in each.
   Every included pathway becomes a confirmation instance ("s_" instances) for H1–H5 in the flies where it passes.
   Pathways are listed and frozen before any attack is run on them.
+- **26 Sep 2026, screen result frozen, before any attack on a screened pathway.** Stage B tested 164 candidate
+  pathways; **128 are included** (105 pass in all three flies). They converge on **35 output groups** (30 output
+  cell types; 82 of the 128 end on DNb05 L/R). Because pathways sharing an output are not independent, **the unit of
+  analysis is the output group** (output type + side); statistics use one value per group or a model with a group
+  term. *Attack set:* one pathway per group, chosen with `numpy.random.default_rng(0)` in `research/freeze_screen.py`
+  (no simulation involved); attack, repair and 15-seed verification are run in every fly where that pathway passed
+  (87 fly-runs), with the same agents, budgets and thresholds as the existing instances. Full lists:
+  `research/results/screen/frozen.json`.

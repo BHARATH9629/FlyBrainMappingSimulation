@@ -1,0 +1,20 @@
+[guard] 132 protected files unchanged; demo cache key 878888a2
+input types in all three flies (10-300 left neurons): 96
+  FlyWire: 0/96  1s
+  FlyWire: 20/96  17s
+  FlyWire: 40/96  35s
+  FlyWire: 60/96  55s
+  FlyWire: 80/96  79s
+  BANC: 0/96  3s
+  BANC: 20/96  51s
+  BANC: 40/96  100s
+  BANC: 60/96  145s
+  BANC: 80/96  194s
+  male: 0/96  1s
+  male: 20/96  27s
+  male: 40/96  55s
+  male: 60/96  85s
+  male: 80/96  121s
+stage A done: 96 input types; 79 drive some descending neuron to >= 40 Hz in at least one fly
+[guard] 132 protected files unchanged; demo cache key 878888a2
+[guard] finished: nothing protected was touched

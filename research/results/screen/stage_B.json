@@ -1,0 +1,3094 @@
+[
+ {
+  "input": "BM_Taste",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 319.1666666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "BM_Taste",
+  "output": "DNg85|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 236.25
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 3.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 193.33333333333334
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "BM_Taste",
+  "output": "DNge036|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 303.33333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 208.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 169.16666666666669
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "BM_Vib",
+  "output": "DNg85|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 144.58333333333334
+   },
+   "BANC": {
+    "passes": 7,
+    "mean_on": 42.91666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 113.75
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "HRN_VP4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 297.9166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 374.58333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 329.58333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "HRN_VP4",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 264.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 368.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 338.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "JO-CL",
+  "output": "DNp33|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 55.41666666666667
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 0.8333333333333334
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 77.5
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "JO-CL",
+  "output": "DNp73|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 5.833333333333334
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 83.75
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "JO-mz",
+  "output": "DNg29|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 1,
+    "mean_on": 35.0
+   },
+   "BANC": {
+    "passes": 2,
+    "mean_on": 31.666666666666668
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 83.75
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "JO-mz",
+  "output": "DNg84|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 47.5
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 50.0
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "JO-mz",
+  "output": "DNp103|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 227.50000000000003
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LB1e",
+  "output": "DNpe007|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 7.5
+   },
+   "male": {
+    "passes": 7,
+    "mean_on": 41.25
+   }
+  },
+  "n_flies_pass": 0
+ },
+ {
+  "input": "LC10a",
+  "output": "DNa02|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 147.91666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 345.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 162.91666666666669
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC10a",
+  "output": "DNae002|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 184.16666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 287.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 100.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC10a",
+  "output": "DNg74_a|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 185.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC10b",
+  "output": "DNg75|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 241.25000000000003
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC10d",
+  "output": "DNa02|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 162.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 339.1666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 98.33333333333334
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC10d",
+  "output": "pIP1|L",
+  "flies": {
+   "FlyWire": null,
+   "BANC": null,
+   "male": {
+    "passes": 8,
+    "mean_on": 135.83333333333334
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC10e",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 20.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 279.1666666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 16.25
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC10e",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 102.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 256.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 59.583333333333336
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC11",
+  "output": "DNbe004|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.4166666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 135.41666666666669
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 50.833333333333336
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC11",
+  "output": "DNp18|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 58.333333333333336
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 300.83333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC11",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 350.83333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC12",
+  "output": "DNg100|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 80.41666666666667
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 10.416666666666668
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 47.5
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC12",
+  "output": "DNg52_a,DNg52_b|R",
+  "flies": {
+   "FlyWire": null,
+   "BANC": null,
+   "male": {
+    "passes": 1,
+    "mean_on": 35.625
+   }
+  },
+  "n_flies_pass": 0
+ },
+ {
+  "input": "LC12",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 353.33333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 14.583333333333334
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC13",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.8333333333333334
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 331.6666666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC13",
+  "output": "DNp43|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 80.41666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 216.25
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 15.416666666666668
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC15",
+  "output": "DNp01|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 146.66666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 339.58333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 55.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC15",
+  "output": "DNp103|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 73.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 349.1666666666667
+   },
+   "male": {
+    "passes": 3,
+    "mean_on": 37.91666666666667
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC16",
+  "output": "DNp43|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 44.16666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 134.16666666666669
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 25.0
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC16",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 278.33333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC16",
+  "output": "pIP1|L",
+  "flies": {
+   "FlyWire": null,
+   "BANC": null,
+   "male": {
+    "passes": 8,
+    "mean_on": 105.41666666666667
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC17",
+  "output": "DNp01|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 125.83333333333334
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 342.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 138.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC17",
+  "output": "DNp70|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 185.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 241.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 93.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC17",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 356.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 47.91666666666667
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC18",
+  "output": "DNg100|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 89.58333333333334
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 17.5
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 31.666666666666668
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC18",
+  "output": "DNpe052|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 118.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 73.33333333333334
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC18",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 346.25
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC21",
+  "output": "DNbe001|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 53.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 283.33333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC21",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 312.5
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC21",
+  "output": "pIP1|L",
+  "flies": {
+   "FlyWire": null,
+   "BANC": null,
+   "male": {
+    "passes": 8,
+    "mean_on": 81.25
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC22",
+  "output": "DNae002|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 102.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 335.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 45.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC22",
+  "output": "DNp26|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 213.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 315.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 175.83333333333334
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC25",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 5,
+    "mean_on": 122.08333333333334
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 0
+ },
+ {
+  "input": "LC31a",
+  "output": "DNg33|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 245.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 160.41666666666669
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC31a",
+  "output": "DNp09|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 172.91666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 209.16666666666669
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 106.25
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC31a",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 348.33333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 13.333333333333334
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC36",
+  "output": "DNa02|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 1,
+    "mean_on": 32.083333333333336
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 327.5
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 15.416666666666668
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC36",
+  "output": "DNpe055|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 141.25
+   },
+   "BANC": {
+    "passes": 5,
+    "mean_on": 43.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 116.66666666666667
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC4",
+  "output": "DNp04|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 275.0
+   },
+   "BANC": {
+    "passes": 2,
+    "mean_on": 34.583333333333336
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 378.33333333333337
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LC4",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 343.75
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 2.916666666666667
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC6",
+  "output": "DNp01|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 145.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 339.1666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 178.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC6",
+  "output": "DNp103|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 145.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 252.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 190.41666666666669
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC6",
+  "output": "DNp70|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 222.91666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 212.5
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 149.16666666666669
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC9",
+  "output": "DNg16|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 120.83333333333334
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 10.0
+   },
+   "male": {
+    "passes": 5,
+    "mean_on": 38.333333333333336
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LC9",
+  "output": "DNp09|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 77.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 149.16666666666669
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 167.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LC9",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 349.58333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LLPC1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 4,
+    "mean_on": 37.083333333333336
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 363.75
+   },
+   "male": {
+    "passes": 6,
+    "mean_on": 41.66666666666667
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LLPC1",
+  "output": "DNbe001|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 258.33333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 362.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 217.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LLPC2",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 227.91666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 236.66666666666669
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LLPC2",
+  "output": "DNp31|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 279.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.5
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 270.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LLPC3",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 345.4166666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 4.583333333333334
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LLPC3",
+  "output": "DNa10|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 190.41666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 285.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 174.58333333333334
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LPC1",
+  "output": "DNa06|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 7,
+    "mean_on": 42.91666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 312.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 102.91666666666667
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LPC1",
+  "output": "DNae002|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 129.16666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 361.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 63.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LPC2",
+  "output": "DNp31|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 156.66666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 319.58333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 136.25
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LPLC1",
+  "output": "DNg33|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 235.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 267.5
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LPLC1",
+  "output": "DNp03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 192.08333333333334
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 17.5
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 262.5
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LPLC1",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 345.4166666666667
+   },
+   "male": {
+    "passes": 4,
+    "mean_on": 34.16666666666667
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "LPLC2",
+  "output": "DNp01|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 175.41666666666669
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 52.083333333333336
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 328.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LPLC2",
+  "output": "DNp103|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 277.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 343.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 305.83333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "LPLC2",
+  "output": "DNp103|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 3,
+    "mean_on": 38.333333333333336
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 362.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 62.083333333333336
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "LPLC4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 347.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 396.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 311.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "MTe01b",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 345.4166666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "MTe01b",
+  "output": "DNpe017|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 152.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 315.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 137.08333333333334
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "MTe50",
+  "output": "DNp31|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 299.58333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "MTe51",
+  "output": "DNp32|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 66.66666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 220.41666666666669
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 44.16666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "MTe51",
+  "output": "DNpe053|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 309.58333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "MeTu1",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 4.583333333333334
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 262.08333333333337
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "MeTu1",
+  "output": "DNp20|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 27.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 117.08333333333334
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 82.5
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "MeTu1",
+  "output": "DNpe017|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 137.08333333333334
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 198.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 70.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "MeTu4a",
+  "output": "DNpe053|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 3,
+    "mean_on": 57.5
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 0
+ },
+ {
+  "input": "ORN_D",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 300.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 369.58333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 333.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_D",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 276.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 363.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 342.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DA1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 311.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 377.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 339.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DA1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 280.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 362.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 353.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DA2",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 282.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 371.6666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 310.4166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DA2",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 243.33333333333334
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 365.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 329.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DA4m",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 278.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 367.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 316.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DA4m",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 265.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 359.1666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 343.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DC1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 337.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DC1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 282.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 356.25
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DC3",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 380.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 332.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DC3",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 281.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 367.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 337.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DC4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 367.5
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 302.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DC4",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 264.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 365.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 311.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 304.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 330.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 281.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 355.4166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL3",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 295.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 382.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 316.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL3",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 267.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 371.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 345.4166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 291.6666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 368.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 303.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL4",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 269.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 365.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 332.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL5",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 310.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 336.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DL5",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 278.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 367.5
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 345.83333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 315.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 380.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 340.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 285.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.6666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 352.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM2",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 378.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 332.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM2",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 277.9166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 373.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 352.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM3",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 304.58333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 363.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 325.83333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM3",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 284.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 361.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 347.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 308.33333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 377.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 333.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM4",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 282.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 350.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM5",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 273.33333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.5
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 316.25
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM5",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 256.6666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 360.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 319.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM6",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 306.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 327.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DM6",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 275.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 346.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DP1l",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 311.6666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 331.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DP1l",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 275.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 368.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 352.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DP1m",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 317.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 379.1666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 342.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_DP1m",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 287.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 380.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 352.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_V",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 298.33333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 314.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_V",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 288.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 380.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 322.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA1d",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 296.6666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 382.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 329.58333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA1d",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 282.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 345.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA1v",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 300.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 383.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 307.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA1v",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 273.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 374.1666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 335.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA2",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 312.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 382.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 342.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA2",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 282.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 355.83333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 333.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA4",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 275.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 366.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 342.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA6",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 377.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 335.83333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VA6",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 285.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 358.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 312.5
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 380.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 332.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 280.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 347.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC2",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 303.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.25
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 330.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC2",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 275.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 349.58333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC3",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 373.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 326.25
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC3",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 263.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 332.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC5",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 299.58333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.6666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 328.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VC5",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 265.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 340.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VL1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 288.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 383.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 328.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VL1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 272.08333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 376.6666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 346.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VL2a",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.4166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 378.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 339.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VL2a",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 278.75
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 368.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 351.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VL2p",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 309.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 373.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 334.58333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VL2p",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 280.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 369.1666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 347.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM1",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 304.58333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 375.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 307.08333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM1",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 274.58333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 373.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 314.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM2",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 280.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 373.75
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 308.33333333333337
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM2",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 259.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.83333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 337.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM3",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 301.6666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 377.08333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 328.75
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM3",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 268.33333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 342.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM4",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 309.1666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 379.58333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 315.0
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM4",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 281.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 371.6666666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 317.9166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM5d",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 305.83333333333337
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 378.33333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 331.6666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM5d",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 262.9166666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 370.4166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 335.4166666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM7d",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 306.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 372.9166666666667
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 322.5
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM7d",
+  "output": "DNb05|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 261.25
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 364.58333333333337
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 329.1666666666667
+   }
+  },
+  "n_flies_pass": 3
+ },
+ {
+  "input": "ORN_VM7v",
+  "output": "DNb05|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 301.6666666666667
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 359.1666666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "aMe5",
+  "output": "DNa03|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 8,
+    "mean_on": 269.1666666666667
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 0.0
+   }
+  },
+  "n_flies_pass": 1
+ },
+ {
+  "input": "claw_tpGRN",
+  "output": "DNg48|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 8,
+    "mean_on": 82.5
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 3.3333333333333335
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 67.5
+   }
+  },
+  "n_flies_pass": 2
+ },
+ {
+  "input": "claw_tpGRN",
+  "output": "DNg75|R",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 6,
+    "mean_on": 145.0
+   },
+   "male": {
+    "passes": 0,
+    "mean_on": 3.75
+   }
+  },
+  "n_flies_pass": 0
+ },
+ {
+  "input": "claw_tpGRN",
+  "output": "DNge059|L",
+  "flies": {
+   "FlyWire": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "BANC": {
+    "passes": 0,
+    "mean_on": 0.0
+   },
+   "male": {
+    "passes": 8,
+    "mean_on": 77.5
+   }
+  },
+  "n_flies_pass": 1
+ }
+]

@@ -1,0 +1,1193 @@
+{
+ "BM_Taste": {
+  "FlyWire": {
+   "output": "DNge036|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 320.0
+  },
+  "male": {
+   "output": "DNg85|L",
+   "hz": 193.33333333333334
+  }
+ },
+ "BM_Vib": {
+  "FlyWire": {
+   "output": "DNg85|L",
+   "hz": 143.33333333333334
+  },
+  "BANC": {
+   "output": "DNg85|L",
+   "hz": 46.66666666666667
+  },
+  "male": {
+   "output": "DNg85|L",
+   "hz": 113.33333333333334
+  }
+ },
+ "HRN_VP4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 296.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 336.6666666666667
+  }
+ },
+ "JO-CL": {
+  "FlyWire": {
+   "output": "DNp33|L",
+   "hz": 53.333333333333336
+  },
+  "BANC": null,
+  "male": {
+   "output": "DNp73|L",
+   "hz": 86.66666666666667
+  }
+ },
+ "JO-mz": {
+  "FlyWire": {
+   "output": "DNg84|L",
+   "hz": 50.0
+  },
+  "BANC": {
+   "output": "DNp103|R",
+   "hz": 236.66666666666669
+  },
+  "male": {
+   "output": "DNg29|L",
+   "hz": 83.33333333333334
+  }
+ },
+ "LB1e": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": {
+   "output": "DNpe007|L",
+   "hz": 40.0
+  }
+ },
+ "LC10a": {
+  "FlyWire": {
+   "output": "DNae002|L",
+   "hz": 186.66666666666669
+  },
+  "BANC": {
+   "output": "DNa02|L",
+   "hz": 340.0
+  },
+  "male": {
+   "output": "DNg74_a|L",
+   "hz": 196.66666666666669
+  }
+ },
+ "LC10b": {
+  "FlyWire": {
+   "output": "DNb01|R",
+   "hz": 36.66666666666667
+  },
+  "BANC": {
+   "output": "DNg75|R",
+   "hz": 230.0
+  },
+  "male": {
+   "output": "DNp08|L",
+   "hz": 16.666666666666668
+  }
+ },
+ "LC10d": {
+  "FlyWire": {
+   "output": "DNa02|L",
+   "hz": 153.33333333333334
+  },
+  "BANC": {
+   "output": "DNa02|L",
+   "hz": 333.33333333333337
+  },
+  "male": {
+   "output": "pIP1|L",
+   "hz": 140.0
+  }
+ },
+ "LC10e": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 113.33333333333334
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 306.6666666666667
+  },
+  "male": {
+   "output": "DNb05|L",
+   "hz": 56.66666666666667
+  }
+ },
+ "LC11": {
+  "FlyWire": {
+   "output": "DNp18|R",
+   "hz": 63.333333333333336
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 350.0
+  },
+  "male": {
+   "output": "DNbe004|R",
+   "hz": 53.333333333333336
+  }
+ },
+ "LC12": {
+  "FlyWire": {
+   "output": "DNg100|R",
+   "hz": 73.33333333333334
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 353.33333333333337
+  },
+  "male": {
+   "output": "DNg52_a,DNg52_b|R",
+   "hz": 53.333333333333336
+  }
+ },
+ "LC13": {
+  "FlyWire": {
+   "output": "DNp43|L",
+   "hz": 80.0
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 326.6666666666667
+  },
+  "male": {
+   "output": "DNa09|R",
+   "hz": 36.66666666666667
+  }
+ },
+ "LC15": {
+  "FlyWire": {
+   "output": "DNp01|R",
+   "hz": 150.0
+  },
+  "BANC": {
+   "output": "DNp103|R",
+   "hz": 350.0
+  },
+  "male": {
+   "output": "DNp01|R",
+   "hz": 56.66666666666667
+  }
+ },
+ "LC16": {
+  "FlyWire": {
+   "output": "DNp43|L",
+   "hz": 43.333333333333336
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 290.0
+  },
+  "male": {
+   "output": "pIP1|L",
+   "hz": 110.0
+  }
+ },
+ "LC17": {
+  "FlyWire": {
+   "output": "DNp70|L",
+   "hz": 180.0
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 356.6666666666667
+  },
+  "male": {
+   "output": "DNp01|R",
+   "hz": 136.66666666666669
+  }
+ },
+ "LC18": {
+  "FlyWire": {
+   "output": "DNg100|R",
+   "hz": 80.0
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 346.6666666666667
+  },
+  "male": {
+   "output": "DNpe052|L",
+   "hz": 76.66666666666667
+  }
+ },
+ "LC20a": {
+  "FlyWire": {
+   "output": "DNae002|L",
+   "hz": 20.0
+  },
+  "BANC": null,
+  "male": null
+ },
+ "LC20b": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LC21": {
+  "FlyWire": {
+   "output": "DNbe001|R",
+   "hz": 56.66666666666667
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 323.33333333333337
+  },
+  "male": {
+   "output": "pIP1|L",
+   "hz": 83.33333333333334
+  }
+ },
+ "LC22": {
+  "FlyWire": {
+   "output": "DNp26|L",
+   "hz": 216.66666666666669
+  },
+  "BANC": {
+   "output": "DNae002|R",
+   "hz": 333.33333333333337
+  },
+  "male": {
+   "output": "DNp26|L",
+   "hz": 180.0
+  }
+ },
+ "LC24": {
+  "FlyWire": {
+   "output": "DNae005|L",
+   "hz": 36.66666666666667
+  },
+  "BANC": null,
+  "male": {
+   "output": "DNbe007|L",
+   "hz": 16.666666666666668
+  }
+ },
+ "LC25": {
+  "FlyWire": null,
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 46.66666666666667
+  },
+  "male": null
+ },
+ "LC26": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LC27": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LC31a": {
+  "FlyWire": {
+   "output": "DNp09|L",
+   "hz": 170.0
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 346.6666666666667
+  },
+  "male": {
+   "output": "DNg33|R",
+   "hz": 160.0
+  }
+ },
+ "LC33": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LC36": {
+  "FlyWire": {
+   "output": "DNpe055|L",
+   "hz": 140.0
+  },
+  "BANC": {
+   "output": "DNa02|R",
+   "hz": 333.33333333333337
+  },
+  "male": {
+   "output": "DNpe055|L",
+   "hz": 116.66666666666667
+  }
+ },
+ "LC4": {
+  "FlyWire": {
+   "output": "DNp04|L",
+   "hz": 276.6666666666667
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 343.33333333333337
+  },
+  "male": {
+   "output": "DNp04|L",
+   "hz": 380.0
+  }
+ },
+ "LC40": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 16.666666666666668
+  },
+  "BANC": {
+   "output": "DNbe001|L",
+   "hz": 16.666666666666668
+  },
+  "male": null
+ },
+ "LC6": {
+  "FlyWire": {
+   "output": "DNp70|L",
+   "hz": 223.33333333333334
+  },
+  "BANC": {
+   "output": "DNp01|R",
+   "hz": 340.0
+  },
+  "male": {
+   "output": "DNp103|L",
+   "hz": 196.66666666666669
+  }
+ },
+ "LC9": {
+  "FlyWire": {
+   "output": "DNg16|R",
+   "hz": 120.0
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 350.0
+  },
+  "male": {
+   "output": "DNp09|L",
+   "hz": 166.66666666666669
+  }
+ },
+ "LCe02": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LCe03": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LLPC1": {
+  "FlyWire": {
+   "output": "DNbe001|L",
+   "hz": 263.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 363.33333333333337
+  },
+  "male": {
+   "output": "DNbe001|L",
+   "hz": 216.66666666666669
+  }
+ },
+ "LLPC2": {
+  "FlyWire": {
+   "output": "DNp31|L",
+   "hz": 280.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNp31|L",
+   "hz": 270.0
+  }
+ },
+ "LLPC3": {
+  "FlyWire": {
+   "output": "DNa10|L",
+   "hz": 190.0
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 343.33333333333337
+  },
+  "male": {
+   "output": "DNa10|L",
+   "hz": 176.66666666666669
+  }
+ },
+ "LPC1": {
+  "FlyWire": {
+   "output": "DNae002|R",
+   "hz": 126.66666666666667
+  },
+  "BANC": {
+   "output": "DNae002|R",
+   "hz": 360.0
+  },
+  "male": {
+   "output": "DNa06|L",
+   "hz": 110.0
+  }
+ },
+ "LPC2": {
+  "FlyWire": {
+   "output": "DNp31|L",
+   "hz": 160.0
+  },
+  "BANC": {
+   "output": "DNp31|L",
+   "hz": 326.6666666666667
+  },
+  "male": {
+   "output": "DNp31|L",
+   "hz": 140.0
+  }
+ },
+ "LPLC1": {
+  "FlyWire": {
+   "output": "DNp03|L",
+   "hz": 193.33333333333334
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 343.33333333333337
+  },
+  "male": {
+   "output": "DNg33|R",
+   "hz": 266.6666666666667
+  }
+ },
+ "LPLC2": {
+  "FlyWire": {
+   "output": "DNp103|L",
+   "hz": 276.6666666666667
+  },
+  "BANC": {
+   "output": "DNp103|R",
+   "hz": 363.33333333333337
+  },
+  "male": {
+   "output": "DNp01|L",
+   "hz": 330.0
+  }
+ },
+ "LPLC4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 350.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 396.6666666666667
+  },
+  "male": {
+   "output": "DNb05|L",
+   "hz": 313.33333333333337
+  }
+ },
+ "LT51": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "LT52": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "MTe01a": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "MTe01b": {
+  "FlyWire": {
+   "output": "DNpe017|L",
+   "hz": 156.66666666666669
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 340.0
+  },
+  "male": {
+   "output": "DNpe017|L",
+   "hz": 143.33333333333334
+  }
+ },
+ "MTe02": {
+  "FlyWire": {
+   "output": "DNp102|L",
+   "hz": 26.666666666666668
+  },
+  "BANC": null,
+  "male": null
+ },
+ "MTe03": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "MTe50": {
+  "FlyWire": {
+   "output": "DNp32|L",
+   "hz": 36.66666666666667
+  },
+  "BANC": {
+   "output": "DNp31|L",
+   "hz": 303.33333333333337
+  },
+  "male": {
+   "output": "DNb05|L",
+   "hz": 23.333333333333336
+  }
+ },
+ "MTe51": {
+  "FlyWire": {
+   "output": "DNp32|L",
+   "hz": 70.0
+  },
+  "BANC": {
+   "output": "DNpe053|R",
+   "hz": 310.0
+  },
+  "male": {
+   "output": "DNp32|L",
+   "hz": 46.66666666666667
+  }
+ },
+ "MTe54": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "MeTu1": {
+  "FlyWire": {
+   "output": "DNpe017|L",
+   "hz": 140.0
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 276.6666666666667
+  },
+  "male": {
+   "output": "DNp20|L",
+   "hz": 80.0
+  }
+ },
+ "MeTu3c": {
+  "FlyWire": null,
+  "BANC": null,
+  "male": null
+ },
+ "MeTu4a": {
+  "FlyWire": {
+   "output": "DNae010|L",
+   "hz": 23.333333333333336
+  },
+  "BANC": {
+   "output": "DNpe053|L",
+   "hz": 133.33333333333334
+  },
+  "male": null
+ },
+ "ORN_D": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 300.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 366.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 340.0
+  }
+ },
+ "ORN_DA1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 310.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 353.33333333333337
+  }
+ },
+ "ORN_DA2": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 283.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 370.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 330.0
+  }
+ },
+ "ORN_DA4m": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 283.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 360.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 340.0
+  }
+ },
+ "ORN_DC1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 353.33333333333337
+  }
+ },
+ "ORN_DC3": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 333.33333333333337
+  }
+ },
+ "ORN_DC4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 370.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 310.0
+  }
+ },
+ "ORN_DL1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 353.33333333333337
+  }
+ },
+ "ORN_DL3": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 296.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 383.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 343.33333333333337
+  }
+ },
+ "ORN_DL4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 280.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 366.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 330.0
+  }
+ },
+ "ORN_DL5": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 310.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 370.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 346.6666666666667
+  }
+ },
+ "ORN_DM1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 313.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 380.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 353.33333333333337
+  }
+ },
+ "ORN_DM2": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 353.33333333333337
+  }
+ },
+ "ORN_DM3": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 360.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 346.6666666666667
+  }
+ },
+ "ORN_DM4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 350.0
+  }
+ },
+ "ORN_DM5": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 250.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 370.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 313.33333333333337
+  }
+ },
+ "ORN_DM6": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 346.6666666666667
+  }
+ },
+ "ORN_DP1l": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 310.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 350.0
+  }
+ },
+ "ORN_DP1m": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 316.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|R",
+   "hz": 380.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 350.0
+  }
+ },
+ "ORN_V": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 296.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|R",
+   "hz": 380.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 323.33333333333337
+  }
+ },
+ "ORN_VA1d": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 296.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 383.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 340.0
+  }
+ },
+ "ORN_VA1v": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 300.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 383.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 333.33333333333337
+  }
+ },
+ "ORN_VA2": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 310.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 380.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 353.33333333333337
+  }
+ },
+ "ORN_VA4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 340.0
+  }
+ },
+ "ORN_VA6": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 356.6666666666667
+  }
+ },
+ "ORN_VC1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 313.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 343.33333333333337
+  }
+ },
+ "ORN_VC2": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 300.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 343.33333333333337
+  }
+ },
+ "ORN_VC3": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 370.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 333.33333333333337
+  }
+ },
+ "ORN_VC5": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 296.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 336.6666666666667
+  }
+ },
+ "ORN_VL1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 280.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 383.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 343.33333333333337
+  }
+ },
+ "ORN_VL2a": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 346.6666666666667
+  }
+ },
+ "ORN_VL2p": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 310.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 346.6666666666667
+  }
+ },
+ "ORN_VM1": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 313.33333333333337
+  }
+ },
+ "ORN_VM2": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 283.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 373.33333333333337
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 336.6666666666667
+  }
+ },
+ "ORN_VM3": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 300.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 340.0
+  }
+ },
+ "ORN_VM4": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 306.6666666666667
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 380.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 310.0
+  }
+ },
+ "ORN_VM5d": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 376.6666666666667
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 330.0
+  }
+ },
+ "ORN_VM7d": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 303.33333333333337
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 370.0
+  },
+  "male": {
+   "output": "DNb05|R",
+   "hz": 330.0
+  }
+ },
+ "ORN_VM7v": {
+  "FlyWire": {
+   "output": "DNb05|L",
+   "hz": 300.0
+  },
+  "BANC": {
+   "output": "DNb05|L",
+   "hz": 356.6666666666667
+  },
+  "male": null
+ },
+ "aMe5": {
+  "FlyWire": {
+   "output": "DNpe045|L",
+   "hz": 20.0
+  },
+  "BANC": {
+   "output": "DNa03|L",
+   "hz": 253.33333333333334
+  },
+  "male": {
+   "output": "DNp06|L",
+   "hz": 26.666666666666668
+  }
+ },
+ "aPhM1": {
+  "FlyWire": {
+   "output": "DNge036|L",
+   "hz": 33.333333333333336
+  },
+  "BANC": null,
+  "male": null
+ },
+ "claw_tpGRN": {
+  "FlyWire": {
+   "output": "DNg48|R",
+   "hz": 83.33333333333334
+  },
+  "BANC": {
+   "output": "DNg75|R",
+   "hz": 146.66666666666669
+  },
+  "male": {
+   "output": "DNge059|L",
+   "hz": 86.66666666666667
+  }
+ }
+}

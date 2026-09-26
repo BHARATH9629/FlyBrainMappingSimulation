@@ -1,0 +1,169 @@
+[guard] 132 protected files unchanged; demo cache key 878888a2
+stage B: 164 candidate pathways x 3 flies x 8 seeds
+  BM_Taste       -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  BM_Taste       -> DNg85|L          FlyWire:8/8  BANC:0/8  male:8/8  INCLUDED
+  BM_Taste       -> DNge036|L        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  BM_Vib         -> DNg85|L          FlyWire:8/8  BANC:7/8  male:8/8  INCLUDED
+  HRN_VP4        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  HRN_VP4        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  JO-CL          -> DNp33|L          FlyWire:8/8  BANC:0/8  male:8/8  INCLUDED
+  JO-CL          -> DNp73|L          FlyWire:0/8  BANC:0/8  male:8/8  
+  JO-mz          -> DNg29|L          FlyWire:1/8  BANC:2/8  male:8/8  
+  JO-mz          -> DNg84|L          FlyWire:8/8  BANC:0/8  male:8/8  INCLUDED
+  JO-mz          -> DNp103|R         FlyWire:0/8  BANC:8/8  male:0/8  
+  LB1e           -> DNpe007|L        FlyWire:0/8  BANC:0/8  male:7/8  
+  LC10a          -> DNa02|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC10a          -> DNae002|L        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC10a          -> DNg74_a|L        FlyWire:0/8  BANC:0/8  male:8/8  
+  LC10b          -> DNg75|R          FlyWire:0/8  BANC:8/8  male:0/8  
+  LC10d          -> DNa02|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC10d          -> pIP1|L           FlyWire:-/8  BANC:-/8  male:8/8  
+  LC10e          -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  LC10e          -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC11           -> DNbe004|R        FlyWire:0/8  BANC:8/8  male:8/8  INCLUDED
+  LC11           -> DNp18|R          FlyWire:8/8  BANC:8/8  male:0/8  INCLUDED
+  LC11           -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC12           -> DNg100|R         FlyWire:8/8  BANC:0/8  male:8/8  INCLUDED
+  LC12           -> DNg52_a,DNg52_b|R FlyWire:-/8  BANC:-/8  male:1/8  
+  LC12           -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC13           -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  LC13           -> DNp43|L          FlyWire:8/8  BANC:8/8  male:0/8  INCLUDED
+  LC15           -> DNp01|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC15           -> DNp103|R         FlyWire:8/8  BANC:8/8  male:3/8  INCLUDED
+  LC16           -> DNp43|L          FlyWire:8/8  BANC:8/8  male:0/8  INCLUDED
+  LC16           -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC16           -> pIP1|L           FlyWire:-/8  BANC:-/8  male:8/8  
+  LC17           -> DNp01|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC17           -> DNp70|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC17           -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:8/8  INCLUDED
+  LC18           -> DNg100|R         FlyWire:8/8  BANC:0/8  male:0/8  
+  LC18           -> DNpe052|L        FlyWire:0/8  BANC:8/8  male:8/8  INCLUDED
+  LC18           -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC21           -> DNbe001|R        FlyWire:8/8  BANC:8/8  male:0/8  INCLUDED
+  LC21           -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC21           -> pIP1|L           FlyWire:-/8  BANC:-/8  male:8/8  
+  LC22           -> DNae002|R        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC22           -> DNp26|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC25           -> DNpe053|R        FlyWire:0/8  BANC:5/8  male:0/8  
+  LC31a          -> DNg33|R          FlyWire:0/8  BANC:8/8  male:8/8  INCLUDED
+  LC31a          -> DNp09|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC31a          -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC36           -> DNa02|R          FlyWire:1/8  BANC:8/8  male:0/8  
+  LC36           -> DNpe055|L        FlyWire:8/8  BANC:5/8  male:8/8  INCLUDED
+  LC4            -> DNp04|L          FlyWire:8/8  BANC:2/8  male:8/8  INCLUDED
+  LC4            -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LC6            -> DNp01|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC6            -> DNp103|L         FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC6            -> DNp70|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC9            -> DNg16|R          FlyWire:8/8  BANC:0/8  male:5/8  
+  LC9            -> DNp09|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LC9            -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  LLPC1          -> DNb05|L          FlyWire:4/8  BANC:8/8  male:6/8  
+  LLPC1          -> DNbe001|L        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LLPC2          -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LLPC2          -> DNp31|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LLPC3          -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  LLPC3          -> DNa10|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LPC1           -> DNa06|L          FlyWire:7/8  BANC:8/8  male:8/8  INCLUDED
+  LPC1           -> DNae002|R        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LPC2           -> DNp31|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LPLC1          -> DNg33|R          FlyWire:0/8  BANC:8/8  male:8/8  INCLUDED
+  LPLC1          -> DNp03|L          FlyWire:8/8  BANC:0/8  male:8/8  INCLUDED
+  LPLC1          -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:4/8  
+  LPLC2          -> DNp01|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LPLC2          -> DNp103|L         FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  LPLC2          -> DNp103|R         FlyWire:3/8  BANC:8/8  male:8/8  INCLUDED
+  LPLC4          -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  MTe01b         -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  MTe01b         -> DNpe017|L        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  MTe50          -> DNp31|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  MTe51          -> DNp32|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  MTe51          -> DNpe053|R        FlyWire:0/8  BANC:8/8  male:0/8  
+  MeTu1          -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  MeTu1          -> DNp20|L          FlyWire:0/8  BANC:8/8  male:8/8  INCLUDED
+  MeTu1          -> DNpe017|L        FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  MeTu4a         -> DNpe053|L        FlyWire:0/8  BANC:3/8  male:0/8  
+  ORN_D          -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_D          -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DA1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DA1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DA2        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DA2        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DA4m       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DA4m       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DC1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DC1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DC3        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DC3        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DC4        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DC4        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL3        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL3        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL4        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL4        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL5        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DL5        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM2        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM2        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM3        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM3        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM4        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM4        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM5        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM5        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM6        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DM6        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DP1l       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DP1l       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DP1m       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_DP1m       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_V          -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_V          -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA1d       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA1d       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA1v       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA1v       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA2        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA2        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA4        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA4        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA6        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VA6        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC2        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC2        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC3        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC3        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC5        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VC5        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VL1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VL1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VL2a       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VL2a       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VL2p       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VL2p       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM1        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM1        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM2        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM2        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM3        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM3        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM4        -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM4        -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM5d       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM5d       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM7d       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM7d       -> DNb05|R          FlyWire:8/8  BANC:8/8  male:8/8  INCLUDED
+  ORN_VM7v       -> DNb05|L          FlyWire:8/8  BANC:8/8  male:0/8  INCLUDED
+  aMe5           -> DNa03|L          FlyWire:0/8  BANC:8/8  male:0/8  
+  claw_tpGRN     -> DNg48|R          FlyWire:8/8  BANC:0/8  male:8/8  INCLUDED
+  claw_tpGRN     -> DNg75|R          FlyWire:0/8  BANC:6/8  male:0/8  
+  claw_tpGRN     -> DNge059|L        FlyWire:0/8  BANC:0/8  male:8/8  
+stage B done: 128 pathways pass in at least two flies
+[guard] 132 protected files unchanged; demo cache key 878888a2
+[guard] finished: nothing protected was touched

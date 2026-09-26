@@ -1,0 +1,1016 @@
+{
+ "included": [
+  {
+   "input": "LC10a",
+   "output": "DNa02|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC10d",
+   "output": "DNa02|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPC1",
+   "output": "DNa06|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LLPC3",
+   "output": "DNa10|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC10a",
+   "output": "DNae002|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC22",
+   "output": "DNae002|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPC1",
+   "output": "DNae002|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "HRN_VP4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC10e",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LLPC2",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPLC4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_D",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DA1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DA2",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DA4m",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DC1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DC3",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DC4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL3",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL5",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM2",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM3",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM5",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM6",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DP1l",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DP1m",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_V",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA1d",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA1v",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA2",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA6",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC2",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC3",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC5",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VL1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VL2a",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VL2p",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM1",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM2",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM3",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM4",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM5d",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM7d",
+   "output": "DNb05|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM7v",
+   "output": "DNb05|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "HRN_VP4",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_D",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DA1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DA2",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DA4m",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DC1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DC3",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DC4",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL3",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL4",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DL5",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM2",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM3",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM4",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM5",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DM6",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DP1l",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_DP1m",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_V",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA1d",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA1v",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA2",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA4",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VA6",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC2",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC3",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VC5",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VL1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VL2a",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VL2p",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM1",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM2",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM3",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM4",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM5d",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "ORN_VM7d",
+   "output": "DNb05|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LLPC1",
+   "output": "DNbe001|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC21",
+   "output": "DNbe001|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC11",
+   "output": "DNbe004|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC12",
+   "output": "DNg100|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC31a",
+   "output": "DNg33|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LPLC1",
+   "output": "DNg33|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "claw_tpGRN",
+   "output": "DNg48|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "JO-mz",
+   "output": "DNg84|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "BM_Taste",
+   "output": "DNg85|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "BM_Vib",
+   "output": "DNg85|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "BM_Taste",
+   "output": "DNge036|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPLC2",
+   "output": "DNp01|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC15",
+   "output": "DNp01|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC17",
+   "output": "DNp01|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC6",
+   "output": "DNp01|R",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPLC1",
+   "output": "DNp03|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC4",
+   "output": "DNp04|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC31a",
+   "output": "DNp09|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC9",
+   "output": "DNp09|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC6",
+   "output": "DNp103|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPLC2",
+   "output": "DNp103|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC15",
+   "output": "DNp103|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LPLC2",
+   "output": "DNp103|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC11",
+   "output": "DNp18|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "MeTu1",
+   "output": "DNp20|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC22",
+   "output": "DNp26|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LLPC2",
+   "output": "DNp31|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LPC2",
+   "output": "DNp31|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "MTe51",
+   "output": "DNp32|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "JO-CL",
+   "output": "DNp33|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC13",
+   "output": "DNp43|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC16",
+   "output": "DNp43|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC17",
+   "output": "DNp70|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC6",
+   "output": "DNp70|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "MTe01b",
+   "output": "DNpe017|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "MeTu1",
+   "output": "DNpe017|L",
+   "n_flies_pass": 3
+  },
+  {
+   "input": "LC18",
+   "output": "DNpe052|L",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC17",
+   "output": "DNpe053|R",
+   "n_flies_pass": 2
+  },
+  {
+   "input": "LC36",
+   "output": "DNpe055|L",
+   "n_flies_pass": 2
+  }
+ ],
+ "groups": {
+  "DNa02|L": 2,
+  "DNa06|L": 1,
+  "DNa10|L": 1,
+  "DNae002|L": 1,
+  "DNae002|R": 2,
+  "DNb05|L": 43,
+  "DNb05|R": 39,
+  "DNbe001|L": 1,
+  "DNbe001|R": 1,
+  "DNbe004|R": 1,
+  "DNg100|R": 1,
+  "DNg33|R": 2,
+  "DNg48|R": 1,
+  "DNg84|L": 1,
+  "DNg85|L": 2,
+  "DNge036|L": 1,
+  "DNp01|L": 1,
+  "DNp01|R": 3,
+  "DNp03|L": 1,
+  "DNp04|L": 1,
+  "DNp09|L": 2,
+  "DNp103|L": 2,
+  "DNp103|R": 2,
+  "DNp18|R": 1,
+  "DNp20|L": 1,
+  "DNp26|L": 1,
+  "DNp31|L": 2,
+  "DNp32|L": 1,
+  "DNp33|L": 1,
+  "DNp43|L": 2,
+  "DNp70|L": 2,
+  "DNpe017|L": 2,
+  "DNpe052|L": 1,
+  "DNpe053|R": 1,
+  "DNpe055|L": 1
+ },
+ "attack_set": [
+  {
+   "input": "LC10d",
+   "output": "DNa02|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LPC1",
+   "output": "DNa06|L",
+   "group_size": 1,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LLPC3",
+   "output": "DNa10|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC10a",
+   "output": "DNae002|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LPC1",
+   "output": "DNae002|R",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "ORN_DP1l",
+   "output": "DNb05|L",
+   "group_size": 43,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "ORN_DL4",
+   "output": "DNb05|R",
+   "group_size": 39,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LLPC1",
+   "output": "DNbe001|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC21",
+   "output": "DNbe001|R",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC"
+   ]
+  },
+  {
+   "input": "LC11",
+   "output": "DNbe004|R",
+   "group_size": 1,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC12",
+   "output": "DNg100|R",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "LC31a",
+   "output": "DNg33|R",
+   "group_size": 2,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "claw_tpGRN",
+   "output": "DNg48|R",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "JO-mz",
+   "output": "DNg84|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "BM_Taste",
+   "output": "DNg85|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "BM_Taste",
+   "output": "DNge036|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LPLC2",
+   "output": "DNp01|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC15",
+   "output": "DNp01|R",
+   "group_size": 3,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LPLC1",
+   "output": "DNp03|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "LC4",
+   "output": "DNp04|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "LC31a",
+   "output": "DNp09|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC6",
+   "output": "DNp103|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LPLC2",
+   "output": "DNp103|R",
+   "group_size": 2,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC11",
+   "output": "DNp18|R",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC"
+   ]
+  },
+  {
+   "input": "MeTu1",
+   "output": "DNp20|L",
+   "group_size": 1,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC22",
+   "output": "DNp26|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LPC2",
+   "output": "DNp31|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "MTe51",
+   "output": "DNp32|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "JO-CL",
+   "output": "DNp33|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  },
+  {
+   "input": "LC16",
+   "output": "DNp43|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC"
+   ]
+  },
+  {
+   "input": "LC6",
+   "output": "DNp70|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "MeTu1",
+   "output": "DNpe017|L",
+   "group_size": 2,
+   "flies": [
+    "FlyWire",
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC18",
+   "output": "DNpe052|L",
+   "group_size": 1,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC17",
+   "output": "DNpe053|R",
+   "group_size": 1,
+   "flies": [
+    "BANC",
+    "male"
+   ]
+  },
+  {
+   "input": "LC36",
+   "output": "DNpe055|L",
+   "group_size": 1,
+   "flies": [
+    "FlyWire",
+    "male"
+   ]
+  }
+ ],
+ "seed": 0
+}
