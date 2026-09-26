@@ -9,7 +9,7 @@ Usage:  python research/run_instance.py r_escape_R block
 import json, os, sys, time
 import numpy as np
 from guard import start, finish
-out_dir = start("instances")
+out_dir = start(sys.argv[sys.argv.index("--outdir") + 1] if "--outdir" in sys.argv else "instances")
 import instances
 from brain import Brain
 from behaviours import Behaviour, BEHAVIOURS
@@ -17,7 +17,16 @@ from agents import Attacker, Defender, Log, merge_iv
 
 NAME, GOAL = sys.argv[1], sys.argv[2]
 FRESH = tuple(range(11, 26)); TARGET = 0.8
-if NAME.startswith("b_"):                     # BANC: the pre-registered scaled weights (research/banc.py)
+if NAME.startswith("s_"):                     # screen pathway: s_<k>_<fly>, that fly's primary (pre-registered) model
+    FLY = NAME.split("_")[2]; SCD = os.path.join(os.path.dirname(out_dir), "{}", "scale_factor.json")
+    if FLY == "BANC":
+        from banc import BancBrain; brain = BancBrain(scale=json.load(open(SCD.format("banc")))["median_ratio"])
+    elif FLY == "male":
+        from malecns import MaleBrain; brain = MaleBrain(scale=json.load(open(SCD.format("male")))["median_ratio"])
+    else:
+        brain = Brain("female")
+    instances.register_screen(brain, FLY)
+elif NAME.startswith("b_"):                     # BANC: the pre-registered scaled weights (research/banc.py)
     from banc import BancBrain
     UNSCALED = "--unscaled" in sys.argv                  # the pre-registered secondary BANC model (weights x 1)
     brain = BancBrain(scale=1.0 if UNSCALED else json.load(open(os.path.join(os.path.dirname(out_dir), "banc", "scale_factor.json")))["median_ratio"])
@@ -39,7 +48,7 @@ def grade(passes):
 
 
 t0 = time.time(); b = Behaviour(brain, NAME); log = Log(quiet=True); cfg = BEHAVIOURS[brain.sex][NAME]
-row = dict(instance=NAME, role=(instances.role(NAME) if NAME in instances.INSTANCES else "confirm (BANC)"), goal=GOAL, fresh_seeds=list(FRESH),
+row = dict(instance=NAME, role=(instances.role(NAME) if NAME in instances.INSTANCES else "confirm" if NAME.startswith("s_") else "confirm (BANC)"), goal=GOAL, fresh_seeds=list(FRESH),
            dataset=getattr(brain, "dataset", "FlyWire v783"))
 healthy_on = float(np.mean(rates(b, True, {}))); row["healthy_on"] = round(healthy_on, 1)
 row["healthy_off"] = round(float(np.mean(rates(b, False, {}))), 1)

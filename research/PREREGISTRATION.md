@@ -186,3 +186,19 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   (no simulation involved); attack, repair and 15-seed verification are run in every fly where that pathway passed
   (87 fly-runs), with the same agents, budgets and thresholds as the existing instances. Full lists:
   `research/results/screen/frozen.json`.
+- **27 Sep 2026, after the 87 screen attack runs, before any analysis of them beyond the summary counts: two
+  follow-ups.** (Summary counts seen so far: attack found in 25/28 FlyWire, 27/32 male, 13/27 BANC fly-runs.)
+  **(a) Scaling sweep (is BANC's lower break rate caused by the global weight scale?).** Re-run the screen attack set
+  in BANC at weights × 1.0 and × 1.4 (× 1.815 is done), and in the male at × 1.0 (× 0.556 is done). At each scale a
+  pathway is first re-checked with the same inclusion test (8/8 seeds); only passing pathways are attacked, with the
+  same agents, budgets and 15-seed verification. *Prediction if the difference is an artefact of scaling:* BANC's
+  break rate (share of included pathways with an attack found) rises as its scale falls toward × 1.0; *if it is
+  biological:* it stays well below FlyWire's at every scale. Reported: break rate and median attack size per fly and
+  scale, and Fisher's exact test of BANC × 1.0 vs FlyWire. No scale is chosen after seeing results; all are reported.
+  **(b) H1 on the screen data (section 4, unchanged measures R1 and R2).** Unit: one fly-run of the attack set (at
+  most one pathway per output group per fly, so no group is counted twice within a fly). Attack cost = size of the
+  cheapest verified-or-not attack found; runs with no attack found get cost = budget + 1 (ranked as the most costly,
+  ties allowed). Spearman correlations computed per fly and pooled (pooled p from a permutation test that shuffles
+  within fly). Confirmation rule as in section 4, applied to the pooled correlations; per-fly values reported.
+  R1 and R2 are computed from the wiring only, by the existing `h1_wiring.py` logic extended to the male and to "s_"
+  instances without changing its definitions.

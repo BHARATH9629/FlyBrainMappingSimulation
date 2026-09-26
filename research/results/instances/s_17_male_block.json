@@ -1,0 +1,131 @@
+{
+ "instance": "s_17_male",
+ "role": "confirm",
+ "goal": "block",
+ "fresh_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "dataset": "MaleCNS v1.0 (traced neurons only)",
+ "healthy_on": 53.8,
+ "healthy_off": 0.0,
+ "attacks_found": [
+  {
+   "strategy": "attacker-greedy",
+   "size": 2,
+   "intervention": {
+    "lesion": [
+     156,
+     2127
+    ]
+   }
+  },
+  {
+   "strategy": "attacker-inject",
+   "size": 1,
+   "intervention": {
+    "inject": {
+     "133925": 150.0
+    }
+   }
+  }
+ ],
+ "attack": {
+  "strategy": "attacker-inject",
+  "size": 1,
+  "intervention": {
+   "inject": {
+    "133925": 150.0
+   }
+  }
+ },
+ "attack_grade": "SOLID",
+ "attack_seeds_ok": 15,
+ "after_attack": [
+  0.0,
+  3.3333333333333335,
+  0.0,
+  3.3333333333333335,
+  0.0,
+  3.3333333333333335,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  6.666666666666667,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "repair": {
+  "size": 2,
+  "move": "bias 3.0 mV + potentiate x2.0 + stop listening",
+  "intervention": {
+   "bias": {
+    "156": 3.0
+   },
+   "potentiate": {
+    "156,0": 2.0,
+    "133925,0": 0.1
+   }
+  },
+  "partial": false,
+  "below_target": false,
+  "why": null
+ },
+ "repair_grade": "SOLID",
+ "repair_seeds_ok": 15,
+ "after_repair_on": [
+  53.333333333333336,
+  63.333333333333336,
+  73.33333333333334,
+  60.0,
+  56.66666666666667,
+  63.333333333333336,
+  60.0,
+  63.333333333333336,
+  60.0,
+  66.66666666666667,
+  63.333333333333336,
+  56.66666666666667,
+  53.333333333333336,
+  53.333333333333336,
+  63.333333333333336
+ ],
+ "after_repair_off": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "cheats": false,
+ "recovery_worst": 0.992,
+ "recovery_mean": 1.128,
+ "seconds": 342,
+ "scale": 0.556287170773152
+}

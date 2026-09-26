@@ -109,3 +109,39 @@ def male_instances():
 def register_male():
     for name, spec in male_instances().items(): BEHAVIOURS["male"][name] = dict(spec)
     return list(male_instances())
+
+
+# ---------------------------------------------------------------- systematic screen ("s_" instances, frozen 26 Sep in
+# results/screen/frozen.json). Neurons are chosen EXACTLY as research/screen.py chose them (FlyWire name; for the male
+# flywireType, else its own type; side column), and passed as explicit ID lists so no other lookup can differ.
+SCREEN_FLIES = ("FlyWire", "BANC", "male")
+
+
+def screen_names(brain, fly):
+    import numpy as np
+    col = "flywireType" if fly == "male" else "type"
+    v = np.array([str(x) for x in brain.types[col]])
+    if fly == "male":
+        own = np.array([str(x) for x in brain.types["type"]]); v = np.where(np.isin(v, ["nan", "None", ""]), own, v)
+    return v
+
+
+def screen_jobs():
+    """[(instance name, fly, input type, output 'type|side')] for the frozen attack set, in a fixed order"""
+    import json, os
+    fz = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "screen", "frozen.json")))
+    return [(f"s_{k:02d}_{f}", f, a["input"], a["output"]) for k, a in enumerate(fz["attack_set"]) for f in a["flies"]]
+
+
+def register_screen(brain, fly):
+    import numpy as np
+    names = screen_names(brain, fly); sides = brain.types["side"].astype(str).values; out = []
+    for name, f, inp, outp in screen_jobs():
+        if f != fly: continue
+        otyp, oside = outp.split("|")
+        stim = np.flatnonzero((names == inp) & (sides == "L")); ro = np.flatnonzero((names == otyp) & (sides == oside))
+        BEHAVIOURS[brain.sex][name] = dict(stimulus=[int(brain.ids[i]) for i in stim], readout=[int(brain.ids[i]) for i in ro],
+                                           on_threshold=40.0, off_threshold=10.0,
+                                           description=f"screen: {inp} (left) -> {outp} [{fly}]")
+        out.append(name)
+    return out

@@ -1,0 +1,89 @@
+87 jobs, 6 at a time -> results/instances/
+[1/87 0s] s_00_FlyWire_block: already done, skipped
+[2/87 0s] s_00_BANC_block: already done, skipped
+[3/87 0s] s_00_male_block: already done, skipped
+[4/87 0s] s_01_BANC_block: already done, skipped
+[5/87 0s] s_01_male_block: already done, skipped
+[6/87 0s] s_02_FlyWire_block: already done, skipped
+[7/87 0s] s_02_BANC_block: already done, skipped
+[8/87 0s] s_02_male_block: already done, skipped
+[9/87 0s] s_03_FlyWire_block: already done, skipped
+[10/87 0s] s_03_BANC_block: already done, skipped
+[11/87 0s] s_03_male_block: already done, skipped
+[12/87 0s] s_04_FlyWire_block: already done, skipped
+[13/87 0s] s_04_BANC_block: already done, skipped
+[14/87 0s] s_04_male_block: already done, skipped
+[15/87 0s] s_05_FlyWire_block: already done, skipped
+[16/87 0s] s_05_BANC_block: already done, skipped
+[17/87 0s] s_05_male_block: already done, skipped
+[18/87 0s] s_06_FlyWire_block: already done, skipped
+[19/87 0s] s_06_BANC_block: already done, skipped
+[20/87 0s] s_06_male_block: already done, skipped
+[21/87 0s] s_07_FlyWire_block: already done, skipped
+[22/87 0s] s_07_BANC_block: already done, skipped
+[23/87 0s] s_07_male_block: already done, skipped
+[24/87 0s] s_08_FlyWire_block: already done, skipped
+[25/87 0s] s_08_BANC_block: already done, skipped
+[26/87 0s] s_09_BANC_block: already done, skipped
+[27/87 0s] s_09_male_block: already done, skipped
+[28/87 0s] s_10_FlyWire_block: already done, skipped
+[29/87 0s] s_10_male_block: already done, skipped
+[30/87 0s] s_11_BANC_block: already done, skipped
+[31/87 0s] s_11_male_block: already done, skipped
+[32/87 0s] s_12_FlyWire_block: already done, skipped
+[33/87 0s] s_12_male_block: already done, skipped
+[34/87 0s] s_13_FlyWire_block: already done, skipped
+[35/87 0s] s_13_male_block: already done, skipped
+[36/87 0s] s_14_FlyWire_block: already done, skipped
+[37/87 0s] s_14_male_block: already done, skipped
+[38/87 0s] s_15_FlyWire_block: already done, skipped
+[39/87 0s] s_15_BANC_block: already done, skipped
+[40/87 0s] s_15_male_block: already done, skipped
+[41/87 0s] s_16_FlyWire_block: already done, skipped
+[42/87 0s] s_16_BANC_block: already done, skipped
+[43/87 0s] s_16_male_block: already done, skipped
+[44/87 0s] s_17_FlyWire_block: already done, skipped
+[45/87 0s] s_17_BANC_block: already done, skipped
+[46/87 0s] s_17_male_block: already done, skipped
+[47/87 0s] s_18_FlyWire_block: already done, skipped
+[48/87 0s] s_18_male_block: already done, skipped
+[49/87 0s] s_19_FlyWire_block: already done, skipped
+[50/87 0s] s_19_male_block: already done, skipped
+[51/87 0s] s_20_FlyWire_block: already done, skipped
+[52/87 0s] s_20_BANC_block: already done, skipped
+[53/87 0s] s_20_male_block: already done, skipped
+[54/87 0s] s_21_FlyWire_block: already done, skipped
+[55/87 0s] s_21_BANC_block: already done, skipped
+[56/87 0s] s_21_male_block: already done, skipped
+[57/87 0s] s_22_BANC_block: already done, skipped
+[58/87 0s] s_22_male_block: already done, skipped
+[59/87 0s] s_23_FlyWire_block: already done, skipped
+[60/87 0s] s_23_BANC_block: already done, skipped
+[61/87 3372s] s_24_BANC_block: s_24_BANC block: attack 4 (MARGINAL 14/15) | repair 12  (SOLID 15/15) recovery 46-73% | 3336s  [3372s]
+[62/87 3372s] s_24_male_block: already done, skipped
+[63/87 3372s] s_25_FlyWire_block: s_25_FlyWire block: attack 6 (MARGINAL 14/15) | repair 7  (SOLID 15/15) recovery 90-93% | 1751s  [1783s]
+[64/87 3372s] s_25_BANC_block: already done, skipped
+[65/87 3372s] s_25_male_block: s_25_male block: attack 6 (SOLID 15/15) | repair 7  (SOLID 15/15) recovery 95-98% | 2511s  [2541s]
+[66/87 3372s] s_26_FlyWire_block: s_26_FlyWire block: attack 3 (SOLID 15/15) | repair 4  (SOLID 15/15) recovery 78-86% | 612s  [643s]
+[67/87 3372s] s_26_BANC_block: already done, skipped
+[68/87 3372s] s_26_male_block: s_26_male block: attack 2 (MARGINAL 13/15) | repair 3  (SOLID 15/15) recovery 87-93% | 480s  [510s]
+[69/87 3372s] s_27_FlyWire_block: s_27_FlyWire block: attack 2 (SOLID 15/15) | repair 1  (SOLID 15/15) recovery 80-90% | 263s  [294s]
+[70/87 3372s] s_27_BANC_block: s_27_BANC block: attack None (None None/15) | repair None  (None None/15) | 408s  [421s]
+[71/87 3372s] s_27_male_block: s_27_male block: attack 1 (SOLID 15/15) | repair 2  (SOLID 15/15) recovery 98-111% | 412s  [420s]
+[72/87 3372s] s_28_FlyWire_block: s_28_FlyWire block: attack 2 (SOLID 15/15) | repair None  (None None/15) | 181s  [190s]
+[73/87 3372s] s_28_male_block: s_28_male block: attack 3 (SOLID 15/15) | repair 4  (SOLID 15/15) recovery 82-95% | 449s  [456s]
+[74/87 3372s] s_29_FlyWire_block: s_29_FlyWire block: attack 2 (SOLID 15/15) | repair 3  (MARGINAL 14/15) recovery 81-97% | 1838s  [1847s]
+[75/87 3372s] s_29_BANC_block: s_29_BANC block: attack 2 (SOLID 15/15) | repair 4  (SOLID 15/15) recovery 77-96% | 2362s  [2375s]
+[76/87 3372s] s_30_FlyWire_block: s_30_FlyWire block: attack 15 (MARGINAL 13/15) | repair 2  (SOLID 15/15) recovery 82-91% | 1144s  [1152s]
+[77/87 3757s] s_30_BANC_block: s_30_BANC block: attack 9 (MARGINAL 14/15) | repair 12  (SOLID 15/15) recovery 65-75% | 1955s  [1974s]
+[78/87 3757s] s_30_male_block: s_30_male block: attack 7 (MARGINAL 13/15) | repair 2  (SOLID 15/15) recovery 78-95% | 781s  [789s]
+[79/87 3757s] s_31_FlyWire_block: s_31_FlyWire block: attack 2 (SOLID 15/15) | repair 3  (SOLID 15/15) recovery 99-104% | 508s  [516s]
+[80/87 3950s] s_31_BANC_block: s_31_BANC block: attack 5 (FAIL 7/15) | repair 8  (SOLID 15/15) recovery 84-93% | 1255s  [1271s]
+[81/87 3950s] s_31_male_block: s_31_male block: attack 1 (MARGINAL 13/15) | repair 2  (SOLID 15/15) recovery 108-120% | 265s  [269s]
+[82/87 4166s] s_32_BANC_block: s_32_BANC block: attack 4 (SOLID 15/15) | repair 4  (SOLID 15/15) recovery 82-84% | 1045s  [1053s]
+[83/87 4212s] s_32_male_block: s_32_male block: attack 5 (MARGINAL 14/15) | repair 4  (SOLID 15/15) recovery 90-104% | 903s  [907s]
+[84/87 4212s] s_33_BANC_block: s_33_BANC block: attack None (None None/15) | repair None  (None None/15) | 322s  [331s]
+[85/87 4212s] s_33_male_block: s_33_male block: attack 1 (SOLID 15/15) | repair 2  (MARGINAL 14/15) recovery 75-94% | 552s  [556s]
+[86/87 4212s] s_34_FlyWire_block: s_34_FlyWire block: attack 3 (MARGINAL 12/15) | repair 4  (SOLID 15/15) recovery 88-94% | 505s  [509s]
+[87/87 4530s] s_34_male_block: s_34_male block: attack 5 (SOLID 15/15) | repair 6  (SOLID 15/15) recovery 87-94% | 769s  [773s]
+all done
