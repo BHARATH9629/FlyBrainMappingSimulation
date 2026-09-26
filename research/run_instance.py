@@ -23,6 +23,10 @@ if NAME.startswith("b_"):                     # BANC: the pre-registered scaled 
     brain = BancBrain(scale=1.0 if UNSCALED else json.load(open(os.path.join(os.path.dirname(out_dir), "banc", "scale_factor.json")))["median_ratio"])
     instances.register_banc()
     if NAME == "b_bitter_R": GOAL_NOTE = "attack only counts (control excluded)"
+elif NAME.startswith("m_"):                   # MaleCNS: traced neurons only, the pre-registered scaled weights
+    from malecns import MaleBrain
+    brain = MaleBrain(scale=1.0 if "--unscaled" in sys.argv else json.load(open(os.path.join(os.path.dirname(out_dir), "male", "scale_factor.json")))["median_ratio"])
+    instances.register_male()
 else:
     brain = Brain("female"); instances.register(brain=brain)
 
@@ -34,7 +38,7 @@ def grade(passes):
     n = sum(passes); return ("SOLID" if n == len(passes) else "MARGINAL" if n >= len(passes) - 3 else "FAIL"), n
 
 
-t0 = time.time(); b = Behaviour(brain, NAME); log = Log(quiet=True); cfg = BEHAVIOURS["female"][NAME]
+t0 = time.time(); b = Behaviour(brain, NAME); log = Log(quiet=True); cfg = BEHAVIOURS[brain.sex][NAME]
 row = dict(instance=NAME, role=(instances.role(NAME) if NAME in instances.INSTANCES else "confirm (BANC)"), goal=GOAL, fresh_seeds=list(FRESH),
            dataset=getattr(brain, "dataset", "FlyWire v783"))
 healthy_on = float(np.mean(rates(b, True, {}))); row["healthy_on"] = round(healthy_on, 1)

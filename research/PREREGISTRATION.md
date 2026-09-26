@@ -149,3 +149,13 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   on the 15 unseen seeds against the 10 Hz OFF bar. (b) Unscaled BANC (weights × 1, the pre-registered secondary
   model): the full attack, repair and verification pipeline on *b_escape_L* and *b_escape_R* (both pass inclusion
   unscaled). Both are reported as secondary; they do not change the primary results.
+- **26 Sep 2026, before any male behaviour run: MaleCNS (third fly, Confirmation C).** Loader `research/malecns.py`
+  keeps only bodies with status Traced or Anchor (165,733 neurons; the original project loader kept all 211,577
+  annotated bodies, including 15,925 orphan fragments, 11,864 glia and 10,751 'unimportant' bodies, which explains the
+  long-standing neuron-count mismatch). Cell type = the male's own type (it separates sugar LB3b/c, water LB3a, bitter
+  LB1a–e and names MN9), else the FlyWire-matched type; side = soma side, else root side. **Synapse scaling:** across
+  4,891 matched cell types, FlyWire neurons receive a median 0.556× the input synapses of their male counterparts
+  (IQR 0.41–0.70); **primary analysis: male weights × 0.556**, unscaled as secondary. Behaviours: exactly the BANC
+  definitions (*m_eat_L/R*, *m_drink_L/R*, *m_bitter_L/R*, *m_escape_L/R*, *m_retreat*, *m_turn_R/L*; both MN9s
+  averaged; turn readout = the DNa02 on the opposite side label from the stimulated eye, as in FlyWire), same
+  thresholds, same inclusion rule. All male instances count as confirmation.

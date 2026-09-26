@@ -97,3 +97,15 @@ def banc_instances():
 def register_banc():
     for name, spec in banc_instances().items(): BEHAVIOURS["female"][name] = dict(spec)
     return list(banc_instances())
+
+
+
+# ---------------------------------------------------------------- MaleCNS (Confirmation C, third fly): the same
+# behaviour definitions as BANC, with the male's own cell-type names (MN9, LB3a-d, LB1a-e exist as such).
+def male_instances():
+    return {"m_" + k[2:]: v for k, v in banc_instances().items()}
+
+
+def register_male():
+    for name, spec in male_instances().items(): BEHAVIOURS["male"][name] = dict(spec)
+    return list(male_instances())
