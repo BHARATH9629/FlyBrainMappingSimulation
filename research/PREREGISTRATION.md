@@ -125,3 +125,12 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   could pass its control check; *b_bitter_R* therefore counts for the attack hypotheses (H1, H2) only, not for the
   repair hypotheses (H3, H4). The same applies to the FlyWire *bitter_R* instance only if its control fails for the
   same reason (it did not: its control passed inclusion).
+- **26 Sep 2026, before running H5: exact H5 procedure.** Attacks compared are the *best* attack of each instance (the
+  one the verification used; discovery ones from `neuroredteam/atlas/female/<behaviour>.json`). Pairs: escape
+  FlyWire L ↔ R; turn FlyWire (right eye) ↔ BANC turn right eye; BANC turn right eye ↔ left eye; bitter FlyWire
+  L (discovery) ↔ R. **Overlap test:** Jaccard index of the two attacks' cell-type sets; null = 10,000 draws of the same
+  numbers of cell types from each output's direct + second-step input neurons in its own brain; one-sided p = share of
+  draws with Jaccard at least as large. **Transfer test:** every attacked neuron is replaced by all neurons of the same
+  cell type on the target side (mirror side within a fly; same side across flies), same move and strength; cell types
+  missing in the target are dropped and counted. A transfer "breaks" the behaviour if its goal is met on at least 12 of
+  the 15 unseen seeds (11–25). Transfers are run in both directions for every pair whose two instances passed inclusion.
