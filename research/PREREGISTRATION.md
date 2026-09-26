@@ -90,4 +90,12 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
 
 ## 7. Changes after 26 September 2026
 
-(none yet)
+- **26 Sep 2026, before any confirmatory run: definition of the mirror instances (Confirmation A).** The 20 sugar
+  neurons used by "eat" are a hand-picked left-side set; the female annotation does not separate sugar from water
+  taste neurons (64 "LB3 sugar/water" left, 58 right), so "eat" has no exact mirror. Taste is therefore compared as a
+  symmetric pair: *taste_L* (all left LB3 → MN9 R) and *taste_R* (all right LB3 → MN9 L); likewise *bitter_L* /
+  *bitter_R* (all LB3 + all bitter neurons of one side, MN9 expected quiet). Escape and turn mirror directly
+  (*escape_R*: right eye → DNp01 R; *turn_L*: left eye → DNa02 R). Back away is two-sided by design and has no mirror.
+  Because the left-side taste and bitter instances overlap the discovery stimuli, they serve only as the reference
+  side for H5; **only the right-side / new instances count as confirmation for H1–H4.** Thresholds are the same as
+  in the discovery versions (MN9 40 / 10 Hz, DNp01 80 / 10 Hz, DNa02 20 / 10 Hz).
