@@ -25,8 +25,11 @@ INSTANCES = {
                         on_threshold=40.0, off_threshold=10.0, control="r_taste_L",
                         description="left taste + left bitter neurons -> MN9 R must stay quiet"), "reference"),
     "r_bitter_R": (dict(stimulus={"union": [_taste(RIGHT), _bitter(RIGHT)]}, readout=MN9_L, expected="off",
-                        on_threshold=40.0, off_threshold=10.0, control="r_taste_R",
+                        on_threshold=40.0, off_threshold=10.0, control="r_feed_L_to_MN9L",
                         description="right taste + right bitter neurons -> MN9 L must stay quiet"), "confirm"),
+    # the control for r_bitter_R: normal feeding through the SAME output neuron (MN9 L) must survive any repair
+    "r_feed_L_to_MN9L": (dict(stimulus=_taste(LEFT), readout=MN9_L, on_threshold=40.0, off_threshold=10.0,
+                              description="all left taste neurons -> MN9 L (control for r_bitter_R)"), "control"),
     "r_escape_R": (dict(stimulus={"types": ["LC4", "LPLC2"], "side": RIGHT}, readout={"types": ["DNp01"], "side": RIGHT},
                         on_threshold=80.0, off_threshold=10.0, description="right-eye looming -> giant fibre DNp01 R"), "confirm"),
     "r_turn_L":   (dict(stimulus={"types": ["LC4", "LPLC2"], "side": LEFT}, readout={"types": ["DNa02"], "side": RIGHT},
