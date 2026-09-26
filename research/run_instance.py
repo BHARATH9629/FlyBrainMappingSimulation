@@ -19,7 +19,8 @@ NAME, GOAL = sys.argv[1], sys.argv[2]
 FRESH = tuple(range(11, 26)); TARGET = 0.8
 if NAME.startswith("b_"):                     # BANC: the pre-registered scaled weights (research/banc.py)
     from banc import BancBrain
-    brain = BancBrain(scale=json.load(open(os.path.join(os.path.dirname(out_dir), "banc", "scale_factor.json")))["median_ratio"])
+    UNSCALED = "--unscaled" in sys.argv                  # the pre-registered secondary BANC model (weights x 1)
+    brain = BancBrain(scale=1.0 if UNSCALED else json.load(open(os.path.join(os.path.dirname(out_dir), "banc", "scale_factor.json")))["median_ratio"])
     instances.register_banc()
     if NAME == "b_bitter_R": GOAL_NOTE = "attack only counts (control excluded)"
 else:
@@ -80,7 +81,8 @@ def plain(v):
     return v.item() if hasattr(v, "item") else v
 
 
-json.dump(plain(row), open(os.path.join(out_dir, f"{NAME}_{GOAL}.json"), "w"), indent=1)
+suffix = "_unscaled" if "--unscaled" in sys.argv else ""; row["scale"] = getattr(brain, "scale", 1.0)
+json.dump(plain(row), open(os.path.join(out_dir, f"{NAME}_{GOAL}{suffix}.json"), "w"), indent=1)
 a_ = row.get("attack") or {}; r_ = row.get("repair") or {}
 print(f"{NAME} {GOAL}: attack {a_.get('size')} ({row.get('attack_grade')} {row.get('attack_seeds_ok')}/15) | "
       f"repair {r_.get('size')} {'(PARTIAL: blue team loses)' if r_.get('partial') else ''} ({row.get('repair_grade')} {row.get('repair_seeds_ok')}/15)"

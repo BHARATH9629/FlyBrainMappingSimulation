@@ -143,3 +143,9 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   **H2 is confirmed** if, in at least 75 % of the confirmation instances with a baseline attack (*escape_R*,
   *bitter_R*, *b_turn_R*, *b_turn_L*), the forbidden-direct-inputs attack costs at least twice the baseline or is not
   found within the rules. Discovery instances are run the same way and reported as discovery.
+- **26 Sep 2026, before running it: secondary analysis of BANC's unbreakable behaviours.** (a) "How close": in the
+  primary (scaled) BANC, apply the strongest attacks the rules allow (the 20 strongest inhibitors of the output jammed at
+  150 Hz; separately, the 10 strongest active drivers cut) to *b_escape_R* and *b_retreat*, and report the output rate
+  on the 15 unseen seeds against the 10 Hz OFF bar. (b) Unscaled BANC (weights × 1, the pre-registered secondary
+  model): the full attack, repair and verification pipeline on *b_escape_L* and *b_escape_R* (both pass inclusion
+  unscaled). Both are reported as secondary; they do not change the primary results.
