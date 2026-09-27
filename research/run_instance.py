@@ -19,10 +19,11 @@ NAME, GOAL = sys.argv[1], sys.argv[2]
 FRESH = tuple(range(11, 26)); TARGET = 0.8
 if NAME.startswith("s_"):                     # screen pathway: s_<k>_<fly>, that fly's primary (pre-registered) model
     FLY = NAME.split("_")[2]; SCD = os.path.join(os.path.dirname(out_dir), "{}", "scale_factor.json")
+    SC_OVR = float(sys.argv[sys.argv.index("--scale") + 1]) if "--scale" in sys.argv else None   # scaling sweep (27 Sep)
     if FLY == "BANC":
-        from banc import BancBrain; brain = BancBrain(scale=json.load(open(SCD.format("banc")))["median_ratio"])
+        from banc import BancBrain; brain = BancBrain(scale=SC_OVR or json.load(open(SCD.format("banc")))["median_ratio"])
     elif FLY == "male":
-        from malecns import MaleBrain; brain = MaleBrain(scale=json.load(open(SCD.format("male")))["median_ratio"])
+        from malecns import MaleBrain; brain = MaleBrain(scale=SC_OVR or json.load(open(SCD.format("male")))["median_ratio"])
     else:
         brain = Brain("female")
     instances.register_screen(brain, FLY)
@@ -50,6 +51,13 @@ def grade(passes):
 t0 = time.time(); b = Behaviour(brain, NAME); log = Log(quiet=True); cfg = BEHAVIOURS[brain.sex][NAME]
 row = dict(instance=NAME, role=(instances.role(NAME) if NAME in instances.INSTANCES else "confirm" if NAME.startswith("s_") else "confirm (BANC)"), goal=GOAL, fresh_seeds=list(FRESH),
            dataset=getattr(brain, "dataset", "FlyWire v783"))
+if "--scale" in sys.argv:                     # sweep: re-check inclusion at this scale first (8/8 seeds), attack only if it passes
+    on8 = [b.measure(True, seed=s)[0] for s in range(1, 9)]; off8 = [b.measure(False, seed=s)[0] for s in range(1, 9)]
+    row["inclusion"] = dict(with_stim=on8, without_stim=off8, passes=int(sum(x >= b.on_thr and y <= b.off_thr for x, y in zip(on8, off8))))
+    if row["inclusion"]["passes"] < 8:
+        row.update(scale=brain.scale, included=False)
+        json.dump(row, open(os.path.join(out_dir, f"{NAME}_{GOAL}.json"), "w"), indent=1)
+        print(f"{NAME} {GOAL}: NOT included at scale {brain.scale} ({row['inclusion']['passes']}/8)", flush=True); finish(); sys.exit(0)
 healthy_on = float(np.mean(rates(b, True, {}))); row["healthy_on"] = round(healthy_on, 1)
 row["healthy_off"] = round(float(np.mean(rates(b, False, {}))), 1)
 

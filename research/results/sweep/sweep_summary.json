@@ -1,0 +1,58 @@
+{
+ "BANC x1.0": {
+  "tested": 27,
+  "included": 20,
+  "attack_found": 16,
+  "break_rate": 0.8,
+  "solid": 12,
+  "median_size": 3.0
+ },
+ "BANC x1.4": {
+  "tested": 27,
+  "included": 23,
+  "attack_found": 14,
+  "break_rate": 0.609,
+  "solid": 8,
+  "median_size": 5.0
+ },
+ "BANC x1.815": {
+  "tested": 27,
+  "included": 27,
+  "attack_found": 13,
+  "break_rate": 0.481,
+  "solid": 7,
+  "median_size": 5.0
+ },
+ "FlyWire x1.0": {
+  "tested": 28,
+  "included": 28,
+  "attack_found": 25,
+  "break_rate": 0.893,
+  "solid": 15,
+  "median_size": 3.0
+ },
+ "male x0.556": {
+  "tested": 32,
+  "included": 32,
+  "attack_found": 27,
+  "break_rate": 0.844,
+  "solid": 19,
+  "median_size": 3.0
+ },
+ "male x1.0": {
+  "tested": 32,
+  "included": 22,
+  "attack_found": 16,
+  "break_rate": 0.727,
+  "solid": 7,
+  "median_size": 4.0
+ },
+ "fisher_BANC1.0_vs_FlyWire": {
+  "odds": 0.48,
+  "p": 0.42937349529544533
+ },
+ "fisher_BANC1.815_vs_FlyWire": {
+  "odds": 0.11142857142857143,
+  "p": 0.0012694919764795597
+ }
+}

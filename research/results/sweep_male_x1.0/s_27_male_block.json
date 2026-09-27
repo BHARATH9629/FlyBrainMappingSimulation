@@ -1,0 +1,52 @@
+{
+ "instance": "s_27_male",
+ "role": "confirm",
+ "goal": "block",
+ "fresh_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "dataset": "MaleCNS v1.0 (traced neurons only)",
+ "inclusion": {
+  "with_stim": [
+   233.33333333333334,
+   216.66666666666669,
+   140.0,
+   140.0,
+   136.66666666666669,
+   130.0,
+   136.66666666666669,
+   140.0
+  ],
+  "without_stim": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "passes": 8
+ },
+ "healthy_on": 149.6,
+ "healthy_off": 0.0,
+ "attacks_found": [],
+ "attack": null,
+ "seconds": 284,
+ "scale": 1.0
+}

@@ -12,9 +12,10 @@ a = sys.argv[1:]
 W = int(a[a.index("--workers") + 1]); OUT = a[a.index("--outdir") + 1] if "--outdir" in a else "instances"
 if "--screen" in a:
     sys.path.insert(0, HERE); import instances
-    jobs = [(n, "block", False) for n, *_ in instances.screen_jobs()]
+    fl = a[a.index("--fly") + 1] if "--fly" in a else None
+    jobs = [(n, "block", False) for n, f, *_ in instances.screen_jobs() if fl in (None, f)]
 else:
-    skip = {a.index("--workers") + 1} | ({a.index("--outdir") + 1} if "--outdir" in a else set())
+    skip = {a.index(k) + 1 for k in ("--workers", "--outdir", "--scale") if k in a}
     jobs = [(j.split(":")[0], j.split(":")[1], j.endswith(":unscaled")) for k, j in enumerate(a) if k not in skip and not j.startswith("--")]
 logdir = os.path.join(HERE, "results", OUT); os.makedirs(logdir, exist_ok=True)
 
@@ -22,7 +23,7 @@ logdir = os.path.join(HERE, "results", OUT); os.makedirs(logdir, exist_ok=True)
 def one(job):
     n, g, uns = job; tag = f"{n}_{g}{'_unscaled' if uns else ''}"
     if os.path.exists(os.path.join(logdir, tag + ".json")): return f"{tag}: already done, skipped"
-    cmd = [sys.executable, os.path.join(HERE, "run_instance.py"), n, g, "--outdir", OUT] + (["--unscaled"] if uns else [])
+    cmd = [sys.executable, os.path.join(HERE, "run_instance.py"), n, g, "--outdir", OUT] + (["--unscaled"] if uns else []) + (["--scale", a[a.index("--scale") + 1]] if "--scale" in a else [])
     t0 = time.time()
     with open(os.path.join(logdir, tag + ".log"), "w") as f: rc = subprocess.call(cmd, stdout=f, stderr=subprocess.STDOUT, cwd=HERE)
     last = open(os.path.join(logdir, tag + ".log")).read().strip().splitlines()
