@@ -1,0 +1,91 @@
+{
+ "instance": "s_33_male",
+ "role": "confirm",
+ "goal": "block",
+ "fresh_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "dataset": "MaleCNS v1.0 (traced neurons only)",
+ "inclusion": {
+  "with_stim": [
+   66.66666666666667,
+   60.0,
+   63.333333333333336,
+   63.333333333333336,
+   66.66666666666667,
+   63.333333333333336,
+   63.333333333333336,
+   66.66666666666667
+  ],
+  "without_stim": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "passes": 8
+ },
+ "param": "V_TH=-46",
+ "healthy_on": 65.6,
+ "healthy_off": 0.0,
+ "attacks_found": [
+  {
+   "strategy": "attacker-inject",
+   "size": 1,
+   "intervention": {
+    "inject": {
+     "129757": 150.0
+    }
+   }
+  }
+ ],
+ "attack": {
+  "strategy": "attacker-inject",
+  "size": 1,
+  "intervention": {
+   "inject": {
+    "129757": 150.0
+   }
+  }
+ },
+ "attack_grade": "SOLID",
+ "attack_seeds_ok": 15,
+ "after_attack": [
+  3.3333333333333335,
+  0.0,
+  6.666666666666667,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  3.3333333333333335,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "repair": "not run (control B: attack cost only)",
+ "seconds": 293,
+ "scale": 0.556287170773152
+}

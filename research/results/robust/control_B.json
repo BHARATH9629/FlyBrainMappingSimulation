@@ -1,0 +1,499 @@
+{
+ "V_TH=-44": {
+  "status": "HOLDS",
+  "rho": 1.0,
+  "p": 0.0,
+  "n_included": 13,
+  "n_excluded": 3,
+  "missing": [],
+  "break_rate": 1.0,
+  "baseline_break_rate": 1.0,
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "included": true,
+    "base": 4,
+    "variant": 4,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_01_BANC",
+    "included": true,
+    "base": 6,
+    "variant": 6,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_02_FlyWire",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_04_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_08_FlyWire",
+    "included": false,
+    "base": 1,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_09_male",
+    "included": false,
+    "base": 1,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_15_FlyWire",
+    "included": true,
+    "base": 11,
+    "variant": 11,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_17_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 8,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_17_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_21_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_24_BANC",
+    "included": false,
+    "base": 4,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_26_male",
+    "included": true,
+    "base": 2,
+    "variant": 2,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_30_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 8,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_33_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_34_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_34_male",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   }
+  ]
+ },
+ "V_TH=-46": {
+  "status": "HOLDS",
+  "rho": 0.9705449139582832,
+  "p": 4.771768206536e-10,
+  "n_included": 16,
+  "n_excluded": 0,
+  "missing": [],
+  "break_rate": 0.9375,
+  "baseline_break_rate": 1.0,
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "included": true,
+    "base": 4,
+    "variant": 4,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_01_BANC",
+    "included": true,
+    "base": 6,
+    "variant": 5,
+    "grade": "FAIL"
+   },
+   {
+    "name": "s_02_FlyWire",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_04_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_08_FlyWire",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_09_male",
+    "included": true,
+    "base": 1,
+    "variant": 2,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_15_FlyWire",
+    "included": true,
+    "base": 11,
+    "variant": 11,
+    "grade": "FAIL"
+   },
+   {
+    "name": "s_17_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 9,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_17_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 4,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_21_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_24_BANC",
+    "included": true,
+    "base": 4,
+    "variant": 5,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_26_male",
+    "included": true,
+    "base": 2,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_30_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 1000,
+    "grade": null
+   },
+   {
+    "name": "s_33_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_34_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 4,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_34_male",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   }
+  ]
+ },
+ "W_SYN=0.23375": {
+  "status": "HOLDS",
+  "rho": 1.0,
+  "p": 0.0,
+  "n_included": 12,
+  "n_excluded": 4,
+  "missing": [],
+  "break_rate": 1.0,
+  "baseline_break_rate": 1.0,
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "included": true,
+    "base": 4,
+    "variant": 4,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_01_BANC",
+    "included": true,
+    "base": 6,
+    "variant": 6,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_02_FlyWire",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_04_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_08_FlyWire",
+    "included": false,
+    "base": 1,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_09_male",
+    "included": false,
+    "base": 1,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_15_FlyWire",
+    "included": true,
+    "base": 11,
+    "variant": 11,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_17_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 8,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_17_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_21_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_24_BANC",
+    "included": false,
+    "base": 4,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_26_male",
+    "included": true,
+    "base": 2,
+    "variant": 2,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_30_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 8,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_33_male",
+    "included": false,
+    "base": 1,
+    "variant": null,
+    "grade": null
+   },
+   {
+    "name": "s_34_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_34_male",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   }
+  ]
+ },
+ "W_SYN=0.31625": {
+  "status": "HOLDS",
+  "rho": 0.9737336025742841,
+  "p": 2.157929332155948e-10,
+  "n_included": 16,
+  "n_excluded": 0,
+  "missing": [],
+  "break_rate": 0.9375,
+  "baseline_break_rate": 1.0,
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "included": true,
+    "base": 4,
+    "variant": 4,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_01_BANC",
+    "included": true,
+    "base": 6,
+    "variant": 6,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_02_FlyWire",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_04_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_08_FlyWire",
+    "included": true,
+    "base": 1,
+    "variant": 2,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_09_male",
+    "included": true,
+    "base": 1,
+    "variant": 2,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_15_FlyWire",
+    "included": true,
+    "base": 11,
+    "variant": 11,
+    "grade": "FAIL"
+   },
+   {
+    "name": "s_17_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 9,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_17_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 4,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_21_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_24_BANC",
+    "included": true,
+    "base": 4,
+    "variant": 5,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_26_male",
+    "included": true,
+    "base": 2,
+    "variant": 2,
+    "grade": "MARGINAL"
+   },
+   {
+    "name": "s_30_BANC",
+    "included": true,
+    "base": 9,
+    "variant": 1000,
+    "grade": null
+   },
+   {
+    "name": "s_33_male",
+    "included": true,
+    "base": 1,
+    "variant": 1,
+    "grade": "SOLID"
+   },
+   {
+    "name": "s_34_FlyWire",
+    "included": true,
+    "base": 3,
+    "variant": 3,
+    "grade": "FAIL"
+   },
+   {
+    "name": "s_34_male",
+    "included": true,
+    "base": 5,
+    "variant": 5,
+    "grade": "SOLID"
+   }
+  ]
+ },
+ "control_B_holds": true
+}

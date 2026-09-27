@@ -153,20 +153,30 @@ save(fig, "fig6_across_flies")
 
 # ---------------------------------------------------------------- Fig 7: robustness A and C (B added when finished)
 RB = L("robust/s_*_block.json")
-fig, (a, b) = plt.subplots(1, 2, figsize=(7.2, 2.8), gridspec_kw=dict(wspace=0.4))
+fig, (a, b, cc) = plt.subplots(1, 3, figsize=(10.2, 2.9), gridspec_kw=dict(wspace=0.5, width_ratios=[1, 1.1, 1.3]))
 ok = [r for r in RB if r["attack_grade"] in ("SOLID", "MARGINAL")]; okr = [r for r in RB if r.get("repair_grade") in ("SOLID", "MARGINAL")]
 agree = [sum(r["A"]["attack_ok"] >= 12 for r in ok) / len(ok), sum(r["A"].get("repair_ok", 0) >= 12 for r in okr) / len(okr)]
 bars = a.bar([0, 1], [100 * v for v in agree], width=0.55, color=SEQ[5], edgecolor=SURF, linewidth=2)
 for r_, v, n in zip(bars, agree, (len(ok), len(okr))): a.text(r_.get_x() + r_.get_width() / 2, 100 * v + 2, f"{100 * v:.0f}% of {n}", ha="center", fontsize=7.5)
 a.axhline(90, color=INK2, linewidth=1, linestyle=(0, (3, 3))); a.text(0.5, 92, "bar: 90%", ha="center", fontsize=6.8, color=INK2)
 a.set_xticks([0, 1], ["attacks", "repairs"]); a.set_ylim(0, 112); a.set_ylabel("still work on the whole brain (%)"); a.grid(axis="x", visible=False)
-a.set_title("3-hop results hold on the whole brain"); panel(a, "A")
+a.set_title("Whole brain agrees"); panel(a, "A")
 c = np.array([r["C"]["share_break"] for r in RB]) * 100
 vals_, cnt = np.unique(c.round(0), return_counts=True)
 b.bar(vals_, cnt, width=3.2, color=SEQ[3], edgecolor=SURF, linewidth=2)
 for v, n in zip(vals_, cnt): b.text(v, n + 0.8, str(n), ha="center", fontsize=7.5, bbox=dict(facecolor=SURF, edgecolor="none", pad=1.5), zorder=5)
 b.axvline(10, color=INK2, linewidth=1, linestyle=(0, (3, 3)), zorder=1); b.text(10.6, max(cnt) * 0.9, "bar: 10%", fontsize=6.8, color=INK2)
 b.set_xlabel("random same-size attacks that break it (%)"); b.set_ylabel("pathways"); b.set_xlim(-4, 30); b.grid(axis="x", visible=False)
-b.set_title("Random neurons almost never break it"); panel(b, "B")
+b.set_title("Random attacks fail"); panel(b, "B")
+CB = json.load(open(os.path.join(R, "robust", "control_B.json")))
+order = [("W_SYN=0.23375", "weights\n× 0.85"), ("W_SYN=0.31625", "weights\n× 1.15"), ("V_TH=-44", "threshold\n−44 mV"), ("V_TH=-46", "threshold\n−46 mV")]
+rh = [CB[k]["rho"] for k, _ in order]
+bars = cc.bar(range(4), rh, width=0.6, color=SEQ[5], edgecolor=SURF, linewidth=2)
+for i, (r_, (k, _)) in enumerate(zip(bars, order)):
+    cc.text(i, rh[i] + 0.03, f"{rh[i]:.2f}\n(n = {CB[k]['n_included']})", ha="center", fontsize=7, color=INK)
+cc.axhline(0.7, color=INK2, linewidth=1, linestyle=(0, (3, 3))); cc.text(-0.85, 0.73, "bar: 0.7", ha="left", fontsize=6.8, color=INK2); cc.set_xlim(-0.9, 3.5)
+cc.set_xticks(range(4), [l for _, l in order], fontsize=7.3); cc.set_ylim(0, 1.3); cc.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
+cc.set_ylabel("rank correlation with baseline cost"); cc.grid(axis="x", visible=False)
+cc.set_title("Other model settings"); panel(cc, "C")
 save(fig, "fig7_robustness")
 finish()
