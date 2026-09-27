@@ -1,0 +1,4 @@
+[guard] 132 protected files unchanged; demo cache key 878888a2
+r_bitter_R corrupt: attack 7 (MARGINAL 12/15) | repair 6 (PARTIAL: blue team loses) (SOLID 15/15) control BROKEN | 871s
+[guard] 132 protected files unchanged; demo cache key 878888a2
+[guard] finished: nothing protected was touched

@@ -1,0 +1,29 @@
+{
+ "instance": "m_escape_L",
+ "role": "confirm (BANC)",
+ "goal": "block",
+ "fresh_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "dataset": "MaleCNS v1.0 (traced neurons only)",
+ "healthy_on": 410.9,
+ "healthy_off": 0.0,
+ "attacks_found": [],
+ "attack": null,
+ "seconds": 455,
+ "scale": 1.0
+}
