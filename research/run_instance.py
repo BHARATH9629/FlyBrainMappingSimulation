@@ -16,6 +16,9 @@ from behaviours import Behaviour, BEHAVIOURS
 from agents import Attacker, Defender, Log, merge_iv
 
 NAME, GOAL = sys.argv[1], sys.argv[2]
+if "--param" in sys.argv:                     # robustness control B (27 Sep): one LIF constant changed, e.g. W_SYN=0.23375
+    import brain as _bm
+    _k, _v = sys.argv[sys.argv.index("--param") + 1].split("="); assert hasattr(_bm, _k); setattr(_bm, _k, float(_v))
 FRESH = tuple(range(11, 26)); TARGET = 0.8
 if NAME.startswith("s_"):                     # screen pathway: s_<k>_<fly>, that fly's primary (pre-registered) model
     FLY = NAME.split("_")[2]; SCD = os.path.join(os.path.dirname(out_dir), "{}", "scale_factor.json")
@@ -51,9 +54,10 @@ def grade(passes):
 t0 = time.time(); b = Behaviour(brain, NAME); log = Log(quiet=True); cfg = BEHAVIOURS[brain.sex][NAME]
 row = dict(instance=NAME, role=(instances.role(NAME) if NAME in instances.INSTANCES else "confirm" if NAME.startswith("s_") else "confirm (BANC)"), goal=GOAL, fresh_seeds=list(FRESH),
            dataset=getattr(brain, "dataset", "FlyWire v783"))
-if "--scale" in sys.argv:                     # sweep: re-check inclusion at this scale first (8/8 seeds), attack only if it passes
+if "--scale" in sys.argv or "--param" in sys.argv:   # sweep / variant: re-check inclusion at this scale first (8/8 seeds), attack only if it passes
     on8 = [b.measure(True, seed=s)[0] for s in range(1, 9)]; off8 = [b.measure(False, seed=s)[0] for s in range(1, 9)]
     row["inclusion"] = dict(with_stim=on8, without_stim=off8, passes=int(sum(x >= b.on_thr and y <= b.off_thr for x, y in zip(on8, off8))))
+    if "--param" in sys.argv: row["param"] = sys.argv[sys.argv.index("--param") + 1]
     if row["inclusion"]["passes"] < 8:
         row.update(scale=brain.scale, included=False)
         json.dump(row, open(os.path.join(out_dir, f"{NAME}_{GOAL}.json"), "w"), indent=1)
@@ -71,25 +75,27 @@ if atk:
     ra = rates(b, GOAL in ("block", "corrupt"), iv)
     ok = [r <= b.off_thr for r in ra] if GOAL == "block" else [r >= b.on_thr for r in ra]
     g, n = grade(ok); row.update(attack_grade=g, attack_seeds_ok=n, after_attack=ra)
+    if "--param" in sys.argv: row["repair"] = "not run (control B: attack cost only)"
     # --- 2. the repair ---------------------------------------------------------------------------------------------
-    D = Defender(b, {"intervention": iv}, log)
-    ctrl_name = cfg.get("control"); ctrl = Behaviour(brain, ctrl_name) if ctrl_name else None
-    rep = D.restore_off(control=ctrl) if GOAL == "corrupt" else D.restore(target=TARGET)
-    if rep and "intervention" in rep:
-        full = merge_iv(iv, rep["intervention"])
-        r_on, r_off = rates(b, True, full), rates(b, False, full)
-        ok = [x <= b.off_thr for x in r_on] if b.expected == "off" else [x >= b.on_thr for x in r_on]
-        g, n = grade(ok)
-        row["repair"] = dict(size=rep["size"], move=rep.get("move"), intervention=rep["intervention"],
-                             partial=bool(rep.get("partial")), below_target=bool(rep.get("below_target")), why=rep.get("why"))
-        row.update(repair_grade=g, repair_seeds_ok=n, after_repair_on=r_on, after_repair_off=r_off,
-                   cheats=any(x > b.off_thr for x in r_off))
-        if b.expected != "off" and healthy_on > 0:
-            row["recovery_worst"] = round(min(r_on) / healthy_on, 3); row["recovery_mean"] = round(float(np.mean(r_on)) / healthy_on, 3)
-        if ctrl:
-            rc = rates(ctrl, True, full); row["control"] = dict(name=ctrl_name, hz=rc, ok=all(x >= ctrl.on_thr for x in rc))
-    else:
-        row["repair"] = None
+    if "--param" not in sys.argv:
+        D = Defender(b, {"intervention": iv}, log)
+        ctrl_name = cfg.get("control"); ctrl = Behaviour(brain, ctrl_name) if ctrl_name else None
+        rep = D.restore_off(control=ctrl) if GOAL == "corrupt" else D.restore(target=TARGET)
+        if rep and "intervention" in rep:
+            full = merge_iv(iv, rep["intervention"])
+            r_on, r_off = rates(b, True, full), rates(b, False, full)
+            ok = [x <= b.off_thr for x in r_on] if b.expected == "off" else [x >= b.on_thr for x in r_on]
+            g, n = grade(ok)
+            row["repair"] = dict(size=rep["size"], move=rep.get("move"), intervention=rep["intervention"],
+                                 partial=bool(rep.get("partial")), below_target=bool(rep.get("below_target")), why=rep.get("why"))
+            row.update(repair_grade=g, repair_seeds_ok=n, after_repair_on=r_on, after_repair_off=r_off,
+                       cheats=any(x > b.off_thr for x in r_off))
+            if b.expected != "off" and healthy_on > 0:
+                row["recovery_worst"] = round(min(r_on) / healthy_on, 3); row["recovery_mean"] = round(float(np.mean(r_on)) / healthy_on, 3)
+            if ctrl:
+                rc = rates(ctrl, True, full); row["control"] = dict(name=ctrl_name, hz=rc, ok=all(x >= ctrl.on_thr for x in rc))
+        else:
+            row["repair"] = None
 else:
     row["attack"] = None
 row["seconds"] = round(time.time() - t0)
@@ -104,7 +110,7 @@ def plain(v):
 
 suffix = "_unscaled" if "--unscaled" in sys.argv else ""; row["scale"] = getattr(brain, "scale", 1.0)
 json.dump(plain(row), open(os.path.join(out_dir, f"{NAME}_{GOAL}{suffix}.json"), "w"), indent=1)
-a_ = row.get("attack") or {}; r_ = row.get("repair") or {}
+a_ = row.get("attack") or {}; r_ = row.get("repair") if isinstance(row.get("repair"), dict) else {}
 print(f"{NAME} {GOAL}: attack {a_.get('size')} ({row.get('attack_grade')} {row.get('attack_seeds_ok')}/15) | "
       f"repair {r_.get('size')} {'(PARTIAL: blue team loses)' if r_.get('partial') else ''} ({row.get('repair_grade')} {row.get('repair_seeds_ok')}/15)"
       f"{' recovery %.0f-%.0f%%' % (100 * row['recovery_worst'], 100 * row['recovery_mean']) if 'recovery_worst' in row else ''}"
