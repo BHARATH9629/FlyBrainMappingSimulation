@@ -1,0 +1,12 @@
+# Python 3.12 or newer (developed on 3.14).  Install with:  pip install -r requirements.txt
+numpy
+scipy
+pandas
+pyarrow
+matplotlib
+pygame-ce        # the live window (virtual_fly/phase2.py, phase3.py)
+flygym           # the 3-D fly body (NeuroMechFly); pulls in mujoco
+imageio
+pillow
+qrcode           # the data card (key I) in the live window
+# optional: scikit-learn -- only to RE-TRAIN the digit reader (neuroredteam/ml/fly_ai_model.py); the trained model is included

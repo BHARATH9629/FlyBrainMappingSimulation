@@ -37,9 +37,10 @@ measure. The output is a **fragility atlas** of fly behaviours and a benchmark f
 ## Quick start
 
 ```bash
-pip install numpy scipy pandas pyarrow matplotlib pygame-ce
+pip install -r requirements.txt    # Python 3.12+; numpy scipy pandas pyarrow matplotlib pygame-ce flygym imageio pillow qrcode
 python data/get_data.py            # female connectome, 100 MB -> data/female_flywire/  (not stored in the repo)
 python data/get_data.py --male     # male connectome, 1.1 GB -> data/male_malecns/     (optional)
+python virtual_fly/phase3.py       # the live demo (female); saved attacks/repairs in virtual_fly/cache/ make it start instantly
 
 cd neuroredteam
 python run_redteam.py --sex female # block + force attacks, redundancy, repair; ~8 min; writes atlas/female/eat.json
