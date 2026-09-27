@@ -1,0 +1,24 @@
+{
+ "instance": "s_04_male",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 710,
+ "attacks_found": [
+  {
+   "strategy": "attacker-inject",
+   "size": 3
+  }
+ ],
+ "best_strategy": "attacker-inject",
+ "best_size": 3,
+ "goal_met": 15,
+ "found": true,
+ "intervention": {
+  "inject": {
+   "561": 150.0,
+   "163001": 150.0,
+   "2662": 150.0
+  }
+ },
+ "seconds": 224,
+ "scale": 0.556287170773152
+}

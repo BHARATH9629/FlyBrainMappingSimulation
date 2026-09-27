@@ -1,0 +1,23 @@
+{
+ "instance": "drink",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 227,
+ "attacks_found": [
+  {
+   "strategy": "attacker-inject",
+   "size": 3
+  }
+ ],
+ "best_strategy": "attacker-inject",
+ "best_size": 3,
+ "goal_met": 15,
+ "found": true,
+ "intervention": {
+  "inject": {
+   "102993": 150.0,
+   "15820": 150.0,
+   "28686": 150.0
+  }
+ },
+ "seconds": 59
+}

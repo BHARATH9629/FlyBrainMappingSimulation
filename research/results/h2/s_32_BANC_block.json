@@ -1,0 +1,10 @@
+{
+ "instance": "s_32_BANC",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 214,
+ "attacks_found": [],
+ "best_size": null,
+ "found": false,
+ "seconds": 473,
+ "scale": 1.8148104642341483
+}

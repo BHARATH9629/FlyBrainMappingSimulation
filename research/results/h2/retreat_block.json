@@ -1,0 +1,25 @@
+{
+ "instance": "retreat",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 818,
+ "attacks_found": [
+  {
+   "strategy": "attacker-greedy",
+   "size": 6
+  },
+  {
+   "strategy": "attacker-inject",
+   "size": 1
+  }
+ ],
+ "best_strategy": "attacker-inject",
+ "best_size": 1,
+ "goal_met": 15,
+ "found": true,
+ "intervention": {
+  "inject": {
+   "89673": 150.0
+  }
+ },
+ "seconds": 143
+}

@@ -1,0 +1,26 @@
+{
+ "instance": "s_31_FlyWire",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 458,
+ "attacks_found": [
+  {
+   "strategy": "attacker-inject",
+   "size": 5
+  }
+ ],
+ "best_strategy": "attacker-inject",
+ "best_size": 5,
+ "goal_met": 14,
+ "found": true,
+ "intervention": {
+  "inject": {
+   "101179": 150.0,
+   "11952": 150.0,
+   "132100": 150.0,
+   "95642": 150.0,
+   "77112": 150.0
+  }
+ },
+ "seconds": 255,
+ "scale": 1.0
+}

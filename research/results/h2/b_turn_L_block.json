@@ -1,0 +1,9 @@
+{
+ "instance": "b_turn_L",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 698,
+ "attacks_found": [],
+ "best_size": null,
+ "found": false,
+ "seconds": 217
+}

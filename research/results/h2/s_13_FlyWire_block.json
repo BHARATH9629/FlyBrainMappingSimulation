@@ -1,0 +1,27 @@
+{
+ "instance": "s_13_FlyWire",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 940,
+ "attacks_found": [
+  {
+   "strategy": "attacker-greedy",
+   "size": 2
+  },
+  {
+   "strategy": "attacker-inject",
+   "size": 5
+  }
+ ],
+ "best_strategy": "attacker-greedy",
+ "best_size": 2,
+ "goal_met": 15,
+ "found": true,
+ "intervention": {
+  "lesion": [
+   91255,
+   134599
+  ]
+ },
+ "seconds": 126,
+ "scale": 1.0
+}

@@ -1,0 +1,22 @@
+{
+ "instance": "eat",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 227,
+ "attacks_found": [
+  {
+   "strategy": "attacker-inject",
+   "size": 2
+  }
+ ],
+ "best_strategy": "attacker-inject",
+ "best_size": 2,
+ "goal_met": 14,
+ "found": true,
+ "intervention": {
+  "inject": {
+   "102993": 150.0,
+   "15820": 150.0
+  }
+ },
+ "seconds": 55
+}

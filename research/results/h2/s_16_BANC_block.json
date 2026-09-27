@@ -1,0 +1,29 @@
+{
+ "instance": "s_16_BANC",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 492,
+ "attacks_found": [
+  {
+   "strategy": "attacker-inject",
+   "size": 8
+  }
+ ],
+ "best_strategy": "attacker-inject",
+ "best_size": 8,
+ "goal_met": 14,
+ "found": true,
+ "intervention": {
+  "inject": {
+   "60393": 150.0,
+   "27256": 150.0,
+   "684": 150.0,
+   "23773": 150.0,
+   "19438": 150.0,
+   "488": 150.0,
+   "11561": 150.0,
+   "40138": 150.0
+  }
+ },
+ "seconds": 849,
+ "scale": 1.8148104642341483
+}

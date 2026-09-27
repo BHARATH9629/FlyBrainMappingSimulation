@@ -1,0 +1,5 @@
+[guard] 132 protected files unchanged; demo cache key 878888a2
+[guard] WARNING: on battery -- plug in the charger for long runs
+s_31_male block: 637 direct inputs forbidden -> attack 3 via attacker-inject (15/15) | 169s
+[guard] 132 protected files unchanged; demo cache key 878888a2
+[guard] finished: nothing protected was touched

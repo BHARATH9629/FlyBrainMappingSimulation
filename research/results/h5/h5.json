@@ -1,0 +1,195 @@
+{
+ "pairs": [
+  {
+   "a": "escape FlyWire L (discovery)",
+   "b": "escape FlyWire R",
+   "relation": "mirror",
+   "types_a": [
+    "CB0010",
+    "CB0563",
+    "CB3707",
+    "CL038",
+    "LHAD1g1",
+    "PVLP010",
+    "SAD017"
+   ],
+   "types_b": [
+    "AN_GNG_SAD_3",
+    "AVLP094",
+    "AVLP202",
+    "CB0010",
+    "CB0563",
+    "CB3707",
+    "CL038",
+    "CL066",
+    "LHAD1g1",
+    "PS001",
+    "PVLP017",
+    "PVLP027",
+    "SAD014",
+    "SMP068"
+   ],
+   "shared": [
+    "CB0010",
+    "CB0563",
+    "CB3707",
+    "CL038",
+    "LHAD1g1"
+   ],
+   "jaccard": 0.3125,
+   "null_mean": 0.0007410526315789473,
+   "p": 9.999000099990002e-05,
+   "pool_a": 5943,
+   "pool_b": 5836,
+   "transfer_a_to_b": {
+    "n_neurons": 12,
+    "dropped_types": [],
+    "goal_met": 0,
+    "breaks": false,
+    "mean_hz": 35.111111111111114
+   },
+   "transfer_b_to_a": {
+    "n_neurons": 22,
+    "dropped_types": [],
+    "goal_met": 15,
+    "breaks": true,
+    "mean_hz": 0.22222222222222224
+   }
+  },
+  {
+   "a": "turn FlyWire R-eye (discovery)",
+   "b": "turn BANC R-eye",
+   "relation": "same side",
+   "types_a": [
+    "PS049"
+   ],
+   "types_b": [
+    "AOTU019",
+    "DNa03",
+    "DNa11",
+    "DNae007",
+    "LAL018",
+    "LAL120a",
+    "LAL170",
+    "SAD085"
+   ],
+   "shared": [],
+   "jaccard": 0.0,
+   "null_mean": 0.0001,
+   "p": 1.0,
+   "pool_a": 6572,
+   "pool_b": 8724,
+   "transfer_a_to_b": {
+    "n_neurons": 1,
+    "dropped_types": [],
+    "goal_met": 0,
+    "breaks": false,
+    "mean_hz": 324.0
+   },
+   "transfer_b_to_a": {
+    "n_neurons": 8,
+    "dropped_types": [],
+    "goal_met": 0,
+    "breaks": false,
+    "mean_hz": 22.888888888888893
+   }
+  },
+  {
+   "a": "turn BANC R-eye",
+   "b": "turn BANC L-eye",
+   "relation": "mirror",
+   "types_a": [
+    "AOTU019",
+    "DNa03",
+    "DNa11",
+    "DNae007",
+    "LAL018",
+    "LAL120a",
+    "LAL170",
+    "SAD085"
+   ],
+   "types_b": [
+    "DNa03",
+    "DNa11",
+    "LAL010",
+    "LAL018",
+    "LAL081",
+    "LAL120a",
+    "PS013",
+    "PS183",
+    "SAD085"
+   ],
+   "shared": [
+    "DNa03",
+    "DNa11",
+    "LAL018",
+    "LAL120a",
+    "SAD085"
+   ],
+   "jaccard": 0.4166666666666667,
+   "null_mean": 0.00039375,
+   "p": 9.999000099990002e-05,
+   "pool_a": 8724,
+   "pool_b": 8614,
+   "transfer_a_to_b": {
+    "n_neurons": 8,
+    "dropped_types": [],
+    "goal_met": 0,
+    "breaks": false,
+    "mean_hz": 261.77777777777777
+   },
+   "transfer_b_to_a": {
+    "n_neurons": 9,
+    "dropped_types": [],
+    "goal_met": 0,
+    "breaks": false,
+    "mean_hz": 129.55555555555557
+   }
+  },
+  {
+   "a": "bitter FlyWire L (discovery)",
+   "b": "bitter FlyWire R",
+   "relation": "mirror",
+   "types_a": [
+    "CB0016",
+    "CB0219",
+    "CB0571"
+   ],
+   "types_b": [
+    "CB0016",
+    "CB0118",
+    "CB0219",
+    "CB0438",
+    "CB0487",
+    "CB0571",
+    "MNx01"
+   ],
+   "shared": [
+    "CB0016",
+    "CB0219",
+    "CB0571"
+   ],
+   "jaccard": 0.42857142857142855,
+   "null_mean": 0.0006222222222222221,
+   "p": 9.999000099990002e-05,
+   "pool_a": 3384,
+   "pool_b": 3020,
+   "transfer_a_to_b": {
+    "n_neurons": 3,
+    "dropped_types": [],
+    "goal_met": 12,
+    "breaks": true,
+    "mean_hz": 44.0
+   },
+   "transfer_b_to_a": {
+    "n_neurons": 6,
+    "dropped_types": [
+     "MNx01"
+    ],
+    "goal_met": 0,
+    "breaks": false,
+    "mean_hz": 8.88888888888889
+   }
+  }
+ ]
+}

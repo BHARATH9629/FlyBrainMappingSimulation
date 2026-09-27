@@ -1,0 +1,42 @@
+[
+ {
+  "pair": "escape FlyWire L (discovery) <-> escape FlyWire R",
+  "jaccard": 0.3125,
+  "direct_pool": [
+   211,
+   214
+  ],
+  "null_mean": 0.017038111455108362,
+  "p": 9.999000099990002e-05
+ },
+ {
+  "pair": "turn FlyWire R-eye (discovery) <-> turn BANC R-eye",
+  "jaccard": 0.0,
+  "direct_pool": [
+   505,
+   501
+  ],
+  "null_mean": 0.00135,
+  "p": 1.0
+ },
+ {
+  "pair": "turn BANC R-eye <-> turn BANC L-eye",
+  "jaccard": 0.4166666666666667,
+  "direct_pool": [
+   501,
+   505
+  ],
+  "null_mean": 0.005571011904761904,
+  "p": 9.999000099990002e-05
+ },
+ {
+  "pair": "bitter FlyWire L (discovery) <-> bitter FlyWire R",
+  "jaccard": 0.42857142857142855,
+  "direct_pool": [
+   177,
+   188
+  ],
+  "null_mean": 0.008527777777777776,
+  "p": 9.999000099990002e-05
+ }
+]

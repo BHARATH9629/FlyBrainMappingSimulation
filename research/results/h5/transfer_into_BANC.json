@@ -1,0 +1,320 @@
+{
+ "primary|s_00_FlyWire->s_00_BANC": {
+  "n_neurons": 5,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 330.0
+ },
+ "primary|s_00_male->s_00_BANC": {
+  "n_neurons": 2,
+  "dropped_types": [
+   "AOTU015"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 323.11111111111114
+ },
+ "primary|s_01_male->s_01_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 345.55555555555554
+ },
+ "primary|s_02_FlyWire->s_02_BANC": {
+  "n_neurons": 5,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 173.55555555555557
+ },
+ "primary|s_02_male->s_02_BANC": {
+  "n_neurons": 6,
+  "dropped_types": [
+   "AOTU063",
+   "PLP214"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 248.22222222222217
+ },
+ "primary|s_03_FlyWire->s_03_BANC": {
+  "n_neurons": 7,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 146.0
+ },
+ "primary|s_03_male->s_03_BANC": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 243.7777777777778
+ },
+ "primary|s_04_FlyWire->s_04_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 335.5555555555556
+ },
+ "primary|s_04_male->s_04_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 335.5555555555556
+ },
+ "primary|s_06_FlyWire->s_06_BANC": {
+  "n_neurons": 28,
+  "dropped_types": [
+   "LPT47_vCal2"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 323.3333333333333
+ },
+ "primary|s_07_FlyWire->s_07_BANC": {
+  "n_neurons": 6,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 292.44444444444446
+ },
+ "primary|s_07_male->s_07_BANC": {
+  "n_neurons": 7,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 287.3333333333333
+ },
+ "primary|s_08_FlyWire->s_08_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 248.88888888888886
+ },
+ "primary|s_09_male->s_09_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 136.88888888888889
+ },
+ "primary|s_11_male->s_11_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 235.11111111111111
+ },
+ "primary|s_15_FlyWire->s_15_BANC": {
+  "n_neurons": 7,
+  "dropped_types": [
+   "CB0484",
+   "CB0721",
+   "CB0847",
+   "CB0851"
+  ],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "primary|s_15_male->s_15_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [
+   "CB0484",
+   "CB0847",
+   "CB0851"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 35.333333333333336
+ },
+ "primary|s_16_FlyWire->s_16_BANC": {
+  "n_neurons": 7,
+  "dropped_types": [
+   "SAD017"
+  ],
+  "goal_met": 14,
+  "breaks": true,
+  "mean_hz": 1.777777777777778
+ },
+ "primary|s_17_FlyWire->s_17_BANC": {
+  "n_neurons": 5,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "primary|s_17_male->s_17_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 322.8888888888889
+ },
+ "primary|s_20_FlyWire->s_20_BANC": {
+  "n_neurons": 24,
+  "dropped_types": [],
+  "goal_met": 12,
+  "breaks": true,
+  "mean_hz": 7.777777777777778
+ },
+ "primary|s_20_male->s_20_BANC": {
+  "n_neurons": 4,
+  "dropped_types": [
+   "CB0149,CB0663"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 50.66666666666666
+ },
+ "primary|s_21_FlyWire->s_21_BANC": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 187.33333333333337
+ },
+ "primary|s_21_male->s_21_BANC": {
+  "n_neurons": 6,
+  "dropped_types": [
+   "AVLP460b"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 256.6666666666667
+ },
+ "primary|s_22_male->s_22_BANC": {
+  "n_neurons": 4,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 327.11111111111114
+ },
+ "primary|s_23_FlyWire->s_23_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 292.66666666666674
+ },
+ "primary|s_24_male->s_24_BANC": {
+  "n_neurons": 24,
+  "dropped_types": [],
+  "goal_met": 4,
+  "breaks": false,
+  "mean_hz": 56.22222222222222
+ },
+ "primary|s_25_FlyWire->s_25_BANC": {
+  "n_neurons": 6,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 274.44444444444446
+ },
+ "primary|s_25_male->s_25_BANC": {
+  "n_neurons": 5,
+  "dropped_types": [
+   "LPT47_vCal2"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 216.22222222222223
+ },
+ "primary|s_26_FlyWire->s_26_BANC": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 255.55555555555554
+ },
+ "primary|s_26_male->s_26_BANC": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 260.6666666666667
+ },
+ "primary|s_27_FlyWire->s_27_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [
+   "PLP251"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 215.55555555555551
+ },
+ "primary|s_27_male->s_27_BANC": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 240.00000000000003
+ },
+ "primary|s_29_FlyWire->s_29_BANC": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 185.33333333333334
+ },
+ "primary|s_30_FlyWire->s_30_BANC": {
+  "n_neurons": 16,
+  "dropped_types": [
+   "AVLP093",
+   "AVLP094",
+   "CB3879",
+   "PS001",
+   "nan"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 171.7777777777778
+ },
+ "primary|s_30_male->s_30_BANC": {
+  "n_neurons": 6,
+  "dropped_types": [
+   "AN_GNG_SAD_18",
+   "AVLP093",
+   "AVLP710m"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 195.77777777777777
+ },
+ "primary|s_31_FlyWire->s_31_BANC": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 169.33333333333334
+ },
+ "primary|s_31_male->s_31_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 2,
+  "breaks": false,
+  "mean_hz": 107.55555555555556
+ },
+ "primary|s_32_male->s_32_BANC": {
+  "n_neurons": 9,
+  "dropped_types": [
+   "AN09B017c"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 133.33333333333331
+ },
+ "primary|s_33_male->s_33_BANC": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 342.4444444444444
+ }
+}

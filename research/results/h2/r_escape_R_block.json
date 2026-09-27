@@ -1,0 +1,9 @@
+{
+ "instance": "r_escape_R",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 483,
+ "attacks_found": [],
+ "best_size": null,
+ "found": false,
+ "seconds": 131
+}

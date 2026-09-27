@@ -1,0 +1,23 @@
+{
+ "instance": "refuse_bitter",
+ "goal": "corrupt",
+ "n_direct_inputs_forbidden": 227,
+ "attacks_found": [
+  {
+   "strategy": "attacker-greedy",
+   "size": 3
+  }
+ ],
+ "best_strategy": "attacker-greedy",
+ "best_size": 3,
+ "goal_met": 15,
+ "found": true,
+ "intervention": {
+  "lesion": [
+   67186,
+   47955,
+   102193
+  ]
+ },
+ "seconds": 40
+}

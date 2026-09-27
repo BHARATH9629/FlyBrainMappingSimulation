@@ -1,0 +1,10 @@
+{
+ "instance": "s_02_male",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 1370,
+ "attacks_found": [],
+ "best_size": null,
+ "found": false,
+ "seconds": 181,
+ "scale": 0.556287170773152
+}

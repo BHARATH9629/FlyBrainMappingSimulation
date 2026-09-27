@@ -1,0 +1,313 @@
+{
+ "primary|s_00_male->s_00_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [
+   "AOTU015"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 130.44444444444449
+ },
+ "primary|s_02_BANC->s_02_FlyWire": {
+  "n_neurons": 23,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.22222222222222224
+ },
+ "primary|s_02_male->s_02_FlyWire": {
+  "n_neurons": 7,
+  "dropped_types": [
+   "AOTU063"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 79.11111111111111
+ },
+ "primary|s_03_male->s_03_FlyWire": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 64.22222222222223
+ },
+ "primary|s_04_male->s_04_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "primary|s_07_male->s_07_FlyWire": {
+  "n_neurons": 7,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 1.777777777777778
+ },
+ "primary|s_10_male->s_10_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 1,
+  "breaks": false,
+  "mean_hz": 29.555555555555554
+ },
+ "primary|s_12_male->s_12_FlyWire": {
+  "n_neurons": 4,
+  "dropped_types": [],
+  "goal_met": 14,
+  "breaks": true,
+  "mean_hz": 2.4444444444444446
+ },
+ "primary|s_13_male->s_13_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "primary|s_14_male->s_14_FlyWire": {
+  "n_neurons": 9,
+  "dropped_types": [
+   "AN_GNG_133"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 72.22222222222223
+ },
+ "primary|s_15_BANC->s_15_FlyWire": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 254.44444444444443
+ },
+ "primary|s_15_male->s_15_FlyWire": {
+  "n_neurons": 4,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 143.33333333333334
+ },
+ "primary|s_16_BANC->s_16_FlyWire": {
+  "n_neurons": 4,
+  "dropped_types": [
+   "CB3875"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 63.777777777777786
+ },
+ "primary|s_17_BANC->s_17_FlyWire": {
+  "n_neurons": 12,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "primary|s_17_male->s_17_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 82.66666666666669
+ },
+ "primary|s_20_BANC->s_20_FlyWire": {
+  "n_neurons": 18,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 5.777777777777778
+ },
+ "primary|s_20_male->s_20_FlyWire": {
+  "n_neurons": 4,
+  "dropped_types": [
+   "CB0149,CB0663"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 28.22222222222223
+ },
+ "primary|s_21_male->s_21_FlyWire": {
+  "n_neurons": 6,
+  "dropped_types": [
+   "AVLP460b"
+  ],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "primary|s_25_male->s_25_FlyWire": {
+  "n_neurons": 5,
+  "dropped_types": [
+   "IN06A008"
+  ],
+  "goal_met": 5,
+  "breaks": false,
+  "mean_hz": 19.555555555555554
+ },
+ "primary|s_26_male->s_26_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 13,
+  "breaks": true,
+  "mean_hz": 5.333333333333334
+ },
+ "primary|s_27_male->s_27_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 3,
+  "breaks": false,
+  "mean_hz": 14.666666666666666
+ },
+ "primary|s_28_male->s_28_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [
+   "CB4067"
+  ],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.22222222222222224
+ },
+ "primary|s_29_BANC->s_29_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 49.111111111111114
+ },
+ "primary|s_30_BANC->s_30_FlyWire": {
+  "n_neurons": 9,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 124.22222222222223
+ },
+ "primary|s_30_male->s_30_FlyWire": {
+  "n_neurons": 6,
+  "dropped_types": [
+   "AVLP710m"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 120.44444444444444
+ },
+ "primary|s_31_BANC->s_31_FlyWire": {
+  "n_neurons": 4,
+  "dropped_types": [
+   "CB0674"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 138.2222222222222
+ },
+ "primary|s_31_male->s_31_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 47.99999999999999
+ },
+ "primary|s_34_male->s_34_FlyWire": {
+  "n_neurons": 5,
+  "dropped_types": [],
+  "goal_met": 14,
+  "breaks": true,
+  "mean_hz": 2.0
+ },
+ "secondary|s_00_BANC->s_00_FlyWire": {
+  "n_neurons": 15,
+  "dropped_types": [
+   "IN12B014"
+  ],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "secondary|s_02_BANC->s_02_FlyWire": {
+  "n_neurons": 7,
+  "dropped_types": [],
+  "goal_met": 9,
+  "breaks": false,
+  "mean_hz": 10.0
+ },
+ "secondary|s_03_BANC->s_03_FlyWire": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 60.0
+ },
+ "secondary|s_04_BANC->s_04_FlyWire": {
+  "n_neurons": 8,
+  "dropped_types": [],
+  "goal_met": 15,
+  "breaks": true,
+  "mean_hz": 0.0
+ },
+ "secondary|s_15_BANC->s_15_FlyWire": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 254.44444444444443
+ },
+ "secondary|s_16_BANC->s_16_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [
+   "CB3875"
+  ],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 120.44444444444447
+ },
+ "secondary|s_17_BANC->s_17_FlyWire": {
+  "n_neurons": 2,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 133.33333333333334
+ },
+ "secondary|s_20_BANC->s_20_FlyWire": {
+  "n_neurons": 4,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 41.55555555555556
+ },
+ "secondary|s_21_BANC->s_21_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 53.55555555555555
+ },
+ "secondary|s_23_BANC->s_23_FlyWire": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 61.111111111111114
+ },
+ "secondary|s_25_BANC->s_25_FlyWire": {
+  "n_neurons": 3,
+  "dropped_types": [],
+  "goal_met": 1,
+  "breaks": false,
+  "mean_hz": 32.0
+ },
+ "secondary|s_26_BANC->s_26_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 52.44444444444444
+ },
+ "secondary|s_30_BANC->s_30_FlyWire": {
+  "n_neurons": 1,
+  "dropped_types": [],
+  "goal_met": 0,
+  "breaks": false,
+  "mean_hz": 138.88888888888886
+ }
+}

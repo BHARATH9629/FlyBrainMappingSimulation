@@ -1,0 +1,10 @@
+{
+ "instance": "s_25_FlyWire",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 596,
+ "attacks_found": [],
+ "best_size": null,
+ "found": false,
+ "seconds": 276,
+ "scale": 1.0
+}

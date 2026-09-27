@@ -1,0 +1,862 @@
+{
+ "primary": {
+  "n": 65,
+  "supports": 50,
+  "share": 0.769,
+  "confirmed": true,
+  "per_fly": {
+   "FlyWire": [
+    16,
+    25
+   ],
+   "BANC": [
+    13,
+    13
+   ],
+   "male": [
+    21,
+    27
+   ]
+  },
+  "not_found": 32,
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "baseline": 4,
+    "forbidden": 14,
+    "supports": true
+   },
+   {
+    "name": "s_02_FlyWire",
+    "baseline": 5,
+    "forbidden": 12,
+    "supports": true
+   },
+   {
+    "name": "s_03_FlyWire",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_04_FlyWire",
+    "baseline": 1,
+    "forbidden": 9,
+    "supports": true
+   },
+   {
+    "name": "s_06_FlyWire",
+    "baseline": 19,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_07_FlyWire",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_08_FlyWire",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_10_FlyWire",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_12_FlyWire",
+    "baseline": 2,
+    "forbidden": 3,
+    "supports": false
+   },
+   {
+    "name": "s_13_FlyWire",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_15_FlyWire",
+    "baseline": 11,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_16_FlyWire",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_17_FlyWire",
+    "baseline": 3,
+    "forbidden": 5,
+    "supports": false
+   },
+   {
+    "name": "s_18_FlyWire",
+    "baseline": 15,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_20_FlyWire",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_21_FlyWire",
+    "baseline": 3,
+    "forbidden": 3,
+    "supports": false
+   },
+   {
+    "name": "s_23_FlyWire",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_25_FlyWire",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_26_FlyWire",
+    "baseline": 3,
+    "forbidden": 3,
+    "supports": false
+   },
+   {
+    "name": "s_27_FlyWire",
+    "baseline": 2,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_28_FlyWire",
+    "baseline": 2,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_29_FlyWire",
+    "baseline": 2,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_30_FlyWire",
+    "baseline": 15,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_31_FlyWire",
+    "baseline": 2,
+    "forbidden": 5,
+    "supports": true
+   },
+   {
+    "name": "s_34_FlyWire",
+    "baseline": 3,
+    "forbidden": 7,
+    "supports": true
+   },
+   {
+    "name": "s_01_BANC",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_02_BANC",
+    "baseline": 19,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_09_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_11_BANC",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_15_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_16_BANC",
+    "baseline": 4,
+    "forbidden": 8,
+    "supports": true
+   },
+   {
+    "name": "s_17_BANC",
+    "baseline": 9,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_20_BANC",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_24_BANC",
+    "baseline": 4,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_29_BANC",
+    "baseline": 2,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_30_BANC",
+    "baseline": 9,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_31_BANC",
+    "baseline": 5,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_32_BANC",
+    "baseline": 4,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_00_male",
+    "baseline": 3,
+    "forbidden": 8,
+    "supports": true
+   },
+   {
+    "name": "s_01_male",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_02_male",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_03_male",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_04_male",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_07_male",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_09_male",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_10_male",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_11_male",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_12_male",
+    "baseline": 4,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_13_male",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_14_male",
+    "baseline": 11,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_15_male",
+    "baseline": 4,
+    "forbidden": 11,
+    "supports": true
+   },
+   {
+    "name": "s_17_male",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_20_male",
+    "baseline": 4,
+    "forbidden": 7,
+    "supports": false
+   },
+   {
+    "name": "s_21_male",
+    "baseline": 7,
+    "forbidden": 6,
+    "supports": false
+   },
+   {
+    "name": "s_22_male",
+    "baseline": 2,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_24_male",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_25_male",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_26_male",
+    "baseline": 2,
+    "forbidden": 4,
+    "supports": true
+   },
+   {
+    "name": "s_27_male",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_28_male",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_30_male",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_31_male",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_32_male",
+    "baseline": 5,
+    "forbidden": 12,
+    "supports": true
+   },
+   {
+    "name": "s_33_male",
+    "baseline": 1,
+    "forbidden": 7,
+    "supports": true
+   },
+   {
+    "name": "s_34_male",
+    "baseline": 5,
+    "forbidden": null,
+    "supports": true
+   }
+  ]
+ },
+ "secondary (BANC x1.0)": {
+  "n": 68,
+  "supports": 53,
+  "share": 0.779,
+  "confirmed": true,
+  "per_fly": {
+   "FlyWire": [
+    16,
+    25
+   ],
+   "BANC": [
+    16,
+    16
+   ],
+   "male": [
+    21,
+    27
+   ]
+  },
+  "not_found": 33,
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "baseline": 4,
+    "forbidden": 14,
+    "supports": true
+   },
+   {
+    "name": "s_02_FlyWire",
+    "baseline": 5,
+    "forbidden": 12,
+    "supports": true
+   },
+   {
+    "name": "s_03_FlyWire",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_04_FlyWire",
+    "baseline": 1,
+    "forbidden": 9,
+    "supports": true
+   },
+   {
+    "name": "s_06_FlyWire",
+    "baseline": 19,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_07_FlyWire",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_08_FlyWire",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_10_FlyWire",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_12_FlyWire",
+    "baseline": 2,
+    "forbidden": 3,
+    "supports": false
+   },
+   {
+    "name": "s_13_FlyWire",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_15_FlyWire",
+    "baseline": 11,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_16_FlyWire",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_17_FlyWire",
+    "baseline": 3,
+    "forbidden": 5,
+    "supports": false
+   },
+   {
+    "name": "s_18_FlyWire",
+    "baseline": 15,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_20_FlyWire",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_21_FlyWire",
+    "baseline": 3,
+    "forbidden": 3,
+    "supports": false
+   },
+   {
+    "name": "s_23_FlyWire",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_25_FlyWire",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_26_FlyWire",
+    "baseline": 3,
+    "forbidden": 3,
+    "supports": false
+   },
+   {
+    "name": "s_27_FlyWire",
+    "baseline": 2,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_28_FlyWire",
+    "baseline": 2,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_29_FlyWire",
+    "baseline": 2,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_30_FlyWire",
+    "baseline": 15,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_31_FlyWire",
+    "baseline": 2,
+    "forbidden": 5,
+    "supports": true
+   },
+   {
+    "name": "s_34_FlyWire",
+    "baseline": 3,
+    "forbidden": 7,
+    "supports": true
+   },
+   {
+    "name": "s_00_BANC",
+    "baseline": 15,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_01_BANC",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_02_BANC",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_03_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_04_BANC",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_11_BANC",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_15_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_16_BANC",
+    "baseline": 3,
+    "forbidden": 10,
+    "supports": true
+   },
+   {
+    "name": "s_17_BANC",
+    "baseline": 2,
+    "forbidden": 12,
+    "supports": true
+   },
+   {
+    "name": "s_20_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_21_BANC",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_22_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_23_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_25_BANC",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_26_BANC",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_30_BANC",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_00_male",
+    "baseline": 3,
+    "forbidden": 8,
+    "supports": true
+   },
+   {
+    "name": "s_01_male",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_02_male",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_03_male",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_04_male",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_07_male",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_09_male",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_10_male",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_11_male",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_12_male",
+    "baseline": 4,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_13_male",
+    "baseline": 1,
+    "forbidden": 1,
+    "supports": false
+   },
+   {
+    "name": "s_14_male",
+    "baseline": 11,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_15_male",
+    "baseline": 4,
+    "forbidden": 11,
+    "supports": true
+   },
+   {
+    "name": "s_17_male",
+    "baseline": 1,
+    "forbidden": 2,
+    "supports": true
+   },
+   {
+    "name": "s_20_male",
+    "baseline": 4,
+    "forbidden": 7,
+    "supports": false
+   },
+   {
+    "name": "s_21_male",
+    "baseline": 7,
+    "forbidden": 6,
+    "supports": false
+   },
+   {
+    "name": "s_22_male",
+    "baseline": 2,
+    "forbidden": 2,
+    "supports": false
+   },
+   {
+    "name": "s_24_male",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_25_male",
+    "baseline": 6,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_26_male",
+    "baseline": 2,
+    "forbidden": 4,
+    "supports": true
+   },
+   {
+    "name": "s_27_male",
+    "baseline": 1,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_28_male",
+    "baseline": 3,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_30_male",
+    "baseline": 7,
+    "forbidden": null,
+    "supports": true
+   },
+   {
+    "name": "s_31_male",
+    "baseline": 1,
+    "forbidden": 3,
+    "supports": true
+   },
+   {
+    "name": "s_32_male",
+    "baseline": 5,
+    "forbidden": 12,
+    "supports": true
+   },
+   {
+    "name": "s_33_male",
+    "baseline": 1,
+    "forbidden": 7,
+    "supports": true
+   },
+   {
+    "name": "s_34_male",
+    "baseline": 5,
+    "forbidden": null,
+    "supports": true
+   }
+  ]
+ },
+ "H5 transfer primary": {
+  "n": 102,
+  "breaks": 32,
+  "share": 0.314,
+  "confirmed": false,
+  "with_dropped_types": 32,
+  "breaks_without_dropped": "24/70"
+ },
+ "H5 transfer secondary (BANC x1.0)": {
+  "n": 101,
+  "breaks": 38,
+  "share": 0.376,
+  "confirmed": false,
+  "with_dropped_types": 27,
+  "breaks_without_dropped": "28/74"
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "instance": "escape",
+ "goal": "block",
+ "n_direct_inputs_forbidden": 479,
+ "attacks_found": [],
+ "best_size": null,
+ "found": false,
+ "seconds": 132
+}
