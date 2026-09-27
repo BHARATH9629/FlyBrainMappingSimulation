@@ -145,3 +145,14 @@ def register_screen(brain, fly):
                                            description=f"screen: {inp} (left) -> {outp} [{fly}]")
         out.append(name)
     return out
+
+
+def screen_brain(fly, scale=None):
+    """the brain a screen instance runs in: that fly's pre-registered primary model, or an explicit weight scale"""
+    import json, os
+    sf = lambda d: json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", d, "scale_factor.json")))["median_ratio"]
+    if fly == "BANC":
+        from banc import BancBrain; return BancBrain(scale=scale or sf("banc"))
+    if fly == "male":
+        from malecns import MaleBrain; return MaleBrain(scale=scale or sf("male"))
+    from brain import Brain; return Brain("female")

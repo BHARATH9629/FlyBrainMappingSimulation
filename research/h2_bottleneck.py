@@ -13,7 +13,10 @@ from behaviours import Behaviour
 from agents import Attacker, Log
 
 NAME, GOAL = sys.argv[1], sys.argv[2]; FRESH = tuple(range(11, 26))
-if NAME.startswith("b_"):
+SC = float(sys.argv[sys.argv.index("--scale") + 1]) if "--scale" in sys.argv else None
+if NAME.startswith("s_"):                     # screen pathway (27 Sep): that fly's primary model, or --scale
+    FLY = NAME.split("_")[2]; brain = instances.screen_brain(FLY, SC); instances.register_screen(brain, FLY)
+elif NAME.startswith("b_"):
     from banc import BancBrain
     brain = BancBrain(scale=json.load(open(os.path.join(os.path.dirname(out), "banc", "scale_factor.json")))["median_ratio"]); instances.register_banc()
 else:
@@ -34,7 +37,8 @@ if found:
 else:
     row.update(best_size=None, found=False)
 row["seconds"] = round(time.time() - t0)
-json.dump(row, open(os.path.join(out, f"{NAME}_{GOAL}.json"), "w"), indent=1)
+row["scale"] = getattr(brain, "scale", 1.0)
+json.dump(row, open(os.path.join(out, f"{NAME}_{GOAL}{'_x%s' % SC if SC else ''}.json"), "w"), indent=1)
 print(f"{NAME} {GOAL}: {len(direct)} direct inputs forbidden -> "
       + (f"attack {row['best_size']} via {row['best_strategy']} ({row['goal_met']}/15)" if found else "NO attack within the rules") + f" | {row['seconds']}s", flush=True)
 finish()
