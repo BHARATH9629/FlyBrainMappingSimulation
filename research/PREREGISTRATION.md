@@ -221,3 +221,19 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   null pool (types within two steps, median ~2,600) makes chance overlap near zero. Exploratory check: the same test
   with the null pool restricted to the types of the readout's **direct** inputs (one step, ≥ 5 synapses, any sign),
   the neurons the attacker mostly chooses from. Reported as exploratory whatever it shows.
+- **27 Sep 2026, before running them: robustness controls (section 5) on the screen attack set.** All use the
+  unchanged simulator (`Brain.run`); primary scales; every fly-run with a baseline attack (65).
+  **(A) Whole-brain fidelity (control 3).** Re-test with the whole brain (`depth=99, min_syn=1`) on the 15 unseen
+  seeds: the healthy pathway (ON bar on ≥ 12/15), the attack (goal met on ≥ 12/15) and, where one exists, attack +
+  repair (ON bar on ≥ 12/15). *Holds* if ≥ 90 % of attacks graded SOLID or MARGINAL on the sub-network also meet
+  ≥ 12/15 on the whole brain, and the same for repairs. Mismatches are listed.
+  **(B) Parameter sensitivity (control 2).** Four model variants, one change each: synaptic weight `W_SYN` × 0.85 and
+  × 1.15; firing threshold `V_TH` −46 mV and −44 mV (default −45). On 16 fly-runs drawn with
+  `numpy.random.default_rng(0)` from the 65, the full attack search (same three strategies, same rules) is re-run
+  under each variant after the usual 8-seed inclusion check. *Holds* if, for every variant, the Spearman correlation
+  between baseline and variant attack cost (no attack = ranked highest) is ≥ 0.7 (as pre-registered in section 5).
+  Break rates per variant are reported.
+  **(C) Random attacks (control 1).** For each of the 65 attacks, 20 random interventions of the same size and the
+  same move type(s), drawn (rng 0) from the readout's direct presynaptic partners (≥ 5 synapses; inhibitory partners for
+  "inject", any for lesion / weaken), tested on seeds 11–25 (goal met on ≥ 12/15). *Holds* if the median share of
+  random sets that break the pathway is ≤ 10 % while the red-team attacks' rate is their verified rate.
