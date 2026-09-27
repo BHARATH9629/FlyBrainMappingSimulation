@@ -1,0 +1,654 @@
+{
+ "primary": {
+  "n": 58,
+  "repair_larger": 45,
+  "repair_smaller": 11,
+  "ties": 2,
+  "share": 0.804,
+  "p_one_sided": 2.68915905507483e-06,
+  "confirmed": true,
+  "per_fly": {
+   "FlyWire": {
+    "n": 21,
+    "repair_larger": 17,
+    "smaller": 4,
+    "ties": 0
+   },
+   "BANC": {
+    "n": 12,
+    "repair_larger": 8,
+    "smaller": 3,
+    "ties": 1
+   },
+   "male": {
+    "n": 25,
+    "repair_larger": 20,
+    "smaller": 4,
+    "ties": 1
+   }
+  },
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_02_FlyWire",
+    "attack": 5,
+    "repair": 6
+   },
+   {
+    "name": "s_03_FlyWire",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_06_FlyWire",
+    "attack": 19,
+    "repair": 6
+   },
+   {
+    "name": "s_07_FlyWire",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_08_FlyWire",
+    "attack": 1,
+    "repair": 3
+   },
+   {
+    "name": "s_10_FlyWire",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_12_FlyWire",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_15_FlyWire",
+    "attack": 11,
+    "repair": 12
+   },
+   {
+    "name": "s_16_FlyWire",
+    "attack": 7,
+    "repair": 6
+   },
+   {
+    "name": "s_17_FlyWire",
+    "attack": 3,
+    "repair": 6
+   },
+   {
+    "name": "s_18_FlyWire",
+    "attack": 15,
+    "repair": 16
+   },
+   {
+    "name": "s_20_FlyWire",
+    "attack": 7,
+    "repair": 8
+   },
+   {
+    "name": "s_21_FlyWire",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_25_FlyWire",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_26_FlyWire",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_27_FlyWire",
+    "attack": 2,
+    "repair": 1
+   },
+   {
+    "name": "s_29_FlyWire",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_30_FlyWire",
+    "attack": 15,
+    "repair": 2
+   },
+   {
+    "name": "s_31_FlyWire",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_34_FlyWire",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_01_BANC",
+    "attack": 6,
+    "repair": 12
+   },
+   {
+    "name": "s_02_BANC",
+    "attack": 19,
+    "repair": 8
+   },
+   {
+    "name": "s_09_BANC",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_11_BANC",
+    "attack": 6,
+    "repair": 12
+   },
+   {
+    "name": "s_15_BANC",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_17_BANC",
+    "attack": 9,
+    "repair": 3
+   },
+   {
+    "name": "s_20_BANC",
+    "attack": 7,
+    "repair": 3
+   },
+   {
+    "name": "s_24_BANC",
+    "attack": 4,
+    "repair": 12
+   },
+   {
+    "name": "s_29_BANC",
+    "attack": 2,
+    "repair": 4
+   },
+   {
+    "name": "s_30_BANC",
+    "attack": 9,
+    "repair": 12
+   },
+   {
+    "name": "s_31_BANC",
+    "attack": 5,
+    "repair": 8
+   },
+   {
+    "name": "s_32_BANC",
+    "attack": 4,
+    "repair": 4
+   },
+   {
+    "name": "s_00_male",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_01_male",
+    "attack": 1,
+    "repair": 5
+   },
+   {
+    "name": "s_02_male",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_03_male",
+    "attack": 3,
+    "repair": 3
+   },
+   {
+    "name": "s_04_male",
+    "attack": 1,
+    "repair": 4
+   },
+   {
+    "name": "s_07_male",
+    "attack": 7,
+    "repair": 8
+   },
+   {
+    "name": "s_09_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_11_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_12_male",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_14_male",
+    "attack": 11,
+    "repair": 8
+   },
+   {
+    "name": "s_15_male",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_17_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_20_male",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_21_male",
+    "attack": 7,
+    "repair": 8
+   },
+   {
+    "name": "s_22_male",
+    "attack": 2,
+    "repair": 1
+   },
+   {
+    "name": "s_24_male",
+    "attack": 1,
+    "repair": 3
+   },
+   {
+    "name": "s_25_male",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_26_male",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_27_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_28_male",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_30_male",
+    "attack": 7,
+    "repair": 2
+   },
+   {
+    "name": "s_31_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_32_male",
+    "attack": 5,
+    "repair": 4
+   },
+   {
+    "name": "s_33_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_34_male",
+    "attack": 5,
+    "repair": 6
+   }
+  ]
+ },
+ "secondary (BANC x1.0)": {
+  "n": 60,
+  "repair_larger": 48,
+  "repair_smaller": 10,
+  "ties": 2,
+  "share": 0.828,
+  "p_one_sided": 2.2583095815598147e-07,
+  "confirmed": true,
+  "per_fly": {
+   "FlyWire": {
+    "n": 21,
+    "repair_larger": 17,
+    "smaller": 4,
+    "ties": 0
+   },
+   "BANC": {
+    "n": 14,
+    "repair_larger": 11,
+    "smaller": 2,
+    "ties": 1
+   },
+   "male": {
+    "n": 25,
+    "repair_larger": 20,
+    "smaller": 4,
+    "ties": 1
+   }
+  },
+  "rows": [
+   {
+    "name": "s_00_FlyWire",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_02_FlyWire",
+    "attack": 5,
+    "repair": 6
+   },
+   {
+    "name": "s_03_FlyWire",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_06_FlyWire",
+    "attack": 19,
+    "repair": 6
+   },
+   {
+    "name": "s_07_FlyWire",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_08_FlyWire",
+    "attack": 1,
+    "repair": 3
+   },
+   {
+    "name": "s_10_FlyWire",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_12_FlyWire",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_15_FlyWire",
+    "attack": 11,
+    "repair": 12
+   },
+   {
+    "name": "s_16_FlyWire",
+    "attack": 7,
+    "repair": 6
+   },
+   {
+    "name": "s_17_FlyWire",
+    "attack": 3,
+    "repair": 6
+   },
+   {
+    "name": "s_18_FlyWire",
+    "attack": 15,
+    "repair": 16
+   },
+   {
+    "name": "s_20_FlyWire",
+    "attack": 7,
+    "repair": 8
+   },
+   {
+    "name": "s_21_FlyWire",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_25_FlyWire",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_26_FlyWire",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_27_FlyWire",
+    "attack": 2,
+    "repair": 1
+   },
+   {
+    "name": "s_29_FlyWire",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_30_FlyWire",
+    "attack": 15,
+    "repair": 2
+   },
+   {
+    "name": "s_31_FlyWire",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_34_FlyWire",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_00_BANC",
+    "attack": 15,
+    "repair": 19
+   },
+   {
+    "name": "s_01_BANC",
+    "attack": 6,
+    "repair": 12
+   },
+   {
+    "name": "s_02_BANC",
+    "attack": 7,
+    "repair": 13
+   },
+   {
+    "name": "s_03_BANC",
+    "attack": 3,
+    "repair": 5
+   },
+   {
+    "name": "s_04_BANC",
+    "attack": 6,
+    "repair": 12
+   },
+   {
+    "name": "s_11_BANC",
+    "attack": 1,
+    "repair": 6
+   },
+   {
+    "name": "s_15_BANC",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_16_BANC",
+    "attack": 3,
+    "repair": 1
+   },
+   {
+    "name": "s_17_BANC",
+    "attack": 2,
+    "repair": 1
+   },
+   {
+    "name": "s_20_BANC",
+    "attack": 3,
+    "repair": 3
+   },
+   {
+    "name": "s_22_BANC",
+    "attack": 3,
+    "repair": 12
+   },
+   {
+    "name": "s_23_BANC",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_25_BANC",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_26_BANC",
+    "attack": 1,
+    "repair": 4
+   },
+   {
+    "name": "s_00_male",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_01_male",
+    "attack": 1,
+    "repair": 5
+   },
+   {
+    "name": "s_02_male",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_03_male",
+    "attack": 3,
+    "repair": 3
+   },
+   {
+    "name": "s_04_male",
+    "attack": 1,
+    "repair": 4
+   },
+   {
+    "name": "s_07_male",
+    "attack": 7,
+    "repair": 8
+   },
+   {
+    "name": "s_09_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_11_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_12_male",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_14_male",
+    "attack": 11,
+    "repair": 8
+   },
+   {
+    "name": "s_15_male",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_17_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_20_male",
+    "attack": 4,
+    "repair": 5
+   },
+   {
+    "name": "s_21_male",
+    "attack": 7,
+    "repair": 8
+   },
+   {
+    "name": "s_22_male",
+    "attack": 2,
+    "repair": 1
+   },
+   {
+    "name": "s_24_male",
+    "attack": 1,
+    "repair": 3
+   },
+   {
+    "name": "s_25_male",
+    "attack": 6,
+    "repair": 7
+   },
+   {
+    "name": "s_26_male",
+    "attack": 2,
+    "repair": 3
+   },
+   {
+    "name": "s_27_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_28_male",
+    "attack": 3,
+    "repair": 4
+   },
+   {
+    "name": "s_30_male",
+    "attack": 7,
+    "repair": 2
+   },
+   {
+    "name": "s_31_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_32_male",
+    "attack": 5,
+    "repair": 4
+   },
+   {
+    "name": "s_33_male",
+    "attack": 1,
+    "repair": 2
+   },
+   {
+    "name": "s_34_male",
+    "attack": 5,
+    "repair": 6
+   }
+  ]
+ }
+}
