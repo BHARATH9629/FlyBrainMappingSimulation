@@ -202,3 +202,18 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   within fly). Confirmation rule as in section 4, applied to the pooled correlations; per-fly values reported.
   R1 and R2 are computed from the wiring only, by the existing `h1_wiring.py` logic extended to the male and to "s_"
   instances without changing its definitions.
+- **27 Sep 2026, after the scaling sweep, before computing any of these: H3 and H5 (overlap) on the screen data;
+  H2 and H5 (transfer) scheduled as simulations.** *Data set:* the screen attack set at each fly's pre-registered
+  primary scale (FlyWire × 1, BANC × 1.815, male × 0.556) is primary; because the sweep showed BANC × 1.815 distorts
+  break rates, the same analyses on BANC × 1.0 are reported as a pre-specified secondary. Unit: fly-run (one pathway
+  per output group per fly).
+  **H3 (section 4, unchanged):** sign test on repair size minus attack size over fly-runs with both an attack and a
+  repair; ties dropped; confirmed if repair is larger in ≥ 75 % of non-tied runs with one-sided p < 0.05.
+  **H5 overlap:** for every output group attacked in two or more flies, each fly pair compares the cell types of the
+  attack neurons (names matched by FlyWire name, as in the screen). Null: for each fly, draw the same number of cell
+  types uniformly from the types of the neurons within two synaptic steps upstream of that fly's readout (any sign,
+  ≥ 5 synapses per step), 10,000 times. Test statistic: mean Jaccard over all pairs; one-sided p = share of null
+  means ≥ observed. Per-pair values reported. Overlap part confirmed if p < 0.05.
+  **H5 transfer and H2 (forbidden direct inputs):** run as simulations on the same attack set (transfer: map the attack
+  by cell type to the other fly's same pathway, test on the 15 unseen seeds, "breaks" = goal met on ≥ 12/15; H2 as in
+  its 26 Sep revision). Rules unchanged from their earlier definitions.
