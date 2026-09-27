@@ -1,0 +1,1215 @@
+[
+ {
+  "group": 2,
+  "input": "LLPC3",
+  "output": "DNa10|L",
+  "cell_type": "IB117",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 3,
+  "input": "LC10a",
+  "output": "DNae002|L",
+  "cell_type": "PLP029",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 4,
+  "input": "LPC1",
+  "output": "DNae002|R",
+  "cell_type": "PLP230",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "silence"
+  ],
+  "transmitter": {
+   "FlyWire": "excitatory",
+   "BANC": "excitatory",
+   "male": "excitatory"
+  },
+  "detail": {
+   "FlyWire": [
+    "silence"
+   ],
+   "BANC": [
+    "silence (BANC x1.0)"
+   ],
+   "male": [
+    "silence"
+   ]
+  }
+ },
+ {
+  "group": 15,
+  "input": "BM_Taste",
+  "output": "DNge036|L",
+  "cell_type": "CB0600",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 20,
+  "input": "LC31a",
+  "output": "DNp09|L",
+  "cell_type": "PLP018",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 20,
+  "input": "LC31a",
+  "output": "DNp09|L",
+  "cell_type": "PVLP020",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 25,
+  "input": "LC22",
+  "output": "DNp26|L",
+  "cell_type": "CB0025",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 25,
+  "input": "LC22",
+  "output": "DNp26|L",
+  "cell_type": "PLP034",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 25,
+  "input": "LC22",
+  "output": "DNp26|L",
+  "cell_type": "PLP035",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 26,
+  "input": "LPC2",
+  "output": "DNp31|L",
+  "cell_type": "IB008",
+  "flies": [
+   "BANC",
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 3,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 0,
+  "input": "LC10d",
+  "output": "DNa02|L",
+  "cell_type": "CB0757",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 1,
+  "input": "LPC1",
+  "output": "DNa06|L",
+  "cell_type": "CB0564",
+  "flies": [
+   "BANC",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate",
+   "silence"
+  ],
+  "transmitter": {
+   "BANC": "excitatory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "BANC": [
+    "silence",
+    "silence (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 2,
+  "input": "LLPC3",
+  "output": "DNa10|L",
+  "cell_type": "AOTU063a",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 2,
+  "input": "LLPC3",
+  "output": "DNa10|L",
+  "cell_type": "AOTU063b",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 2,
+  "input": "LLPC3",
+  "output": "DNa10|L",
+  "cell_type": "CB0309",
+  "flies": [
+   "BANC",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 2,
+  "input": "LLPC3",
+  "output": "DNa10|L",
+  "cell_type": "PLP213",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 3,
+  "input": "LC10a",
+  "output": "DNae002|L",
+  "cell_type": "LAL046",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 3,
+  "input": "LC10a",
+  "output": "DNae002|L",
+  "cell_type": "LAL074,LAL084",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "excitatory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 7,
+  "input": "LLPC1",
+  "output": "DNbe001|L",
+  "cell_type": "CB0442",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 7,
+  "input": "LLPC1",
+  "output": "DNbe001|L",
+  "cell_type": "CB0607",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 7,
+  "input": "LLPC1",
+  "output": "DNbe001|L",
+  "cell_type": "PLP035",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 7,
+  "input": "LLPC1",
+  "output": "DNbe001|L",
+  "cell_type": "PS057",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 7,
+  "input": "LLPC1",
+  "output": "DNbe001|L",
+  "cell_type": "PS112",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 13,
+  "input": "JO-mz",
+  "output": "DNg84|L",
+  "cell_type": "CB0591",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "silence"
+  ],
+  "transmitter": {
+   "FlyWire": "excitatory",
+   "male": "excitatory"
+  },
+  "detail": {
+   "FlyWire": [
+    "silence"
+   ],
+   "male": [
+    "silence"
+   ]
+  }
+ },
+ {
+  "group": 15,
+  "input": "BM_Taste",
+  "output": "DNge036|L",
+  "cell_type": "CB0484",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 15,
+  "input": "BM_Taste",
+  "output": "DNge036|L",
+  "cell_type": "CB0733",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 15,
+  "input": "BM_Taste",
+  "output": "DNge036|L",
+  "cell_type": "CB0847",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 15,
+  "input": "BM_Taste",
+  "output": "DNge036|L",
+  "cell_type": "CB0851",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 16,
+  "input": "LPLC2",
+  "output": "DNp01|L",
+  "cell_type": "CB3707",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 16,
+  "input": "LPLC2",
+  "output": "DNp01|L",
+  "cell_type": "LHAD1g1",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 17,
+  "input": "LC15",
+  "output": "DNp01|R",
+  "cell_type": "PVLP010",
+  "flies": [
+   "BANC",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "BANC": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 20,
+  "input": "LC31a",
+  "output": "DNp09|L",
+  "cell_type": "CB0580",
+  "flies": [
+   "BANC",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "BANC": [
+    "activate",
+    "activate (BANC x1.0)"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 20,
+  "input": "LC31a",
+  "output": "DNp09|L",
+  "cell_type": "PVLP004,PVLP005",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 21,
+  "input": "LC6",
+  "output": "DNp103|L",
+  "cell_type": "AVLP080",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 21,
+  "input": "LC6",
+  "output": "DNp103|L",
+  "cell_type": "CB0563",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 21,
+  "input": "LC6",
+  "output": "DNp103|L",
+  "cell_type": "LHAD1g1",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "activate (BANC x1.0)"
+   ]
+  }
+ },
+ {
+  "group": 26,
+  "input": "LPC2",
+  "output": "DNp31|L",
+  "cell_type": "PS117b",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 29,
+  "input": "LC16",
+  "output": "DNp43|L",
+  "cell_type": "CB0580",
+  "flies": [
+   "BANC",
+   "FlyWire"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate",
+   "silence"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "BANC": [
+    "silence"
+   ]
+  }
+ },
+ {
+  "group": 30,
+  "input": "LC6",
+  "output": "DNp70|L",
+  "cell_type": "AVLP093",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 30,
+  "input": "LC6",
+  "output": "DNp70|L",
+  "cell_type": "AVLP094",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 30,
+  "input": "LC6",
+  "output": "DNp70|L",
+  "cell_type": "CB3879",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 31,
+  "input": "MeTu1",
+  "output": "DNpe017|L",
+  "cell_type": "IB009",
+  "flies": [
+   "BANC",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate",
+   "silence"
+  ],
+  "transmitter": {
+   "BANC": "excitatory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "BANC": [
+    "silence"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 34,
+  "input": "LC36",
+  "output": "DNpe055|L",
+  "cell_type": "IB008",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "BANC": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ },
+ {
+  "group": 34,
+  "input": "LC36",
+  "output": "DNpe055|L",
+  "cell_type": "IB097",
+  "flies": [
+   "FlyWire",
+   "male"
+  ],
+  "n_flies": 2,
+  "move": [
+   "activate"
+  ],
+  "transmitter": {
+   "FlyWire": "inhibitory",
+   "male": "inhibitory"
+  },
+  "detail": {
+   "FlyWire": [
+    "activate"
+   ],
+   "male": [
+    "activate"
+   ]
+  }
+ }
+]

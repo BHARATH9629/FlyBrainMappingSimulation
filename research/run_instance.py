@@ -59,9 +59,9 @@ if "--scale" in sys.argv or "--param" in sys.argv:   # sweep / variant: re-check
     row["inclusion"] = dict(with_stim=on8, without_stim=off8, passes=int(sum(x >= b.on_thr and y <= b.off_thr for x, y in zip(on8, off8))))
     if "--param" in sys.argv: row["param"] = sys.argv[sys.argv.index("--param") + 1]
     if row["inclusion"]["passes"] < 8:
-        row.update(scale=brain.scale, included=False)
+        row.update(scale=getattr(brain, "scale", 1.0), included=False)
         json.dump(row, open(os.path.join(out_dir, f"{NAME}_{GOAL}.json"), "w"), indent=1)
-        print(f"{NAME} {GOAL}: NOT included at scale {brain.scale} ({row['inclusion']['passes']}/8)", flush=True); finish(); sys.exit(0)
+        print(f"{NAME} {GOAL}: NOT included at scale {getattr(brain, "scale", 1.0)} ({row['inclusion']['passes']}/8)", flush=True); finish(); sys.exit(0)
 healthy_on = float(np.mean(rates(b, True, {}))); row["healthy_on"] = round(healthy_on, 1)
 row["healthy_off"] = round(float(np.mean(rates(b, False, {}))), 1)
 
