@@ -237,3 +237,11 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   same move type(s), drawn (rng 0) from the readout's direct presynaptic partners (≥ 5 synapses; inhibitory partners for
   "inject", any for lesion / weaken), tested on seeds 11–25 (goal met on ≥ 12/15). *Holds* if the median share of
   random sets that break the pathway is ≤ 10 % while the red-team attacks' rate is their verified rate.
+- **27 Sep 2026, clarification of control B, written while it runs and before any of its results were read.** The
+  rule did not say what happens to a fly-run that fails the 8-seed inclusion check under a variant. It is **dropped
+  from that variant's correlation** and counted in the report (n included per variant); if fewer than 8 of the 16
+  remain, that variant is reported as not assessable rather than as passing or failing. Also recorded here (audit,
+  no change to any result): in this model nothing fires without input, so the "without stimulus ≤ 10 Hz" half of
+  the inclusion test is always met (0 Hz in all 87 screen runs); inclusion effectively rests on the ON condition.
+  H1's "pooled" Spearman was implemented as the mean of the three per-fly values (with the within-fly permutation
+  test), and "budget + 1" as a rank above every found cost; both are rank-equivalent to the wording.

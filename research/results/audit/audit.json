@@ -1,0 +1,127 @@
+{
+ "screen": {
+  "tested": 164,
+  "included": 128,
+  "all3": 105
+ },
+ "per_fly": {
+  "FlyWire": {
+   "runs": 28,
+   "attack": 25,
+   "grades": {
+    "SOLID": 15,
+    "MARGINAL": 7,
+    "FAIL": 3
+   },
+   "median_attack": 3.0,
+   "repair": 21,
+   "repair_solid": 20,
+   "median_repair": 5.0,
+   "healthy_off_max": 0.0,
+   "repair_cheats": 0
+  },
+  "BANC": {
+   "runs": 27,
+   "attack": 13,
+   "grades": {
+    "SOLID": 7,
+    "MARGINAL": 5,
+    "FAIL": 1
+   },
+   "median_attack": 5.0,
+   "repair": 12,
+   "repair_solid": 12,
+   "median_repair": 6.0,
+   "healthy_off_max": 0.0,
+   "repair_cheats": 0
+  },
+  "male": {
+   "runs": 32,
+   "attack": 27,
+   "grades": {
+    "SOLID": 19,
+    "MARGINAL": 7,
+    "FAIL": 1
+   },
+   "median_attack": 3.0,
+   "repair": 25,
+   "repair_solid": 24,
+   "median_repair": 4.0,
+   "healthy_off_max": 0.0,
+   "repair_cheats": 0
+  }
+ },
+ "off_condition_all_zero": true,
+ "H3_by_group": {
+  "groups": 31,
+  "repair_larger": 21.0,
+  "smaller": 9.0,
+  "tied": 1.0,
+  "p": 0.021386972628533847
+ },
+ "H3_per_fly_p": {},
+ "H3_per_fly": {
+  "FlyWire": {
+   "larger": 17,
+   "smaller": 4,
+   "p": 0.0035986900329589844
+  },
+  "BANC": {
+   "larger": 8,
+   "smaller": 3,
+   "p": 0.11328125
+  },
+  "male": {
+   "larger": 20,
+   "smaller": 4,
+   "p": 0.000771939754486084
+  }
+ },
+ "H1_found_only": {
+  "FlyWire": {
+   "n": 25,
+   "rho": 0.8309763777199769,
+   "p": 2.7010062869504984e-07
+  },
+  "BANC": {
+   "n": 13,
+   "rho": 0.07252504209216265,
+   "p": 0.8138571119638833
+  },
+  "male": {
+   "n": 27,
+   "rho": 0.6255466349994732,
+   "p": 0.0004841784757457661
+  }
+ },
+ "H1_R1_found_vs_not": {
+  "median_found": 18.0,
+  "median_not_found": 73.0,
+  "p": 1.7517211232745883e-09
+ },
+ "H2_by_group": {
+  "groups": 33,
+  "majority_support": 23.0,
+  "tie": 4.0
+ },
+ "robust_A": {
+  "done": 65,
+  "attack_agree": "57/60",
+  "repair_agree": "57/58",
+  "healthy_fullbrain_fail": [],
+  "attack_mismatch": [
+   "s_11_BANC",
+   "s_30_BANC",
+   "s_32_BANC"
+  ],
+  "repair_mismatch": [
+   "s_22_male"
+  ]
+ },
+ "robust_C": {
+  "n": 65,
+  "median": 0.0,
+  "max": 0.1,
+  "none_valid": []
+ }
+}
