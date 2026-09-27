@@ -1,0 +1,2399 @@
+{
+ "primary": {
+  "pairs": [
+   {
+    "group": 0,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AOTU019",
+      "CB0757",
+      "LAL040",
+      "PS049"
+     ],
+     [
+      "AOTU012",
+      "AOTU015",
+      "PS013"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     238,
+     366
+    ]
+   },
+   {
+    "group": 1,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0564",
+      "CB0581",
+      "DNa02",
+      "DNa11",
+      "PS124"
+     ],
+     [
+      "CB0564"
+     ]
+    ],
+    "shared": [
+     "CB0564"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     94,
+     204
+    ]
+   },
+   {
+    "group": 2,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AN_GNG_IPS_1",
+      "AOTU048",
+      "AOTU063a",
+      "AOTU063b",
+      "CB0309",
+      "CB0344",
+      "IB117",
+      "LPT50",
+      "PLP109,PLP112",
+      "PLP213",
+      "PLP248",
+      "PS089",
+      "PS106",
+      "PS115",
+      "PS140"
+     ],
+     [
+      "AOTU063a",
+      "AOTU063b",
+      "IB117",
+      "PLP213"
+     ]
+    ],
+    "shared": [
+     "AOTU063a",
+     "AOTU063b",
+     "IB117",
+     "PLP213"
+    ],
+    "jaccard": 0.26666666666666666,
+    "pool_sizes": [
+     145,
+     148
+    ]
+   },
+   {
+    "group": 2,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AN_GNG_IPS_1",
+      "AOTU048",
+      "AOTU063a",
+      "AOTU063b",
+      "CB0309",
+      "CB0344",
+      "IB117",
+      "LPT50",
+      "PLP109,PLP112",
+      "PLP213",
+      "PLP248",
+      "PS089",
+      "PS106",
+      "PS115",
+      "PS140"
+     ],
+     [
+      "AOTU050b",
+      "AOTU063",
+      "CB0309",
+      "IB117",
+      "PLP214"
+     ]
+    ],
+    "shared": [
+     "CB0309",
+     "IB117"
+    ],
+    "jaccard": 0.1111111111111111,
+    "pool_sizes": [
+     145,
+     205
+    ]
+   },
+   {
+    "group": 2,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AOTU063a",
+      "AOTU063b",
+      "IB117",
+      "PLP213"
+     ],
+     [
+      "AOTU050b",
+      "AOTU063",
+      "CB0309",
+      "IB117",
+      "PLP214"
+     ]
+    ],
+    "shared": [
+     "IB117"
+    ],
+    "jaccard": 0.125,
+    "pool_sizes": [
+     148,
+     205
+    ]
+   },
+   {
+    "group": 3,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0751",
+      "LAL046",
+      "LAL074,LAL084",
+      "LPT22",
+      "PLP029"
+     ],
+     [
+      "CB0049",
+      "LAL046",
+      "PLP029"
+     ]
+    ],
+    "shared": [
+     "LAL046",
+     "PLP029"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     179,
+     216
+    ]
+   },
+   {
+    "group": 4,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "PLP230"
+     ],
+     [
+      "PLP230"
+     ]
+    ],
+    "shared": [
+     "PLP230"
+    ],
+    "jaccard": 1.0,
+    "pool_sizes": [
+     196,
+     193
+    ]
+   },
+   {
+    "group": 7,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0442",
+      "CB0607",
+      "PLP035",
+      "PS057",
+      "PS112",
+      "PS138"
+     ],
+     [
+      "CB0442",
+      "CB0607",
+      "PLP034",
+      "PLP035",
+      "PS057",
+      "PS112"
+     ]
+    ],
+    "shared": [
+     "CB0442",
+     "CB0607",
+     "PLP035",
+     "PS057",
+     "PS112"
+    ],
+    "jaccard": 0.7142857142857143,
+    "pool_sizes": [
+     176,
+     241
+    ]
+   },
+   {
+    "group": 9,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "PS108",
+      "auto:DNb07"
+     ],
+     [
+      "CL309"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     133,
+     200
+    ]
+   },
+   {
+    "group": 10,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "DNge129"
+     ],
+     [
+      "AVLP151"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     120,
+     219
+    ]
+   },
+   {
+    "group": 11,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AN_GNG_SAD_7",
+      "AN_SAD_GNG_2",
+      "CB0040",
+      "CL213",
+      "DNg33",
+      "LAL195"
+     ],
+     [
+      "DNp35"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     18,
+     47
+    ]
+   },
+   {
+    "group": 12,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB2513",
+      "CB3680"
+     ],
+     [
+      "AN_GNG_5",
+      "CB0109",
+      "CB0516"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     38,
+     59
+    ]
+   },
+   {
+    "group": 13,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0591"
+     ],
+     [
+      "CB0591"
+     ]
+    ],
+    "shared": [
+     "CB0591"
+    ],
+    "jaccard": 1.0,
+    "pool_sizes": [
+     71,
+     96
+    ]
+   },
+   {
+    "group": 15,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0600",
+      "CB0733",
+      "CB2191"
+     ],
+     [
+      "CB0022",
+      "CB0048",
+      "CB0484",
+      "CB0600",
+      "CB0721",
+      "CB0733",
+      "CB0792",
+      "CB0847",
+      "CB0851"
+     ]
+    ],
+    "shared": [
+     "CB0600",
+     "CB0733"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     87,
+     137
+    ]
+   },
+   {
+    "group": 15,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0600",
+      "CB0733",
+      "CB2191"
+     ],
+     [
+      "CB0484",
+      "CB0600",
+      "CB0847",
+      "CB0851"
+     ]
+    ],
+    "shared": [
+     "CB0600"
+    ],
+    "jaccard": 0.16666666666666666,
+    "pool_sizes": [
+     87,
+     166
+    ]
+   },
+   {
+    "group": 15,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0022",
+      "CB0048",
+      "CB0484",
+      "CB0600",
+      "CB0721",
+      "CB0733",
+      "CB0792",
+      "CB0847",
+      "CB0851"
+     ],
+     [
+      "CB0484",
+      "CB0600",
+      "CB0847",
+      "CB0851"
+     ]
+    ],
+    "shared": [
+     "CB0484",
+     "CB0600",
+     "CB0847",
+     "CB0851"
+    ],
+    "jaccard": 0.4444444444444444,
+    "pool_sizes": [
+     137,
+     166
+    ]
+   },
+   {
+    "group": 16,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB3707",
+      "CB3875",
+      "LHAD1g1",
+      "PVLP010"
+     ],
+     [
+      "CB0010",
+      "CB0563",
+      "CB3707",
+      "LHAD1g1",
+      "SAD017"
+     ]
+    ],
+    "shared": [
+     "CB3707",
+     "LHAD1g1"
+    ],
+    "jaccard": 0.2857142857142857,
+    "pool_sizes": [
+     94,
+     97
+    ]
+   },
+   {
+    "group": 17,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AN_multi_87",
+      "CB0563",
+      "CB3707",
+      "CL038",
+      "PVLP010",
+      "SAD014"
+     ],
+     [
+      "DNp70",
+      "PVLP151"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     87,
+     111
+    ]
+   },
+   {
+    "group": 17,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AN_multi_87",
+      "CB0563",
+      "CB3707",
+      "CL038",
+      "PVLP010",
+      "SAD014"
+     ],
+     [
+      "PVLP010"
+     ]
+    ],
+    "shared": [
+     "PVLP010"
+    ],
+    "jaccard": 0.16666666666666666,
+    "pool_sizes": [
+     87,
+     179
+    ]
+   },
+   {
+    "group": 17,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "DNp70",
+      "PVLP151"
+     ],
+     [
+      "PVLP010"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     111,
+     179
+    ]
+   },
+   {
+    "group": 20,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0580",
+      "PLP018",
+      "PVLP004,PVLP005",
+      "PVLP020"
+     ],
+     [
+      "CB0663",
+      "PLP018",
+      "PVLP004,PVLP005",
+      "PVLP020"
+     ]
+    ],
+    "shared": [
+     "PLP018",
+     "PVLP004,PVLP005",
+     "PVLP020"
+    ],
+    "jaccard": 0.6,
+    "pool_sizes": [
+     56,
+     106
+    ]
+   },
+   {
+    "group": 20,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0580",
+      "PLP018",
+      "PVLP004,PVLP005",
+      "PVLP020"
+     ],
+     [
+      "CB0149,CB0663",
+      "CB0580",
+      "PLP018",
+      "PVLP020"
+     ]
+    ],
+    "shared": [
+     "CB0580",
+     "PLP018",
+     "PVLP020"
+    ],
+    "jaccard": 0.6,
+    "pool_sizes": [
+     56,
+     185
+    ]
+   },
+   {
+    "group": 20,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0663",
+      "PLP018",
+      "PVLP004,PVLP005",
+      "PVLP020"
+     ],
+     [
+      "CB0149,CB0663",
+      "CB0580",
+      "PLP018",
+      "PVLP020"
+     ]
+    ],
+    "shared": [
+     "PLP018",
+     "PVLP020"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     106,
+     185
+    ]
+   },
+   {
+    "group": 21,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP080",
+      "CB0563",
+      "LHAD1g1"
+     ],
+     [
+      "AVLP076",
+      "AVLP080",
+      "AVLP082",
+      "AVLP460b",
+      "CB0563",
+      "CL001"
+     ]
+    ],
+    "shared": [
+     "AVLP080",
+     "CB0563"
+    ],
+    "jaccard": 0.2857142857142857,
+    "pool_sizes": [
+     371,
+     522
+    ]
+   },
+   {
+    "group": 24,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0358",
+      "DNge087",
+      "OCG01a",
+      "OCG01c"
+     ],
+     [
+      "MTe01b"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     23,
+     40
+    ]
+   },
+   {
+    "group": 25,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AN_multi_28",
+      "CB0025",
+      "CB0399",
+      "PLP034",
+      "PLP035",
+      "SIP052"
+     ],
+     [
+      "AN_multi_11",
+      "CB0025",
+      "IN06A008",
+      "LPT47_vCal2",
+      "PLP034",
+      "PLP035"
+     ]
+    ],
+    "shared": [
+     "CB0025",
+     "PLP034",
+     "PLP035"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     101,
+     120
+    ]
+   },
+   {
+    "group": 26,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "IB008",
+      "PS117b"
+     ],
+     [
+      "IB008",
+      "PS117b"
+     ]
+    ],
+    "shared": [
+     "IB008",
+     "PS117b"
+    ],
+    "jaccard": 1.0,
+    "pool_sizes": [
+     180,
+     215
+    ]
+   },
+   {
+    "group": 27,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "PLP130",
+      "PLP251"
+     ],
+     [
+      "CL132"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     135,
+     225
+    ]
+   },
+   {
+    "group": 28,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "JO-CL"
+     ],
+     [
+      "CB0435",
+      "CB3275b",
+      "CB4067"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     53,
+     55
+    ]
+   },
+   {
+    "group": 29,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AVLP156",
+      "CB0580"
+     ],
+     [
+      "CB0580",
+      "CL002"
+     ]
+    ],
+    "shared": [
+     "CB0580"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     76,
+     92
+    ]
+   },
+   {
+    "group": 30,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AVLP369",
+      "AVLP396",
+      "AVLP498",
+      "AVLP571",
+      "DNp45",
+      "DNpe026",
+      "DNpe042"
+     ],
+     [
+      "AVLP093",
+      "AVLP094",
+      "CB3595",
+      "CB3707",
+      "CB3879",
+      "CL038",
+      "CL066",
+      "MTe31",
+      "PS001",
+      "SMP068"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     63,
+     217
+    ]
+   },
+   {
+    "group": 30,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP369",
+      "AVLP396",
+      "AVLP498",
+      "AVLP571",
+      "DNp45",
+      "DNpe026",
+      "DNpe042"
+     ],
+     [
+      "AN_GNG_SAD_18",
+      "AN_multi_12",
+      "AVLP093",
+      "AVLP094",
+      "AVLP710m",
+      "CB3879",
+      "IB065"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     63,
+     290
+    ]
+   },
+   {
+    "group": 30,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP093",
+      "AVLP094",
+      "CB3595",
+      "CB3707",
+      "CB3879",
+      "CL038",
+      "CL066",
+      "MTe31",
+      "PS001",
+      "SMP068"
+     ],
+     [
+      "AN_GNG_SAD_18",
+      "AN_multi_12",
+      "AVLP093",
+      "AVLP094",
+      "AVLP710m",
+      "CB3879",
+      "IB065"
+     ]
+    ],
+    "shared": [
+     "AVLP093",
+     "AVLP094",
+     "CB3879"
+    ],
+    "jaccard": 0.21428571428571427,
+    "pool_sizes": [
+     217,
+     290
+    ]
+   },
+   {
+    "group": 31,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0478",
+      "CB0674",
+      "IB009",
+      "LAL200",
+      "PS010"
+     ],
+     [
+      "MTe19",
+      "OCG01a"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     106,
+     114
+    ]
+   },
+   {
+    "group": 31,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0478",
+      "CB0674",
+      "IB009",
+      "LAL200",
+      "PS010"
+     ],
+     [
+      "IB009"
+     ]
+    ],
+    "shared": [
+     "IB009"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     106,
+     157
+    ]
+   },
+   {
+    "group": 31,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "MTe19",
+      "OCG01a"
+     ],
+     [
+      "IB009"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     114,
+     157
+    ]
+   },
+   {
+    "group": 32,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP258",
+      "CB0580",
+      "VL2p_adPN",
+      "auto:AVLP085"
+     ],
+     [
+      "AN09B017c",
+      "AN_AVLP_GNG_16",
+      "AVLP490",
+      "CB0732"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     7,
+     133
+    ]
+   },
+   {
+    "group": 34,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "IB008",
+      "IB097"
+     ],
+     [
+      "IB008",
+      "IB010",
+      "IB097",
+      "PS065"
+     ]
+    ],
+    "shared": [
+     "IB008",
+     "IB097"
+    ],
+    "jaccard": 0.5,
+    "pool_sizes": [
+     46,
+     82
+    ]
+   }
+  ],
+  "mean_jaccard": 0.24773391812865495,
+  "null_mean": 0.009429394880145653,
+  "p_one_sided": 9.999000099990002e-05,
+  "confirmed": true,
+  "pairs_with_any_shared": 23
+ },
+ "secondary (BANC x1.0)": {
+  "pairs": [
+   {
+    "group": 0,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0083",
+      "CB0172",
+      "CB0677",
+      "CB0757",
+      "IN12B014",
+      "LAL126",
+      "PLP029",
+      "PS059",
+      "PS186",
+      "VES051,VES052"
+     ],
+     [
+      "AOTU019",
+      "CB0757",
+      "LAL040",
+      "PS049"
+     ]
+    ],
+    "shared": [
+     "CB0757"
+    ],
+    "jaccard": 0.07692307692307693,
+    "pool_sizes": [
+     187,
+     238
+    ]
+   },
+   {
+    "group": 0,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0083",
+      "CB0172",
+      "CB0677",
+      "CB0757",
+      "IN12B014",
+      "LAL126",
+      "PLP029",
+      "PS059",
+      "PS186",
+      "VES051,VES052"
+     ],
+     [
+      "AOTU012",
+      "AOTU015",
+      "PS013"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     187,
+     366
+    ]
+   },
+   {
+    "group": 0,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AOTU019",
+      "CB0757",
+      "LAL040",
+      "PS049"
+     ],
+     [
+      "AOTU012",
+      "AOTU015",
+      "PS013"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     238,
+     366
+    ]
+   },
+   {
+    "group": 1,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0564",
+      "CB0581",
+      "DNa02",
+      "DNa11",
+      "PS124"
+     ],
+     [
+      "CB0564"
+     ]
+    ],
+    "shared": [
+     "CB0564"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     94,
+     204
+    ]
+   },
+   {
+    "group": 2,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AN_GNG_IPS_1",
+      "AOTU063a",
+      "AOTU063b",
+      "CB0309",
+      "PLP213",
+      "PLP248",
+      "PS089"
+     ],
+     [
+      "AOTU063a",
+      "AOTU063b",
+      "IB117",
+      "PLP213"
+     ]
+    ],
+    "shared": [
+     "AOTU063a",
+     "AOTU063b",
+     "PLP213"
+    ],
+    "jaccard": 0.375,
+    "pool_sizes": [
+     145,
+     148
+    ]
+   },
+   {
+    "group": 2,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AN_GNG_IPS_1",
+      "AOTU063a",
+      "AOTU063b",
+      "CB0309",
+      "PLP213",
+      "PLP248",
+      "PS089"
+     ],
+     [
+      "AOTU050b",
+      "AOTU063",
+      "CB0309",
+      "IB117",
+      "PLP214"
+     ]
+    ],
+    "shared": [
+     "CB0309"
+    ],
+    "jaccard": 0.09090909090909091,
+    "pool_sizes": [
+     145,
+     205
+    ]
+   },
+   {
+    "group": 2,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AOTU063a",
+      "AOTU063b",
+      "IB117",
+      "PLP213"
+     ],
+     [
+      "AOTU050b",
+      "AOTU063",
+      "CB0309",
+      "IB117",
+      "PLP214"
+     ]
+    ],
+    "shared": [
+     "IB117"
+    ],
+    "jaccard": 0.125,
+    "pool_sizes": [
+     148,
+     205
+    ]
+   },
+   {
+    "group": 3,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "LAL074,LAL084",
+      "PLP029"
+     ],
+     [
+      "CB0751",
+      "LAL046",
+      "LAL074,LAL084",
+      "LPT22",
+      "PLP029"
+     ]
+    ],
+    "shared": [
+     "LAL074,LAL084",
+     "PLP029"
+    ],
+    "jaccard": 0.4,
+    "pool_sizes": [
+     156,
+     179
+    ]
+   },
+   {
+    "group": 3,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "LAL074,LAL084",
+      "PLP029"
+     ],
+     [
+      "CB0049",
+      "LAL046",
+      "PLP029"
+     ]
+    ],
+    "shared": [
+     "PLP029"
+    ],
+    "jaccard": 0.25,
+    "pool_sizes": [
+     156,
+     216
+    ]
+   },
+   {
+    "group": 3,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0751",
+      "LAL046",
+      "LAL074,LAL084",
+      "LPT22",
+      "PLP029"
+     ],
+     [
+      "CB0049",
+      "LAL046",
+      "PLP029"
+     ]
+    ],
+    "shared": [
+     "LAL046",
+     "PLP029"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     179,
+     216
+    ]
+   },
+   {
+    "group": 4,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "LAL018",
+      "LAL074,LAL084",
+      "PLP230",
+      "PS013",
+      "PS274"
+     ],
+     [
+      "PLP230"
+     ]
+    ],
+    "shared": [
+     "PLP230"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     179,
+     196
+    ]
+   },
+   {
+    "group": 4,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "LAL018",
+      "LAL074,LAL084",
+      "PLP230",
+      "PS013",
+      "PS274"
+     ],
+     [
+      "PLP230"
+     ]
+    ],
+    "shared": [
+     "PLP230"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     179,
+     193
+    ]
+   },
+   {
+    "group": 4,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "PLP230"
+     ],
+     [
+      "PLP230"
+     ]
+    ],
+    "shared": [
+     "PLP230"
+    ],
+    "jaccard": 1.0,
+    "pool_sizes": [
+     196,
+     193
+    ]
+   },
+   {
+    "group": 7,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0442",
+      "CB0607",
+      "PLP035",
+      "PS057",
+      "PS112",
+      "PS138"
+     ],
+     [
+      "CB0442",
+      "CB0607",
+      "PLP034",
+      "PLP035",
+      "PS057",
+      "PS112"
+     ]
+    ],
+    "shared": [
+     "CB0442",
+     "CB0607",
+     "PLP035",
+     "PS057",
+     "PS112"
+    ],
+    "jaccard": 0.7142857142857143,
+    "pool_sizes": [
+     176,
+     241
+    ]
+   },
+   {
+    "group": 10,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "DNge129"
+     ],
+     [
+      "AVLP151"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     120,
+     219
+    ]
+   },
+   {
+    "group": 11,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "DNg33"
+     ],
+     [
+      "DNp35"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     18,
+     47
+    ]
+   },
+   {
+    "group": 12,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB2513",
+      "CB3680"
+     ],
+     [
+      "AN_GNG_5",
+      "CB0109",
+      "CB0516"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     38,
+     59
+    ]
+   },
+   {
+    "group": 13,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0591"
+     ],
+     [
+      "CB0591"
+     ]
+    ],
+    "shared": [
+     "CB0591"
+    ],
+    "jaccard": 1.0,
+    "pool_sizes": [
+     71,
+     96
+    ]
+   },
+   {
+    "group": 15,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0600",
+      "CB0733",
+      "CB2191"
+     ],
+     [
+      "CB0022",
+      "CB0048",
+      "CB0484",
+      "CB0600",
+      "CB0721",
+      "CB0733",
+      "CB0792",
+      "CB0847",
+      "CB0851"
+     ]
+    ],
+    "shared": [
+     "CB0600",
+     "CB0733"
+    ],
+    "jaccard": 0.2,
+    "pool_sizes": [
+     87,
+     137
+    ]
+   },
+   {
+    "group": 15,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0600",
+      "CB0733",
+      "CB2191"
+     ],
+     [
+      "CB0484",
+      "CB0600",
+      "CB0847",
+      "CB0851"
+     ]
+    ],
+    "shared": [
+     "CB0600"
+    ],
+    "jaccard": 0.16666666666666666,
+    "pool_sizes": [
+     87,
+     166
+    ]
+   },
+   {
+    "group": 15,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0022",
+      "CB0048",
+      "CB0484",
+      "CB0600",
+      "CB0721",
+      "CB0733",
+      "CB0792",
+      "CB0847",
+      "CB0851"
+     ],
+     [
+      "CB0484",
+      "CB0600",
+      "CB0847",
+      "CB0851"
+     ]
+    ],
+    "shared": [
+     "CB0484",
+     "CB0600",
+     "CB0847",
+     "CB0851"
+    ],
+    "jaccard": 0.4444444444444444,
+    "pool_sizes": [
+     137,
+     166
+    ]
+   },
+   {
+    "group": 16,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB3707",
+      "CB3875"
+     ],
+     [
+      "CB0010",
+      "CB0563",
+      "CB3707",
+      "LHAD1g1",
+      "SAD017"
+     ]
+    ],
+    "shared": [
+     "CB3707"
+    ],
+    "jaccard": 0.16666666666666666,
+    "pool_sizes": [
+     94,
+     97
+    ]
+   },
+   {
+    "group": 17,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AVLP396",
+      "DNp103"
+     ],
+     [
+      "DNp70",
+      "PVLP151"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     87,
+     111
+    ]
+   },
+   {
+    "group": 17,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP396",
+      "DNp103"
+     ],
+     [
+      "PVLP010"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     87,
+     179
+    ]
+   },
+   {
+    "group": 17,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "DNp70",
+      "PVLP151"
+     ],
+     [
+      "PVLP010"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     111,
+     179
+    ]
+   },
+   {
+    "group": 20,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0580",
+      "PLP018",
+      "PVLP020"
+     ],
+     [
+      "CB0663",
+      "PLP018",
+      "PVLP004,PVLP005",
+      "PVLP020"
+     ]
+    ],
+    "shared": [
+     "PLP018",
+     "PVLP020"
+    ],
+    "jaccard": 0.4,
+    "pool_sizes": [
+     56,
+     106
+    ]
+   },
+   {
+    "group": 20,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0580",
+      "PLP018",
+      "PVLP020"
+     ],
+     [
+      "CB0149,CB0663",
+      "CB0580",
+      "PLP018",
+      "PVLP020"
+     ]
+    ],
+    "shared": [
+     "CB0580",
+     "PLP018",
+     "PVLP020"
+    ],
+    "jaccard": 0.75,
+    "pool_sizes": [
+     56,
+     185
+    ]
+   },
+   {
+    "group": 20,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0663",
+      "PLP018",
+      "PVLP004,PVLP005",
+      "PVLP020"
+     ],
+     [
+      "CB0149,CB0663",
+      "CB0580",
+      "PLP018",
+      "PVLP020"
+     ]
+    ],
+    "shared": [
+     "PLP018",
+     "PVLP020"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     106,
+     185
+    ]
+   },
+   {
+    "group": 21,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "LHAD1g1"
+     ],
+     [
+      "AVLP080",
+      "CB0563",
+      "LHAD1g1"
+     ]
+    ],
+    "shared": [
+     "LHAD1g1"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     229,
+     371
+    ]
+   },
+   {
+    "group": 21,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "LHAD1g1"
+     ],
+     [
+      "AVLP076",
+      "AVLP080",
+      "AVLP082",
+      "AVLP460b",
+      "CB0563",
+      "CL001"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     229,
+     522
+    ]
+   },
+   {
+    "group": 21,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP080",
+      "CB0563",
+      "LHAD1g1"
+     ],
+     [
+      "AVLP076",
+      "AVLP080",
+      "AVLP082",
+      "AVLP460b",
+      "CB0563",
+      "CL001"
+     ]
+    ],
+    "shared": [
+     "AVLP080",
+     "CB0563"
+    ],
+    "jaccard": 0.2857142857142857,
+    "pool_sizes": [
+     371,
+     522
+    ]
+   },
+   {
+    "group": 22,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP079",
+      "AVLP082",
+      "AVLP435b"
+     ],
+     [
+      "PVLP151"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     292,
+     511
+    ]
+   },
+   {
+    "group": 23,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "DNa03",
+      "PS010",
+      "PVLP141"
+     ],
+     [
+      "CL053"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     116,
+     118
+    ]
+   },
+   {
+    "group": 25,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "CB0025",
+      "PLP034",
+      "PLP035"
+     ],
+     [
+      "AN_multi_28",
+      "CB0025",
+      "CB0399",
+      "PLP034",
+      "PLP035",
+      "SIP052"
+     ]
+    ],
+    "shared": [
+     "CB0025",
+     "PLP034",
+     "PLP035"
+    ],
+    "jaccard": 0.5,
+    "pool_sizes": [
+     92,
+     101
+    ]
+   },
+   {
+    "group": 25,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "CB0025",
+      "PLP034",
+      "PLP035"
+     ],
+     [
+      "AN_multi_11",
+      "CB0025",
+      "IN06A008",
+      "LPT47_vCal2",
+      "PLP034",
+      "PLP035"
+     ]
+    ],
+    "shared": [
+     "CB0025",
+     "PLP034",
+     "PLP035"
+    ],
+    "jaccard": 0.5,
+    "pool_sizes": [
+     92,
+     120
+    ]
+   },
+   {
+    "group": 25,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AN_multi_28",
+      "CB0025",
+      "CB0399",
+      "PLP034",
+      "PLP035",
+      "SIP052"
+     ],
+     [
+      "AN_multi_11",
+      "CB0025",
+      "IN06A008",
+      "LPT47_vCal2",
+      "PLP034",
+      "PLP035"
+     ]
+    ],
+    "shared": [
+     "CB0025",
+     "PLP034",
+     "PLP035"
+    ],
+    "jaccard": 0.3333333333333333,
+    "pool_sizes": [
+     101,
+     120
+    ]
+   },
+   {
+    "group": 26,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "IB008"
+     ],
+     [
+      "IB008",
+      "PS117b"
+     ]
+    ],
+    "shared": [
+     "IB008"
+    ],
+    "jaccard": 0.5,
+    "pool_sizes": [
+     182,
+     180
+    ]
+   },
+   {
+    "group": 26,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "IB008"
+     ],
+     [
+      "IB008",
+      "PS117b"
+     ]
+    ],
+    "shared": [
+     "IB008"
+    ],
+    "jaccard": 0.5,
+    "pool_sizes": [
+     182,
+     215
+    ]
+   },
+   {
+    "group": 26,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "IB008",
+      "PS117b"
+     ],
+     [
+      "IB008",
+      "PS117b"
+     ]
+    ],
+    "shared": [
+     "IB008",
+     "PS117b"
+    ],
+    "jaccard": 1.0,
+    "pool_sizes": [
+     180,
+     215
+    ]
+   },
+   {
+    "group": 27,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "PLP130",
+      "PLP251"
+     ],
+     [
+      "CL132"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     135,
+     225
+    ]
+   },
+   {
+    "group": 28,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "JO-CL"
+     ],
+     [
+      "CB0435",
+      "CB3275b",
+      "CB4067"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     53,
+     55
+    ]
+   },
+   {
+    "group": 30,
+    "flies": [
+     "BANC",
+     "FlyWire"
+    ],
+    "types": [
+     [
+      "AVLP498"
+     ],
+     [
+      "AVLP093",
+      "AVLP094",
+      "CB3595",
+      "CB3707",
+      "CB3879",
+      "CL038",
+      "CL066",
+      "MTe31",
+      "PS001",
+      "SMP068"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     63,
+     217
+    ]
+   },
+   {
+    "group": 30,
+    "flies": [
+     "BANC",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP498"
+     ],
+     [
+      "AN_GNG_SAD_18",
+      "AN_multi_12",
+      "AVLP093",
+      "AVLP094",
+      "AVLP710m",
+      "CB3879",
+      "IB065"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     63,
+     290
+    ]
+   },
+   {
+    "group": 30,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "AVLP093",
+      "AVLP094",
+      "CB3595",
+      "CB3707",
+      "CB3879",
+      "CL038",
+      "CL066",
+      "MTe31",
+      "PS001",
+      "SMP068"
+     ],
+     [
+      "AN_GNG_SAD_18",
+      "AN_multi_12",
+      "AVLP093",
+      "AVLP094",
+      "AVLP710m",
+      "CB3879",
+      "IB065"
+     ]
+    ],
+    "shared": [
+     "AVLP093",
+     "AVLP094",
+     "CB3879"
+    ],
+    "jaccard": 0.21428571428571427,
+    "pool_sizes": [
+     217,
+     290
+    ]
+   },
+   {
+    "group": 31,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "MTe19",
+      "OCG01a"
+     ],
+     [
+      "IB009"
+     ]
+    ],
+    "shared": [],
+    "jaccard": 0.0,
+    "pool_sizes": [
+     114,
+     157
+    ]
+   },
+   {
+    "group": 34,
+    "flies": [
+     "FlyWire",
+     "male"
+    ],
+    "types": [
+     [
+      "IB008",
+      "IB097"
+     ],
+     [
+      "IB008",
+      "IB010",
+      "IB097",
+      "PS065"
+     ]
+    ],
+    "shared": [
+     "IB008",
+     "IB097"
+    ],
+    "jaccard": 0.5,
+    "pool_sizes": [
+     46,
+     82
+    ]
+   }
+  ],
+  "mean_jaccard": 0.2628962824614998,
+  "null_mean": 0.007817328881866925,
+  "p_one_sided": 9.999000099990002e-05,
+  "confirmed": true,
+  "pairs_with_any_shared": 30
+ }
+}

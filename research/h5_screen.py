@@ -10,6 +10,8 @@ import instances
 from brain import Brain
 from banc import BancBrain
 from malecns import MaleBrain
+import sys
+STRICT = "--strict" in sys.argv          # exploratory stricter null (27 Sep): direct inputs only
 R = os.path.dirname(out); SCF = os.path.join(R, "{}", "scale_factor.json")
 brains = {"FlyWire": Brain("female"), "BANC": BancBrain(scale=json.load(open(SCF.format("banc")))["median_ratio"]),
           "male": MaleBrain(scale=json.load(open(SCF.format("male")))["median_ratio"])}
@@ -30,7 +32,9 @@ def attack_types(f, iv):
 def pool(f, name):
     from behaviours import Behaviour
     b = Behaviour(info[f]["brain"], name); A = info[f]["A"]
-    one = set(np.unique(A[:, b.readouts].indices).tolist()); two = set(np.unique(A[:, sorted(one)].indices).tolist()) if one else set()
+    one = set(np.unique(A[:, b.readouts].indices).tolist())
+    if STRICT: return sorted({info[f]["names"][i] for i in one - set(b.readouts)} - BAD)
+    two = set(np.unique(A[:, sorted(one)].indices).tolist()) if one else set()
     return sorted({info[f]["names"][i] for i in (one | two) - set(b.readouts)} - BAD)
 
 
@@ -68,5 +72,5 @@ for label, pats in SETS.items():
           f"{rep[label]['pairs_with_any_shared']} pairs share at least one type  -> overlap {'CONFIRMED' if pv < 0.05 else 'NOT confirmed'}", flush=True)
     for p in pairs:
         if p["shared"]: print(f"    group {p['group']:2d} {p['flies']}: shared {p['shared']}  (J = {p['jaccard']:.2f})")
-json.dump(rep, open(os.path.join(out, "h5_screen.json"), "w"), indent=1)
+json.dump(rep, open(os.path.join(out, "h5_screen_strict.json" if STRICT else "h5_screen.json"), "w"), indent=1)
 finish()

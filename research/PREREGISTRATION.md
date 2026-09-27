@@ -217,3 +217,7 @@ Every hypothesis, confirmed or not; every excluded instance and why; the discove
   **H5 transfer and H2 (forbidden direct inputs):** run as simulations on the same attack set (transfer: map the attack
   by cell type to the other fly's same pathway, test on the 15 unseen seeds, "breaks" = goal met on ≥ 12/15; H2 as in
   its 26 Sep revision). Rules unchanged from their earlier definitions.
+- **27 Sep 2026, after the H5 overlap result (so exploratory, not confirmatory): stricter null.** The pre-registered
+  null pool (types within two steps, median ~2,600) makes chance overlap near zero. Exploratory check: the same test
+  with the null pool restricted to the types of the readout's **direct** inputs (one step, ≥ 5 synapses, any sign),
+  the neurons the attacker mostly chooses from. Reported as exploratory whatever it shows.
