@@ -1,0 +1,2912 @@
+{
+ "args": {
+  "sex": "female",
+  "samples": 200,
+  "draws": 3,
+  "channels": 8,
+  "per_channel": 12,
+  "modes": "neurons,types",
+  "ks": "10,25,50",
+  "windows": "300,1000",
+  "pool": 500,
+  "hz": 150.0,
+  "workers": 10,
+  "seed": 0
+ },
+ "rows": [
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4876585402901193
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4569172932330828
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.794736842105263
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6394051350947902
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4905217589428116
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.8802005012531329
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.7095947156291984
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.48575985418090684
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9030075187969924
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.7746230780713538
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4905217589428116
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5087719298245614
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9794486215538847
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6324936557695179
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.486431989063568
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9947368421052631
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8643006418868489
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.486431989063568
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9197716077026422
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.486431989063568
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9894736842105264
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9278437080161218
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5013404723931039
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4300877192982456
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9789473684210526
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9312919838781909
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.48383838383838385
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.40206766917293224
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9789473684210526
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9252761606209882
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4823270296954507
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4554010025062657
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9947368421052631
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.990909090909091
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.560306068200805
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4714160401002506
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9947368421052631
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.990909090909091
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5079934685197843
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4686466165413535
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9947368421052631
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.990909090909091
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5249943039416725
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5091979949874686
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4797979797979798
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.47398496240601506
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.5179028132992327
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5933333333333334
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.47777777777777775
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.46196741854636586
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6033333333333334
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4818181818181818
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4607268170426065
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6733333333333335
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4818181818181818
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.47672932330827067
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.4666666666666666
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5866666666666667
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.49696969696969695
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.46768170426065164
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.52
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.47368421052631576
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4818181818181818
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4694235588972431
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9954545454545455
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9766666666666668
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4737373737373737
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.49104010025062655
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9954545454545455
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.99
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4409090909090909
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5707142857142857
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9954545454545455
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9666666666666668
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4606060606060606
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5476566416040101
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5015151515151516
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4682706766917294
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4292929292929292
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4519924812030075
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4636363636363637
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.45172932330827065
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.43
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.445
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9544235588972431
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.59717868338558
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5440852130325815
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9952380952380953
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.790282131661442
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.53
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5456140350877192
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8015673981191223
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.53
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5406140350877193
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9691854636591479
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.7517241379310344
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.535
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.533295739348371
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.7858934169278997
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.52
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5280325814536342
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8542319749216303
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5199999999999999
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.533295739348371
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6978056426332289
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.44000000000000006
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.36503759398496244
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6978056426332289
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.43499999999999994
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.36324561403508776
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9601880877742947
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.395
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4281453634085214
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.7034482758620689
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.465
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.36177944862155387
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.742319749216301
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.485
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.37479949874686713
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.990909090909091
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.51
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3973057644110275
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4920175438596492
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3907142857142857
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5315037593984961
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3628195488721805
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.48348370927318296
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3798370927318296
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.44795739348370933
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3795989974937343
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5002380952380953
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.354812030075188
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5139473684210526
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4219298245614035
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4524310776942356
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.40716791979949873
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9949999999999999
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8546917450365725
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5617919799498747
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.36786967418546357
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9850000000000001
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9375757575757577
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.6121804511278196
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.44615288220551375
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9800000000000001
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9350365726227796
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.6016541353383458
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3623684210526316
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9441274817136887
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5713408521303258
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3030325814536341
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9281400208986416
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5653383458646617
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.37015037593984956
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5856516290726818
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.3511278195488722
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4511779448621554
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.45469924812030077
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6483870967741935
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.449235588972431
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.47399749373433586
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6383512544802867
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4842355889724311
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.47072681704260655
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5985663082437276
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4992355889724312
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.41923558897243113
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5752688172043011
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4742355889724311
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5039974937343359
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5845878136200717
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4442355889724311
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.44548872180451127
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.6448028673835126
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.449235588972431
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4864661654135339
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8627240143369177
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.39146616541353385
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.42417293233082703
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.864516129032258
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4164661654135339
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.42943609022556384
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8408602150537632
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4314661654135339
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4144611528822055
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.942652329749104
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4364661654135339
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.466015037593985
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.942652329749104
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4714661654135338
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4912781954887218
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9347670250896059
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.48154135338345866
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4894862155388471
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.586891937275569
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "raw inputs",
+   "window": 0,
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5942014126224653
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.7400604510578935
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.4970588235294118
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4524128755586556
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5482304245462141
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.7434149680952751
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.4882352941176471
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.48574620889198894
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5532733348522823
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.7495078663876618
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5019607843137255
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4741300472758273
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5608642819169136
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.8951432483401792
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5441176470588236
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.442455242966752
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5223323460165565
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9106021855382469
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5181181563534505
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.43832700405590436
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5286283891547049
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9211591619520008
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.5436083524318819
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.4161538660259888
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5248613959140276
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.988562091503268
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 0.574942704354469
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5396445271125578
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.514551530341004
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.988562091503268
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.8845047109752991
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.49795654757291585
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4789093946988684
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.988562091503268
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9018207282913165
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.49651243896768193
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 300,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4698944330523278
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9944444444444445
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "AND (bits 0,1)",
+   "acc": 1.0
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.592286031672221
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 10,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.534385205437837
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9944444444444445
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9857142857142858
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5493244465111473
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.5180071390597707
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "acc": 0.9944444444444445
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "acc": 0.9857142857142858
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "acc": 0.5503926735384536
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "window": 1000,
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "acc": 0.4837320574162679
+  }
+ ],
+ "meta": [
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "real",
+   "responding": 9845,
+   "pool": 500
+  },
+  {
+   "mode": "neurons",
+   "draw": 0,
+   "brain": "rewired",
+   "responding": 149,
+   "pool": 53
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "real",
+   "responding": 9813,
+   "pool": 500
+  },
+  {
+   "mode": "neurons",
+   "draw": 1,
+   "brain": "rewired",
+   "responding": 157,
+   "pool": 61
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "real",
+   "responding": 10098,
+   "pool": 500
+  },
+  {
+   "mode": "neurons",
+   "draw": 2,
+   "brain": "rewired",
+   "responding": 218,
+   "pool": 122
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "real",
+   "responding": 9861,
+   "pool": 500
+  },
+  {
+   "mode": "types",
+   "draw": 0,
+   "brain": "rewired",
+   "responding": 472,
+   "pool": 278
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "real",
+   "responding": 9888,
+   "pool": 500
+  },
+  {
+   "mode": "types",
+   "draw": 1,
+   "brain": "rewired",
+   "responding": 788,
+   "pool": 500
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "real",
+   "responding": 10024,
+   "pool": 500
+  },
+  {
+   "mode": "types",
+   "draw": 2,
+   "brain": "rewired",
+   "responding": 640,
+   "pool": 462
+  }
+ ]
+}

@@ -1,0 +1,450 @@
+{
+ "entry": {
+  "behaviour": "turn",
+  "healthy_on_hz": 62.22222222222223,
+  "healthy_off_hz": 0.0,
+  "goals": {
+   "block": {
+    "attacks": {
+     "greedy": {
+      "strategy": "attacker-greedy",
+      "goal": "block",
+      "intervention": {
+       "lesion": [
+        78527,
+        46248,
+        99517
+       ]
+      },
+      "size": 3,
+      "simulations": 6
+     },
+     "inject_inhibitors": {
+      "strategy": "attacker-inject",
+      "goal": "block",
+      "intervention": {
+       "inject": {
+        "61335": 150.0
+       }
+      },
+      "size": 1,
+      "simulations": 1
+     },
+     "weaken_only": null,
+     "search": null
+    },
+    "best": {
+     "strategy": "attacker-inject",
+     "goal": "block",
+     "intervention": {
+      "inject": {
+       "61335": 150.0
+      }
+     },
+     "size": 1,
+     "simulations": 1
+    },
+    "greedy_best_size": 1,
+    "disjoint_attacks": [
+     3
+    ],
+    "repair": {
+     "strategy": "defender-greedy",
+     "move": "stop listening to the hijacked wire",
+     "intervention": {
+      "potentiate": {
+       "(61335, 92992)": 0.1
+      }
+     },
+     "size": 1,
+     "on_hz": 25.555555555555557,
+     "off_hz": 0.0,
+     "simulations": 12
+    }
+   }
+  },
+  "total_seconds": 532,
+  "sex": "female",
+  "side": "default"
+ },
+ "log": [
+  {
+   "agent": "attacker-greedy",
+   "step": 1,
+   "hypothesis": "cut the 1 strongest drivers",
+   "intervention": "lesion 1",
+   "result": "readout 43.3 Hz",
+   "goal_met": false,
+   "t": 24.3
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 2,
+   "hypothesis": "cut the 2 strongest drivers",
+   "intervention": "lesion 2",
+   "result": "readout 7.8 Hz",
+   "goal_met": false,
+   "t": 36.7
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 3,
+   "hypothesis": "cut the 3 strongest drivers",
+   "intervention": "lesion 3",
+   "result": "readout 0.0 Hz",
+   "goal_met": true,
+   "t": 49.6
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 4,
+   "hypothesis": "is neuron 78527 necessary? try without it",
+   "intervention": "lesion 2",
+   "result": "readout 22.2 Hz",
+   "goal_met": false,
+   "t": 60.8
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 5,
+   "hypothesis": "is neuron 46248 necessary? try without it",
+   "intervention": "lesion 2",
+   "result": "readout 25.6 Hz",
+   "goal_met": false,
+   "t": 73.0
+  },
+  {
+   "agent": "attacker-greedy",
+   "step": 6,
+   "hypothesis": "is neuron 99517 necessary? try without it",
+   "intervention": "lesion 2",
+   "result": "readout 7.8 Hz",
+   "goal_met": false,
+   "t": 73.0
+  },
+  {
+   "agent": "attacker-inject",
+   "step": 1,
+   "hypothesis": "drive the 1 strongest inhibitors of the readout (no cuts)",
+   "intervention": "inject 1",
+   "result": "readout 1.1 Hz",
+   "goal_met": true,
+   "t": 85.9
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 1,
+   "hypothesis": "weaken the 1 strongest drivers to 50 %",
+   "intervention": "weaken 1",
+   "result": "readout 42.2 Hz",
+   "goal_met": false,
+   "t": 97.4
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 2,
+   "hypothesis": "weaken the 2 strongest drivers to 50 %",
+   "intervention": "weaken 2",
+   "result": "readout 40.0 Hz",
+   "goal_met": false,
+   "t": 109.1
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 3,
+   "hypothesis": "weaken the 3 strongest drivers to 50 %",
+   "intervention": "weaken 3",
+   "result": "readout 28.9 Hz",
+   "goal_met": false,
+   "t": 120.1
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 4,
+   "hypothesis": "weaken the 4 strongest drivers to 50 %",
+   "intervention": "weaken 4",
+   "result": "readout 23.3 Hz",
+   "goal_met": false,
+   "t": 134.0
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 5,
+   "hypothesis": "weaken the 6 strongest drivers to 50 %",
+   "intervention": "weaken 6",
+   "result": "readout 17.8 Hz",
+   "goal_met": false,
+   "t": 147.7
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 6,
+   "hypothesis": "weaken the 8 strongest drivers to 50 %",
+   "intervention": "weaken 8",
+   "result": "readout 21.1 Hz",
+   "goal_met": false,
+   "t": 160.0
+  },
+  {
+   "agent": "attacker-weaken",
+   "step": 7,
+   "hypothesis": "weaken the 10 strongest drivers to 50 %",
+   "intervention": "weaken 10",
+   "result": "readout 17.8 Hz",
+   "goal_met": false,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-1",
+   "step": 1,
+   "hypothesis": "cut the 1 strongest drivers",
+   "intervention": "lesion 1",
+   "result": "readout 43.3 Hz",
+   "goal_met": false,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-1",
+   "step": 2,
+   "hypothesis": "cut the 2 strongest drivers",
+   "intervention": "lesion 2",
+   "result": "readout 7.8 Hz",
+   "goal_met": false,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-1",
+   "step": 3,
+   "hypothesis": "cut the 3 strongest drivers",
+   "intervention": "lesion 3",
+   "result": "readout 0.0 Hz",
+   "goal_met": true,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-1",
+   "step": 4,
+   "hypothesis": "is neuron 78527 necessary? try without it",
+   "intervention": "lesion 2",
+   "result": "readout 22.2 Hz",
+   "goal_met": false,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-1",
+   "step": 5,
+   "hypothesis": "is neuron 46248 necessary? try without it",
+   "intervention": "lesion 2",
+   "result": "readout 25.6 Hz",
+   "goal_met": false,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-1",
+   "step": 6,
+   "hypothesis": "is neuron 99517 necessary? try without it",
+   "intervention": "lesion 2",
+   "result": "readout 7.8 Hz",
+   "goal_met": false,
+   "t": 173.1
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 1,
+   "hypothesis": "cut the 1 strongest drivers",
+   "intervention": "lesion 1",
+   "result": "readout 34.4 Hz",
+   "goal_met": false,
+   "t": 187.7
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 2,
+   "hypothesis": "cut the 2 strongest drivers",
+   "intervention": "lesion 2",
+   "result": "readout 26.7 Hz",
+   "goal_met": false,
+   "t": 203.5
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 3,
+   "hypothesis": "cut the 3 strongest drivers",
+   "intervention": "lesion 3",
+   "result": "readout 26.7 Hz",
+   "goal_met": false,
+   "t": 217.6
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 4,
+   "hypothesis": "cut the 4 strongest drivers",
+   "intervention": "lesion 4",
+   "result": "readout 22.2 Hz",
+   "goal_met": false,
+   "t": 229.2
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 5,
+   "hypothesis": "cut the 5 strongest drivers",
+   "intervention": "lesion 5",
+   "result": "readout 18.9 Hz",
+   "goal_met": false,
+   "t": 239.8
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 6,
+   "hypothesis": "cut the 6 strongest drivers",
+   "intervention": "lesion 6",
+   "result": "readout 22.2 Hz",
+   "goal_met": false,
+   "t": 251.2
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 7,
+   "hypothesis": "cut the 7 strongest drivers",
+   "intervention": "lesion 7",
+   "result": "readout 22.2 Hz",
+   "goal_met": false,
+   "t": 263.0
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 8,
+   "hypothesis": "cut the 8 strongest drivers",
+   "intervention": "lesion 8",
+   "result": "readout 17.8 Hz",
+   "goal_met": false,
+   "t": 275.1
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 9,
+   "hypothesis": "cut the 9 strongest drivers",
+   "intervention": "lesion 9",
+   "result": "readout 23.3 Hz",
+   "goal_met": false,
+   "t": 287.3
+  },
+  {
+   "agent": "redundancy-2",
+   "step": 10,
+   "hypothesis": "cut the 10 strongest drivers",
+   "intervention": "lesion 10",
+   "result": "readout 23.3 Hz",
+   "goal_met": false,
+   "t": 298.3
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 1,
+   "hypothesis": "bias only: 1 neurons",
+   "intervention": "bias 1",
+   "result": "on 0.0 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 320.6
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 2,
+   "hypothesis": "bias only: 2 neurons",
+   "intervention": "bias 2",
+   "result": "on 1.1 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 341.6
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 3,
+   "hypothesis": "bias only: 4 neurons",
+   "intervention": "bias 4",
+   "result": "on 1.1 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 360.9
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 4,
+   "hypothesis": "bias only: 6 neurons",
+   "intervention": "bias 6",
+   "result": "on 3.3 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 381.8
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 5,
+   "hypothesis": "bias only: 8 neurons",
+   "intervention": "bias 8",
+   "result": "on 2.2 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 406.0
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 6,
+   "hypothesis": "bias only: 12 neurons",
+   "intervention": "bias 12",
+   "result": "on 3.3 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 426.9
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 7,
+   "hypothesis": "potentiate only: 1 neurons",
+   "intervention": "potentiate 1",
+   "result": "on 18.9 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 449.1
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 8,
+   "hypothesis": "potentiate only: 2 neurons",
+   "intervention": "potentiate 2",
+   "result": "on 31.1 / off 0.0 Hz",
+   "goal_met": true,
+   "t": 472.0
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 9,
+   "hypothesis": "is neuron 78527 needed for the repair?",
+   "intervention": "potentiate 1",
+   "result": "on 4.4 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 495.3
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 10,
+   "hypothesis": "is neuron 99517 needed for the repair?",
+   "intervention": "potentiate 1",
+   "result": "on 18.9 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 495.3
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 11,
+   "hypothesis": "bias + potentiate: 1 neurons",
+   "intervention": "bias 1, potentiate 1",
+   "result": "on 4.4 / off 0.0 Hz",
+   "goal_met": false,
+   "t": 513.8
+  },
+  {
+   "agent": "defender-greedy",
+   "step": 12,
+   "hypothesis": "stop listening to the hijacked wire: 1 neurons",
+   "intervention": "potentiate 1",
+   "result": "on 25.6 / off 0.0 Hz",
+   "goal_met": true,
+   "t": 528.9
+  }
+ ]
+}

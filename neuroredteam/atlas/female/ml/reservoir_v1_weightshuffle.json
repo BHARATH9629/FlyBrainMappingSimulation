@@ -1,0 +1,29 @@
+{
+ "sex": "female",
+ "samples": 400,
+ "channels": 8,
+ "per_channel": 12,
+ "readout_neurons": 200,
+ "results": {
+  "IDENTITY (bit 0)": {
+   "raw_inputs": 1.0,
+   "reservoir": 0.975004819741662,
+   "shuffled": 0.775742827989298
+  },
+  "AND (bits 0,1)": {
+   "raw_inputs": 1.0,
+   "reservoir": 0.9903890160183068,
+   "shuffled": 1.0
+  },
+  "XOR (bits 0,1)": {
+   "raw_inputs": 0.6104294040340552,
+   "reservoir": 0.924425270936899,
+   "shuffled": 0.800562851782364
+  },
+  "PARITY (bits 0,1,2)": {
+   "raw_inputs": 0.5001172607879925,
+   "reservoir": 0.9273655409631021,
+   "shuffled": 0.548975468975469
+  }
+ }
+}

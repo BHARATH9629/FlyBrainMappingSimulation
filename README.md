@@ -1,75 +1,143 @@
-# NeuroRedTeam
+# FlyBrainMappingSimulation (ConnectomeLab / NeuroRedTeam)
 
-**Attack and repair testing of a real fly brain.** Two flies, kept strictly apart: the **female** brain (FlyWire, 2024) and the **male** brain + nerve cord (MaleCNS, Google/Janelia, Sep 2026).
-RVCE Experiential Learning, Semester 3 (Sept to Dec 2026).
-Team: Govind, Bharath, Dhanush A, Shreenidhi Chalmi.
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
+[![Connectome](https://img.shields.io/badge/Connectome-FlyWire%20v783%20%7C%20MaleCNS%20v1.0-brightgreen.svg)](https://codex.flywire.ai/)
+[![Simulation](https://img.shields.io/badge/Physics-MuJoCo%20%7C%20FlyGym-orange.svg)](https://github.com/NeLy-EPFL/flygym)
+[![Paper Reproduction](https://img.shields.io/badge/Reproducibility-Nature%202024%20Verified-blueviolet.svg)](https://www.nature.com/articles/s41586-024-07763-9)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 
-## What this is, in one paragraph
+> **Autonomous Red-Teaming, Neural Fragility Mapping, and Embodied 3D Simulation of Whole-Brain Connectomes**
+> 
+> *Two full brains, kept strictly apart:*
+> 1. **Female Drosophila melanogaster brain** (*FlyWire v783*, Nature 2024 — 139,255 neurons, 15 million synapses)
+> 2. **Male Drosophila brain + ventral nerve cord** (*MaleCNS v1.0*, Janelia/Google/Cell 2026 — 211,577 neurons, 26 million synapses)
+>
+> RVCE Experiential Learning, Semester 3 (Sept to Dec 2026)  
+> **Team:** Govind, Bharath, Dhanush A, Shreenidhi Chalmi
 
-Scientists mapped every neuron and connection in a fruit fly's brain (FlyWire, Nature 2024: 139,255 neurons,
-15 million connections) and released it free. A follow-up paper showed the whole map can be simulated on a laptop
-and behaves like a real fly. We run that simulation and treat the brain like a system under security testing:
-an **attacker agent** searches for the smallest set of allowed changes that breaks a behaviour, a **defender agent**
-searches for the smallest stimulation that restores it, and we record the results for every behaviour we can
-measure. The output is a **fragility atlas** of fly behaviours and a benchmark for the agents.
+---
 
-## Status (18 September 2026)
+## 🌟 What Makes This Project Unique
 
-| Piece | Status | Evidence |
-|---|---|---|
-| Whole-brain simulation, matches Nature 2024 | done | sugar -> feeding neuron MN9 fires (95 to 107 Hz); random input -> 0 Hz |
-| Behaviour "eat" as a pass/fail test | done | on >= 40 Hz with sugar AND off <= 10 Hz without |
-| Attack rules (attack surface) | done | `neuroredteam/behaviours.py` |
-| Attacker: greedy (cut), inject-inhibitors (no cuts), weaken-only, random baseline | **done, verified on 3 seeds x 3 seed-sets** | smallest block = 2 neurons via inhibition (beats the hand-found 3); force = 1 neuron |
-| Defender: greedy, escalating moves, set minimisation | **done, verified on 3 seeds x 3 seed-sets** | 3-neuron repair after the inhibitory attack; 52 % recovery; 0 Hz without sugar |
-| Fragility-atlas entry (eat) with redundancy and force goals | done | block 2, force 1, 1 independent cut-attack, repair 3; zero variance across seed-sets |
-| Batch runner + atlas CSV with mean +/- sd | done | `neuroredteam/batch.py` |
-| **Male fly** (MaleCNS v1.0, 211,577 neurons, 26 M connections): same simulator, same behaviour test, same agents | **done, 1 run** | sugar -> MN9 143 Hz, 0 Hz without; block 4, force 1, repair 1 |
-| Goal "corrupt" (eat bitter) | not yet | needs bitter neuron IDs |
-| Behaviours escape, refuse_bitter (+ corrupt goal), both sexes | **done** | milestone 3 below; groom / courtship left out with numbers |
-| Search attacker, choke-point maps, cross-sex matching, iterated attack/repair game | **done** | milestone 3 below |
-| LLM attacker and defender | not yet | same tools; needs an API key |
-| Fragility atlas over all behaviours | 3 behaviours x 2 sexes | milestone 3 |
-| Virtual fly (3-D NeuroMechFly body, connectome decides eat/no-eat) | **done, v1** | `virtual_fly/demo.py`; 6 clips: female/male x healthy/attacked/repaired |
-| Web dashboard | not yet | |
-| Side result: 3,000 fly neurons play Flappy Bird | done | `flappy/`; real wiring did NOT beat scrambled wiring, we say so |
+* **Complete Whole-Brain Connectome Simulation on a Laptop:** Simulates hundreds of thousands of biologically-accurate leaky integrate-and-fire (LIF) neurons and tens of millions of synaptic connections in Python using sparse linear algebra without requiring a GPU cluster.
+* **Autonomous Security Red-Teaming (Attack & Repair):** Treats an organism's brain as a system under security evaluation. An **Attacker Agent** uses greedy search, synaptic weakening, and inhibitory injection to discover the *absolute minimal set of perturbations* that break, hijack, or corrupt instinctual behaviors. A **Defender Agent** searches for minimal counter-stimulations and synaptic potentiations that restore healthy behavior without cheating.
+* **Embodied 3D Biological Physics:** Connects whole-brain decisions directly to a 3D physical body in [FlyGym](https://github.com/NeLy-EPFL/flygym) and MuJoCo. Neurons fire, motor commands emerge, and the virtual fly walks, turns, feeds, drinks, escapes looming threats, or avoids bitter substances in real-time.
+* **Bio-Reservoir Computing:** Connects 3,000 real biological Kenyon cells into a computational reservoir that learns to play *Flappy Bird*, comparing authentic connectome wiring topologies against degree-preserving randomized null models.
+* **Conserved Across Sexes:** Provides side-by-side behavioral fragility atlases comparing female and male Drosophila circuits to identify conserved neural choke points.
 
-## Quick start
+---
+
+## ⚙️ Quick Start & How to Run
+
+### 1. Prerequisites & Environment Setup
+
+Clone the repository and install the dependencies:
 
 ```bash
-pip install -r requirements.txt    # Python 3.12+; numpy scipy pandas pyarrow matplotlib pygame-ce flygym imageio pillow qrcode
-python data/get_data.py            # female connectome, 100 MB -> data/female_flywire/  (not stored in the repo)
-python data/get_data.py --male     # male connectome, 1.1 GB -> data/male_malecns/     (optional)
-python virtual_fly/phase3.py       # the live demo (female); saved attacks/repairs in virtual_fly/cache/ make it start instantly
+git clone https://github.com/BHARATH9629/FlyBrainMappingSimulation.git
+cd FlyBrainMappingSimulation
 
+# Python 3.12+ recommended
+pip install -r requirements.txt
+```
+
+### 2. Configure Environment & API Keys (Security)
+
+Keep your API keys, database credentials, and confidential tokens safe:
+
+```bash
+# Copy the template to .env
+cp .env.example .env
+```
+
+Edit `.env` with your preferred credentials:
+* `OPENAI_API_KEY` / `GEMINI_API_KEY` / `ANTHROPIC_API_KEY` (for LLM-driven autonomous agents)
+* `CAVE_API_TOKEN` / `FLYWIRE_SECRET` (for online connectome queries)
+* `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` (for database backends)
+
+> [!IMPORTANT]
+> The `.env` file is strictly ignored by Git (`.gitignore`) to ensure your secrets, database names, and API keys remain safe and never get pushed to GitHub.
+
+---
+
+### 3. Download Connectome Datasets
+
+The raw connectome files are freely downloadable and gitignored:
+
+```bash
+# Download female FlyWire v783 connectome (~100 MB -> data/female_flywire/)
+python data/get_data.py
+
+# (Optional) Download male MaleCNS v1.0 connectome (~1.1 GB -> data/male_malecns/)
+python data/get_data.py --male
+```
+
+---
+
+### 4. Running the Simulations & Demos
+
+#### A. Interactive Live Demo & Brain Viewer (Phase 3 & Phase 2)
+Experience the fly's brain firing in real-time as it makes behavioral decisions:
+```bash
+# Phase 3 Live Verification Demo (instant start with pre-cached female brain state)
+python virtual_fly/phase3.py
+
+# Phase 2 Choice Arena & 3D Interactive Fly (FlyGym / Pygame)
+python virtual_fly/phase2.py --sex female
+# Press keys to trigger stimuli:
+#   'S' -> Sugar (MN9 fires -> Eats)
+#   'V' -> Water (Drinks)
+#   'B' -> Bitter (Refuses bitter)
+#   'L' -> Looming visual shadow (Giant fiber fires -> Escapes)
+#   'DOWN' -> Approach (Backs up)
+#   '1'/'2' -> Threat on left/right eye (Turns away)
+```
+
+#### B. Autonomous Red-Teaming (Attacker & Defender Agents)
+Run automated security attacks and repairs against the connectome:
+```bash
 cd neuroredteam
-python run_redteam.py --sex female # block + force attacks, redundancy, repair; ~8 min; writes atlas/female/eat.json
-python run_redteam.py --sex male   # same on the male fly; ~11 min; writes atlas/male/eat.json
-python batch.py --sex female --reps 3   # the atlas table with mean +/- sd over independent seed-sets; ~10 min
+
+# Run attack, redundancy analysis, and repair for feeding behavior
+python run_redteam.py --sex female     # female fly (~8 min -> atlas/female/eat.json)
+python run_redteam.py --sex male       # male fly (~11 min -> atlas/male/eat.json)
+
+# Multi-seed batch verification producing fragility atlas with mean +/- SD
+python batch.py --sex female --reps 3
+
+# Phase 3 verification on 15 fresh held-out seeds
+python verify_phase3.py --sex female --defender restore
 ```
 
-Other things to run:
-
+#### C. Biological Paper Reproduction & Flappy Bird
 ```bash
-cd simulator && python sugar_test.py        # the Nature 2024 reproduction (about 80 s)
-cd simulator && python lesion_test.py       # trace tongue -> MN9 (3 synapses) and cut neurons
-cd flappy && python live_flappy.py          # live Flappy Bird played by 3,000 fly neurons (keys: F S N C R)
+# Reproduce Nature 2024 whole-brain feeding activation benchmark (~80 s)
+cd simulator && python sugar_test.py
+
+# Run Flappy Bird played by 3,000 biological Kenyon cells
+cd flappy && python live_flappy.py
+# Controls: F (flap), S (step), N (new game), C (switch real/scrambled), R (reset)
 ```
 
-Everything runs on a normal laptop, no GPU.
+---
 
-## Folder map
+## 📊 Project Architecture & Folder Map
 
 | Folder | Contents |
 |---|---|
-| `neuroredteam/` | **the project.** `brain.py` fast simulator + interventions + wiring queries; `behaviours.py` behaviour tests and rules; `agents.py` attacker and defender; `run_redteam.py` one-command run; `atlas/female/` and `atlas/male/` results and full experiment logs, never mixed |
-| `simulator/` | the original whole-brain reproduction (`sugar_test.py`), lesion tracing, animations, defender feasibility tests |
-| `flappy/` | the Flappy Bird side result: `flappy_fly.py` (train + compare), `live_flappy.py` (live game), `tune.py` |
-| `data/` | `get_data.py` downloads the female files into `female_flywire/` and (with `--male`) the male files into `male_malecns/` (all gitignored, 100 MB + 1.1 GB) |
-| `results/`, `animations/` | charts, GIFs, the methodology flowchart PNG |
-| `virtual_fly/` | 3-D fly (FlyGym/MuJoCo) driven by the connectome's decision: walks to sugar, eats or not depending on healthy / attacked / repaired brain; `out/` has the clips |
-| `docs/` | `NeuroRedTeam_Phase1.pptx` (also at repo root), explainer PDF, and the scripts that generate them |
-| `HANDOFF.md` | how the code works, who owns what, what to do next, known caveats |
+| `neuroredteam/` | **Core red-teaming engine:** `brain.py` (LIF simulator & wiring query engine), `behaviours.py` (behavior tests & pass/fail criteria), `agents.py` (Attacker & Defender agents), `run_redteam.py`, `verify_phase3.py`, and `atlas/` (verified fragility data). |
+| `simulator/` | Whole-brain simulation reproduction (`sugar_test.py`), lesion tests (`lesion_test.py`), and baseline validations. |
+| `virtual_fly/` | 3D fly embodiment (FlyGym & MuJoCo), interactive GUI (`live.py`), and behavioral demos (`phase2.py`, `phase3.py`). |
+| `flappy/` | Bio-reservoir computing experiment: 3,000 neurons playing Flappy Bird (`flappy_fly.py`, `live_flappy.py`). |
+| `data/` | Automated download script `get_data.py` for female (*FlyWire*) and male (*MaleCNS*) datasets. |
+| `results/`, `animations/` | Visualizations, video renders, flowchart PNGs, and raster animations. |
+| `docs/` | Project presentations (`NeuroRedTeam_Phase1.pptx`), explainer PDF, and presentation generators. |
+| `research/` | Theoretical analyses, null models, literature reproduction audits, and paper drafts. |
+| `HANDOFF.md` | In-depth engineering handoff, caveats, and circuit design notes. |
+
+---
+
+## 🔬 Scientific Status & Fragility Atlas
 
 ## The fragility atlas so far
 

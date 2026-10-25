@@ -108,7 +108,9 @@ def check(name, goal):
     cheat = any(x > b.off_thr for x in r_off)             # fires with NO stimulus on ANY seed: not a repair
     row["repair_verified"] = rep_ok and not cheat
     row["no_forcing_ok"] = not cheat
-    if rep.get("partial"): problems.append(f"{name}/{goal}: BLUE TEAM LOST -- {rep.get('why', 'partial repair only')}")
+    if rep.get("partial"):
+        row["blue_team_lost"] = True
+        problems.append(f"{name}/{goal}: BLUE TEAM LOST -- {rep.get('why', 'partial repair only')}")
     elif not rep_ok: problems.append(f"{name}/{goal}: repair {g} -- restores on {n}/{len(r_on)} unseen seeds (mean {on:.1f} Hz, "
                                      f"needs {'<=' if b.expected == 'off' else '>='} {b.off_thr if b.expected == 'off' else b.on_thr:.0f})")
     if cheat: problems.append(f"{name}/{goal}: CHEATING REPAIR -- fires up to {max(r_off):.1f} Hz with no stimulus")
@@ -123,7 +125,8 @@ t0 = time.time()
 print(f"Phase 3 verification, {args.sex} fly -- every result re-checked on unseen seeds {FRESH}\n", flush=True)
 for name, goal in CASES:
     r = check(name, goal)
-    verdict = "OK" if r.get("attack_verified") and r.get("repair_verified") else "PROBLEM"
+    verdict = ("OK" if r.get("attack_verified") and r.get("repair_verified") and not r.get("blue_team_lost")
+               and r.get("control_ok", True) else "PROBLEM")
     rec = f" ({r['recovery_worst'] * 100:.0f}-{r['recovery_mean'] * 100:.0f}%)" if "recovery_worst" in r else ""
     print(f"  {name:14s} {goal:8s} attack {str(r.get('attack')):20s} {str(r.get('attack_seeds_ok')):6s} {r.get('after_attack_hz')} Hz | "
           f"repair {str(r.get('repair'))[:30]:30s} {str(r.get('repair_seeds_ok')):6s} {r.get('after_repair_on')} Hz{rec}  [{verdict}]", flush=True)

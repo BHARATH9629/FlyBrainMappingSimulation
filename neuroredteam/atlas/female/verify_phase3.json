@@ -1,0 +1,109 @@
+{
+ "sex": "female",
+ "fresh_seeds": [
+  11,
+  12,
+  13
+ ],
+ "cases": [
+  {
+   "behaviour": "eat",
+   "goal": "block",
+   "healthy_on": 92.2,
+   "healthy_off": 0.0,
+   "attack": "2 via inject",
+   "after_attack_hz": 0.0,
+   "attack_verified": true,
+   "repair": "3 via bias + potentiate",
+   "after_repair_on": 46.7,
+   "after_repair_off": 0.0,
+   "repair_target": ">= 40 Hz with the stimulus",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "eat",
+   "goal": "force",
+   "healthy_on": 92.2,
+   "healthy_off": 0.0,
+   "attack": "1 via greedy",
+   "after_attack_hz": 98.9,
+   "attack_verified": true,
+   "repair": "n/a (a forced behaviour is undone by removing the attack)"
+  },
+  {
+   "behaviour": "drink",
+   "goal": "block",
+   "healthy_on": 87.8,
+   "healthy_off": 0.0,
+   "attack": "1 via inject",
+   "after_attack_hz": 6.7,
+   "attack_verified": true,
+   "repair": "2 via bias + potentiate",
+   "after_repair_on": 58.9,
+   "after_repair_off": 0.0,
+   "repair_target": ">= 40 Hz with the stimulus",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "escape",
+   "goal": "block",
+   "healthy_on": 234.4,
+   "healthy_off": 0.0,
+   "attack": "11 via inject",
+   "after_attack_hz": 15.6,
+   "attack_verified": false,
+   "repair": "4 via potentiate only",
+   "after_repair_on": 118.9,
+   "after_repair_off": 0.0,
+   "repair_target": ">= 80 Hz with the stimulus",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "retreat",
+   "goal": "block",
+   "healthy_on": 34.7,
+   "healthy_off": 0.0,
+   "attack": "1 via inject",
+   "after_attack_hz": 3.1,
+   "attack_verified": true,
+   "repair": "1 via stop listening to the hijacked wire",
+   "after_repair_on": 24.7,
+   "after_repair_off": 0.0,
+   "repair_target": ">= 20 Hz with the stimulus",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "turn",
+   "goal": "block",
+   "healthy_on": 65.6,
+   "healthy_off": 0.0,
+   "attack": "1 via inject",
+   "after_attack_hz": 0.0,
+   "attack_verified": true,
+   "repair": "1 via stop listening to the hijacked wire",
+   "after_repair_on": 23.3,
+   "after_repair_off": 0.0,
+   "repair_target": ">= 20 Hz with the stimulus",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "refuse_bitter",
+   "goal": "corrupt",
+   "healthy_on": 0.0,
+   "healthy_off": 0.0,
+   "attack": "3 via greedy",
+   "after_attack_hz": 93.3,
+   "attack_verified": true,
+   "repair": null
+  }
+ ],
+ "problems": [
+  "escape/block: FALSE PASS -- attacker claimed success, fresh seeds give 15.6 Hz",
+  "refuse_bitter/corrupt: NO REPAIR FOUND"
+ ]
+}

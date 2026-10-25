@@ -1,0 +1,773 @@
+{
+ "sex": "female",
+ "samples": 300,
+ "channels": 8,
+ "per_channel": 12,
+ "draws": 3,
+ "readouts": [
+  25,
+  50,
+  100,
+  200
+ ],
+ "trial_noise": "own seed per trial",
+ "control": "degree-preserving rewiring (targets permuted; presynaptic neuron, weight and sign kept)",
+ "rows": [
+  {
+   "draw": 0,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 1.0
+  },
+  {
+   "draw": 0,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 1.0
+  },
+  {
+   "draw": 0,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5371467652717652
+  },
+  {
+   "draw": 0,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.49987764182424915
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.7988876529477196
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.6588029010053635
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.48304322991822984
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4853170189098999
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.8182424916573972
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.70671943195883
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5048611111111111
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.45831294030404146
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 100,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.8384872080088988
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 100,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.6904349336633878
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 100,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.48048941798941797
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 100,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4973303670745272
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 200,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.8315906562847608
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 200,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.6944325016828439
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 200,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.45991612554112554
+  },
+  {
+   "draw": 0,
+   "brain": "real",
+   "K": 200,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.491998516870597
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.993103448275862
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.9751253989968081
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5468554593554594
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.5130033370411569
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.9896551724137931
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.9616887064903482
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5257981601731602
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.5235706340378197
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 100,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 100,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 100,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 100,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 200,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 200,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 200,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 0,
+   "brain": "rewired",
+   "K": 200,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 1.0
+  },
+  {
+   "draw": 1,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 1.0
+  },
+  {
+   "draw": 1,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5377450096200096
+  },
+  {
+   "draw": 1,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4378336940836941
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.5767676767676768
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.5998469155103903
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.4998075998075998
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.5300039081289082
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.5942760942760943
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.5867923913751547
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.4976506132756133
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.49850138287638285
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 100,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.5925925925925926
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 100,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.5909560723514212
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 100,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.49317580567580566
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 100,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4907422438672439
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 200,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.7676767676767676
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 200,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.6491585781599462
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 200,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5433862433862433
+  },
+  {
+   "draw": 1,
+   "brain": "real",
+   "K": 200,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.506582190957191
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.47205387205387206
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.7329641934293096
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5099537037037037
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.48347913660413655
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.9757575757575758
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.8885555772696676
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5328989297739298
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.5314799783549784
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 100,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 100,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 100,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 100,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 200,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 200,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 200,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 1,
+   "brain": "rewired",
+   "K": 200,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 1.0
+  },
+  {
+   "draw": 2,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 1.0
+  },
+  {
+   "draw": 2,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5333629628158271
+  },
+  {
+   "draw": 2,
+   "brain": "raw inputs",
+   "K": 0,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.43654801631442347
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.4959583068488797
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.5062111801242236
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5241736850468776
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.49087504634779383
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.5013154497060225
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.49099378881987576
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.48452794771968855
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.46087504634779386
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 100,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.5265051446051168
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 100,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.5121118012422361
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 100,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.4949944382647386
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 100,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4775417130144605
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 200,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.49754240823136814
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 200,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.496583850931677
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 200,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5159169911012236
+  },
+  {
+   "draw": 2,
+   "brain": "real",
+   "K": 200,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4842083796811272
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 25,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.4770096734466868
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 25,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.6590062111801241
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 25,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.510819561417448
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 25,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.5123470522803115
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 50,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": 0.5233488598442714
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 50,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": 0.6437888198757764
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 50,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": 0.5645801883044652
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 50,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": 0.4632295142751205
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 100,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 100,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 100,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 100,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 200,
+   "task": "IDENTITY (bit 0)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 200,
+   "task": "AND (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 200,
+   "task": "XOR (bits 0,1)",
+   "balanced_accuracy": NaN
+  },
+  {
+   "draw": 2,
+   "brain": "rewired",
+   "K": 200,
+   "task": "PARITY (bits 0,1,2)",
+   "balanced_accuracy": NaN
+  }
+ ]
+}

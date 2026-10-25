@@ -1,0 +1,344 @@
+{
+ "sex": "female",
+ "fresh_seeds": [
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "cases": [
+  {
+   "behaviour": "eat",
+   "goal": "block",
+   "healthy_on": 94.0,
+   "healthy_off": 0.0,
+   "attack": "2 via inject",
+   "after_attack_hz": 0.9,
+   "attack_grade": "SOLID",
+   "attack_seeds_ok": "15/15",
+   "attack_worst_hz": 6.7,
+   "attack_verified": true,
+   "repair": "4 via bias 6.0 mV + potentiate x3.0 + stop listening",
+   "after_repair_on": 116.9,
+   "after_repair_off": 0.0,
+   "recovery_worst": 0.957,
+   "recovery_mean": 1.243,
+   "cost_recovery_curve": [
+    {
+     "size": 3,
+     "worst_hz": 63.333333333333336,
+     "mean_hz": 83.75,
+     "recovery": 0.6129032258064516
+    },
+    {
+     "size": 4,
+     "worst_hz": 90.0,
+     "mean_hz": 117.08333333333334,
+     "recovery": 0.8709677419354838
+    },
+    {
+     "size": 5,
+     "worst_hz": 73.33333333333334,
+     "mean_hz": 102.08333333333334,
+     "recovery": 0.7096774193548387
+    },
+    {
+     "size": 6,
+     "worst_hz": 90.0,
+     "mean_hz": 112.5,
+     "recovery": 0.8709677419354838
+    }
+   ],
+   "repair_target": ">= 40 Hz with the stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "eat",
+   "goal": "force",
+   "healthy_on": 94.0,
+   "healthy_off": 0.0,
+   "attack": "1 via greedy",
+   "after_attack_hz": 100.2,
+   "attack_grade": "SOLID",
+   "attack_seeds_ok": "15/15",
+   "attack_worst_hz": 90.0,
+   "attack_verified": true,
+   "repair": "2 via bias 4.5 mV + potentiate x2.5 + stop listening",
+   "after_repair_on": 93.6,
+   "after_repair_off": 4.0,
+   "recovery_worst": 0.78,
+   "recovery_mean": 0.995,
+   "cost_recovery_curve": [
+    {
+     "size": 1,
+     "worst_hz": 53.333333333333336,
+     "mean_hz": 62.5,
+     "recovery": 0.5161290322580645
+    },
+    {
+     "size": 2,
+     "worst_hz": 83.33333333333334,
+     "mean_hz": 99.58333333333334,
+     "recovery": 0.8064516129032259
+    }
+   ],
+   "repair_target": ">= 40 Hz with the stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "drink",
+   "goal": "block",
+   "healthy_on": 93.3,
+   "healthy_off": 0.0,
+   "attack": "2 via inject",
+   "after_attack_hz": 0.0,
+   "attack_grade": "SOLID",
+   "attack_seeds_ok": "15/15",
+   "attack_worst_hz": 0.0,
+   "attack_verified": true,
+   "below_target": "80 % of healthy not reachable with up to 12 drivers; best working repair reaches 67 % on every seed",
+   "repair": "8 via bias 3.0 mV + potentiate x2.0 + stop listening",
+   "after_repair_on": 83.3,
+   "after_repair_off": 0.0,
+   "recovery_worst": 0.714,
+   "recovery_mean": 0.893,
+   "cost_recovery_curve": [
+    {
+     "size": 3,
+     "worst_hz": 43.333333333333336,
+     "mean_hz": 67.08333333333334,
+     "recovery": 0.48372093023255813
+    },
+    {
+     "size": 4,
+     "worst_hz": 50.0,
+     "mean_hz": 80.0,
+     "recovery": 0.5581395348837209
+    },
+    {
+     "size": 5,
+     "worst_hz": 46.66666666666667,
+     "mean_hz": 71.66666666666667,
+     "recovery": 0.5209302325581395
+    },
+    {
+     "size": 6,
+     "worst_hz": 43.333333333333336,
+     "mean_hz": 70.41666666666667,
+     "recovery": 0.48372093023255813
+    },
+    {
+     "size": 8,
+     "worst_hz": 60.0,
+     "mean_hz": 82.08333333333334,
+     "recovery": 0.669767441860465
+    },
+    {
+     "size": 10,
+     "worst_hz": 50.0,
+     "mean_hz": 70.83333333333334,
+     "recovery": 0.5581395348837209
+    },
+    {
+     "size": 14,
+     "worst_hz": 46.66666666666667,
+     "mean_hz": 68.33333333333334,
+     "recovery": 0.5209302325581395
+    }
+   ],
+   "repair_target": ">= 40 Hz with the stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "escape",
+   "goal": "block",
+   "healthy_on": 236.2,
+   "healthy_off": 0.0,
+   "attack": "11 via inject",
+   "after_attack_hz": 6.7,
+   "attack_grade": "MARGINAL",
+   "attack_seeds_ok": "13/15",
+   "attack_worst_hz": 20.0,
+   "attack_verified": false,
+   "repair": "12 via bias 1.5 mV + potentiate x1.5 + stop listening",
+   "after_repair_on": 268.7,
+   "after_repair_off": 0.0,
+   "recovery_worst": 1.101,
+   "recovery_mean": 1.137,
+   "cost_recovery_curve": [
+    {
+     "size": 12,
+     "worst_hz": 260.0,
+     "mean_hz": 267.08333333333337,
+     "recovery": 1.1162790697674418
+    },
+    {
+     "size": 13,
+     "worst_hz": 266.6666666666667,
+     "mean_hz": 272.08333333333337,
+     "recovery": 1.144901610017889
+    },
+    {
+     "size": 14,
+     "worst_hz": 266.6666666666667,
+     "mean_hz": 272.9166666666667,
+     "recovery": 1.144901610017889
+    },
+    {
+     "size": 15,
+     "worst_hz": 273.33333333333337,
+     "mean_hz": 275.0,
+     "recovery": 1.1735241502683365
+    },
+    {
+     "size": 17,
+     "worst_hz": 273.33333333333337,
+     "mean_hz": 277.5,
+     "recovery": 1.1735241502683365
+    },
+    {
+     "size": 19,
+     "worst_hz": 273.33333333333337,
+     "mean_hz": 277.5,
+     "recovery": 1.1735241502683365
+    },
+    {
+     "size": 23,
+     "worst_hz": 276.6666666666667,
+     "mean_hz": 279.1666666666667,
+     "recovery": 1.18783542039356
+    }
+   ],
+   "repair_target": ">= 80 Hz with the stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "retreat",
+   "goal": "block",
+   "healthy_on": 39.5,
+   "healthy_off": 0.0,
+   "attack": "1 via inject",
+   "after_attack_hz": 2.6,
+   "attack_grade": "SOLID",
+   "attack_seeds_ok": "15/15",
+   "attack_worst_hz": 5.8,
+   "attack_verified": true,
+   "repair": "3 via bias 6.0 mV + potentiate x3.0",
+   "after_repair_on": 46.3,
+   "after_repair_off": 0.0,
+   "recovery_worst": 0.886,
+   "recovery_mean": 1.173,
+   "cost_recovery_curve": [
+    {
+     "size": 2,
+     "worst_hz": 30.0,
+     "mean_hz": 34.79166666666667,
+     "recovery": 0.7422680412371133
+    },
+    {
+     "size": 3,
+     "worst_hz": 33.333333333333336,
+     "mean_hz": 36.458333333333336,
+     "recovery": 0.8247422680412371
+    },
+    {
+     "size": 4,
+     "worst_hz": 36.66666666666667,
+     "mean_hz": 38.22916666666667,
+     "recovery": 0.9072164948453608
+    }
+   ],
+   "repair_target": ">= 20 Hz with the stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "turn",
+   "goal": "block",
+   "healthy_on": 62.4,
+   "healthy_off": 0.0,
+   "attack": "1 via inject",
+   "after_attack_hz": 0.4,
+   "attack_grade": "SOLID",
+   "attack_seeds_ok": "15/15",
+   "attack_worst_hz": 3.3,
+   "attack_verified": true,
+   "repair": "2 via bias 3.0 mV + potentiate x2.0 + stop listening",
+   "after_repair_on": 68.0,
+   "after_repair_off": 0.0,
+   "recovery_worst": 0.854,
+   "recovery_mean": 1.089,
+   "cost_recovery_curve": [
+    {
+     "size": 2,
+     "worst_hz": 53.333333333333336,
+     "mean_hz": 64.58333333333334,
+     "recovery": 0.8767123287671232
+    },
+    {
+     "size": 3,
+     "worst_hz": 43.333333333333336,
+     "mean_hz": 52.083333333333336,
+     "recovery": 0.7123287671232876
+    }
+   ],
+   "repair_target": ">= 20 Hz with the stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true
+  },
+  {
+   "behaviour": "refuse_bitter",
+   "goal": "corrupt",
+   "healthy_on": 0.0,
+   "healthy_off": 0.0,
+   "attack": "3 via greedy",
+   "after_attack_hz": 77.8,
+   "attack_grade": "SOLID",
+   "attack_seeds_ok": "15/15",
+   "attack_worst_hz": 63.3,
+   "attack_verified": true,
+   "repair": "6 via stop listening, hard",
+   "after_repair_on": 0.0,
+   "after_repair_off": 0.0,
+   "repair_target": "<= 10 Hz with the refused stimulus",
+   "repair_grade": "SOLID",
+   "repair_seeds_ok": "15/15",
+   "repair_verified": true,
+   "no_forcing_ok": true,
+   "control_hz": 0.2,
+   "control_ok": false
+  }
+ ],
+ "problems": [
+  "escape/block: attack MARGINAL -- holds on 13/15 unseen seeds (mean 6.7 Hz, worst 20.0 Hz)",
+  "refuse_bitter/corrupt: BLUE TEAM LOST -- no repair restores the refusal (0.0 Hz, needs <= 10) without pushing the control behaviour below its bar (0.0 Hz)",
+  "refuse_bitter/corrupt: repair broke the control behaviour 'eat' (0.2 Hz)"
+ ]
+}
